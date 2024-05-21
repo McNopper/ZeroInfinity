@@ -5,8 +5,8 @@
 #include <stdexcept>
 #include <vector>
 
-// Interval operators see https://en.wikipedia.org/wiki/Interval_arithmetic
-class Interval {
+// New interval arithmetic based on https://en.wikipedia.org/wiki/Interval_arithmetic
+class IntervalArithmetic {
 
 private:
 
@@ -14,13 +14,13 @@ private:
 
 public:
 
-    Interval(double x) noexcept
+    IntervalArithmetic(double x) noexcept
     {
         m_bounds[0] = x;
         m_bounds[1] = x;
     }
 
-    Interval(double bound0, double bound1) noexcept
+    IntervalArithmetic(double bound0, double bound1) noexcept
     {
         if (bound0 < bound1)
         {
@@ -44,75 +44,66 @@ public:
         return m_bounds[1];
     }
 
-    Interval operator+(const Interval& other) const noexcept
+    IntervalArithmetic operator+(const IntervalArithmetic& other) const noexcept
     {
-        return Interval(lowerBound() + other.lowerBound(), upperBound() + other.upperBound());
+        return IntervalArithmetic(lowerBound() + other.lowerBound(), upperBound() + other.upperBound());
     }
 
-    Interval operator-(const Interval& other) const noexcept
+    IntervalArithmetic operator+(double x) const noexcept
     {
-        return Interval(lowerBound() - other.upperBound(), upperBound() - other.lowerBound());
+        return IntervalArithmetic(lowerBound() + x, upperBound() + x);
     }
 
-    Interval operator*(const Interval& other) const noexcept
+    IntervalArithmetic operator-(const IntervalArithmetic& other) const noexcept
     {
-        auto x1y1 = lowerBound() * other.lowerBound();
-        auto x1y2 = lowerBound() * other.upperBound();
-        auto x2y1 = upperBound() * other.lowerBound();
-        auto x2y2 = upperBound() * other.upperBound();
-
-        auto bound0 = std::min(x1y1, x1y2);
-        bound0 = std::min(bound0, x2y1);
-        bound0 = std::min(bound0, x2y2);
-
-        auto bound1 = std::max(x1y1, x1y2);
-        bound1 = std::max(bound0, x2y1);
-        bound1 = std::max(bound0, x2y2);
-
-        return Interval(bound0, bound1);
+        return IntervalArithmetic(lowerBound() - other.lowerBound(), upperBound() - other.upperBound());
     }
 
-    Interval operator/(const Interval& other) const
+    IntervalArithmetic operator-(const double x) const noexcept
     {
-        static constexpr auto INF = std::numeric_limits<double>::infinity();
-
-        if (other.lowerBound() != 0.0 || other.upperBound() != 0.0)
-        {
-            if (other.lowerBound() < 0.0)
-            {
-                return *this * Interval(-INF, 1.0 / other.lowerBound());
-            }
-            else if (other.upperBound() > 0.0)
-            {
-                return *this * Interval(1.0 / other.upperBound(), INF);
-            }
-
-            return *this * Interval(1.0 / other.upperBound(), 1.0 / other.lowerBound());
-        }
-
-        return *this * Interval(-INF, INF);
+        return IntervalArithmetic(lowerBound() - x, upperBound() - x);
     }
 
-    Interval operator*(double x) const noexcept
+    IntervalArithmetic operator*(const IntervalArithmetic& other) const noexcept
     {
-        return Interval(lowerBound() * x, upperBound() * x);
+        return IntervalArithmetic(lowerBound() * other.lowerBound(), upperBound() * other.upperBound());
     }
 
-    Interval operator/(double x) const
+    IntervalArithmetic operator*(double x) const noexcept
     {
-        return Interval(lowerBound() / x, upperBound() / x);
+        return IntervalArithmetic(lowerBound() * x, upperBound() * x);
+    }
+
+    IntervalArithmetic operator/(const IntervalArithmetic& other) const
+    {
+        return IntervalArithmetic(lowerBound() / other.lowerBound(), upperBound() / other.upperBound());
+    }
+
+    IntervalArithmetic operator/(double x) const
+    {
+        return IntervalArithmetic(lowerBound() / x, upperBound() / x);
     }
 
 };
 
-Interval operator*(double x, const Interval& other) noexcept
+IntervalArithmetic operator+(double x, const IntervalArithmetic& other) noexcept
 {
-    return Interval(x * other.lowerBound(), x * other.upperBound());
+    return IntervalArithmetic(x + other.lowerBound(), x + other.upperBound());
 }
 
-Interval operator/(double x, const Interval& other)
+IntervalArithmetic operator-(double x, const IntervalArithmetic& other) noexcept
 {
-    return Interval(x / other.lowerBound(), x / other.upperBound());
+    return IntervalArithmetic(x - other.lowerBound(), x - other.upperBound());
+}
+
+IntervalArithmetic operator*(double x, const IntervalArithmetic& other) noexcept
+{
+    return IntervalArithmetic(x * other.lowerBound(), x * other.upperBound());
+}
+
+IntervalArithmetic operator/(double x, const IntervalArithmetic& other)
+{
+    return IntervalArithmetic(x / other.lowerBound(), x / other.upperBound());
 }
 
 int main(int argc, const char* argv[])
@@ -129,7 +120,7 @@ int main(int argc, const char* argv[])
     printf("inf * 1.0 = %lf\n", b);
 
     // Creating the [0, ∞] interval
-    auto c = Interval(0.0, inf);
+    auto c = IntervalArithmetic(0.0, inf);
     printf("[%lf, %lf]\n", c.lowerBound(), c.upperBound());
 
     // Checking the multiplication
