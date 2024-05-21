@@ -44,6 +44,16 @@ public:
         return m_bounds[1];
     }
 
+    bool operator==(const IntervalArithmetic& other) const noexcept
+    {
+        return (lowerBound() == other.lowerBound()) && (upperBound() == other.upperBound());
+    }
+
+    bool operator!=(const IntervalArithmetic& other) const noexcept
+    {
+        return (lowerBound() != other.lowerBound()) || (upperBound() != other.upperBound());
+    }
+
     IntervalArithmetic operator+(const IntervalArithmetic& other) const noexcept
     {
         return IntervalArithmetic(lowerBound() + other.lowerBound(), upperBound() + other.upperBound());
@@ -116,8 +126,8 @@ int main(int argc, const char* argv[])
     printf("0.0 * 0.0 = %lf\n", a);
 
     // Checking the upper interval bound
-    auto b = inf * 1.0;
-    printf("inf * 1.0 = %lf\n", b);
+    auto b = 1.0 * inf;
+    printf("1.0 * inf = %lf\n", b);
 
     // Creating the [0, ∞] interval
     auto c = IntervalArithmetic(0.0, inf);
