@@ -6,6 +6,10 @@
 
 The expressions `0 • ∞` and implicitly `0 • -∞` are indeterminate forms [1].
 
+ToDo:
+- Explain problem, why  `0 • -∞` => `0 • (-1 • ∞)` => `(0 • -1) • ∞` => `0 • ∞` is not allowed.  
+- In the Proof, each step has to be explained, that this is based on improper limits.
+
 ## New equation
 
 The above expressions can be solved to the equation `0 • ∞ = 0 • -∞`.
