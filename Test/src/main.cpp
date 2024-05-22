@@ -24,5 +24,9 @@ int main(int argc, const char* argv[])
     auto d = -1.0 * c;
     printf("[%lf, %lf]\n", d.lowerBound(), d.upperBound());
 
+    // As expected, produces not a number
+    auto e = inf - inf;
+    printf("inf - inf = %lf\n", e);
+
     return 0;
 }
