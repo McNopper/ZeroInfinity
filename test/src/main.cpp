@@ -1,6 +1,8 @@
 #include <cstdio>
 #include <limits>
 
+#include <gtest/gtest.h>
+
 #include "IntervalArithmetic.hpp"
 
 int main(int argc, const char* argv[])
