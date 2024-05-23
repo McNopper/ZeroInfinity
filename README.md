@@ -65,6 +65,7 @@ Using this approach, other indeterminate forms could be expressed as intervals a
 - Transform sketch idea (similar to complex number `i`) and illustration to repository.  
 - Explain problem, why  `0 • -∞` => `0 • (-1 • ∞)` => `(0 • -1) • ∞` => `0 • ∞` is not allowed.  
 - In the Proof, each step has to be explained, that this is based on improper limits.  
+- Adapt source code, that it represents the improper limits.  
 
 ### Form
 
