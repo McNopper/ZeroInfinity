@@ -6,11 +6,6 @@
 
 The expressions `0 • ∞` and implicitly `0 • -∞` are indeterminate forms [1].
 
-ToDo:
-- Transform sketch idea (similar to complex number `i`) and illustration to repository.  
-- Explain problem, why  `0 • -∞` => `0 • (-1 • ∞)` => `(0 • -1) • ∞` => `0 • ∞` is not allowed.  
-- In the Proof, each step has to be explained, that this is based on improper limits.
-
 ## New equation
 
 The above expressions can be solved to the equation `0 • ∞ = 0 • -∞`.
@@ -62,3 +57,68 @@ Using this approach, other indeterminate forms could be expressed as intervals a
 
 [1] [Indeterminate form](https://en.wikipedia.org/wiki/Indeterminate_form)  
 [2] [Interval arithmetic](https://en.wikipedia.org/wiki/Interval_arithmetic)
+
+#
+
+*ToDo:*
+
+- Transform sketch idea (similar to complex number `i`) and illustration to repository.  
+- Explain problem, why  `0 • -∞` => `0 • (-1 • ∞)` => `(0 • -1) • ∞` => `0 • ∞` is not allowed.  
+- In the Proof, each step has to be explained, that this is based on improper limits.  
+
+### Form
+
+Writing mathematical expressions  
+https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/writing-mathematical-expressions
+
+SysML  
+https://sysml.org/
+
+### Inhalt
+
+Teilgebiete der Mathematik  
+https://de.wikipedia.org/wiki/Teilgebiete_der_Mathematik
+
+**Algebra**
+
+Algebraische Struktur  
+https://de.wikipedia.org/wiki/Algebraische_Struktur
+
+- Kommutativgesetz  
+https://de.wikipedia.org/wiki/Kommutativgesetz
+
+- Distributivgesetz  
+https://de.wikipedia.org/wiki/Distributivgesetz
+
+- Assoziativgesetz  
+https://de.wikipedia.org/wiki/Assoziativgesetz
+
+- Inverses Element  
+https://de.wikipedia.org/wiki/Inverses_Element
+
+Körper (Algebra)  
+https://de.wikipedia.org/wiki/K%C3%B6rper_(Algebra)
+
+*Zahlen*
+
+Hyperreelle Zahl  
+https://de.wikipedia.org/wiki/Hyperreelle_Zahl
+
+Unendlich (Mathematik)  
+https://de.wikipedia.org/wiki/Unendlich_(Mathematik)
+
+**Analysis**
+
+improper limits  
+https://planetmath.org/improperlimits
+
+Grenzwert (Funktion)  
+https://de.wikipedia.org/wiki/Grenzwert_(Funktion)
+
+### Übersetzungen
+
+Unbestimmter Ausdruck (Mathematik) (zu [1])  
+https://de.wikipedia.org/wiki/Unbestimmter_Ausdruck_(Mathematik)
+
+Intervallarithmetik (zu [2])  
+https://de.wikipedia.org/wiki/Intervallarithmetik
