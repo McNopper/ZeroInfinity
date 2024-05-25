@@ -1,73 +1,96 @@
 # Solving indeterminate forms using interval arithmetic
 
-![](images/formula.png)
+*by Norbert Nopper*
 
-## Status quo
+#### Credits
 
-The expressions `0 • ∞` and implicitly `0 • -∞` are indeterminate forms [1].
+Thanks to Eric Lengyel for asking the initial right questions.  
 
-## New equation
+### Status quo
 
-The above expressions can be solved to the equation `0 • ∞ = 0 • -∞`.
+The expressions $0 \times ∞$ and implicitly $0 \times -∞$ are indeterminate forms [1].
 
-## Deduction
+*ToDo:*  
+*Explain problem, why  `0 x -∞` => `0 x (-1 x ∞)` => `(0 x -1) x ∞` => `0 x ∞` is not allowed.*  
+*Add scanned sketch regarding the inspiration (analogy to complex number `i`)*  
+
+### Thesis
+
+The above expressions can be solved to the equation:  
+
+$0 \times ∞ = 0 \times -∞$
+
+### Deduction
 
 In interval arithmetic, the intervals `[0, ∞]` and `[-∞, 0]` are allowed [2].
 
-The indeterminate form of `0 • ∞` can be expressed as the interval `[0, ∞]`.  
-Similar, the indeterminate form of `0 • -∞` is `[-∞, 0]`.
+The indeterminate form of `0 x ∞` can be expressed as the interval `[0, ∞]`.  
+Similar, the indeterminate form of `0 x -∞` is `[-∞, 0]`.
 
 ### Idea
 
 The idea is to calculate the two interval bounds for not indeterminate forms.
 
 I.  
-`0 • ∞ = [0, ∞]`:
+`0 x ∞ = [0, ∞]`:
 
 Replacing second multiplier with 0:  
-`0 • 0 = 0`  
+`0 x 0 = 0`  
 Replacing first multiplier with 1:  
-`1 • ∞ = ∞`
+`1 x ∞ = ∞`
 
 II.  
-`0 • -∞ = [-∞, 0]`:
+`0 x -∞ = [-∞, 0]`:
 
 Replacing second multiplier with 0:  
-`0 • 0 = 0`  
+`0 x 0 = 0`  
 Replacing first multiplier with 1:  
-`1 • -∞ = -∞`
+`1 x -∞ = -∞`
 
-## Proof
+### Proof
+
+*ToDo*  
+*In the Proof, each step has to be explained, that this is based on improper limits.*  
 
 ```
-0 • -∞      | see II.
+0 x -∞      | see II.
 [-∞, 0]     | Exclude -1
--1 • [0, ∞] | see I.
--1 • 0 • ∞  | -1 • 0 is 0
-0 • ∞
+-1 x [0, ∞] | see I.
+-1 x 0 x ∞  | -1 x 0 is 0
+0 x ∞
 
 q.e.d.
 ```
 
-## Conclusion
+### Interval arithmetic operators
+
+*ToDo:*  
+*Define Addition, Subtraction etc.*  
+*Check the algebraic structure*
+
+### Implementation
+
+*ToDo:*  
+*Adapt source code, that it represents the improper limits.*  
+
+### Conclusion
 
 Using this approach, other indeterminate forms could be expressed as intervals and solved to equations as well.
 
-## References
+### References
 
 [1] [Indeterminate form](https://en.wikipedia.org/wiki/Indeterminate_form)  
 [2] [Interval arithmetic](https://en.wikipedia.org/wiki/Interval_arithmetic)
 
 #
 
-*ToDo:*
-
-- Transform sketch idea (similar to complex number `i`) and illustration to repository.  
-- Explain problem, why  `0 • -∞` => `0 • (-1 • ∞)` => `(0 • -1) • ∞` => `0 • ∞` is not allowed.  
-- In the Proof, each step has to be explained, that this is based on improper limits.  
-- Adapt source code, that it represents the improper limits.  
+*ToDo*  
+*Quick links and to be removed later.*
 
 ### Form
+
+Markdown Cheat Sheet  
+https://www.markdownguide.org/cheat-sheet/
 
 Writing mathematical expressions  
 https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/writing-mathematical-expressions
