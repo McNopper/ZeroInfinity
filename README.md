@@ -27,7 +27,7 @@ $0 \times +∞ = 0 \times -∞$
 In interval arithmetic, the intervals `[0, +∞]` and `[-∞, 0]` are allowed [2].
 
 *ToDo:*  
-*Define interval arithmetic as new Interval Number.*  
+*Define interval arithmetic as new interval number. We make a difference between +0.0 and -0.0, which fits with limits. See source code.*  
 
 The indeterminate form of `0 x +∞` can be expressed as the interval `[0, +∞]`.  
 Similar, the indeterminate form of `0 x -∞` is `[-∞, 0]`.
