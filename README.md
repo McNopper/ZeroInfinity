@@ -19,22 +19,24 @@ $0 \times ∞ = -1 \times (0 \times -∞)$
 
 ### Inspiration
 
+*ToDo:*  
+*Explain shortly for complex numbers [2]*  
 ![](illustrations/visual_complex_number.png)  
 
-In interval arithmetic, the intervals `[0, +∞]` and `[-∞, 0]` are allowed [2].
+In interval arithmetic, the intervals `[0, ∞]` and `[-∞, 0]` are allowed [3].
 
-The indeterminate form of `0 x ∞` can be expressed as the interval `[0, +∞]`.  
+The indeterminate form of `0 x ∞` can be expressed as the interval `[0, ∞]`.  
 Similar, the indeterminate form of `0 x -∞` is `[-∞, 0]`.
 
 The idea is to calculate the two interval bounds for not indeterminate forms.
 
 I.  
-`0 x +∞ = [0, +∞]`:
+`0 x ∞ = [0, ∞]`:
 
 Replacing second multiplier with 0:  
 `0 x 0 = 0`  
 Replacing first multiplier with 1:  
-`1 x +∞ = +∞`
+`1 x ∞ = ∞`
 
 II.  
 `0 x -∞ = [-∞, 0]`:
@@ -81,10 +83,10 @@ Using this approach, other indeterminate forms could be expressed as interval ar
 
 ### References
 
-[0] [Complex number](https://en.wikipedia.org/wiki/Complex_number)  
-[1] [Indeterminate form](https://en.wikipedia.org/wiki/Indeterminate_form)  
-[2] [Interval arithmetic](https://en.wikipedia.org/wiki/Interval_arithmetic)  
-[3] [Ring (mathematics)](https://en.wikipedia.org/wiki/Ring_(mathematics))  
+[1] [Complex number](https://en.wikipedia.org/wiki/Complex_number)  
+[2] [Indeterminate form](https://en.wikipedia.org/wiki/Indeterminate_form)  
+[3] [Interval arithmetic](https://en.wikipedia.org/wiki/Interval_arithmetic)  
+[4] [Ring (mathematics)](https://en.wikipedia.org/wiki/Ring_(mathematics))  
 
 #
 
