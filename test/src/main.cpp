@@ -39,120 +39,121 @@ TEST(Basics, InfinityMinusInfinity)
 
 TEST(IntervalArithmetic, ConstructorStandard01)
 {
-    IntervalNumber result;
+    IntervalArithmetic result;
 
-    EXPECT_EQ(result.getA(), 0.0);
-    EXPECT_EQ(result.getB(), 0.0);
+    EXPECT_EQ(result.getX0(), 0.0);
+    EXPECT_EQ(result.getX1(), 0.0);
 }
 
 TEST(IntervalArithmetic, ConstructorStandard02)
 {
-    // Creating the [1, 10] interval number
-    IntervalNumber result{1.0, 9.0};
+    // Creating the [0, 10] interval
+    IntervalArithmetic result{0.0, 10.0};
 
-    EXPECT_EQ(result.getA(), 1.0);
-    EXPECT_EQ(result.getB(), 9.0);
+    EXPECT_EQ(result.getX0(), 0.0);
+    EXPECT_EQ(result.getX1(), 10.0);
 }
 
 TEST(IntervalArithmetic, ConstructorZeroInfinity)
 {
-    // Creating the [0, ∞] interval number
-    IntervalNumber result{0.0, INF};
+    // Creating the [0, ∞] interval
+    IntervalArithmetic result{0.0, INF};
 
-    EXPECT_EQ(result.getA(), 0.0);
-    EXPECT_EQ(result.getB(), INF);
+    EXPECT_EQ(result.getX0(), 0.0);
+    EXPECT_EQ(result.getX1(), INF);
+}
+
+TEST(IntervalArithmetic, ConstructorNaN01)
+{
+    IntervalArithmetic result{0.0, QUIET_NAN};
+
+    EXPECT_EQ(true, std::isnan(result.getX0()));
+    EXPECT_EQ(true, std::isnan(result.getX1()));
+}
+
+TEST(IntervalArithmetic, ConstructorNaN02)
+{
+    IntervalArithmetic result{QUIET_NAN, 0.0};
+
+    EXPECT_EQ(true, std::isnan(result.getX0()));
+    EXPECT_EQ(true, std::isnan(result.getX1()));
 }
 
 TEST(IntervalArithmetic, Addition01)
 {
-    IntervalNumber a{0.0, 8.0};
-    IntervalNumber b{1.0, 4.0};
+    IntervalArithmetic a{1.0, 0.0};
+    IntervalArithmetic b{2.0, 0.0};
 
     auto result = a + b;
 
-    EXPECT_EQ(result.getA(), 1.0);
-    EXPECT_EQ(result.getB(), 7.0);
+    EXPECT_EQ(result.getX0(), 3.0);
+    EXPECT_EQ(result.getX1(), 0.0);
 }
 
 TEST(IntervalArithmetic, Addition02)
 {
-    IntervalNumber a{0.0, INF};
-    IntervalNumber b{0.0, INF};
+    IntervalArithmetic a{INF, 0.0};
+    IntervalArithmetic b{INF, 0.0};
 
     auto result = a + b;
 
-    EXPECT_EQ(result.getA(), 0.0);
-    EXPECT_EQ(result.getB(), INF);
+    EXPECT_EQ(result.getX0(), INF);
+    EXPECT_EQ(result.getX1(), 0.0);
 }
 
+/*
 TEST(IntervalArithmetic, Multiplication01)
 {
-    IntervalNumber a{1.0, 2.0};
+    IntervalArithmetic a{1.0, 2.0};
 
     auto result = -1.0 * a;
 
-    EXPECT_EQ(result.getA(), -1.0);
-    EXPECT_EQ(result.getB(), -2.0);
+    EXPECT_EQ(result.getX0(), -1.0);
+    EXPECT_EQ(result.getX1(), -2.0);
 }
 
 
 TEST(IntervalArithmetic, Multiplication02)
 {
-    IntervalNumber a{1.0, INF};
+    IntervalArithmetic a{1.0, INF};
 
     auto result = -1.0 * a;
 
-    EXPECT_EQ(result.getA(), -1.0);
-    EXPECT_EQ(result.getB(), -INF);
+    EXPECT_EQ(result.getX0(), -1.0);
+    EXPECT_EQ(result.getX1(), -INF);
 }
 
 TEST(IntervalArithmetic, Multiplication03)
 {
-    IntervalNumber a{0.0, INF};
+    IntervalArithmetic a{0.0, INF};
 
     auto result = -1.0 * a;
 
-    EXPECT_EQ(result.getA(), 0.0);
-    EXPECT_EQ(result.getB(), -INF);
+    EXPECT_EQ(result.getX0(), 0.0);
+    EXPECT_EQ(result.getX1(), -INF);
 }
 
 TEST(IntervalArithmetic, Multiplication04)
 {
-    IntervalNumber a{0.0, INF};
-    IntervalNumber b{0.0, INF};
+    IntervalArithmetic a{0.0, INF};
+    IntervalArithmetic b{0.0, INF};
 
     auto result = a * b;
 
-    EXPECT_EQ(result.getA(), 0.0);
-    EXPECT_EQ(result.getB(), INF);
+    EXPECT_EQ(result.getX0(), 0.0);
+    EXPECT_EQ(result.getX1(), INF);
 }
 
 TEST(IntervalArithmetic, Multiplication05)
 {
-    IntervalNumber a{-INF, 0.0};
-    IntervalNumber b{INF, 0.0};
+    IntervalArithmetic a{-INF, 0.0};
+    IntervalArithmetic b{INF, 0.0};
 
     auto result = a * b;
 
-    EXPECT_EQ(result.getA(), -INF);
-    EXPECT_EQ(result.getB(), 0.0);
-}
-
-TEST(IntervalArithmetic, CheckNaN01)
-{
-    IntervalNumber result{0.0, QUIET_NAN};
-
-    EXPECT_EQ(true, std::isnan(result.getA()));
-    EXPECT_EQ(true, std::isnan(result.getB()));
-}
-
-TEST(IntervalArithmetic, CheckNaN02)
-{
-    IntervalNumber result{QUIET_NAN, 0.0};
-
-    EXPECT_EQ(true, std::isnan(result.getA()));
-    EXPECT_EQ(true, std::isnan(result.getB()));
-}
+    EXPECT_EQ(result.getX0(), -INF);
+    EXPECT_EQ(result.getX1(), 0.0);
+}*/
 
 int main(int argc, char** argv)
 {

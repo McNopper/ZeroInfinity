@@ -27,9 +27,11 @@ In interval arithmetic, the intervals `[0, ∞]` and `[-∞, 0]` are allowed [3]
 
 The indeterminate form of `0 x ∞` can be expressed with complex numbers as the interval `[0 + 0 x i, 0 + ∞ x i]`.  
 Similar, the indeterminate form of `0 x -∞` is `[0 + -∞ x i, 0 + 0 x i]`.
+*ToDo:*  
+*Explain restriction, that the lower and upper bound has to go through the origin.*
 
 *ToDo:*  
-*Explain illustraion and so on*  
+*Explain illustration and so on*  
 ![](illustrations/visual_interval_number.png)  
 
 ### Deduction
