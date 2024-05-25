@@ -12,7 +12,7 @@ The expressions $0 \times ∞$ and implicitly $0 \times -∞$ are indeterminate 
 
 *ToDo:*  
 *Explain problem, why  `0 x -∞` => `0 x (-1 x ∞)` => `(0 x -1) x ∞` => `0 x ∞` is not allowed.*  
-*Add scanned sketch regarding the inspiration (analogy to complex number `i`)*  
+*Add scanned sketch regarding the inspiration (analogy to complex number `i`).*  
 
 ### Thesis
 
@@ -49,7 +49,7 @@ Replacing first multiplier with 1:
 
 ### Proof
 
-*ToDo*  
+*ToDo:*  
 *In the Proof, each step has to be explained, that this is based on improper limits.*  
 
 ```
@@ -66,7 +66,7 @@ q.e.d.
 
 *ToDo:*  
 *Define Addition, Subtraction etc.*  
-*Check the algebraic structure*
+*Check the algebraic structure.*
 
 ### Implementation
 
@@ -84,8 +84,8 @@ Using this approach, other indeterminate forms could be expressed as intervals a
 
 #
 
-*ToDo*  
-*Quick links and to be removed later.*
+*ToDo:*  
+*Quick links and to be integrated and/or removed later.*
 
 ### Form
 
