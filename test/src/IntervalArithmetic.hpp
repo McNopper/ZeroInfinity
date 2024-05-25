@@ -6,8 +6,6 @@
 #include <limits>
 #include <vector>
 
-#include "ComplexNumber.hpp"
-
 // Constants for convenience
 static constexpr double INF = std::numeric_limits<double>::infinity();
 static constexpr double QUIET_NAN = std::numeric_limits<double>::quiet_NaN();
@@ -95,12 +93,31 @@ public:
 
     IntervalArithmetic operator*(const IntervalArithmetic& other) const noexcept
     {
-        ComplexNumber first{getX0(), getX1()};
-        ComplexNumber second{other.getX0(), other.getX1()};
+        auto x0y0 = getX0() * other.getX0();
+        auto x1y1 = -getX1() * other.getX1();
+        double a{0.0};
+        if (!std::isnan(x0y0))
+        {
+            a += x0y0;
+        }
+        if (!std::isnan(x1y1))
+        {
+            a += x0y0;
+        }
 
-        auto result = first * second;
+        auto x0y1 = getX0() * other.getX1();
+        auto x1y0 = -getX1() * other.getX0();
+        double b{0.0};
+        if (!std::isnan(x0y1))
+        {
+            b += x0y1;
+        }
+        if (!std::isnan(x1y0))
+        {
+            b += x1y0;
+        }
 
-        return IntervalArithmetic(result.getA(), result.getB());
+        return IntervalArithmetic(a, b);
     }
 
     IntervalArithmetic operator*(double x) const noexcept

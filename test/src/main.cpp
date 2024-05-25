@@ -101,7 +101,6 @@ TEST(IntervalArithmetic, Addition02)
     EXPECT_EQ(result.getX1(), INF);
 }
 
-/*
 TEST(IntervalArithmetic, Multiplication01)
 {
     IntervalArithmetic a{1.0, 0.0};
@@ -122,6 +121,7 @@ TEST(IntervalArithmetic, Multiplication02)
     EXPECT_EQ(result.getX1(), -INF);
 }
 
+/*
 TEST(IntervalArithmetic, Multiplication03)
 {
     IntervalArithmetic a{0.0, INF};
