@@ -69,7 +69,7 @@ Replacing first multiplier with 1:
 
 *ToDo:*  
 *Define Addition, Subtraction etc.*  
-*Check the algebraic structure.*
+*Check the algebraic structure. Minimum required is Ring [4] and going for addition and multiplication*
 
 ### Implementation
 
@@ -84,7 +84,8 @@ Using this approach, other indeterminate forms could be expressed as intervals a
 
 [0] [Complex number](https://en.wikipedia.org/wiki/Complex_number)  
 [1] [Indeterminate form](https://en.wikipedia.org/wiki/Indeterminate_form)  
-[2] [Interval arithmetic](https://en.wikipedia.org/wiki/Interval_arithmetic)
+[2] [Interval arithmetic](https://en.wikipedia.org/wiki/Interval_arithmetic)  
+[3] [Ring (mathematics)](https://en.wikipedia.org/wiki/Ring_(mathematics))  
 
 #
 
@@ -123,6 +124,9 @@ https://de.wikipedia.org/wiki/Inverses_Element
 
 Körper (Algebra)  
 https://de.wikipedia.org/wiki/K%C3%B6rper_(Algebra)
+
+Ring (mathematics)  
+https://en.wikipedia.org/wiki/Ring_(mathematics)  
 
 *Zahlen*
 

@@ -8,6 +8,8 @@
 // New interval arithmetic based on https://en.wikipedia.org/wiki/Interval_arithmetic
 class IntervalArithmetic {
 
+// Algebraic structure: Ring
+
 private:
 
     std::vector<double> m_bounds{0.0, 0.0};
@@ -75,17 +77,7 @@ public:
 
     IntervalArithmetic operator+(double x) const noexcept
     {
-        return IntervalArithmetic(lowerBound() + x, upperBound() + x);
-    }
-
-    IntervalArithmetic operator-(const IntervalArithmetic& other) const noexcept
-    {
-        return IntervalArithmetic(lowerBound() - other.lowerBound(), upperBound() - other.upperBound());
-    }
-
-    IntervalArithmetic operator-(const double x) const noexcept
-    {
-        return IntervalArithmetic(lowerBound() - x, upperBound() - x);
+        return *this + IntervalArithmetic(x, x);
     }
 
     IntervalArithmetic operator*(const IntervalArithmetic& other) const noexcept
@@ -95,39 +87,19 @@ public:
 
     IntervalArithmetic operator*(double x) const noexcept
     {
-        return IntervalArithmetic(lowerBound() * x, upperBound() * x);
-    }
-
-    IntervalArithmetic operator/(const IntervalArithmetic& other) const
-    {
-        return IntervalArithmetic(lowerBound() / other.lowerBound(), upperBound() / other.upperBound());
-    }
-
-    IntervalArithmetic operator/(double x) const
-    {
-        return IntervalArithmetic(lowerBound() / x, upperBound() / x);
+        return *this * IntervalArithmetic(x, x);
     }
 
 };
 
 IntervalArithmetic operator+(double x, const IntervalArithmetic& other) noexcept
 {
-    return IntervalArithmetic(x + other.lowerBound(), x + other.upperBound());
-}
-
-IntervalArithmetic operator-(double x, const IntervalArithmetic& other) noexcept
-{
-    return IntervalArithmetic(x - other.lowerBound(), x - other.upperBound());
+    return IntervalArithmetic(x) + other;
 }
 
 IntervalArithmetic operator*(double x, const IntervalArithmetic& other) noexcept
 {
-    return IntervalArithmetic(x * other.lowerBound(), x * other.upperBound());
-}
-
-IntervalArithmetic operator/(double x, const IntervalArithmetic& other)
-{
-    return IntervalArithmetic(x / other.lowerBound(), x / other.upperBound());
+    return IntervalArithmetic(x) * other;
 }
 
 #endif /* INTERVALARITHMETIC_HPP_ */

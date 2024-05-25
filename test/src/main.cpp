@@ -7,8 +7,8 @@
 
 // Constants for convenience
 
-static constexpr auto INF = std::numeric_limits<double>::infinity();
-static constexpr auto QUIET_NAN = std::numeric_limits<double>::quiet_NaN();
+static constexpr double INF = std::numeric_limits<double>::infinity();
+static constexpr double QUIET_NAN = std::numeric_limits<double>::quiet_NaN();
 
 // Basic tests for the C++ implementation
 
@@ -60,6 +60,28 @@ TEST(IntervalArithmetic, ConstructorZeroInfinity)
     EXPECT_EQ(result.upperBound(), INF);
 }
 
+TEST(IntervalArithmetic, Addition01)
+{
+    IntervalArithmetic a{0.0, INF};
+    IntervalArithmetic b{1.0, INF};
+
+    auto result = a + b;
+
+    EXPECT_EQ(result.lowerBound(), 1.0);
+    EXPECT_EQ(result.upperBound(), INF);
+}
+
+TEST(IntervalArithmetic, Addition02)
+{
+    IntervalArithmetic a{0.0, INF};
+    IntervalArithmetic b{0.0, INF};
+
+    auto result = a + b;
+
+    EXPECT_EQ(result.lowerBound(), 0.0);
+    EXPECT_EQ(result.upperBound(), INF);
+}
+
 TEST(IntervalArithmetic, Multiplication01)
 {
     IntervalArithmetic temp{0.0, INF};
@@ -79,6 +101,28 @@ TEST(IntervalArithmetic, Multiplication02)
     EXPECT_EQ(result.lowerBound(), 0.0);
     EXPECT_EQ(result.upperBound(), INF);
 }
+
+TEST(IntervalArithmetic, Multiplication03)
+{
+    IntervalArithmetic a{0.0, INF};
+    IntervalArithmetic b{0.0, INF};
+
+    auto result = a * b;
+
+    EXPECT_EQ(result.lowerBound(), 0.0);
+    EXPECT_EQ(result.upperBound(), INF);
+}
+
+/*TEST(IntervalArithmetic, Multiplication04)
+{
+    IntervalArithmetic a{-MY_INF, 0.0};
+    IntervalArithmetic b{0.0, MY_INF};
+
+    auto result = a * b;
+
+    EXPECT_EQ(result.lowerBound(), -MY_INF);
+    EXPECT_EQ(result.upperBound(), 0.0);
+}*/
 
 TEST(IntervalArithmetic, BoundsNaN)
 {
