@@ -35,7 +35,7 @@ Similar, the indeterminate form of `0 x -∞` is `[-∞, 0]`.
 ### Deduction
 
 *ToDo:*  
-*Explain `-1 x (0 x -∞)` => `0 x ∞`.* 
+*Explain and express `-1 x (0 x -∞)` => `(-1 x 0) x -∞)`=> `-1 x -∞)` => `0 x ∞` with math limits.* 
 
 ### Interval arithmetic operators
 

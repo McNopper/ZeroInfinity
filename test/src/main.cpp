@@ -156,10 +156,10 @@ TEST(IntervalArithmetic, Multiplication05)
 TEST(IntervalArithmetic, Thesis)
 {
     IntervalArithmetic a{-1.0, -1.0};
-    IntervalArithmetic b{0.0, 0.0};
-    IntervalArithmetic c{-INF, 0.0};
+    IntervalArithmetic b{-0.0, +0.0};
+    IntervalArithmetic c{-INF, -0.0};
 
-    auto result = a * (b * c);
+    auto result = (a * b) * c;
 
     EXPECT_EQ(result.getX0(), 0.0);
     EXPECT_EQ(result.getX1(), INF);
