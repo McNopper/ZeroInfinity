@@ -20,7 +20,7 @@ $\lim_{n\to\infty}\sqrt[n]{n}=1$
 $\lim_{n\to\infty}\frac{1}{n}=0$  
 $\lim_{n\to\infty}{n}=\infty$  
   
-$\lim_{n\to\infty}\sqrt[n]{n} \times \lim_{n\to\infty}\frac{1}{n} = \lim_{n\to\infty}\sqrt[n]{n} \times \frac{1}{n} = \lim_{n\to\infty}\frac{1}{n}$ which is again `-1 x (0 x -∞)`.
+For explanation $\lim_{n\to\infty}\sqrt[n]{n} \times \lim_{n\to\infty}\frac{1}{n} = \lim_{n\to\infty}\sqrt[n]{n} \times \frac{1}{n} = \lim_{n\to\infty}\frac{1}{n}$ which is again 0.
 
 ### Thesis
 

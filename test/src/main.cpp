@@ -153,13 +153,24 @@ TEST(IntervalArithmetic, Multiplication05)
     EXPECT_EQ(result.getX1(), INF);
 }
 
+TEST(IntervalArithmetic, StatusQuo)
+{
+    IntervalArithmetic a{-1.0, -1.0};
+    IntervalArithmetic b{0.0, 0.0};
+    IntervalArithmetic c{-INF, -INF};
+
+    auto result = a * (b * c);
+
+    EXPECT_EQ(true, std::isnan(result.getX0()));
+    EXPECT_EQ(true, std::isnan(result.getX1()));
+}
+
 TEST(IntervalArithmetic, Thesis)
 {
     IntervalArithmetic a{-1.0, -1.0};
-    IntervalArithmetic b{-0.0, +0.0};
-    IntervalArithmetic c{-INF, -0.0};
+    IntervalArithmetic bc{-INF, 0.0};
 
-    auto result = (a * b) * c;
+    auto result = a * bc;
 
     EXPECT_EQ(result.getX0(), 0.0);
     EXPECT_EQ(result.getX1(), INF);
