@@ -103,12 +103,12 @@ TEST(IntervalArithmetic, Addition02)
 
 TEST(IntervalArithmetic, Multiplication01)
 {
-    IntervalArithmetic a{1.0, 0.0};
+    IntervalArithmetic a{1.0, 1.0};
 
     auto result = -1.0 * a;
 
     EXPECT_EQ(result.getX0(), -1.0);
-    EXPECT_EQ(result.getX1(), 0.0);
+    EXPECT_EQ(result.getX1(), -1.0);
 }
 
 TEST(IntervalArithmetic, Multiplication02)
@@ -133,13 +133,13 @@ TEST(IntervalArithmetic, Multiplication03)
 
 TEST(IntervalArithmetic, Multiplication04)
 {
-    IntervalArithmetic a{-INF, 0.0};
-    IntervalArithmetic b{0.0, INF};
+    IntervalArithmetic a{2.0, 2.0};
+    IntervalArithmetic b{3.0, 3.0};
 
     auto result = a * b;
 
-    EXPECT_EQ(result.getX0(), -INF);
-    EXPECT_EQ(result.getX1(), 0.0);
+    EXPECT_EQ(result.getX0(), 6);
+    EXPECT_EQ(result.getX1(), 6);
 }
 
 TEST(IntervalArithmetic, Multiplication05)

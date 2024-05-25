@@ -47,7 +47,7 @@ public:
     }
 
     IntervalArithmetic(double x0) noexcept :
-        m_x0{x0}, m_x1{0.0}
+        m_x0{x0}, m_x1{x0}
     {
         check();
     }
@@ -93,31 +93,10 @@ public:
 
     IntervalArithmetic operator*(const IntervalArithmetic& other) const noexcept
     {
-        auto x0y0 = getX0() * other.getX0();
-        auto x1y1 = -getX1() * other.getX1();
-        double a{0.0};
-        if (!std::isnan(x0y0))
-        {
-            a += x0y0;
-        }
-        if (!std::isnan(x1y1))
-        {
-            a += x1y1;
-        }
+        auto x0 = getX0() * other.getX0();
+        auto x1 = getX1() * other.getX1();
 
-        auto x0y1 = getX0() * other.getX1();
-        auto x1y0 = -getX1() * other.getX0();
-        double b{0.0};
-        if (!std::isnan(x0y1))
-        {
-            b += x0y1;
-        }
-        if (!std::isnan(x1y0))
-        {
-            b += x1y0;
-        }
-
-        return IntervalArithmetic(a, b);
+        return IntervalArithmetic(x0, x1);
     }
 
     IntervalArithmetic operator*(double x) const noexcept

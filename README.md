@@ -1,4 +1,4 @@
-# Solving indeterminate forms using interval arithmetic with complex numbers
+# Solving indeterminate forms using interval arithmetic
 
 *by Norbert Nopper*
 
