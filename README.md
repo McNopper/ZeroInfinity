@@ -20,7 +20,7 @@ $0 \times ∞ = -1 \times (0 \times -∞)$
 ### Inspiration
 
 *ToDo:*  
-*Explain complex numbers [2] in short.*  
+*Explain inspiration from complex numbers [2] in short.*  
 ![](illustrations/visual_complex_number.png)  
 
 In interval arithmetic, the intervals `[0, ∞]` and `[-∞, 0]` are allowed [3].
