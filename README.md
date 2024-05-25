@@ -13,8 +13,8 @@ The expressions $0 \times ∞$ and implicitly $0 \times -∞$ are indeterminate 
 *ToDo:*  
 *Explain problem, why  `0 x -∞` => `0 x (-1 x ∞)` => `(0 x -1) x ∞` => `0 x ∞` is not allowed.*  
 
-![](illustrations/visual_complex_number.png)
-![](illustrations/visual_interval_number.png)
+![](illustrations/visual_complex_number.png)  
+![](illustrations/visual_interval_number.png)  
 
 ### Thesis
 
@@ -25,6 +25,9 @@ $0 \times ∞ = 0 \times -∞$
 ### Deduction
 
 In interval arithmetic, the intervals `[0, ∞]` and `[-∞, 0]` are allowed [2].
+
+*ToDo:*  
+*Define interval arithmetic as new Interval Number.*  
 
 The indeterminate form of `0 x ∞` can be expressed as the interval `[0, ∞]`.  
 Similar, the indeterminate form of `0 x -∞` is `[-∞, 0]`.
