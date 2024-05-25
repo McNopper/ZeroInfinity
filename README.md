@@ -8,31 +8,23 @@ Thanks to Eric Lengyel for asking the initial right questions.
 
 ### Status quo
 
-The expressions $0 \times +∞$ and implicitly $0 \times -∞$ are indeterminate forms [1].
+The expressions $0 \times ∞$ and implicitly $0 \times -∞$ are indeterminate forms [1].
 
 *ToDo:*  
-*Explain problem, why  `0 x -∞` => `0 x (-1 x +∞)` => `(0 x -1) x +∞` => `0 x +∞` is not allowed.*  
-
-![](illustrations/visual_complex_number.png)  
-![](illustrations/visual_interval_number.png)  
+*Explain problem, that no calculations can be done.*  
 
 ### Thesis
 
-The above expressions can be solved to the equation:  
+$0 \times ∞ = -1 \times (0 \times -∞)$
 
-$0 \times +∞ = 0 \times -∞$
+### Inspiration
 
-### Deduction
+![](illustrations/visual_complex_number.png)  
 
 In interval arithmetic, the intervals `[0, +∞]` and `[-∞, 0]` are allowed [2].
 
-*ToDo:*  
-*Define interval arithmetic as new interval number. We make a difference between +0.0 and -0.0, which fits with limits. See source code.*  
-
-The indeterminate form of `0 x +∞` can be expressed as the interval `[0, +∞]`.  
+The indeterminate form of `0 x ∞` can be expressed as the interval `[0, +∞]`.  
 Similar, the indeterminate form of `0 x -∞` is `[-∞, 0]`.
-
-### Idea
 
 The idea is to calculate the two interval bounds for not indeterminate forms.
 
@@ -52,33 +44,40 @@ Replacing second multiplier with 0:
 Replacing first multiplier with 1:  
 `1 x -∞ = -∞`
 
-### Proof
+*ToDo:*  
+*New illustraion*  
+![](illustrations/visual_interval_number.png)  
+
+### Deduction
 
 *ToDo:*  
-*In the Proof, each step has to be explained, that this is based on improper limits.*  
+*Explain `-1 x (0 x -∞)` => `0 x ∞`.* 
 
 ```
-0 x -∞       | see II.
-[-∞, 0]      | Exclude -1
--1 x [0, +∞] | see I.
--1 x 0 x +∞  | -1 x 0 is 0
-0 x ∞
+// Given interval [x1, x2] using interval arithmetic
+//
+// a + b*in
+//
+// where a = x1
+// where b = x2 - x1
+// where in is the new integral number (similar as i in complex numbers)
+//
+// a + b*in = (a + b) - b*in
 ```
 
 ### Interval arithmetic operators
 
 *ToDo:*  
-*Define Addition, Subtraction etc.*  
-*Check the algebraic structure. Minimum required is Ring [4] and going for addition and multiplication*
+*Define Addition and Multiplication for minimal algebraic structure of Ring [4]*  
 
 ### Implementation
 
 *ToDo:*  
-*Adapt source code, that it represents the improper limits.*  
+*Adapt source code.*  
 
 ### Conclusion
 
-Using this approach, other indeterminate forms could be expressed as intervals and solved to equations as well.
+Using this approach, other indeterminate forms could be expressed as interval arithmetics and solved to equations as well.
 
 ### References
 
