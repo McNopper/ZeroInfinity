@@ -12,7 +12,9 @@ The expressions $0 \times ∞$ and implicitly $0 \times -∞$ are indeterminate 
 
 *ToDo:*  
 *Explain problem, why  `0 x -∞` => `0 x (-1 x ∞)` => `(0 x -1) x ∞` => `0 x ∞` is not allowed.*  
-*Add scanned sketch regarding the inspiration (analogy to complex number `i`).*  
+
+![](illustrations/visual_complex_number.png)
+![](illustrations/visual_interval_number.png)
 
 ### Thesis
 
@@ -77,6 +79,7 @@ Using this approach, other indeterminate forms could be expressed as intervals a
 
 ### References
 
+[0] [Complex number](https://en.wikipedia.org/wiki/Complex_number)  
 [1] [Indeterminate form](https://en.wikipedia.org/wiki/Indeterminate_form)  
 [2] [Interval arithmetic](https://en.wikipedia.org/wiki/Interval_arithmetic)
 
