@@ -58,8 +58,6 @@ Replacing first multiplier with 1:
 -1 x [0, ∞] | see I.
 -1 x 0 x ∞  | -1 x 0 is 0
 0 x ∞
-
-q.e.d.
 ```
 
 ### Interval arithmetic operators
