@@ -8,10 +8,10 @@ Thanks to Eric Lengyel for asking the initial right questions.
 
 ### Status quo
 
-The expressions $0 \times ∞$ and implicitly $0 \times -∞$ are indeterminate forms [1].
+The expressions $0 \times +∞$ and implicitly $0 \times -∞$ are indeterminate forms [1].
 
 *ToDo:*  
-*Explain problem, why  `0 x -∞` => `0 x (-1 x ∞)` => `(0 x -1) x ∞` => `0 x ∞` is not allowed.*  
+*Explain problem, why  `0 x -∞` => `0 x (-1 x +∞)` => `(0 x -1) x +∞` => `0 x +∞` is not allowed.*  
 
 ![](illustrations/visual_complex_number.png)  
 ![](illustrations/visual_interval_number.png)  
@@ -20,16 +20,16 @@ The expressions $0 \times ∞$ and implicitly $0 \times -∞$ are indeterminate 
 
 The above expressions can be solved to the equation:  
 
-$0 \times ∞ = 0 \times -∞$
+$0 \times +∞ = 0 \times -∞$
 
 ### Deduction
 
-In interval arithmetic, the intervals `[0, ∞]` and `[-∞, 0]` are allowed [2].
+In interval arithmetic, the intervals `[0, +∞]` and `[-∞, 0]` are allowed [2].
 
 *ToDo:*  
 *Define interval arithmetic as new Interval Number.*  
 
-The indeterminate form of `0 x ∞` can be expressed as the interval `[0, ∞]`.  
+The indeterminate form of `0 x +∞` can be expressed as the interval `[0, +∞]`.  
 Similar, the indeterminate form of `0 x -∞` is `[-∞, 0]`.
 
 ### Idea
@@ -37,12 +37,12 @@ Similar, the indeterminate form of `0 x -∞` is `[-∞, 0]`.
 The idea is to calculate the two interval bounds for not indeterminate forms.
 
 I.  
-`0 x ∞ = [0, ∞]`:
+`0 x +∞ = [0, +∞]`:
 
 Replacing second multiplier with 0:  
 `0 x 0 = 0`  
 Replacing first multiplier with 1:  
-`1 x ∞ = ∞`
+`1 x +∞ = +∞`
 
 II.  
 `0 x -∞ = [-∞, 0]`:
@@ -58,10 +58,10 @@ Replacing first multiplier with 1:
 *In the Proof, each step has to be explained, that this is based on improper limits.*  
 
 ```
-0 x -∞      | see II.
-[-∞, 0]     | Exclude -1
--1 x [0, ∞] | see I.
--1 x 0 x ∞  | -1 x 0 is 0
+0 x -∞       | see II.
+[-∞, 0]      | Exclude -1
+-1 x [0, +∞] | see I.
+-1 x 0 x +∞  | -1 x 0 is 0
 0 x ∞
 ```
 
@@ -98,9 +98,6 @@ https://www.markdownguide.org/cheat-sheet/
 
 Writing mathematical expressions  
 https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/writing-mathematical-expressions
-
-SysML  
-https://sysml.org/
 
 ### Inhalt
 
