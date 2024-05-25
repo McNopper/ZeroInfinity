@@ -1,4 +1,4 @@
-# Solving indeterminate forms using interval arithmetic
+# Solving indeterminate forms using interval arithmetic with complex numbers
 
 *by Norbert Nopper*
 
@@ -20,52 +20,22 @@ $0 \times ∞ = -1 \times (0 \times -∞)$
 ### Inspiration
 
 *ToDo:*  
-*Explain shortly for complex numbers [2]*  
+*Explain complex numbers [2] in short.*  
 ![](illustrations/visual_complex_number.png)  
 
 In interval arithmetic, the intervals `[0, ∞]` and `[-∞, 0]` are allowed [3].
 
-The indeterminate form of `0 x ∞` can be expressed as the interval `[0, ∞]`.  
-Similar, the indeterminate form of `0 x -∞` is `[-∞, 0]`.
-
-The idea is to calculate the two interval bounds for not indeterminate forms.
-
-I.  
-`0 x ∞ = [0, ∞]`:
-
-Replacing second multiplier with 0:  
-`0 x 0 = 0`  
-Replacing first multiplier with 1:  
-`1 x ∞ = ∞`
-
-II.  
-`0 x -∞ = [-∞, 0]`:
-
-Replacing second multiplier with 0:  
-`0 x 0 = 0`  
-Replacing first multiplier with 1:  
-`1 x -∞ = -∞`
+The indeterminate form of `0 x ∞` can be expressed with complex numbers as the interval `[0 + 0 x i, 0 + ∞ x i]`.  
+Similar, the indeterminate form of `0 x -∞` is `[0 + -∞ x i, 0 + 0 x i]`.
 
 *ToDo:*  
-*New illustraion*  
+*Explain illustraion and so on*  
 ![](illustrations/visual_interval_number.png)  
 
 ### Deduction
 
 *ToDo:*  
 *Explain `-1 x (0 x -∞)` => `0 x ∞`.* 
-
-```
-// Given interval [x1, x2] using interval arithmetic
-//
-// a + b*in
-//
-// where a = x1
-// where b = x2 - x1
-// where in is the new integral number (similar as i in complex numbers)
-//
-// a + b*in = (a + b) - b*in
-```
 
 ### Interval arithmetic operators
 

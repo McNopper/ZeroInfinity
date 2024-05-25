@@ -3,7 +3,7 @@
 
 #include <gtest/gtest.h>
 
-#include "IntervalNumber.hpp"
+#include "IntervalArithmetic.hpp"
 
 // Basic tests for the C++ implementation
 
@@ -35,9 +35,9 @@ TEST(Basics, InfinityMinusInfinity)
     EXPECT_EQ(true, std::isnan(result));
 }
 
-// Tests for IntervalNumber implementation
+// Tests for IntervalArithmetic implementation
 
-TEST(IntervalNumber, ConstructorStandard01)
+TEST(IntervalArithmetic, ConstructorStandard01)
 {
     IntervalNumber result;
 
@@ -45,7 +45,7 @@ TEST(IntervalNumber, ConstructorStandard01)
     EXPECT_EQ(result.getB(), 0.0);
 }
 
-TEST(IntervalNumber, ConstructorStandard02)
+TEST(IntervalArithmetic, ConstructorStandard02)
 {
     // Creating the [1, 10] interval number
     IntervalNumber result{1.0, 9.0};
@@ -54,7 +54,7 @@ TEST(IntervalNumber, ConstructorStandard02)
     EXPECT_EQ(result.getB(), 9.0);
 }
 
-TEST(IntervalNumber, ConstructorZeroInfinity)
+TEST(IntervalArithmetic, ConstructorZeroInfinity)
 {
     // Creating the [0, ∞] interval number
     IntervalNumber result{0.0, INF};
@@ -63,7 +63,7 @@ TEST(IntervalNumber, ConstructorZeroInfinity)
     EXPECT_EQ(result.getB(), INF);
 }
 
-TEST(IntervalNumber, Addition01)
+TEST(IntervalArithmetic, Addition01)
 {
     IntervalNumber a{0.0, 8.0};
     IntervalNumber b{1.0, 4.0};
@@ -74,7 +74,7 @@ TEST(IntervalNumber, Addition01)
     EXPECT_EQ(result.getB(), 7.0);
 }
 
-TEST(IntervalNumber, Addition02)
+TEST(IntervalArithmetic, Addition02)
 {
     IntervalNumber a{0.0, INF};
     IntervalNumber b{0.0, INF};
@@ -85,7 +85,7 @@ TEST(IntervalNumber, Addition02)
     EXPECT_EQ(result.getB(), INF);
 }
 
-TEST(IntervalNumber, Multiplication01)
+TEST(IntervalArithmetic, Multiplication01)
 {
     IntervalNumber a{1.0, 2.0};
 
@@ -96,7 +96,7 @@ TEST(IntervalNumber, Multiplication01)
 }
 
 
-TEST(IntervalNumber, Multiplication02)
+TEST(IntervalArithmetic, Multiplication02)
 {
     IntervalNumber a{1.0, INF};
 
@@ -106,7 +106,7 @@ TEST(IntervalNumber, Multiplication02)
     EXPECT_EQ(result.getB(), -INF);
 }
 
-TEST(IntervalNumber, Multiplication03)
+TEST(IntervalArithmetic, Multiplication03)
 {
     IntervalNumber a{0.0, INF};
 
@@ -116,7 +116,7 @@ TEST(IntervalNumber, Multiplication03)
     EXPECT_EQ(result.getB(), -INF);
 }
 
-TEST(IntervalNumber, Multiplication04)
+TEST(IntervalArithmetic, Multiplication04)
 {
     IntervalNumber a{0.0, INF};
     IntervalNumber b{0.0, INF};
@@ -127,7 +127,7 @@ TEST(IntervalNumber, Multiplication04)
     EXPECT_EQ(result.getB(), INF);
 }
 
-TEST(IntervalNumber, Multiplication05)
+TEST(IntervalArithmetic, Multiplication05)
 {
     IntervalNumber a{-INF, 0.0};
     IntervalNumber b{INF, 0.0};
@@ -138,7 +138,7 @@ TEST(IntervalNumber, Multiplication05)
     EXPECT_EQ(result.getB(), 0.0);
 }
 
-TEST(IntervalNumber, CheckNaN01)
+TEST(IntervalArithmetic, CheckNaN01)
 {
     IntervalNumber result{0.0, QUIET_NAN};
 
@@ -146,7 +146,7 @@ TEST(IntervalNumber, CheckNaN01)
     EXPECT_EQ(true, std::isnan(result.getB()));
 }
 
-TEST(IntervalNumber, CheckNaN02)
+TEST(IntervalArithmetic, CheckNaN02)
 {
     IntervalNumber result{QUIET_NAN, 0.0};
 

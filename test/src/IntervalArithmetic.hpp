@@ -1,5 +1,5 @@
-#ifndef INTERVALNUMBER_HPP_
-#define INTERVALNUMBER_HPP_
+#ifndef INTERVALARITHMETIC_HPP_
+#define INTERVALARITHMETIC_HPP_
 
 #include <algorithm>
 #include <cmath>
@@ -154,4 +154,4 @@ IntervalNumber operator*(double x, const IntervalNumber& other) noexcept
     return IntervalNumber(x) * other;
 }
 
-#endif /* INTERVALNUMBER_HPP_ */
+#endif /* INTERVALARITHMETIC_HPP_ */
