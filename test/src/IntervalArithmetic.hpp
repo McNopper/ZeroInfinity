@@ -26,6 +26,13 @@ private:
     // If one of the bounds is not a number, the whole interval is not a number.
     void check() noexcept
     {
+        if (m_x0 > m_x1)
+        {
+            auto x0 = m_x0;
+            m_x0 = m_x1;
+            m_x1 = x0;
+        }
+
         if (std::isnan(m_x0) || std::isnan(m_x1))
         {
             m_x0 = std::numeric_limits<double>::quiet_NaN();
@@ -75,12 +82,10 @@ public:
 
     IntervalArithmetic operator+(const IntervalArithmetic& other) const noexcept
     {
-        ComplexNumber first{getX0(), getX1()};
-        ComplexNumber second{other.getX0(), other.getX1()};
+        auto x0 = getX0() + other.getX0();
+        auto x1 = x0 + std::max(getX1(), other.getX1());
 
-        auto result = first + second;
-
-        return IntervalArithmetic(result.getA(), result.getB());
+        return IntervalArithmetic(x0, x1);
     }
 
     IntervalArithmetic operator+(double x) const noexcept
