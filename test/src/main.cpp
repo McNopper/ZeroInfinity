@@ -3,12 +3,7 @@
 
 #include <gtest/gtest.h>
 
-#include "IntervalArithmetic.hpp"
-
-// Constants for convenience
-
-static constexpr double INF = std::numeric_limits<double>::infinity();
-static constexpr double QUIET_NAN = std::numeric_limits<double>::quiet_NaN();
+#include "IntervalNumber.hpp"
 
 // Basic tests for the C++ implementation
 
@@ -26,6 +21,13 @@ TEST(Basics, OnePlusInfinity)
     EXPECT_EQ(true, std::isinf(result));
 }
 
+TEST(Basics, MinusInfinityByInfinity)
+{
+    double result = -INF * INF;
+
+    EXPECT_EQ(true, std::isinf(result));
+}
+
 TEST(Basics, InfinityMinusInfinity)
 {
     double result = INF - INF;
@@ -35,101 +37,121 @@ TEST(Basics, InfinityMinusInfinity)
 
 // Tests for IntervalArithmetic implementation
 
-TEST(IntervalArithmetic, ConstructorStandard)
+TEST(IntervalNumber, ConstructorStandard01)
 {
-    IntervalArithmetic result{1.0, 10.0};
+    IntervalNumber result;
 
-    EXPECT_EQ(result.lowerBound(), 1.0);
-    EXPECT_EQ(result.upperBound(), 10.0);
+    EXPECT_EQ(result.getA(), 0.0);
+    EXPECT_EQ(result.getB(), 0.0);
 }
 
-TEST(IntervalArithmetic, ConstructorSwizzle)
+TEST(IntervalNumber, ConstructorStandard02)
 {
-    IntervalArithmetic result{10.0, 1.0};
+    // Creating the [1, 10] interval number
+    IntervalNumber result{1.0, 9.0};
 
-    EXPECT_EQ(result.lowerBound(), 1.0);
-    EXPECT_EQ(result.upperBound(), 10.0);
+    EXPECT_EQ(result.getA(), 1.0);
+    EXPECT_EQ(result.getB(), 9.0);
 }
 
-TEST(IntervalArithmetic, ConstructorZeroInfinity)
+TEST(IntervalNumber, ConstructorZeroInfinity)
 {
-    // Creating the [0, ∞] interval
-    IntervalArithmetic result{0.0, INF};
+    // Creating the [0, ∞] interval number
+    IntervalNumber result{0.0, INF};
 
-    EXPECT_EQ(result.lowerBound(), 0.0);
-    EXPECT_EQ(result.upperBound(), INF);
+    EXPECT_EQ(result.getA(), 0.0);
+    EXPECT_EQ(result.getB(), INF);
 }
 
-TEST(IntervalArithmetic, Addition01)
+TEST(IntervalNumber, Addition01)
 {
-    IntervalArithmetic a{0.0, INF};
-    IntervalArithmetic b{1.0, INF};
+    IntervalNumber a{0.0, 8.0};
+    IntervalNumber b{1.0, 4.0};
 
     auto result = a + b;
 
-    EXPECT_EQ(result.lowerBound(), 1.0);
-    EXPECT_EQ(result.upperBound(), INF);
+    EXPECT_EQ(result.getA(), 1.0);
+    EXPECT_EQ(result.getB(), 7.0);
 }
 
-TEST(IntervalArithmetic, Addition02)
+TEST(IntervalNumber, Addition02)
 {
-    IntervalArithmetic a{0.0, INF};
-    IntervalArithmetic b{0.0, INF};
+    IntervalNumber a{0.0, INF};
+    IntervalNumber b{0.0, INF};
 
     auto result = a + b;
 
-    EXPECT_EQ(result.lowerBound(), 0.0);
-    EXPECT_EQ(result.upperBound(), INF);
+    EXPECT_EQ(result.getA(), 0.0);
+    EXPECT_EQ(result.getB(), INF);
 }
 
-TEST(IntervalArithmetic, Multiplication01)
+TEST(IntervalNumber, Multiplication01)
 {
-    IntervalArithmetic temp{0.0, INF};
+    IntervalNumber a{1.0, 2.0};
 
-    auto result = -1.0 * temp;
+    auto result = -1.0 * a;
 
-    EXPECT_EQ(result.lowerBound(), -INF);
-    EXPECT_EQ(result.upperBound(), 0.0);
+    EXPECT_EQ(result.getA(), -1.0);
+    EXPECT_EQ(result.getB(), -2.0);
 }
 
-TEST(IntervalArithmetic, Multiplication02)
+
+TEST(IntervalNumber, Multiplication02)
 {
-    IntervalArithmetic temp{-INF, 0.0};
+    IntervalNumber a{1.0, INF};
 
-    auto result = -1.0 * temp;
+    auto result = -1.0 * a;
 
-    EXPECT_EQ(result.lowerBound(), 0.0);
-    EXPECT_EQ(result.upperBound(), INF);
+    EXPECT_EQ(result.getA(), -1.0);
+    EXPECT_EQ(result.getB(), -INF);
 }
 
-TEST(IntervalArithmetic, Multiplication03)
+TEST(IntervalNumber, Multiplication03)
 {
-    IntervalArithmetic a{0.0, INF};
-    IntervalArithmetic b{0.0, INF};
+    IntervalNumber a{0.0, INF};
+
+    auto result = -1.0 * a;
+
+    EXPECT_EQ(result.getA(), 0.0);
+    EXPECT_EQ(result.getB(), -INF);
+}
+
+TEST(IntervalNumber, Multiplication04)
+{
+    IntervalNumber a{0.0, INF};
+    IntervalNumber b{0.0, INF};
 
     auto result = a * b;
 
-    EXPECT_EQ(result.lowerBound(), 0.0);
-    EXPECT_EQ(result.upperBound(), INF);
+    EXPECT_EQ(result.getA(), 0.0);
+    EXPECT_EQ(result.getB(), INF);
 }
 
-/*TEST(IntervalArithmetic, Multiplication04)
+TEST(IntervalNumber, Multiplication05)
 {
-    IntervalArithmetic a{-MY_INF, 0.0};
-    IntervalArithmetic b{0.0, MY_INF};
+    IntervalNumber a{-INF, 0.0};
+    IntervalNumber b{INF, 0.0};
 
     auto result = a * b;
 
-    EXPECT_EQ(result.lowerBound(), -MY_INF);
-    EXPECT_EQ(result.upperBound(), 0.0);
-}*/
+    EXPECT_EQ(result.getA(), -INF);
+    EXPECT_EQ(result.getB(), 0.0);
+}
 
-TEST(IntervalArithmetic, BoundsNaN)
+TEST(IntervalNumber, CheckNaN01)
 {
-    IntervalArithmetic result{0.0, QUIET_NAN};
+    IntervalNumber result{0.0, QUIET_NAN};
 
-    EXPECT_EQ(true, std::isnan(result.lowerBound()));
-    EXPECT_EQ(true, std::isnan(result.upperBound()));
+    EXPECT_EQ(true, std::isnan(result.getA()));
+    EXPECT_EQ(true, std::isnan(result.getB()));
+}
+
+TEST(IntervalNumber, CheckNaN02)
+{
+    IntervalNumber result{QUIET_NAN, 0.0};
+
+    EXPECT_EQ(true, std::isnan(result.getA()));
+    EXPECT_EQ(true, std::isnan(result.getB()));
 }
 
 int main(int argc, char** argv)
