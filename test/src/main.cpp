@@ -121,18 +121,28 @@ TEST(IntervalArithmetic, Multiplication02)
     EXPECT_EQ(result.getX1(), -INF);
 }
 
-/*
 TEST(IntervalArithmetic, Multiplication03)
 {
     IntervalArithmetic a{0.0, INF};
 
     auto result = -1.0 * a;
 
-    EXPECT_EQ(result.getX0(), 0.0);
-    EXPECT_EQ(result.getX1(), -INF);
+    EXPECT_EQ(result.getX0(), -INF);
+    EXPECT_EQ(result.getX1(), 0.0);
 }
 
 TEST(IntervalArithmetic, Multiplication04)
+{
+    IntervalArithmetic a{-INF, 0.0};
+    IntervalArithmetic b{0.0, INF};
+
+    auto result = a * b;
+
+    EXPECT_EQ(result.getX0(), -INF);
+    EXPECT_EQ(result.getX1(), 0.0);
+}
+
+TEST(IntervalArithmetic, Multiplication05)
 {
     IntervalArithmetic a{0.0, INF};
     IntervalArithmetic b{0.0, INF};
@@ -142,17 +152,6 @@ TEST(IntervalArithmetic, Multiplication04)
     EXPECT_EQ(result.getX0(), 0.0);
     EXPECT_EQ(result.getX1(), INF);
 }
-
-TEST(IntervalArithmetic, Multiplication05)
-{
-    IntervalArithmetic a{-INF, 0.0};
-    IntervalArithmetic b{INF, 0.0};
-
-    auto result = a * b;
-
-    EXPECT_EQ(result.getX0(), -INF);
-    EXPECT_EQ(result.getX1(), 0.0);
-}*/
 
 int main(int argc, char** argv)
 {

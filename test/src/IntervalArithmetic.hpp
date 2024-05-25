@@ -102,7 +102,7 @@ public:
         }
         if (!std::isnan(x1y1))
         {
-            a += x0y0;
+            a += x1y1;
         }
 
         auto x0y1 = getX0() * other.getX1();
