@@ -49,13 +49,11 @@ $$[x_0, x_1] = \{ x_0 = a * b \, | \, b \in [a, b[ \, \land \, x_1 = a * b  \, |
 
 ### Deduction
 
-$
--1 \cdot (0 \cdot -∞) \\
--1 \cdot [-∞, 0] \\
-[-1 \cdot -∞, -1 \cdot 0] \\
-[0, ∞] \\
-0 \cdot ∞
-$
+$-1 \cdot (0 \cdot -∞)$  
+$-1 \cdot [-∞, 0]$  
+$[-1 \cdot -∞, -1 \cdot 0]$  
+$[0, ∞]$  
+$0 \cdot ∞$
 
 *ToDo:*  
 *For each step, name the rules and operators.*
