@@ -16,13 +16,12 @@ $$0 \cdot ∞ = -1 \cdot (0 \cdot -∞)$$
 
 The expressions $0 \cdot ∞$ and implicitly $0 \cdot -∞$ are indeterminate forms [1].
 
-A naive approach like $-1 \cdot (0 \cdot -∞)$ <=> $(-1 \cdot 0) \cdot -∞)$ with math limits [2] results again in $0 \cdot -∞$ even when the associative law is allowed.
+A naive approach like $-1 \cdot (0 \cdot -∞)$ <=> $(-1 \cdot 0) \cdot -∞$ with math limits [2] results again in $0 \cdot -∞$ even when the associative law is allowed.
 
 Existing required math limits for above assumption:
 
 $\lim_{n\to\infty}\sqrt[n]{n}=1$  
 $\lim_{n\to\infty}\frac{1}{n}=0$  
-$\lim_{n\to\infty}{n}=\infty$
 
 Assume the usage of the associative law is allowed:
 
@@ -46,7 +45,7 @@ $$[x_0, x_1] = \{ x_0 = a * b \, | \, b \in [a, b[ \, \land \, x_1 = a * b  \, |
 ### Interval arithmetic operators
 
 *ToDo:*  
-*Define Addition and Multiplication for minimal algebraic structure Ring [4]*
+*Define Addition and Multiplication for minimal algebraic structure Ring [4].*
 
 ### Deduction
 
@@ -70,7 +69,7 @@ In the [test](test/) folter is an implementation of this interval arithmetic.
 
 ### Conclusion
 
-Using this approach, other indeterminate forms could be expressed as interval arithmetics and solved to equations as well.
+Using this approach, other indeterminate forms could be expressed as an interval and solved to equations as well.
 
 *ToDo:*  
 *Add investigation, if the algebraic structure is more than a mathematical Ring.*
