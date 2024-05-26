@@ -60,7 +60,7 @@ $0 \cdot ∞$
 
 ### Implementation
 
-In the [test](test/) folter is an implementation of this interval arithmetic.   
+In the [test](test/) folder is an implementation of this interval arithmetic.   
 
 *ToDo:*  
 *Depending on the mathematical Ring, extend implementation and unit tests.*
