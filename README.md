@@ -38,9 +38,9 @@ Similar, the indeterminate form of $0 \cdot -∞$ is $[-∞, 0]$.
 
 ![](illustrations/visual_interval_arithmetic.png)
 
-The interval $[x_0, x_1]$ is estimated from $a * b \in \mathbb R \land a \le b$ providing following rule:
+The interval $[x_0, x_1]$ is estimated from $a \cdot b \in \mathbb R \land a \le b$ providing following rule:
 
-$$[x_0, x_1] = \{ x_0 = a * b \, | \, b \in [a, b[ \, \land \, x_1 = a * b  \, | \, a \in ]a, b] \}$$
+$$[x_0, x_1] = \{ x_0 = a \cdot b | b \in [a, b[ \land x_1 = a \cdot b | a \in ]a, b] \}$$
 
 ### Interval arithmetic operators
 
