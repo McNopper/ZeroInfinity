@@ -42,6 +42,9 @@ The interval $[x_0, x_1]$ is estimated from $a \cdot b \in \mathbb R \land a \le
 
 $$[x_0, x_1] = \{ x_0 = a \cdot b | b \in [a, b[ \land x_1 = a \cdot b | a \in ]a, b] \}$$
 
+*Note:*  
+GitHub can not properly resolve the above curly brackets. They are invisible on GitHub. Please use e.g. Visual Studio Code to display properly.
+
 ### Interval arithmetic operators
 
 *ToDo:*  
