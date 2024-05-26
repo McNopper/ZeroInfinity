@@ -6,24 +6,23 @@
 #include <limits>
 #include <vector>
 
-// Constants for convenience
+// Constants for convenience.
 static constexpr double INF = std::numeric_limits<double>::infinity();
 static constexpr double QUIET_NAN = std::numeric_limits<double>::quiet_NaN();
 
-// Given [x0, x1] using interval arithmetic with complex numbers.
-// For simplicity, only the four intervals in the illustration are supported.
+// Given [x0, x1] using interval arithmetic.
+//
+// Algebraic structure: Ring.
 class IntervalArithmetic {
-
-// Algebraic structure: Ring
 
 private:
 
     double m_x0{0.0};
     double m_x1{0.0};
 
-    // If one of the bounds is not a number, the whole interval is not a number.
     void check() noexcept
     {
+        // Always guarantee, that m_x0 <= m_x1.
         if (m_x0 > m_x1)
         {
             auto x0 = m_x0;
@@ -31,6 +30,7 @@ private:
             m_x1 = x0;
         }
 
+        // If one of the bounds is not a number, the whole interval is not a number.
         if (std::isnan(m_x0) || std::isnan(m_x1))
         {
             m_x0 = std::numeric_limits<double>::quiet_NaN();
@@ -88,7 +88,7 @@ public:
 
     IntervalArithmetic operator+(double x) const noexcept
     {
-        return *this + IntervalArithmetic(x, x);
+        return *this + IntervalArithmetic(x);
     }
 
     IntervalArithmetic operator*(const IntervalArithmetic& other) const noexcept
@@ -101,7 +101,7 @@ public:
 
     IntervalArithmetic operator*(double x) const noexcept
     {
-        return *this * IntervalArithmetic(x, x);
+        return *this * IntervalArithmetic(x);
     }
 
 };

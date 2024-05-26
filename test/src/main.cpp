@@ -5,9 +5,9 @@
 
 #include "IntervalArithmetic.hpp"
 
-// Basic tests for the C++ implementation
+// Basic tests for the C++ implementation.
 
-TEST(Basics, ZeroMultiplyInfinity)
+TEST(Basics, ZeroByInfinity)
 {
     double result = 0.0 * INF;
 
@@ -39,7 +39,7 @@ TEST(Basics, InfinityMinusInfinity)
 
 TEST(IntervalArithmetic, ConstructorStandard01)
 {
-    IntervalArithmetic result;
+    IntervalArithmetic result{};
 
     EXPECT_EQ(result.getX0(), 0.0);
     EXPECT_EQ(result.getX1(), 0.0);
@@ -47,7 +47,6 @@ TEST(IntervalArithmetic, ConstructorStandard01)
 
 TEST(IntervalArithmetic, ConstructorStandard02)
 {
-    // Creating the [0, 10] interval
     IntervalArithmetic result{0.0, 10.0};
 
     EXPECT_EQ(result.getX0(), 0.0);
@@ -56,7 +55,6 @@ TEST(IntervalArithmetic, ConstructorStandard02)
 
 TEST(IntervalArithmetic, ConstructorZeroInfinity)
 {
-    // Creating the [0, ∞] interval
     IntervalArithmetic result{0.0, INF};
 
     EXPECT_EQ(result.getX0(), 0.0);
@@ -103,9 +101,9 @@ TEST(IntervalArithmetic, Addition02)
 
 TEST(IntervalArithmetic, Multiplication01)
 {
-    IntervalArithmetic a{1.0, 1.0};
+    IntervalArithmetic b{1.0};
 
-    auto result = -1.0 * a;
+    auto result = -1.0 * b;
 
     EXPECT_EQ(result.getX0(), -1.0);
     EXPECT_EQ(result.getX1(), -1.0);
@@ -113,9 +111,9 @@ TEST(IntervalArithmetic, Multiplication01)
 
 TEST(IntervalArithmetic, Multiplication02)
 {
-    IntervalArithmetic a{INF, INF};
+    IntervalArithmetic b{INF};
 
-    auto result = -1.0 * a;
+    auto result = -1.0 * b;
 
     EXPECT_EQ(result.getX0(), -INF);
     EXPECT_EQ(result.getX1(), -INF);
@@ -123,9 +121,9 @@ TEST(IntervalArithmetic, Multiplication02)
 
 TEST(IntervalArithmetic, Multiplication03)
 {
-    IntervalArithmetic a{0.0, INF};
+    IntervalArithmetic b{0.0, INF};
 
-    auto result = -1.0 * a;
+    auto result = -1.0 * b;
 
     EXPECT_EQ(result.getX0(), -INF);
     EXPECT_EQ(result.getX1(), 0.0);
@@ -133,13 +131,13 @@ TEST(IntervalArithmetic, Multiplication03)
 
 TEST(IntervalArithmetic, Multiplication04)
 {
-    IntervalArithmetic a{2.0, 2.0};
-    IntervalArithmetic b{3.0, 3.0};
+    IntervalArithmetic a{2.0};
+    IntervalArithmetic b{3.0};
 
     auto result = a * b;
 
-    EXPECT_EQ(result.getX0(), 6);
-    EXPECT_EQ(result.getX1(), 6);
+    EXPECT_EQ(result.getX0(), 6.0);
+    EXPECT_EQ(result.getX1(), 6.0);
 }
 
 TEST(IntervalArithmetic, Multiplication05)
@@ -155,9 +153,9 @@ TEST(IntervalArithmetic, Multiplication05)
 
 TEST(IntervalArithmetic, StatusQuo)
 {
-    IntervalArithmetic a{-1.0, -1.0};
-    IntervalArithmetic b{0.0, 0.0};
-    IntervalArithmetic c{-INF, -INF};
+    IntervalArithmetic a{-1.0};
+    IntervalArithmetic b{0.0};
+    IntervalArithmetic c{-INF};
 
     auto result = a * (b * c);
 
@@ -167,7 +165,7 @@ TEST(IntervalArithmetic, StatusQuo)
 
 TEST(IntervalArithmetic, Thesis)
 {
-    IntervalArithmetic a{-1.0, -1.0};
+    IntervalArithmetic a{-1.0};
     IntervalArithmetic bc{-INF, 0.0};
 
     auto result = a * bc;
