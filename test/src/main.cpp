@@ -3,7 +3,7 @@
 
 #include <gtest/gtest.h>
 
-#include "IntervalArithmetic.hpp"
+#include "Interval.hpp"
 
 // Basic tests for the C++ implementation.
 
@@ -37,50 +37,50 @@ TEST(Basics, InfinityMinusInfinity)
 
 // Tests for IntervalArithmetic implementation
 
-TEST(IntervalArithmetic, ConstructorStandard01)
+TEST(Interval, ConstructorStandard01)
 {
-    IntervalArithmetic result{};
+    Interval result{};
 
     EXPECT_EQ(result.getX0(), 0.0);
     EXPECT_EQ(result.getX1(), 0.0);
 }
 
-TEST(IntervalArithmetic, ConstructorStandard02)
+TEST(Interval, ConstructorStandard02)
 {
-    IntervalArithmetic result{0.0, 10.0};
+    Interval result{0.0, 10.0};
 
     EXPECT_EQ(result.getX0(), 0.0);
     EXPECT_EQ(result.getX1(), 10.0);
 }
 
-TEST(IntervalArithmetic, ConstructorZeroInfinity)
+TEST(Interval, ConstructorZeroInfinity)
 {
-    IntervalArithmetic result{0.0, INF};
+    Interval result{0.0, INF};
 
     EXPECT_EQ(result.getX0(), 0.0);
     EXPECT_EQ(result.getX1(), INF);
 }
 
-TEST(IntervalArithmetic, ConstructorNaN01)
+TEST(Interval, ConstructorNaN01)
 {
-    IntervalArithmetic result{0.0, QUIET_NAN};
+    Interval result{0.0, QUIET_NAN};
 
     EXPECT_EQ(true, std::isnan(result.getX0()));
     EXPECT_EQ(true, std::isnan(result.getX1()));
 }
 
-TEST(IntervalArithmetic, ConstructorNaN02)
+TEST(Interval, ConstructorNaN02)
 {
-    IntervalArithmetic result{QUIET_NAN, 0.0};
+    Interval result{QUIET_NAN, 0.0};
 
     EXPECT_EQ(true, std::isnan(result.getX0()));
     EXPECT_EQ(true, std::isnan(result.getX1()));
 }
 
-TEST(IntervalArithmetic, Addition01)
+TEST(Interval, Addition01)
 {
-    IntervalArithmetic a{1.0, 1.0};
-    IntervalArithmetic b{2.0, 2.0};
+    Interval a{1.0, 1.0};
+    Interval b{2.0, 2.0};
 
     auto result = a + b;
 
@@ -88,10 +88,10 @@ TEST(IntervalArithmetic, Addition01)
     EXPECT_EQ(result.getX1(), 3.0);
 }
 
-TEST(IntervalArithmetic, Addition02)
+TEST(Interval, Addition02)
 {
-    IntervalArithmetic a{0.0, INF};
-    IntervalArithmetic b{0.0, INF};
+    Interval a{0.0, INF};
+    Interval b{0.0, INF};
 
     auto result = a + b;
 
@@ -99,9 +99,9 @@ TEST(IntervalArithmetic, Addition02)
     EXPECT_EQ(result.getX1(), INF);
 }
 
-TEST(IntervalArithmetic, Multiplication01)
+TEST(Interval, Multiplication01)
 {
-    IntervalArithmetic b{1.0};
+    Interval b{1.0};
 
     auto result = -1.0 * b;
 
@@ -109,9 +109,9 @@ TEST(IntervalArithmetic, Multiplication01)
     EXPECT_EQ(result.getX1(), -1.0);
 }
 
-TEST(IntervalArithmetic, Multiplication02)
+TEST(Interval, Multiplication02)
 {
-    IntervalArithmetic b{INF};
+    Interval b{INF};
 
     auto result = -1.0 * b;
 
@@ -119,9 +119,9 @@ TEST(IntervalArithmetic, Multiplication02)
     EXPECT_EQ(result.getX1(), -INF);
 }
 
-TEST(IntervalArithmetic, Multiplication03)
+TEST(Interval, Multiplication03)
 {
-    IntervalArithmetic b{0.0, INF};
+    Interval b{0.0, INF};
 
     auto result = -1.0 * b;
 
@@ -129,10 +129,10 @@ TEST(IntervalArithmetic, Multiplication03)
     EXPECT_EQ(result.getX1(), 0.0);
 }
 
-TEST(IntervalArithmetic, Multiplication04)
+TEST(Interval, Multiplication04)
 {
-    IntervalArithmetic a{2.0};
-    IntervalArithmetic b{3.0};
+    Interval a{2.0};
+    Interval b{3.0};
 
     auto result = a * b;
 
@@ -140,10 +140,10 @@ TEST(IntervalArithmetic, Multiplication04)
     EXPECT_EQ(result.getX1(), 6.0);
 }
 
-TEST(IntervalArithmetic, Multiplication05)
+TEST(Interval, Multiplication05)
 {
-    IntervalArithmetic a{0.0, INF};
-    IntervalArithmetic b{0.0, INF};
+    Interval a{0.0, INF};
+    Interval b{0.0, INF};
 
     auto result = a * b;
 
@@ -151,11 +151,11 @@ TEST(IntervalArithmetic, Multiplication05)
     EXPECT_EQ(result.getX1(), INF);
 }
 
-TEST(IntervalArithmetic, StatusQuo)
+TEST(Interval, StatusQuo)
 {
-    IntervalArithmetic a{-1.0};
-    IntervalArithmetic b{0.0};
-    IntervalArithmetic c{-INF};
+    Interval a{-1.0};
+    Interval b{0.0};
+    Interval c{-INF};
 
     auto result = a * (b * c);
 
@@ -163,10 +163,10 @@ TEST(IntervalArithmetic, StatusQuo)
     EXPECT_EQ(true, std::isnan(result.getX1()));
 }
 
-TEST(IntervalArithmetic, Thesis)
+TEST(Interval, Thesis)
 {
-    IntervalArithmetic a{-1.0};
-    IntervalArithmetic bc{-INF, 0.0};
+    Interval a{-1.0};
+    Interval bc{-INF, 0.0};
 
     auto result = a * bc;
 

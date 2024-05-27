@@ -1,5 +1,5 @@
-#ifndef INTERVALARITHMETIC_HPP_
-#define INTERVALARITHMETIC_HPP_
+#ifndef INTERVAL_HPP_
+#define INTERVAL_HPP_
 
 #include <algorithm>
 #include <cmath>
@@ -10,10 +10,10 @@
 static constexpr double INF = std::numeric_limits<double>::infinity();
 static constexpr double QUIET_NAN = std::numeric_limits<double>::quiet_NaN();
 
-// Given [x0, x1] using interval arithmetic.
+// Given interval [x0, x1] with extended real numbers line.
 //
 // Algebraic structure: Ring.
-class IntervalArithmetic {
+class Interval {
 
 private:
 
@@ -40,19 +40,19 @@ private:
 
 public:
 
-    IntervalArithmetic() noexcept :
+    Interval() noexcept :
         m_x0{0.0}, m_x1{0.0}
     {
         check();
     }
 
-    IntervalArithmetic(double x0) noexcept :
+    Interval(double x0) noexcept :
         m_x0{x0}, m_x1{x0}
     {
         check();
     }
 
-    IntervalArithmetic(double x0, double x1) noexcept :
+    Interval(double x0, double x1) noexcept :
         m_x0{x0}, m_x1{x1}
     {
         check();
@@ -68,52 +68,52 @@ public:
         return m_x1;
     }
 
-    bool operator==(const IntervalArithmetic& other) const noexcept
+    bool operator==(const Interval& other) const noexcept
     {
         return (getX0() == other.getX0()) && (getX1() == other.getX1());
     }
 
-    bool operator!=(const IntervalArithmetic& other) const noexcept
+    bool operator!=(const Interval& other) const noexcept
     {
         return (getX0() != other.getX0()) || (getX1() != other.getX1());
     }
 
-    IntervalArithmetic operator+(const IntervalArithmetic& other) const noexcept
+    Interval operator+(const Interval& other) const noexcept
     {
         auto x0 = getX0() + other.getX0();
         auto x1 = getX1() + other.getX1();
 
-        return IntervalArithmetic(x0, x1);
+        return Interval(x0, x1);
     }
 
-    IntervalArithmetic operator+(double x) const noexcept
+    Interval operator+(double x) const noexcept
     {
-        return *this + IntervalArithmetic(x);
+        return *this + Interval(x);
     }
 
-    IntervalArithmetic operator*(const IntervalArithmetic& other) const noexcept
+    Interval operator*(const Interval& other) const noexcept
     {
         auto x0 = getX0() * other.getX0();
         auto x1 = getX1() * other.getX1();
 
-        return IntervalArithmetic(x0, x1);
+        return Interval(x0, x1);
     }
 
-    IntervalArithmetic operator*(double x) const noexcept
+    Interval operator*(double x) const noexcept
     {
-        return *this * IntervalArithmetic(x);
+        return *this * Interval(x);
     }
 
 };
 
-IntervalArithmetic operator+(double x, const IntervalArithmetic& other) noexcept
+Interval operator+(double x, const Interval& other) noexcept
 {
-    return IntervalArithmetic(x) + other;
+    return Interval(x) + other;
 }
 
-IntervalArithmetic operator*(double x, const IntervalArithmetic& other) noexcept
+Interval operator*(double x, const Interval& other) noexcept
 {
-    return IntervalArithmetic(x) * other;
+    return Interval(x) * other;
 }
 
-#endif /* INTERVALARITHMETIC_HPP_ */
+#endif /* INTERVAL_HPP_ */

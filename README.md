@@ -1,4 +1,4 @@
-# Solving indeterminate forms using interval arithmetic
+# Solving indeterminate forms with extended real numbers and intervals
 
 *by Norbert Nopper*
 
@@ -31,12 +31,12 @@ The result is again 0.
 
 ### Idea
 
-Using extended real number line $\overline {\mathbb R}$ [2] and in interval arithmetic [3], the intervals $[0, ∞]$ and $[-∞, 0]$ are allowed.
+Using extended real number line $\overline {\mathbb R}$ [3], the intervals $[0, ∞]$ and $[-∞, 0]$ are allowed.
 
 The indeterminate form of $0 \cdot ∞$ can be expressed as the interval $[0, ∞]$.  
 Similar, the indeterminate form of $0 \cdot -∞$ is $[-∞, 0]$.
 
-![](illustrations/visual_interval_arithmetic.png)
+![](illustrations/visual_interval_extended.png)
 
 The interval $[x_0, x_1]$ is estimated from $a \cdot b \in \overline {\mathbb R} \land a \le b$ providing following rule:
 
@@ -45,9 +45,11 @@ $$[x_0, x_1] = \{ x_0 = a \cdot b | b \in [a, b[ \land x_1 = a \cdot b | a \in ]
 *Note:*  
 GitHub can not properly resolve the above curly brackets. They are invisible on GitHub. Please use e.g. Visual Studio Code to display properly.
 
-### Interval arithmetic operators
+### Interval operators
 
 *ToDo:*  
+*Are interval addition and multiplication of interval trivial?*  
+*https://www.lernhelfer.de/schuelerlexikon/mathematik/artikel/intervalle-rechnen.*  
 *Define Addition and Multiplication for minimal algebraic structure Ring [4].*
 
 ### Deduction
@@ -63,7 +65,7 @@ $0 \cdot ∞$
 
 ### Implementation
 
-In the [test](test/) folder is an implementation of this interval arithmetic.   
+In the [test](test/) folder is an implementation of the interval operators.   
 
 *ToDo:*  
 *Depending on the mathematical Ring, extend implementation and unit tests.*
@@ -86,6 +88,5 @@ $1^∞ = ∞^0$
 
 [1] [Indeterminate form](https://en.wikipedia.org/wiki/Indeterminate_form)  
 [2] [Limit (mathematics)](https://en.wikipedia.org/wiki/Limit_(mathematics))  
-[3] [Extended real number line](https://en.wikipedia.org/wiki/Extended_real_number_line)
-[4] [Interval arithmetic](https://en.wikipedia.org/wiki/Interval_arithmetic)  
-[5] [Ring (mathematics)](https://en.wikipedia.org/wiki/Ring_(mathematics))
+[3] [Extended real number line](https://en.wikipedia.org/wiki/Extended_real_number_line)  
+[4] [Ring (mathematics)](https://en.wikipedia.org/wiki/Ring_(mathematics))
