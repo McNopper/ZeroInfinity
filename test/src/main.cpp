@@ -35,7 +35,7 @@ TEST(Basics, InfinityMinusInfinity)
     EXPECT_EQ(true, std::isnan(result));
 }
 
-// Tests for IntervalArithmetic implementation
+// Tests for the Interval implementation
 
 TEST(Interval, ConstructorStandard01)
 {
