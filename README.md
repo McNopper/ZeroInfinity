@@ -16,7 +16,7 @@ $$0 \cdot ∞ = -1 \cdot (0 \cdot -∞)$$
 
 The expressions $0 \cdot ∞$ and implicitly $0 \cdot -∞$ are indeterminate forms [1].
 
-A naive approach like $-1 \cdot (0 \cdot -∞)$ <=> $(-1 \cdot 0) \cdot -∞$ with math limits [2] results again in $0 \cdot -∞$ even when the associative law is allowed.
+A naive approach like $-1 \cdot (0 \cdot -∞)$ <=> $(-1 \cdot 0) \cdot -∞$ with math limits results again in $0 \cdot -∞$ even when the associative law is allowed.
 
 Existing required math limits for above assumption:
 
@@ -31,7 +31,7 @@ The result is again 0.
 
 ### Idea
 
-Using extended real number line $\overline {\mathbb R}$ [3], the intervals $[0, ∞]$ and $[-∞, 0]$ are allowed.
+Using extended real number line $\overline {\mathbb R}$ [2], the intervals $[0, ∞]$ and $[-∞, 0]$ are allowed.
 
 The indeterminate form of $0 \cdot ∞$ can be expressed as the interval $[0, ∞]$.  
 Similar, the indeterminate form of $0 \cdot -∞$ is $[-∞, 0]$.
@@ -50,7 +50,7 @@ GitHub can not properly resolve the above curly brackets. They are invisible on 
 *ToDo:*  
 *Are interval addition and multiplication of interval trivial?*  
 *https://www.lernhelfer.de/schuelerlexikon/mathematik/artikel/intervalle-rechnen.*  
-*Define Addition and Multiplication for minimal algebraic structure Ring [4].*
+*Define Addition and Multiplication for minimal algebraic structure Ring [3].*
 
 ### Deduction
 
@@ -87,6 +87,5 @@ $1^∞ = ∞^0$
 ### References
 
 [1] [Indeterminate form](https://en.wikipedia.org/wiki/Indeterminate_form)  
-[2] [Limit (mathematics)](https://en.wikipedia.org/wiki/Limit_(mathematics))  
-[3] [Extended real number line](https://en.wikipedia.org/wiki/Extended_real_number_line)  
-[4] [Ring (mathematics)](https://en.wikipedia.org/wiki/Ring_(mathematics))
+[2] [Extended real number line](https://en.wikipedia.org/wiki/Extended_real_number_line)  
+[3] [Ring (mathematics)](https://en.wikipedia.org/wiki/Ring_(mathematics))
