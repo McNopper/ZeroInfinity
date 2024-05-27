@@ -97,6 +97,19 @@ public:
         return *this + IntervalNumber(x);
     }
 
+    IntervalNumber operator-(const IntervalNumber& other) const noexcept
+    {
+        auto x0 = getX0() - other.getX0();
+        auto x1 = getX1() - other.getX1();
+
+        return IntervalNumber(x0, x1);
+    }
+
+    IntervalNumber operator-(double x) const noexcept
+    {
+        return *this - IntervalNumber(x);
+    }
+
     IntervalNumber operator*(const IntervalNumber& other) const noexcept
     {
         auto x0 = getX0() * other.getX0();
@@ -110,6 +123,20 @@ public:
         return *this * IntervalNumber(x);
     }
 
+    IntervalNumber operator/(const IntervalNumber& other) const noexcept
+    {
+        // Swizzle is by purpose.
+        auto x0 = getX0() / other.getX1();
+        auto x1 = getX1() / other.getX0();
+
+        return IntervalNumber(x0, x1);
+    }
+
+    IntervalNumber operator/(double x) const noexcept
+    {
+        return *this / IntervalNumber(x);
+    }
+
 };
 
 IntervalNumber operator+(double x, const IntervalNumber& other) noexcept
@@ -117,9 +144,19 @@ IntervalNumber operator+(double x, const IntervalNumber& other) noexcept
     return IntervalNumber(x) + other;
 }
 
+IntervalNumber operator-(double x, const IntervalNumber& other) noexcept
+{
+    return IntervalNumber(x) - other;
+}
+
 IntervalNumber operator*(double x, const IntervalNumber& other) noexcept
 {
     return IntervalNumber(x) * other;
+}
+
+IntervalNumber operator/(double x, const IntervalNumber& other) noexcept
+{
+    return IntervalNumber(x) / other;
 }
 
 #endif /* INTERVALNUMBER_HPP_ */
