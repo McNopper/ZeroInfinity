@@ -31,14 +31,14 @@ The result is again 0.
 
 ### Idea
 
-In interval arithmetic, the intervals $[0, ∞]$ and $[-∞, 0]$ are allowed [3].
+Using extended real number line $\overline {\mathbb R}$ [2] and in interval arithmetic [3], the intervals $[0, ∞]$ and $[-∞, 0]$ are allowed.
 
 The indeterminate form of $0 \cdot ∞$ can be expressed as the interval $[0, ∞]$.  
 Similar, the indeterminate form of $0 \cdot -∞$ is $[-∞, 0]$.
 
 ![](illustrations/visual_interval_arithmetic.png)
 
-The interval $[x_0, x_1]$ is estimated from $a \cdot b \in \mathbb R \land a \le b$ providing following rule:
+The interval $[x_0, x_1]$ is estimated from $a \cdot b \in \overline {\mathbb R} \land a \le b$ providing following rule:
 
 $$[x_0, x_1] = \{ x_0 = a \cdot b | b \in [a, b[ \land x_1 = a \cdot b | a \in ]a, b] \}$$
 
@@ -86,5 +86,6 @@ $1^∞ = ∞^0$
 
 [1] [Indeterminate form](https://en.wikipedia.org/wiki/Indeterminate_form)  
 [2] [Limit (mathematics)](https://en.wikipedia.org/wiki/Limit_(mathematics))  
-[3] [Interval arithmetic](https://en.wikipedia.org/wiki/Interval_arithmetic)  
-[4] [Ring (mathematics)](https://en.wikipedia.org/wiki/Ring_(mathematics))
+[3] [Extended real number line](https://en.wikipedia.org/wiki/Extended_real_number_line)
+[4] [Interval arithmetic](https://en.wikipedia.org/wiki/Interval_arithmetic)  
+[5] [Ring (mathematics)](https://en.wikipedia.org/wiki/Ring_(mathematics))
