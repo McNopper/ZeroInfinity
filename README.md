@@ -8,6 +8,17 @@ Thanks to Eric Lengyel for asking the initial right questions.
 
 Thanks a lot to my family and their patience having me as a 🤓.
 
+### Definition
+
+*ToDo:*  
+Define interval number *in* as the deduction is **any** and not **all** numbers in the interval:  
+
+$a \cdot b \in \overline {\mathbb R} \land a \le b$
+
+$[x_0, x_1] = \{ x_0 = a \cdot b | b \in [a, b[ \land x_1 = a \cdot b | a \in ]a, b] \}$
+
+$[x_0, x_1]in := \exists in \in [x_0, x_1]$
+
 ### Thesis
 
 $$0 \cdot ∞ = -1 \cdot (0 \cdot -∞)$$
