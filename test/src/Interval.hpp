@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <cmath>
 #include <limits>
+#include <string>
 #include <vector>
 
 // Constants for convenience.
@@ -66,6 +67,11 @@ public:
     double getX1() const noexcept
     {
         return m_x1;
+    }
+
+    std::string toString() const noexcept
+    {
+        return "[" + std::to_string(m_x0) + ", " + std::to_string(m_x1) + "]";
     }
 
     bool operator==(const Interval& other) const noexcept
