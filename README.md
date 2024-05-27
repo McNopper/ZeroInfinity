@@ -73,6 +73,13 @@ In the [test](test/) folder is an implementation of this interval arithmetic.
 Using this approach, other indeterminate forms could be expressed as an interval and solved to equations as well.
 
 *ToDo:*  
+*Estimate intervals for indeterminate forms with exponents e.g.*  
+$1^∞ = [1, ∞]$  
+$∞^0 = [1, ∞]$  
+*results in this equation:*  
+$1^∞ = ∞^0$
+
+*ToDo:*  
 *Add investigation, if the algebraic structure is more than a mathematical Ring.*
 
 ### References
