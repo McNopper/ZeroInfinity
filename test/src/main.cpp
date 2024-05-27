@@ -85,7 +85,7 @@ TEST(IntervalArithmetic, Addition01)
     auto result = a + b;
 
     EXPECT_EQ(result.getX0(), 3.0);
-    EXPECT_EQ(result.getX1(), 5.0);
+    EXPECT_EQ(result.getX1(), 3.0);
 }
 
 TEST(IntervalArithmetic, Addition02)

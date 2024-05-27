@@ -81,7 +81,7 @@ public:
     IntervalArithmetic operator+(const IntervalArithmetic& other) const noexcept
     {
         auto x0 = getX0() + other.getX0();
-        auto x1 = x0 + std::max(getX1(), other.getX1());
+        auto x1 = getX1() + other.getX1();
 
         return IntervalArithmetic(x0, x1);
     }
