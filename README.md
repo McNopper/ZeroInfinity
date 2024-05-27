@@ -1,33 +1,24 @@
-# Solving indeterminate forms with extended real numbers and intervals
+# Solution for indeterminate forms using interval numbers
 
 *by Norbert Nopper*
 
-#### Credits
+## Credits
 
 Thanks to Eric Lengyel for asking the initial right questions.
 
 Thanks a lot to my family and their patience having me as a 🤓.
 
-### Definition
+## Motivation
 
-*ToDo:*  
-Define interval number *in* as the deduction is **any** and not **all** numbers in the interval:  
-
-$a \cdot b \in \overline {\mathbb R} \land a \le b$
-
-$[x_0, x_1] = \{ x_0 = a \cdot b | b \in [a, b[ \land x_1 = a \cdot b | a \in ]a, b] \}$
-
-$[x_0, x_1]in := \exists in \in [x_0, x_1]$
-
-### Thesis
+The expressions $0 \cdot ∞$ and implicitly $0 \cdot -∞$ are indeterminate forms [1]. It is not possible to do any calculus on these expressions like $-1 \cdot (0 \cdot -∞)$. Intuitively the following equation should be true: 
 
 $$0 \cdot ∞ = -1 \cdot (0 \cdot -∞)$$
 
-#### Status quo
+### Problem
 
-The expressions $0 \cdot ∞$ and implicitly $0 \cdot -∞$ are indeterminate forms [1].
+A naive approach like $-1 \cdot (0 \cdot -∞) = (-1 \cdot 0) \cdot -∞$ with math limits results again in $0 \cdot -∞$ even when the associative law is allowed.
 
-A naive approach like $-1 \cdot (0 \cdot -∞)$ <=> $(-1 \cdot 0) \cdot -∞$ with math limits results again in $0 \cdot -∞$ even when the associative law is allowed.
+#### Investigation
 
 Existing required math limits for above assumption:
 
@@ -40,43 +31,65 @@ $\lim_{n\to\infty}-\sqrt[n]{n} \cdot \lim_{n\to\infty}\frac{1}{n} = \lim_{n\to\i
 
 The result is again 0.
 
-### Idea
+## New interval number
 
-Using extended real number line $\overline {\mathbb R}$ [2], the intervals $[0, ∞]$ and $[-∞, 0]$ are allowed.
+### Assumption
 
-The indeterminate form of $0 \cdot ∞$ can be expressed as the interval $[0, ∞]$.  
-Similar, the indeterminate form of $0 \cdot -∞$ is $[-∞, 0]$.
+In the case of the two indeterminate forms, the result could be **any** number. However, the resulting number can be enclosed in an interval.  
+
+#### Using extended real number  
+
+Using the extended real number system $\overline {\mathbb R}$ [2], the intervals $[0, ∞]$ and $[-∞, 0]$ are allowed.
 
 ![](illustrations/visual_interval_extended.png)
 
-The interval $[x_0, x_1]$ is estimated from $a \cdot b \in \overline {\mathbb R} \land a \le b$ providing following rule:
+#### Enclosing the result in an interval
 
-$$[x_0, x_1] = \{ x_0 = a \cdot b | b \in [a, b[ \land x_1 = a \cdot b | a \in ]a, b] \}$$
+Following is given:
 
-*Note:*  
-GitHub can not properly resolve the above curly brackets. They are invisible on GitHub. Please use e.g. Visual Studio Code to display properly.
+$a, b \in \overline {\mathbb R} \land a \le b$
 
-### Interval operators
+Interval, where the result is enclosed: 
+
+$[x_0, x_1] = \{ x_0 = a \cdot b | b \in [a, b[ \land x_1 = a \cdot b | a \in ]a, b] \}$
+
+### Definition
+
+As the result is not **all** numbers in the interval, **any** numbers in the interval has to be expressed as a new interval number *in*:
+
+$[x_0, x_1]in := \{ x \in \overline {\mathbb R} | \exists x \in [x_0, x_1] \}$
+
+The indeterminate form of $0 \cdot ∞$ can be expressed as:
+
+$0 \cdot ∞ = [0, ∞]in$
+
+Similar, the indeterminate form of $0 \cdot -∞$ is:
+
+$0 \cdot -∞ = [-∞, 0]in$
+
+### Interval number operations
 
 *ToDo:*  
 *Are interval addition and multiplication of interval trivial?*  
 *https://www.lernhelfer.de/schuelerlexikon/mathematik/artikel/intervalle-rechnen.*  
-*Define Addition and Multiplication for minimal algebraic structure Ring [3].*
+
+*ToDo:*  
+*Define and proof Addition and Multiplication for minimal algebraic structure Ring [3] requirements.*
 
 ### Deduction
 
 $-1 \cdot (0 \cdot -∞)$  
-$-1 \cdot [-∞, 0]$  
-$[-1 \cdot -∞, -1 \cdot 0]$  
-$[0, ∞]$  
+$-1 \cdot [-∞, 0]in$  
+$[-1 \cdot -∞, -1 \cdot 0]in$  
+$[0, ∞]in$  
 $0 \cdot ∞$
 
 *ToDo:*  
-*For each step, name the rules and operators.*
+*For each step, name the rules and operations.*
 
 ### Implementation
 
-In the [test](test/) folder is an implementation of the interval operators.   
+In the [test](test/) folder is an implementation of the interval number and the unit tests.   
 
 *ToDo:*  
 *Depending on the mathematical Ring, extend implementation and unit tests.*
@@ -87,8 +100,8 @@ Using this approach, other indeterminate forms could be expressed as an interval
 
 *ToDo:*  
 *Estimate intervals for indeterminate forms with exponents e.g.*  
-$1^∞ = [1, ∞]$  
-$∞^0 = [1, ∞]$  
+$1^∞ = [1, ∞]in$  
+$∞^0 = [1, ∞]in$  
 *results in this equation:*  
 $1^∞ = ∞^0$
 

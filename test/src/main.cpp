@@ -3,7 +3,7 @@
 
 #include <gtest/gtest.h>
 
-#include "Interval.hpp"
+#include "IntervalNumber.hpp"
 
 // Basic tests for the C++ implementation.
 
@@ -35,52 +35,52 @@ TEST(Basics, InfinityMinusInfinity)
     EXPECT_EQ(true, std::isnan(result));
 }
 
-// Tests for the Interval implementation
+// Tests for the interval number implementation
 
-TEST(Interval, ConstructorStandard01)
+TEST(IntervalNumber, ConstructorStandard01)
 {
-    Interval result{};
+    IntervalNumber result{};
 
     EXPECT_EQ(result.getX0(), 0.0);
     EXPECT_EQ(result.getX1(), 0.0);
 }
 
-TEST(Interval, ConstructorStandard02)
+TEST(IntervalNumber, ConstructorStandard02)
 {
-    Interval result{0.0, 10.0};
+    IntervalNumber result{0.0, 10.0};
 
     EXPECT_EQ(result.getX0(), 0.0);
     EXPECT_EQ(result.getX1(), 10.0);
 }
 
-TEST(Interval, ConstructorZeroInfinity)
+TEST(IntervalNumber, ConstructorZeroInfinity)
 {
-    Interval result{0.0, INF};
+    IntervalNumber result{0.0, INF};
 
     EXPECT_EQ(result.getX0(), 0.0);
     EXPECT_EQ(result.getX1(), INF);
 }
 
-TEST(Interval, ConstructorNaN01)
+TEST(IntervalNumber, ConstructorNaN01)
 {
-    Interval result{0.0, QUIET_NAN};
+    IntervalNumber result{0.0, QUIET_NAN};
 
     EXPECT_EQ(true, std::isnan(result.getX0()));
     EXPECT_EQ(true, std::isnan(result.getX1()));
 }
 
-TEST(Interval, ConstructorNaN02)
+TEST(IntervalNumber, ConstructorNaN02)
 {
-    Interval result{QUIET_NAN, 0.0};
+    IntervalNumber result{QUIET_NAN, 0.0};
 
     EXPECT_EQ(true, std::isnan(result.getX0()));
     EXPECT_EQ(true, std::isnan(result.getX1()));
 }
 
-TEST(Interval, Addition01)
+TEST(IntervalNumber, Addition01)
 {
-    Interval a{1.0, 1.0};
-    Interval b{2.0, 2.0};
+    IntervalNumber a{1.0, 1.0};
+    IntervalNumber b{2.0, 2.0};
 
     auto result = a + b;
 
@@ -88,10 +88,10 @@ TEST(Interval, Addition01)
     EXPECT_EQ(result.getX1(), 3.0);
 }
 
-TEST(Interval, Addition02)
+TEST(IntervalNumber, Addition02)
 {
-    Interval a{0.0, INF};
-    Interval b{0.0, INF};
+    IntervalNumber a{0.0, INF};
+    IntervalNumber b{0.0, INF};
 
     auto result = a + b;
 
@@ -99,9 +99,9 @@ TEST(Interval, Addition02)
     EXPECT_EQ(result.getX1(), INF);
 }
 
-TEST(Interval, Multiplication01)
+TEST(IntervalNumber, Multiplication01)
 {
-    Interval b{1.0};
+    IntervalNumber b{1.0};
 
     auto result = -1.0 * b;
 
@@ -109,9 +109,9 @@ TEST(Interval, Multiplication01)
     EXPECT_EQ(result.getX1(), -1.0);
 }
 
-TEST(Interval, Multiplication02)
+TEST(IntervalNumber, Multiplication02)
 {
-    Interval b{INF};
+    IntervalNumber b{INF};
 
     auto result = -1.0 * b;
 
@@ -119,9 +119,9 @@ TEST(Interval, Multiplication02)
     EXPECT_EQ(result.getX1(), -INF);
 }
 
-TEST(Interval, Multiplication03)
+TEST(IntervalNumber, Multiplication03)
 {
-    Interval b{0.0, INF};
+    IntervalNumber b{0.0, INF};
 
     auto result = -1.0 * b;
 
@@ -129,10 +129,10 @@ TEST(Interval, Multiplication03)
     EXPECT_EQ(result.getX1(), 0.0);
 }
 
-TEST(Interval, Multiplication04)
+TEST(IntervalNumber, Multiplication04)
 {
-    Interval a{2.0};
-    Interval b{3.0};
+    IntervalNumber a{2.0};
+    IntervalNumber b{3.0};
 
     auto result = a * b;
 
@@ -140,10 +140,10 @@ TEST(Interval, Multiplication04)
     EXPECT_EQ(result.getX1(), 6.0);
 }
 
-TEST(Interval, Multiplication05)
+TEST(IntervalNumber, Multiplication05)
 {
-    Interval a{0.0, INF};
-    Interval b{0.0, INF};
+    IntervalNumber a{0.0, INF};
+    IntervalNumber b{0.0, INF};
 
     auto result = a * b;
 
@@ -151,11 +151,11 @@ TEST(Interval, Multiplication05)
     EXPECT_EQ(result.getX1(), INF);
 }
 
-TEST(Interval, StatusQuo)
+TEST(IntervalNumber, StatusQuo)
 {
-    Interval a{-1.0};
-    Interval b{0.0};
-    Interval c{-INF};
+    IntervalNumber a{-1.0};
+    IntervalNumber b{0.0};
+    IntervalNumber c{-INF};
 
     auto result = a * (b * c);
 
@@ -163,10 +163,10 @@ TEST(Interval, StatusQuo)
     EXPECT_EQ(true, std::isnan(result.getX1()));
 }
 
-TEST(Interval, Thesis)
+TEST(IntervalNumber, Thesis)
 {
-    Interval a{-1.0};
-    Interval bc{-INF, 0.0};
+    IntervalNumber a{-1.0};
+    IntervalNumber bc{-INF, 0.0};
 
     auto result = a * bc;
 
@@ -177,5 +177,6 @@ TEST(Interval, Thesis)
 int main(int argc, char** argv)
 {
     testing::InitGoogleTest(&argc, argv);
+
     return RUN_ALL_TESTS();
 }
