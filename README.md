@@ -10,7 +10,8 @@ Thanks a lot to my family and their patience having me as a 🤓.
 
 ## Motivation
 
-The expressions $0 \cdot ∞$ and implicitly $0 \cdot -∞$ are indeterminate forms [1]. It is not possible to do any calculus on these expressions like $-1 \cdot (0 \cdot -∞)$. Intuitively the following equation should be true: 
+The expressions $0 \cdot ∞$ and implicitly $0 \cdot -∞$ are indeterminate forms [1]. It is not possible to do any calculus on these expressions like $-1 \cdot (0 \cdot -∞)$.  
+Compared to $x = -1 \cdot -x$, intuitively the following equation should be true: 
 
 $$0 \cdot ∞ = -1 \cdot (0 \cdot -∞)$$
 
@@ -29,13 +30,13 @@ Assume the usage of the associative law is allowed:
 
 $\lim_{n\to\infty}-\sqrt[n]{n} \cdot \lim_{n\to\infty}\frac{1}{n} = \lim_{n\to\infty}-\sqrt[n]{n} \cdot \frac{1}{n} = \lim_{n\to\infty}\frac{-1}{n}$
 
-The result is again 0.
+The result is again 0 and does not provide the expected result.
 
 ## New interval number
 
 ### Assumption
 
-In the case of the two indeterminate forms, the result could be **any** number. However, the resulting number can be enclosed in an interval.  
+In the case of the given two indeterminate forms, the result could be **any** number. However, the resulting number can be enclosed in an interval.  
 
 #### Using extended real number  
 
@@ -70,11 +71,7 @@ $0 \cdot -∞ = [-∞, 0]in$
 ### Interval number operations
 
 *ToDo:*  
-*Are interval addition and multiplication of interval trivial?*  
-*https://www.lernhelfer.de/schuelerlexikon/mathematik/artikel/intervalle-rechnen.*  
-
-*ToDo:*  
-*Define and proof Addition and Multiplication for minimal algebraic structure Ring [3] requirements.*
+*Define and proof Addition and Multiplication for minimal algebraic structure Ring [3]requirements.*
 
 ### Deduction
 
@@ -92,7 +89,7 @@ $0 \cdot ∞$
 In the [test](test/) folder is an implementation of the interval number and the unit tests.   
 
 *ToDo:*  
-*Depending on the mathematical Ring, extend implementation and unit tests.*
+*Implemente the required unit tests for the mathematical Ring.*
 
 ### Conclusion
 
@@ -106,7 +103,7 @@ $∞^0 = [1, ∞]in$
 $1^∞ = ∞^0$
 
 *ToDo:*  
-*Add investigation, if the algebraic structure is more than a mathematical Ring.*
+*Add outlook and investigation, if the algebraic structure is more than a mathematical Ring.*
 
 ### References
 
