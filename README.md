@@ -68,6 +68,8 @@ Similar, the indeterminate form of $0 \cdot -∞$ is:
 
 $0 \cdot -∞ = [-∞, 0]in$
 
+![](illustrations/visual_interval_number.png)
+
 ### Interval number operations
 
 *ToDo:*  
