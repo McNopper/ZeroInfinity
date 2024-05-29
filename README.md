@@ -8,6 +8,11 @@ Thanks to Eric Lengyel for asking the initial right questions.
 
 Thanks a lot to my family and their patience having me as a 🤓.
 
+## Note
+
+The math formulas are encoded using [MathJax](https://www.mathjax.org/). However, the decoding and rendering is not properly done in GitHub.  
+For properly displaying the formulas, please use another free editor like [Visual Studio Code](https://code.visualstudio.com/).
+
 ## Motivation
 
 The expressions $0 \cdot ∞$ and implicitly $0 \cdot -∞$ are indeterminate forms [1]. It is not possible to do any calculus on these expressions like $-1 \cdot (0 \cdot -∞)$.  
