@@ -11,7 +11,7 @@ Thanks a lot to my family and their patience having me as a 🤓.
 ## Motivation
 
 The expressions $0 \cdot ∞$ and implicitly $0 \cdot -∞$ are indeterminate forms [1]. It is not possible to do any calculus on these expressions like $-1 \cdot (0 \cdot -∞)$.  
-Compared to $x = -1 \cdot -x$, intuitively the following equation should be true: 
+However, compared to $x = -1 \cdot -x$, intuitively the following equation should be true: 
 
 $$0 \cdot ∞ = -1 \cdot (0 \cdot -∞)$$
 
@@ -73,7 +73,7 @@ $0 \cdot -∞ = [-∞, 0]in$
 ### Interval number operations
 
 *ToDo:*  
-*Define and proof Addition and Multiplication for minimal algebraic structure Ring [3]requirements.*
+*Define and proof Addition and Multiplication for minimal algebraic structure Ring [3] requirements.*
 
 ### Deduction
 
@@ -91,7 +91,7 @@ $0 \cdot ∞$
 In the [test](test/) folder is an implementation of the interval number and the unit tests.   
 
 *ToDo:*  
-*Implemente the required unit tests for the mathematical Ring.*
+*Implement the required unit tests for the mathematical Ring.*
 
 ### Conclusion
 
@@ -101,7 +101,7 @@ Using this approach, other indeterminate forms could be expressed as an interval
 *Estimate intervals for indeterminate forms with exponents e.g.*  
 $1^∞ = [1, ∞]in$  
 $∞^0 = [1, ∞]in$  
-*results in this equation:*  
+*This results in the equation:*  
 $1^∞ = ∞^0$
 
 *ToDo:*  
