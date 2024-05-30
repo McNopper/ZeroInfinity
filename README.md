@@ -11,7 +11,7 @@ Thanks a lot to my family and their patience having me as a 🤓.
 ## Note
 
 The math formulas are encoded using [MathJax](https://www.mathjax.org/). However, the decoding and rendering is not properly done in GitHub.  
-For properly displaying the formulas, please use another free editor like [Visual Studio Code](https://code.visualstudio.com/).
+For properly displaying the formulas, please use another editor like [Visual Studio Code](https://code.visualstudio.com/).
 
 ## Motivation
 
@@ -119,9 +119,9 @@ In the [test](test/) folder is a C++ implementation of the interval number and t
 
 Using this approach, other indeterminate forms could be expressed as an interval and solved to equations as well.
 
-For now it is shown, taht the interval number is a Magma. However, including the other mathematical operations, the algebraic structure could be further investigated.
+For now it is shown, that the algebraic structure of the interval number is a Magma. However, including the other mathematical operations, the algebraic structure could be further investigated.
 
-Furthermore, other intervals for indeterminate forms e.g. with exponents could be estimated and defined:
+Furthermore, other intervals for indeterminate forms e.g. with exponents could be estimated and properly defined:
 
 $0^0 = [0, 1]in$  
 $1^∞ = [1, ∞]in$  
