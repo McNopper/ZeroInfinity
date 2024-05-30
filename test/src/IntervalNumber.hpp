@@ -12,8 +12,6 @@ static constexpr double INF = std::numeric_limits<double>::infinity();
 static constexpr double QUIET_NAN = std::numeric_limits<double>::quiet_NaN();
 
 // Given interval [x0, x1] with extended real number system.
-//
-// Algebraic structure: Ring.
 class IntervalNumber {
 
 private:

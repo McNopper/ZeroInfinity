@@ -69,7 +69,7 @@ The indeterminate form of $0 \cdot ∞$ can be expressed as:
 
 $0 \cdot ∞ = [0, ∞]in$
 
-Similar, the indeterminate form of $0 \cdot -∞$ is:
+Similar, the expression for the indeterminate form of $0 \cdot -∞$ is:
 
 $0 \cdot -∞ = [-∞, 0]in$
 
@@ -77,8 +77,26 @@ $0 \cdot -∞ = [-∞, 0]in$
 
 ### Interval number operations
 
+These are the given mathematical operations.
+
+#### Addition
+
+$[x_0, x_1]in + [y_0, y_1]in = [x_0 + y_0, x_1 + y_1]in$
+
+#### Multiplication
+
+$[x_0, x_1]in \cdot [y_0, y_1]in = [x_0 \cdot y_0, x_1 \cdot y_1]in$
+
+#### Subtraction
+
+$[x_0, x_1]in - [y_0, y_1]in = [x_0 - y_0, x_1 - y_1]in$
+
+#### Division
+
+$\frac{[x_0, x_1]in}{[y_0, y_1]in} = [\frac{x_0}{y_1}, \frac{x_1}{y_0}]in$
+
 *ToDo:*  
-*Define and proof Addition and Multiplication for minimal algebraic structure Ring [3] requirements.*
+*Algebraic structure [3] investigations.*
 
 ### Deduction
 
@@ -89,14 +107,14 @@ $[0, ∞]in$
 $0 \cdot ∞$
 
 *ToDo:*  
-*For each step, name the rules and operations.*
+*For each step name the rules and operations.*
 
 ### Implementation
 
 In the [test](test/) folder is an implementation of the interval number and the unit tests.   
 
 *ToDo:*  
-*Implement the required unit tests for the mathematical Ring.*
+*Implement the required unit tests for the algebraic structure.*
 
 ### Conclusion
 
@@ -104,16 +122,14 @@ Using this approach, other indeterminate forms could be expressed as an interval
 
 *ToDo:*  
 *Estimate intervals for indeterminate forms with exponents e.g.*  
+$0^0 = [0, 1]in$  
 $1^∞ = [1, ∞]in$  
 $∞^0 = [1, ∞]in$  
 *This results in the equation:*  
 $1^∞ = ∞^0$
 
-*ToDo:*  
-*Add outlook and investigation, if the algebraic structure is more than a mathematical Ring.*
-
 ### References
 
 [1] [Indeterminate form](https://en.wikipedia.org/wiki/Indeterminate_form)  
 [2] [Extended real number line](https://en.wikipedia.org/wiki/Extended_real_number_line)  
-[3] [Ring (mathematics)](https://en.wikipedia.org/wiki/Ring_(mathematics))
+[3] [Algebraic structure](https://en.wikipedia.org/wiki/Algebraic_structure)

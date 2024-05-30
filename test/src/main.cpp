@@ -5,7 +5,7 @@
 
 #include "IntervalNumber.hpp"
 
-// Basic tests for the C++ implementation.
+// Basic tests regarding numeric limits in C++.
 
 TEST(Basics, ZeroByInfinity)
 {
@@ -35,7 +35,7 @@ TEST(Basics, InfinityMinusInfinity)
     EXPECT_EQ(true, std::isnan(result));
 }
 
-// Tests for the interval number implementation
+// Tests for the interval number implementation.
 
 TEST(IntervalNumber, ConstructorStandard01)
 {
