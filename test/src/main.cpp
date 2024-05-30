@@ -151,19 +151,7 @@ TEST(IntervalNumber, Multiplication05)
     EXPECT_EQ(result.getX1(), INF);
 }
 
-TEST(IntervalNumber, StatusQuo)
-{
-    IntervalNumber a{-1.0};
-    IntervalNumber b{0.0};
-    IntervalNumber c{-INF};
-
-    auto result = a * (b * c);
-
-    EXPECT_EQ(true, std::isnan(result.getX0()));
-    EXPECT_EQ(true, std::isnan(result.getX1()));
-}
-
-TEST(IntervalNumber, Thesis)
+TEST(IntervalNumber, Thesis01)
 {
     IntervalNumber a{-1.0};
     IntervalNumber bc{-INF, 0.0};
@@ -172,6 +160,30 @@ TEST(IntervalNumber, Thesis)
 
     EXPECT_EQ(result.getX0(), 0.0);
     EXPECT_EQ(result.getX1(), INF);
+}
+
+TEST(IntervalNumber, Thesis02)
+{
+    IntervalNumber a{-1.0};
+    IntervalNumber b{0.0};
+    IntervalNumber c{-INF};
+
+    auto result = a * (b * c);
+
+    EXPECT_EQ(result.getX0(), 0.0);
+    EXPECT_EQ(result.getX1(), INF);
+}
+
+TEST(IntervalNumber, MultiplicationNotAssociative)
+{
+    IntervalNumber a{-1.0};
+    IntervalNumber b{0.0};
+    IntervalNumber c{-INF};
+
+    auto result_0 = a * (b * c);
+    auto result_1 = (a * b) * c;
+
+    EXPECT_NE(result_0, result_1);
 }
 
 int main(int argc, char** argv)

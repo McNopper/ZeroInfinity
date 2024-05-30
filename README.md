@@ -65,12 +65,14 @@ As the result is not **all** numbers in the interval, **any** numbers in the int
 
 $[x_0, x_1]in := \{ x \in \overline {\mathbb R} | \exists x \in [x_0, x_1] \}$
 
-The indeterminate form of $0 \cdot ∞$ can be expressed as:
+The indeterminate form of $0 \cdot ∞$ can be expressed as the first rule:
 
+***Rule I***  
 $0 \cdot ∞ = [0, ∞]in$
 
-Similar, the expression for the indeterminate form of $0 \cdot -∞$ is:
+Similar, the expression for the indeterminate form of $0 \cdot -∞$ is the second rule:
 
+***Rule II***  
 $0 \cdot -∞ = [-∞, 0]in$
 
 ![](illustrations/visual_interval_number.png)
@@ -79,57 +81,59 @@ $0 \cdot -∞ = [-∞, 0]in$
 
 These are the given mathematical operations.
 
-#### Addition
-
-$[x_0, x_1]in + [y_0, y_1]in = [x_0 + y_0, x_1 + y_1]in$
-
 #### Multiplication
 
 $[x_0, x_1]in \cdot [y_0, y_1]in = [x_0 \cdot y_0, x_1 \cdot y_1]in$
-
-#### Subtraction
-
-$[x_0, x_1]in - [y_0, y_1]in = [x_0 - y_0, x_1 - y_1]in$
 
 #### Division
 
 $\frac{[x_0, x_1]in}{[y_0, y_1]in} = [\frac{x_0}{y_1}, \frac{x_1}{y_0}]in$
 
-*ToDo:*  
-*Algebraic structure [3] investigations.*
+#### Addition
+
+$[x_0, x_1]in + [y_0, y_1]in = [x_0 + y_0, x_1 + y_1]in$
+
+#### Subtraction
+
+$[x_0, x_1]in - [y_0, y_1]in = [x_0 - y_0, x_1 - y_1]in$
+
+Regarding the algebraic structure [3], only the required multiplication for the given rules are investigated.
+
+This algebraic structure of the interval numbers is at least a Magma [4], as all multiplications in $\overline {\mathbb R}$ including ***Rule I*** and ***Rule II*** are defined.
 
 ### Deduction
 
-$-1 \cdot (0 \cdot -∞)$  
-$-1 \cdot [-∞, 0]in$  
-$[-1 \cdot -∞, -1 \cdot 0]in$  
-$[0, ∞]in$  
-$0 \cdot ∞$
-
-*ToDo:*  
-*For each step name the rules and operations.*
+|                               | Operation or rule                    |
+|-------------------------------|--------------------------------------|
+| $-1 \cdot (0 \cdot -∞)$       | ***Rule II***                        |
+| $-1 \cdot [-∞, 0]in$          | Multiplication for interval number   |
+| $[-1 \cdot -∞, -1 \cdot 0]in$ | Operation in $\overline {\mathbb R}$ |
+| $[0, ∞]in$                    | ***Rule I***                         |
+| $0 \cdot ∞$                   |                                      |
 
 ### Implementation
 
-In the [test](test/) folder is an implementation of the interval number and the unit tests.   
-
-*ToDo:*  
-*Implement the required unit tests for the algebraic structure.*
+In the [test](test/) folder is a C++ implementation of the interval number and the unit tests.
 
 ### Conclusion
 
 Using this approach, other indeterminate forms could be expressed as an interval and solved to equations as well.
 
-*ToDo:*  
-*Estimate intervals for indeterminate forms with exponents e.g.*  
+For now it is shown, taht the interval number is a Magma. However, including the other mathematical operations, the algebraic structure could be further investigated.
+
+Furthermore, other intervals for indeterminate forms e.g. with exponents could be estimated and defined:
+
 $0^0 = [0, 1]in$  
 $1^∞ = [1, ∞]in$  
-$∞^0 = [1, ∞]in$  
-*This results in the equation:*  
+$∞^0 = [1, ∞]in$
+
+The last two interval numbers do result in the equation:
+
 $1^∞ = ∞^0$
 
 ### References
 
 [1] [Indeterminate form](https://en.wikipedia.org/wiki/Indeterminate_form)  
 [2] [Extended real number line](https://en.wikipedia.org/wiki/Extended_real_number_line)  
-[3] [Algebraic structure](https://en.wikipedia.org/wiki/Algebraic_structure)
+[3] [Algebraic structure](https://en.wikipedia.org/wiki/Algebraic_structure)  
+[4] [Magma (algebra)](https://en.wikipedia.org/wiki/Magma_(algebra))
