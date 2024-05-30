@@ -121,15 +121,7 @@ Using this approach, other indeterminate forms could be expressed as an interval
 
 For now it is shown, that the algebraic structure of the interval number is a Magma. However, including the other mathematical operations, the algebraic structure could be further investigated.
 
-Furthermore, other intervals for indeterminate forms e.g. with exponents could be estimated and properly defined:
-
-$0^0 = [0, 1]in$  
-$1^∞ = [1, ∞]in$  
-$∞^0 = [1, ∞]in$
-
-The last two interval numbers do result in the equation:
-
-$1^∞ = ∞^0$
+Furthermore, other intervals for indeterminate forms could be estimated and properly defined.
 
 ### References
 
