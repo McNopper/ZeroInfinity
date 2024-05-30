@@ -61,7 +61,7 @@ $[x_0, x_1] = \{ x_0 = a \cdot \beta | \beta \in [a, b[ \land x_1 = \alpha \cdot
 
 ### Definition
 
-As the result is not **all** numbers in the interval, **any** numbers in the interval has to be expressed as a new interval number *in*:
+As the result is probably not **all** numbers in the interval, **any** or at least **one** number in the interval has to be expressed as a new interval number *in*:
 
 $[x_0, x_1]in := \{ x \in \overline {\mathbb R} | \exists x \in [x_0, x_1] \}$
 
