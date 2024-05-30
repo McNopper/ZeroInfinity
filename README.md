@@ -121,7 +121,7 @@ Using this approach, other indeterminate forms could be expressed as an interval
 
 For now it is shown, that the algebraic structure of the interval number is a Magma. However, including the other mathematical operations, the algebraic structure could be further investigated.
 
-Furthermore, other intervals for indeterminate forms could be estimated and properly defined.
+Furthermore, other intervals for indeterminate forms could be estimated and defined.
 
 ### References
 
