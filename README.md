@@ -55,9 +55,9 @@ Following is given:
 
 $a, b \in \overline {\mathbb R} \land a \le b$
 
-Interval, where the result is enclosed: 
+Interval, where the result for $a \cdot b$ is enclosed in the interval: 
 
-$[x_0, x_1] = \{ x_0 = a \cdot b | b \in [a, b[ \land x_1 = a \cdot b | a \in ]a, b] \}$
+$[x_0, x_1] = \{ x_0 = a \cdot \beta | \beta \in [a, b[ \land x_1 = \alpha \cdot b | \alpha \in ]a, b] \}$
 
 ### Definition
 
