@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <cmath>
 #include <limits>
+#include <set>
 #include <string>
 #include <vector>
 
@@ -84,39 +85,56 @@ public:
 
     IntervalNumber operator*(const IntervalNumber& other) const noexcept
     {
-        // Catching the interval number cases:
-        if ((*this == IntervalNumber(0.0) && other == IntervalNumber(INF)) || (*this == IntervalNumber(INF) && other == IntervalNumber(0.0)))
+        std::set<double> results{};
+
+        // Adding results, if they can be calculated without the new rules.
+        double x = getX0() * other.getX0();
+        if (!std::isnan(x))
         {
-            return IntervalNumber(0.0, INF);
+            results.insert(x);
         }
-        if ((*this == IntervalNumber(0.0) && other == IntervalNumber(-INF)) || (*this == IntervalNumber(-INF) && other == IntervalNumber(0.0)))
+        x = getX1() * other.getX1();
+        if (!std::isnan(x))
         {
-            return IntervalNumber(-INF, 0.0);
+            results.insert(x);
         }
 
-        auto x0 = getX0() * other.getX0();
-        auto x1 = getX1() * other.getX1();
+        // Calcuate results depending on the new rules, as in the above code the results are not added.
+        if ((getX0() == -INF && other.getX0() == 0.0) || (getX0() == 0.0 && other.getX0() == -INF))
+        {
+            results.insert(-INF);
+            results.insert(0.0);
+        }
+        if ((getX0() == INF && other.getX0() == 0.0) || (getX0() == 0.0 && other.getX0() == INF))
+        {
+            results.insert(0.0);
+            results.insert(INF);
+        }
 
-        return IntervalNumber(x0, x1);
+        if ((getX1() == -INF && other.getX1() == 0.0) || (getX1() == 0.0 && other.getX1() == -INF))
+        {
+            results.insert(-INF);
+            results.insert(0.0);
+        }
+        if ((getX1() == INF && other.getX1() == 0.0) || (getX1() == 0.0 && other.getX1() == INF))
+        {
+            results.insert(0.0);
+            results.insert(INF);
+        }
+
+        // No results means not a number.
+        if (results.size() == 0)
+        {
+            return IntervalNumber(QUIET_NAN);
+        }
+
+        // Set is ordered, so use first and last result.
+        return IntervalNumber(*results.begin(), *results.rbegin());
     }
 
     IntervalNumber operator*(double x) const noexcept
     {
         return *this * IntervalNumber(x);
-    }
-
-    IntervalNumber operator/(const IntervalNumber& other) const noexcept
-    {
-        // Swizzle is by purpose.
-        auto x0 = getX0() / other.getX1();
-        auto x1 = getX1() / other.getX0();
-
-        return IntervalNumber(x0, x1);
-    }
-
-    IntervalNumber operator/(double x) const noexcept
-    {
-        return *this / IntervalNumber(x);
     }
 
     IntervalNumber operator+(const IntervalNumber& other) const noexcept
@@ -132,19 +150,6 @@ public:
         return *this + IntervalNumber(x);
     }
 
-    IntervalNumber operator-(const IntervalNumber& other) const noexcept
-    {
-        auto x0 = getX0() - other.getX0();
-        auto x1 = getX1() - other.getX1();
-
-        return IntervalNumber(x0, x1);
-    }
-
-    IntervalNumber operator-(double x) const noexcept
-    {
-        return *this - IntervalNumber(x);
-    }
-
 };
 
 IntervalNumber operator*(double x, const IntervalNumber& other) noexcept
@@ -152,19 +157,9 @@ IntervalNumber operator*(double x, const IntervalNumber& other) noexcept
     return IntervalNumber(x) * other;
 }
 
-IntervalNumber operator/(double x, const IntervalNumber& other) noexcept
-{
-    return IntervalNumber(x) / other;
-}
-
 IntervalNumber operator+(double x, const IntervalNumber& other) noexcept
 {
     return IntervalNumber(x) + other;
-}
-
-IntervalNumber operator-(double x, const IntervalNumber& other) noexcept
-{
-    return IntervalNumber(x) - other;
 }
 
 #endif /* INTERVALNUMBER_HPP_ */

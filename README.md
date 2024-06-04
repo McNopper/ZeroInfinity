@@ -83,19 +83,11 @@ These are the given mathematical operations.
 
 #### Multiplication
 
-$[x_0, x_1]in \cdot [y_0, y_1]in = [x_0 \cdot y_0, x_1 \cdot y_1]in$
-
-#### Division
-
-$\frac{[x_0, x_1]in}{[y_0, y_1]in} = [\frac{x_0}{y_1}, \frac{x_1}{y_0}]in$
+$[x_0, x_1]in \cdot [y_0, y_1]in = [\min(x_0 \cdot y_0, x_1 \cdot y_1), \max(x_0 \cdot y_0, x_1 \cdot y_1)]in$
 
 #### Addition
 
 $[x_0, x_1]in + [y_0, y_1]in = [x_0 + y_0, x_1 + y_1]in$
-
-#### Subtraction
-
-$[x_0, x_1]in - [y_0, y_1]in = [x_0 - y_0, x_1 - y_1]in$
 
 Regarding the algebraic structure [3], only the required multiplication for the given rules are investigated.
 
