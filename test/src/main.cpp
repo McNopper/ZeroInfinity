@@ -77,28 +77,6 @@ TEST(IntervalNumber, ConstructorNaN02)
     EXPECT_EQ(true, std::isnan(result.getX1()));
 }
 
-TEST(IntervalNumber, Addition01)
-{
-    IntervalNumber a{1.0, 1.0};
-    IntervalNumber b{2.0, 2.0};
-
-    auto result = a + b;
-
-    EXPECT_EQ(result.getX0(), 3.0);
-    EXPECT_EQ(result.getX1(), 3.0);
-}
-
-TEST(IntervalNumber, Addition02)
-{
-    IntervalNumber a{0.0, INF};
-    IntervalNumber b{0.0, INF};
-
-    auto result = a + b;
-
-    EXPECT_EQ(result.getX0(), 0.0);
-    EXPECT_EQ(result.getX1(), INF);
-}
-
 TEST(IntervalNumber, Multiplication01)
 {
     IntervalNumber b{1.0};

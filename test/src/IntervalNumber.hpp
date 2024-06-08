@@ -99,7 +99,9 @@ public:
             results.insert(x);
         }
 
-        // Calcuate results depending on the new rules, as in the above code the results are not added.
+        // Calculate results depending on the new rules, as in the above code the results are not added.
+
+        // Lower endpoint calculation x0.
         if ((getX0() == -INF && other.getX0() == 0.0) || (getX0() == 0.0 && other.getX0() == -INF))
         {
             results.insert(-INF);
@@ -111,6 +113,7 @@ public:
             results.insert(INF);
         }
 
+        // Upper endpoint calculation x1.
         if ((getX1() == -INF && other.getX1() == 0.0) || (getX1() == 0.0 && other.getX1() == -INF))
         {
             results.insert(-INF);
@@ -123,12 +126,12 @@ public:
         }
 
         // No results means not a number.
-        if (results.size() == 0)
+        if (results.empty())
         {
             return IntervalNumber(QUIET_NAN);
         }
 
-        // Set is ordered, so use first and last result.
+        // Set in C++ is ordered, so first and last results are the interval endpoints.
         return IntervalNumber(*results.begin(), *results.rbegin());
     }
 
@@ -137,29 +140,11 @@ public:
         return *this * IntervalNumber(x);
     }
 
-    IntervalNumber operator+(const IntervalNumber& other) const noexcept
-    {
-        auto x0 = getX0() + other.getX0();
-        auto x1 = getX1() + other.getX1();
-
-        return IntervalNumber(x0, x1);
-    }
-
-    IntervalNumber operator+(double x) const noexcept
-    {
-        return *this + IntervalNumber(x);
-    }
-
 };
 
 IntervalNumber operator*(double x, const IntervalNumber& other) noexcept
 {
     return IntervalNumber(x) * other;
-}
-
-IntervalNumber operator+(double x, const IntervalNumber& other) noexcept
-{
-    return IntervalNumber(x) + other;
 }
 
 #endif /* INTERVALNUMBER_HPP_ */
