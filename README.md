@@ -6,7 +6,7 @@
 
 Thanks to Eric Lengyel for asking the initial right questions.
 
-Thanks a lot to my family and their patience having me as a 🤓.
+Thanks a lot, to my family and their patience having me as a 🤓.
 
 ## Note
 
@@ -61,7 +61,7 @@ $[x_0, x_1] = \{ x_0 = a \cdot \beta | \beta \in [a, b[ \land x_1 = \alpha \cdot
 
 ### Definition
 
-As the result is probably not **all** numbers in the interval, **any** or at least **one** number in the interval has to be expressed as a new interval number *in*:
+As the result is probably not **all** numbers in the interval, **any** or at least **one** number in the interval must be expressed as a new interval number *in*:
 
 $[x_0, x_1]in := \{ x \in \overline {\mathbb R} | \exists x \in [x_0, x_1] \}$
 
@@ -77,6 +77,8 @@ $0 \cdot -∞ = [-∞, 0]in$
 
 ![](illustrations/visual_interval_number.png)
 
+The above illustration introduces a new axis like the complex number axis $i$.  
+
 ### Interval number operation
 
 These is the given mathematical operation.
@@ -85,7 +87,7 @@ These is the given mathematical operation.
 
 $[x_0, x_1]in \cdot [y_0, y_1]in = [\min(x_0 \cdot y_0, x_1 \cdot y_1), \max(x_0 \cdot y_0, x_1 \cdot y_1)]in$
 
-Regarding the algebraic structure [3], only the required multiplication for the given rules are investigated.
+Regarding the algebraic structure [3], only the required multiplication for the given rules is investigated.
 
 This algebraic structure of the interval numbers is at least a Magma [4], as all multiplications in $\overline {\mathbb R}$ including ***Rule I*** and ***Rule II*** are defined.
 
@@ -107,7 +109,7 @@ In the [test](test/) folder is a C++ implementation of the interval number and t
 
 Using this approach, other indeterminate forms could be expressed as an interval and solved to equations as well.
 
-For now it is shown, that the algebraic structure of the interval number is a Magma. However, including the other mathematical operations, the algebraic structure could be further investigated.
+For now, it is shown, that the algebraic structure of the interval number is a Magma. However, including the other mathematical operations, the algebraic structure could be further investigated.
 
 Furthermore, other intervals for indeterminate forms could be estimated and defined.
 
