@@ -119,3 +119,16 @@ Furthermore, other intervals for indeterminate forms could be estimated and defi
 [2] [Extended real number line](https://en.wikipedia.org/wiki/Extended_real_number_line)  
 [3] [Algebraic structure](https://en.wikipedia.org/wiki/Algebraic_structure)  
 [4] [Magma (algebra)](https://en.wikipedia.org/wiki/Magma_(algebra))
+
+### Footnote
+
+With same argumentation, one can define this third rule:
+
+***Rule III***  
+$\frac{0}{0} = [-∞, ∞]in$
+
+Example, where limit value goes towards ∞:  
+$\lim_{n\to0}( \frac{1}{n} - \frac{1}{n + 1} ) = ∞$  
+
+Example, where limit value goes towards -∞:  
+$\lim_{n\to0}( \frac{1}{n + 1} - \frac{1}{n} ) = -∞$
