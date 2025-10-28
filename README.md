@@ -75,10 +75,6 @@ Similar, the expression for the indeterminate form of $0 \cdot -∞$ is the seco
 ***Rule II***  
 $0 \cdot -∞ = [-∞, 0]in$
 
-![](illustrations/visual_interval_number.png)
-
-The above illustration introduces a new axis like the complex number axis $i$.  
-
 ### Interval number operation
 
 These is the given mathematical operation.
@@ -101,11 +97,22 @@ This algebraic structure of the interval numbers is at least a Magma [4], as all
 | $[0, ∞]in$                    | ***Rule I***                         |
 | $0 \cdot ∞$                   |                                      |
 
-### Implementation
+## Implementation
 
 In the [test](test/) folder is a C++ implementation of the interval number and the unit tests.
 
-### Conclusion
+
+## Some indeterminate forms as interval numbers
+
+$\frac{0}{0} = [-∞, ∞]in$
+
+Because the limits of the given example formula results in +∞ and -∞:
+
+$\lim_{n\to0^+}\frac{n}{n^2} = +∞$
+
+$\lim_{n\to0^-}\frac{n}{n^2} = -∞$
+
+## Conclusion
 
 Using this approach, other indeterminate forms could be expressed as an interval and solved to equations as well.
 
@@ -113,22 +120,9 @@ For now, it is shown, that the algebraic structure of the interval number is a M
 
 Furthermore, other intervals for indeterminate forms could be estimated and defined.
 
-### References
+## References
 
 [1] [Indeterminate form](https://en.wikipedia.org/wiki/Indeterminate_form)  
 [2] [Extended real number line](https://en.wikipedia.org/wiki/Extended_real_number_line)  
 [3] [Algebraic structure](https://en.wikipedia.org/wiki/Algebraic_structure)  
 [4] [Magma (algebra)](https://en.wikipedia.org/wiki/Magma_(algebra))
-
-### Footnote
-
-With same argumentation, one can define this third rule:
-
-***Rule III***  
-$\frac{0}{0} = [-∞, ∞]in$
-
-Example, where limit value goes towards ∞:  
-$\lim_{n\to0}( \frac{1}{n} - \frac{1}{n + 1} ) = ∞$  
-
-Example, where limit value goes towards -∞:  
-$\lim_{n\to0}( \frac{1}{n + 1} - \frac{1}{n} ) = -∞$
