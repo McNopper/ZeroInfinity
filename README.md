@@ -15,7 +15,7 @@ For properly displaying the formulas, please use another editor like [Visual Stu
 
 ## Motivation
 
-The expressions $0 \cdot ∞$ and implicitly $0 \cdot -∞$ are indeterminate forms [1]. It is not possible to do any calculus on these expressions like $-1 \cdot (0 \cdot -∞)$.  
+The expressions $0 \cdot ∞$ and implicitly $0 \cdot -∞$ are indeterminate forms [[1](#1-indeterminate-form)]. It is not possible to do any calculus on these expressions like $-1 \cdot (0 \cdot -∞)$.  
 However, compared to $x = -1 \cdot -x$, intuitively the following equation should be true: 
 
 $$0 \cdot ∞ = -1 \cdot (0 \cdot -∞)$$
@@ -45,7 +45,7 @@ In the case of the given two indeterminate forms, the result could be **any** nu
 
 #### Using extended real number  
 
-Using the extended real number system $\overline {\mathbb R}$ [2], the intervals $[0, ∞]$ and $[-∞, 0]$ are allowed.
+Using the extended real number system $\overline {\mathbb R}$ [[2](#2-extended-real-number-line)], the intervals $[0, ∞]$ and $[-∞, 0]$ are allowed.
 
 ![](illustrations/visual_interval_extended.png)
 
@@ -81,11 +81,11 @@ These is the given mathematical operation.
 
 #### Multiplication
 
-$[x_0, x_1]in \cdot [y_0, y_1]in = [\min(x_0 \cdot y_0, x_1 \cdot y_1), \max(x_0 \cdot y_0, x_1 \cdot y_1)]in$
+$[x_0, x_1]in \cdot [y_0, y_1]in := [\min(x_0 \cdot y_0, x_1 \cdot y_1), \max(x_0 \cdot y_0, x_1 \cdot y_1)]in$
 
-Regarding the algebraic structure [3], only the required multiplication for the given rules is investigated.
+Regarding the algebraic structure [[3](#3-algebraic-structure)], only the required multiplication for the given rules is investigated.
 
-This algebraic structure of the interval numbers is at least a Magma [4], as all multiplications in $\overline {\mathbb R}$ including ***Rule I*** and ***Rule II*** are defined.
+This algebraic structure of the interval numbers is at least a Magma [[4](#4-magma-algebra)], as all multiplications in $\overline {\mathbb R}$ including ***Rule I*** and ***Rule II*** are defined.
 
 ### Deduction
 
@@ -104,6 +104,9 @@ In the [test](test/) folder is a C++ implementation of the interval number and t
 
 ## Some indeterminate forms as interval numbers
 
+At point of writing, the expression $\frac{0}{0}$ is undefined, also in $\overline {\mathbb R}$ [[5](#5-affinely-extended-real-numbers)].  
+However, with interval numbers, the expression can be defined:
+
 $\frac{0}{0} = [-∞, ∞]in$
 
 Because the limits of the given example formula results in +∞ and -∞:
@@ -114,7 +117,7 @@ $\lim_{n\to0^-}\frac{n}{n^2} = -∞$
 
 ## Conclusion
 
-Using this approach, other indeterminate forms could be expressed as an interval and solved to equations as well.
+Using this approach, other indeterminate forms could be expressed as an interval and solved to equations as well. Especially the usage and current definition in measure theory should be further evaluated [[6](#6-extended-real-numbers)].
 
 For now, it is shown, that the algebraic structure of the interval number is a Magma. However, including the other mathematical operations, the algebraic structure could be further investigated.
 
@@ -122,7 +125,20 @@ Furthermore, other intervals for indeterminate forms could be estimated and defi
 
 ## References
 
-[1] [Indeterminate form](https://en.wikipedia.org/wiki/Indeterminate_form)  
-[2] [Extended real number line](https://en.wikipedia.org/wiki/Extended_real_number_line)  
-[3] [Algebraic structure](https://en.wikipedia.org/wiki/Algebraic_structure)  
-[4] [Magma (algebra)](https://en.wikipedia.org/wiki/Magma_(algebra))
+##### 1 Indeterminate form
+https://en.wikipedia.org/wiki/Indeterminate_form
+
+##### 2 Extended real number line
+https://en.wikipedia.org/wiki/Extended_real_number_line
+
+##### 3 Algebraic structure
+https://en.wikipedia.org/wiki/Algebraic_structure
+
+##### 4 Magma (algebra)
+https://en.wikipedia.org/wiki/Magma_(algebra)
+
+##### 5 Affinely Extended Real Numbers
+https://mathworld.wolfram.com/AffinelyExtendedRealNumbers.html
+
+##### 6 extended real numbers
+https://planetmath.org/extendedrealnumbers
