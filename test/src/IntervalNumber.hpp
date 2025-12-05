@@ -87,8 +87,18 @@ public:
     {
         std::set<double> results{};
 
-        // Adding results, if they can be calculated without the new rules.
+        // Compute all four cross products for proper interval multiplication.
         double x = getX0() * other.getX0();
+        if (!std::isnan(x))
+        {
+            results.insert(x);
+        }
+        x = getX0() * other.getX1();
+        if (!std::isnan(x))
+        {
+            results.insert(x);
+        }
+        x = getX1() * other.getX0();
         if (!std::isnan(x))
         {
             results.insert(x);
@@ -99,25 +109,44 @@ public:
             results.insert(x);
         }
 
-        // Calculate results depending on the new rules, as in the above code the results are not added.
+        // Calculate results depending on the new rules for 0 * ±∞.
 
-        // Lower endpoint calculation x0.
+        // Check all four cross products for indeterminate forms.
         if ((getX0() == -INF && other.getX0() == 0.0) || (getX0() == 0.0 && other.getX0() == -INF))
         {
             results.insert(-INF);
             results.insert(0.0);
         }
+        if ((getX0() == -INF && other.getX1() == 0.0) || (getX0() == 0.0 && other.getX1() == -INF))
+        {
+            results.insert(-INF);
+            results.insert(0.0);
+        }
+        if ((getX1() == -INF && other.getX0() == 0.0) || (getX1() == 0.0 && other.getX0() == -INF))
+        {
+            results.insert(-INF);
+            results.insert(0.0);
+        }
+        if ((getX1() == -INF && other.getX1() == 0.0) || (getX1() == 0.0 && other.getX1() == -INF))
+        {
+            results.insert(-INF);
+            results.insert(0.0);
+        }
+
         if ((getX0() == INF && other.getX0() == 0.0) || (getX0() == 0.0 && other.getX0() == INF))
         {
             results.insert(0.0);
             results.insert(INF);
         }
-
-        // Upper endpoint calculation x1.
-        if ((getX1() == -INF && other.getX1() == 0.0) || (getX1() == 0.0 && other.getX1() == -INF))
+        if ((getX0() == INF && other.getX1() == 0.0) || (getX0() == 0.0 && other.getX1() == INF))
         {
-            results.insert(-INF);
             results.insert(0.0);
+            results.insert(INF);
+        }
+        if ((getX1() == INF && other.getX0() == 0.0) || (getX1() == 0.0 && other.getX0() == INF))
+        {
+            results.insert(0.0);
+            results.insert(INF);
         }
         if ((getX1() == INF && other.getX1() == 0.0) || (getX1() == 0.0 && other.getX1() == INF))
         {

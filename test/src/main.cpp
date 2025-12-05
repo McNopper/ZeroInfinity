@@ -164,6 +164,52 @@ TEST(IntervalNumber, MultiplicationNotAssociative)
     EXPECT_NE(result_0, result_1);
 }
 
+// Additional tests for complete interval multiplication
+
+TEST(IntervalNumber, MultiplicationNegativeIntervals)
+{
+    IntervalNumber a{-2.0, -1.0};
+    IntervalNumber b{3.0, 4.0};
+
+    auto result = a * b;
+
+    EXPECT_EQ(result.getX0(), -8.0);
+    EXPECT_EQ(result.getX1(), -3.0);
+}
+
+TEST(IntervalNumber, MultiplicationMixedSigns)
+{
+    IntervalNumber a{-2.0, 3.0};
+    IntervalNumber b{-1.0, 4.0};
+
+    auto result = a * b;
+
+    EXPECT_EQ(result.getX0(), -8.0);
+    EXPECT_EQ(result.getX1(), 12.0);
+}
+
+TEST(IntervalNumber, MultiplicationSpanningZero)
+{
+    IntervalNumber a{-3.0, 2.0};
+    IntervalNumber b{-1.0, 1.0};
+
+    auto result = a * b;
+
+    EXPECT_EQ(result.getX0(), -3.0);
+    EXPECT_EQ(result.getX1(), 3.0);
+}
+
+TEST(IntervalNumber, MultiplicationWithInfinityEndpoints)
+{
+    IntervalNumber a{-INF, -1.0};
+    IntervalNumber b{2.0, 3.0};
+
+    auto result = a * b;
+
+    EXPECT_EQ(result.getX0(), -INF);
+    EXPECT_EQ(result.getX1(), -2.0);
+}
+
 int main(int argc, char** argv)
 {
     testing::InitGoogleTest(&argc, argv);

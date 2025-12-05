@@ -81,7 +81,7 @@ These is the given mathematical operation.
 
 #### Multiplication
 
-$[x_0, x_1]in \cdot [y_0, y_1]in := [\min(x_0 \cdot y_0, x_1 \cdot y_1), \max(x_0 \cdot y_0, x_1 \cdot y_1)]in$
+$[x_0, x_1]in \cdot [y_0, y_1]in := [\min(x_0 \cdot y_0, x_0 \cdot y_1, x_1 \cdot y_0, x_1 \cdot y_1), \max(x_0 \cdot y_0, x_0 \cdot y_1, x_1 \cdot y_0, x_1 \cdot y_1)]in$
 
 Regarding the algebraic structure [[3](#3-algebraic-structure)], only the required multiplication for the given rules is investigated.
 
