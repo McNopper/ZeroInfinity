@@ -164,7 +164,7 @@ TEST(IntervalNumber, MultiplicationNotAssociative)
     EXPECT_NE(result_0, result_1);
 }
 
-// Additional tests for complete interval multiplication
+// Additional tests for complete interval multiplication.
 
 TEST(IntervalNumber, MultiplicationNegativeIntervals)
 {

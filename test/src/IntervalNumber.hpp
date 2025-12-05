@@ -109,9 +109,7 @@ public:
             results.insert(x);
         }
 
-        // Calculate results depending on the new rules for 0 * ±∞.
-
-        // Check all four cross products for indeterminate forms.
+        // Check for indeterminate forms.
         if ((getX0() == -INF && other.getX0() == 0.0) || (getX0() == 0.0 && other.getX0() == -INF))
         {
             results.insert(-INF);
