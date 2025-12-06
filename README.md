@@ -15,14 +15,14 @@ For properly displaying the formulas, please use another editor like [Visual Stu
 
 ## Motivation
 
-The expressions $0 \cdot ∞$ and implicitly $0 \cdot -∞$ are indeterminate forms [[1](#1-indeterminate-form)]. It is not possible to do any calculus on these expressions like $-1 \cdot (0 \cdot -∞)$.  
+The expressions $0 \cdot \infty$ and implicitly $0 \cdot -\infty$ are indeterminate forms [[1](#1-indeterminate-form)]. It is not possible to do any calculus on these expressions like $-1 \cdot (0 \cdot -\infty)$.  
 However, compared to $x = -1 \cdot -x$, intuitively the following equation should be true: 
 
-$$0 \cdot ∞ = -1 \cdot (0 \cdot -∞)$$
+$$0 \cdot \infty = -1 \cdot (0 \cdot -\infty)$$
 
 ### Problem
 
-A naive approach like $-1 \cdot (0 \cdot -∞) = (-1 \cdot 0) \cdot -∞$ with math limits results again in $0 \cdot -∞$ even when the associative law is allowed.
+A naive approach like $-1 \cdot (0 \cdot -\infty) = (-1 \cdot 0) \cdot -\infty$ with math limits results again in $0 \cdot -\infty$ even when the associative law is allowed.
 
 #### Investigation
 
@@ -45,7 +45,7 @@ In the case of the given two indeterminate forms, the result could be **any** nu
 
 #### Using extended real numbers  
 
-Using the extended real number system $\overline {\mathbb R}$ [[2](#2-extended-real-number-line)], the intervals $[0, ∞]$ and $[-∞, 0]$ are allowed.
+Using the extended real number system $\overline {\mathbb R}$ [[2](#2-extended-real-number-line)], the intervals $[0, \infty]$ and $[-\infty, 0]$ are allowed.
 
 ![](illustrations/visual_interval_extended.png)
 
@@ -65,15 +65,15 @@ As the result is probably not **all** numbers in the interval, **any** or at lea
 
 $[x_0, x_1]in := \{ x \in \overline {\mathbb R} | \exists x \in [x_0, x_1] \}$
 
-The indeterminate form of $0 \cdot ∞$ can be expressed as the first rule:
+The indeterminate form of $0 \cdot \infty$ can be expressed as the first rule:
 
 ***Rule I***  
-$0 \cdot ∞ = [0, ∞]in$
+$0 \cdot \infty = [0, \infty]in$
 
-Similarly, the expression for the indeterminate form of $0 \cdot -∞$ is the second rule:
+Similarly, the expression for the indeterminate form of $0 \cdot -\infty$ is the second rule:
 
 ***Rule II***  
-$0 \cdot -∞ = [-∞, 0]in$
+$0 \cdot -\infty = [-\infty, 0]in$
 
 ### Interval number operations
 
@@ -89,13 +89,13 @@ The algebraic structure of the interval numbers is at least a Magma [[4](#4-magm
 
 ### Deduction
 
-|                               | Operation or rule                    |
-|-------------------------------|--------------------------------------|
-| $-1 \cdot (0 \cdot -∞)$       | ***Rule II***                        |
-| $-1 \cdot [-∞, 0]in$          | Multiplication for interval number   |
-| $[-1 \cdot -∞, -1 \cdot 0]in$ | Operation in $\overline {\mathbb R}$ |
-| $[0, ∞]in$                    | ***Rule I***                         |
-| $0 \cdot ∞$                   |                                      |
+|                                    | Operation or rule                    |
+|------------------------------------|--------------------------------------|
+| $-1 \cdot (0 \cdot -\infty)$       | ***Rule II***                        |
+| $-1 \cdot [-\infty, 0]in$          | Multiplication for interval number   |
+| $[-1 \cdot -\infty, -1 \cdot 0]in$ | Operation in $\overline {\mathbb R}$ |
+| $[0, \infty]in$                    | ***Rule I***                         |
+| $0 \cdot \infty$                   |                                      |
 
 ## Implementation
 
@@ -107,37 +107,37 @@ In the [test](test/) folder is a C++ implementation of the interval number and t
 At the time of writing, the expression $\frac{0}{0}$ is undefined, also in $\overline {\mathbb R}$ [[5](#5-affinely-extended-real-numbers)].  
 However, with interval numbers, the expression can be defined:
 
-$\frac{0}{0} = [-∞, ∞]in$
+$\frac{0}{0} = [-\infty, \infty]in$
 
-Because the limits of the given example formulas result in +∞ and -∞:
+Because the limits of the given example formulas result in $+\infty$ and $-\infty$:
 
-$\lim_{n\to0^+}\frac{n}{n^2} = +∞$
+$\lim_{n\to0^+}\frac{n}{n^2} = +\infty$
 
-$\lim_{n\to0^-}\frac{n}{n^2} = -∞$
-
----
-
-Similarly, the indeterminate form $∞ - ∞$ can be expressed as:
-
-$∞ - ∞ = [-∞, ∞]in$
-
-Because different limit approaches yield different results:
-
-$\lim_{n\to∞}(n - n^2) = -∞$
-
-$\lim_{n\to∞}(n^2 - n) = ∞$
+$\lim_{n\to0^-}\frac{n}{n^2} = -\infty$
 
 ---
 
-The indeterminate form $\frac{∞}{∞}$ can be expressed as:
+Similarly, the indeterminate form $\infty - \infty$ can be expressed as:
 
-$\frac{∞}{∞} = [0, ∞]in$
+$\infty - \infty = [-\infty, \infty]in$
 
 Because different limit approaches yield different results:
 
-$\lim_{n\to∞}\frac{n}{n^2} = 0$
+$\lim_{n\to\infty}(n - n^2) = -\infty$
 
-$\lim_{n\to∞}\frac{n^2}{n} = ∞$
+$\lim_{n\to\infty}(n^2 - n) = \infty$
+
+---
+
+The indeterminate form $\frac{\infty}{\infty}$ can be expressed as:
+
+$\frac{\infty}{\infty} = [0, \infty]in$
+
+Because different limit approaches yield different results:
+
+$\lim_{n\to\infty}\frac{n}{n^2} = 0$
+
+$\lim_{n\to\infty}\frac{n^2}{n} = \infty$
 
 ---
 
@@ -147,33 +147,33 @@ $0^0 = [0, 1]in$
 
 Because different limit approaches yield different results:
 
-$\lim_{x\to0^+}0^x = 0$
+$\lim_{n\to0^+}0^n = 0$
 
-$\lim_{x\to0^+}x^x = 1$
-
----
-
-The indeterminate form $1^∞$ can be expressed as:
-
-$1^∞ = [0, ∞]in$
-
-Because different limit approaches yield different results:
-
-$\lim_{n\to∞}(1 - \frac{1}{\sqrt{n}})^{n^2} = 0$
-
-$\lim_{n\to∞}(1 + \frac{1}{n})^{n^2} = ∞$
+$\lim_{n\to0^+}n^n = 1$
 
 ---
 
-The indeterminate form $∞^0$ can be expressed as:
+The indeterminate form $1^\infty$ can be expressed as:
 
-$∞^0 = [1, ∞]in$
+$1^\infty = [0, \infty]in$
 
 Because different limit approaches yield different results:
 
-$\lim_{n\to∞}n^{\frac{1}{n}} = 1$
+$\lim_{n\to\infty}(1 - \frac{1}{\sqrt{n}})^{n^2} = 0$
 
-$\lim_{n\to∞}n^{\frac{1}{\ln(\ln(n))}} = ∞$
+$\lim_{n\to\infty}(1 + \frac{1}{n})^{n^2} = \infty$
+
+---
+
+The indeterminate form $\infty^0$ can be expressed as:
+
+$\infty^0 = [1, \infty]in$
+
+Because different limit approaches yield different results:
+
+$\lim_{n\to\infty}n^{\frac{1}{n}} = 1$
+
+$\lim_{n\to\infty}n^{\frac{1}{\ln(\ln(n))}} = \infty$
 
 ## Some equations from indeterminate forms resulting back in a non-indeterminate form
 
@@ -187,15 +187,15 @@ $[0, 1]in \cdot 0 = [\min(0 \cdot 0, 1 \cdot 0), \max(0 \cdot 0, 1 \cdot 0)] = [
 
 ---
 
-$|\frac{0}{0}| + ∞ = ∞$
+$|\frac{0}{0}| + \infty = \infty$
 
 Because:
 
-$\frac{0}{0} = [-∞, ∞]in$
+$\frac{0}{0} = [-\infty, \infty]in$
 
-$|-∞, ∞|in = [0, ∞]in$
+$|-\infty, \infty|in = [0, \infty]in$
 
-$[0, ∞]in + ∞ = [0 + ∞, ∞ + ∞] = [∞, ∞]in = ∞$
+$[0, \infty]in + \infty = [0 + \infty, \infty + \infty] = [\infty, \infty]in = \infty$
 
 ---
 
