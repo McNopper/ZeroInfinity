@@ -187,6 +187,32 @@ $\lim_{n\to∞}n^{\frac{1}{n}} = 1$
 
 $\lim_{n\to∞}n^{\frac{1}{\sqrt{n}}} = ∞$
 
+## Some equations from indeterminate forms resulting back in a non-indeterminate form
+
+$(0^0) \cdot 0 = 0$
+
+Because:
+
+$0^0 = [0, 1]in$
+
+$[0, 1]in \cdot 0 = [\min(0 \cdot 0, 1 \cdot 0), \max(0 \cdot 0, 1 \cdot 0)] = [0, 0]in = 0$
+
+---
+
+$|\frac{0}{0}| + ∞ = ∞$
+
+Because:
+
+$\frac{0}{0} = [-∞, ∞]in$
+
+$|-∞, ∞|in = [0, ∞]in$
+
+$[0, ∞]in + ∞ = [0 + ∞, ∞ + ∞] = [∞, ∞]in = ∞$
+
+---
+
+
+
 ## Conclusion
 
 Using this approach, other indeterminate forms could be expressed as an interval and solved to equations as well. Especially the usage and current definition in measure theory should be further evaluated [[6](#6-extended-real-numbers)].
