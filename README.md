@@ -43,7 +43,7 @@ The result is again 0 and does not provide the expected result.
 
 In the case of the given two indeterminate forms, the result could be **any** number. However, the resulting number can be enclosed in an interval.  
 
-#### Using extended real number  
+#### Using extended real numbers  
 
 Using the extended real number system $\overline {\mathbb R}$ [[2](#2-extended-real-number-line)], the intervals $[0, ∞]$ and $[-∞, 0]$ are allowed.
 
@@ -70,14 +70,14 @@ The indeterminate form of $0 \cdot ∞$ can be expressed as the first rule:
 ***Rule I***  
 $0 \cdot ∞ = [0, ∞]in$
 
-Similar, the expression for the indeterminate form of $0 \cdot -∞$ is the second rule:
+Similarly, the expression for the indeterminate form of $0 \cdot -∞$ is the second rule:
 
 ***Rule II***  
 $0 \cdot -∞ = [-∞, 0]in$
 
-### Interval number operation
+### Interval number operations
 
-These is the given mathematical operation.
+This is the given mathematical operation.
 
 #### Multiplication
 
@@ -85,7 +85,7 @@ $[x_0, x_1]in \cdot [y_0, y_1]in := [\min(x_0 \cdot y_0, x_0 \cdot y_1, x_1 \cdo
 
 Regarding the algebraic structure [[3](#3-algebraic-structure)], only the required multiplication for the given rules is investigated.
 
-This algebraic structure of the interval numbers is at least a Magma [[4](#4-magma-algebra)], as all multiplications in $\overline {\mathbb R}$ including ***Rule I*** and ***Rule II*** are defined.
+The algebraic structure of the interval numbers is at least a Magma [[4](#4-magma-algebra)], as all multiplications in $\overline {\mathbb R}$ including ***Rule I*** and ***Rule II*** are defined.
 
 ### Deduction
 
@@ -104,12 +104,12 @@ In the [test](test/) folder is a C++ implementation of the interval number and t
 
 ## Some indeterminate forms as interval numbers
 
-At point of writing, the expression $\frac{0}{0}$ is undefined, also in $\overline {\mathbb R}$ [[5](#5-affinely-extended-real-numbers)].  
+At the time of writing, the expression $\frac{0}{0}$ is undefined, also in $\overline {\mathbb R}$ [[5](#5-affinely-extended-real-numbers)].  
 However, with interval numbers, the expression can be defined:
 
 $\frac{0}{0} = [-∞, ∞]in$
 
-Because the limits of the given example formula results in +∞ and -∞:
+Because the limits of the given example formula result in +∞ and -∞:
 
 $\lim_{n\to0^+}\frac{n}{n^2} = +∞$
 
@@ -147,9 +147,9 @@ $0^0 = [0, 1]in$
 
 Because different limit approaches yield different results:
 
-$\lim_{x\to0^+}x^x = 1$
-
 $\lim_{x\to0^+}0^x = 0$
+
+$\lim_{x\to0^+}x^x = 1$
 
 ---
 
@@ -203,9 +203,9 @@ $[0, ∞]in + ∞ = [0 + ∞, ∞ + ∞] = [∞, ∞]in = ∞$
 
 ## Conclusion
 
-Using this approach, other indeterminate forms could be expressed as an interval and solved to equations as well. Especially the usage and current definition in measure theory should be further evaluated [[6](#6-extended-real-numbers)].
+Using this approach, other indeterminate forms could be expressed as intervals and solved in equations as well. Especially the usage and current definition in measure theory should be further evaluated [[6](#6-extended-real-numbers)].
 
-For now, it is shown, that the algebraic structure of the interval number is a Magma. However, including the other mathematical operations, the algebraic structure could be further investigated.
+For now, it is shown that the algebraic structure of the interval number is a Magma. However, including the other mathematical operations, the algebraic structure could be further investigated.
 
 Furthermore, other intervals for indeterminate forms could be estimated and defined.
 
