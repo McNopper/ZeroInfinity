@@ -115,6 +115,78 @@ $\lim_{n\to0^+}\frac{n}{n^2} = +∞$
 
 $\lim_{n\to0^-}\frac{n}{n^2} = -∞$
 
+---
+
+Similarly, the indeterminate form $∞ - ∞$ can be expressed as:
+
+$∞ - ∞ = [-∞, ∞]in$
+
+Because different limit approaches yield different results:
+
+$\lim_{n\to∞}(n - n) = 0$
+
+$\lim_{n\to∞}(n^2 - n) = ∞$
+
+$\lim_{n\to∞}(n - n^2) = -∞$
+
+---
+
+The indeterminate form $\frac{∞}{∞}$ can be expressed as:
+
+$\frac{∞}{∞} = [0, ∞]in$
+
+Because different limit approaches yield different results:
+
+$\lim_{n\to∞}\frac{n}{n} = 1$
+
+$\lim_{n\to∞}\frac{n}{n^2} = 0$
+
+$\lim_{n\to∞}\frac{n^2}{n} = ∞$
+
+---
+
+The indeterminate form $0^0$ can be expressed as:
+
+$0^0 = [0, 1]in$
+
+Because different limit approaches yield different results:
+
+$\lim_{x\to0^+}x^x = 1$
+
+$\lim_{x\to0^+}0^x = 0$
+
+$\lim_{x\to0^+}x^0 = 1$
+
+---
+
+The indeterminate form $1^∞$ can be expressed as:
+
+$1^∞ = [0, ∞]in$
+
+Because different limit approaches yield different results:
+
+$\lim_{n\to∞}1^n = 1$
+
+$\lim_{n\to∞}(1 + \frac{1}{n})^n = e$
+
+$\lim_{n\to∞}(1 + \frac{1}{n})^{n^2} = ∞$
+
+$\lim_{n\to∞}(1 - \frac{1}{n})^n = \frac{1}{e}$
+
+---
+
+The indeterminate form $∞^0$ can be expressed as:
+
+$∞^0 = [1, ∞]in$
+
+Because different limit approaches yield different results:
+
+$\lim_{n\to∞}n^0 = 1$
+
+$\lim_{n\to∞}n^{\frac{1}{n}} = 1$
+
+$\lim_{n\to∞}n^{\frac{1}{\sqrt{n}}} = ∞$
+
 ## Conclusion
 
 Using this approach, other indeterminate forms could be expressed as an interval and solved to equations as well. Especially the usage and current definition in measure theory should be further evaluated [[6](#6-extended-real-numbers)].

@@ -83,6 +83,8 @@ public:
         return (getX0() != other.getX0()) || (getX1() != other.getX1());
     }
 
+    // Multiplication
+
     IntervalNumber operator*(const IntervalNumber& other) const noexcept
     {
         std::set<double> results{};
@@ -129,11 +131,56 @@ public:
         return *this * IntervalNumber(x);
     }
 
+    // Addition
+
+    IntervalNumber operator+(const IntervalNumber& other) const noexcept
+    {
+        std::set<double> results{};
+
+        // Compute for interval addition.
+        for (std::size_t i = 0u; i < 2u; i++)
+        {
+            auto result = m_interval[i] + other.m_interval[i];
+            if (!std::isnan(result))
+            {
+                results.insert(result);
+            }
+            else
+            {
+                // Check for indeterminate forms.
+                if ((m_interval[i] == -INF && other.m_interval[i] == INF) || (m_interval[i] == INF && other.m_interval[i] == -INF))
+                {
+                    results.insert(-INF);
+                    results.insert(INF);
+                }
+            }
+        }
+
+        // No results means not a number.
+        if (results.empty())
+        {
+            return IntervalNumber(QUIET_NAN);
+        }
+
+        // Set in C++ is ordered, so first and last results are the interval endpoints.
+        return IntervalNumber(*results.begin(), *results.rbegin());
+    }
+
+    IntervalNumber operator+(double x) const noexcept
+    {
+        return *this + IntervalNumber(x);
+    }
+
 };
 
 IntervalNumber operator*(double x, const IntervalNumber& other) noexcept
 {
     return IntervalNumber(x) * other;
+}
+
+IntervalNumber operator+(double x, const IntervalNumber& other) noexcept
+{
+    return IntervalNumber(x) + other;
 }
 
 #endif /* INTERVALNUMBER_HPP_ */
