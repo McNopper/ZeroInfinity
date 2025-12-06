@@ -123,11 +123,9 @@ $∞ - ∞ = [-∞, ∞]in$
 
 Because different limit approaches yield different results:
 
-$\lim_{n\to∞}(n - n) = 0$
+$\lim_{n\to∞}(n - n^2) = -∞$
 
 $\lim_{n\to∞}(n^2 - n) = ∞$
-
-$\lim_{n\to∞}(n - n^2) = -∞$
 
 ---
 
@@ -136,8 +134,6 @@ The indeterminate form $\frac{∞}{∞}$ can be expressed as:
 $\frac{∞}{∞} = [0, ∞]in$
 
 Because different limit approaches yield different results:
-
-$\lim_{n\to∞}\frac{n}{n} = 1$
 
 $\lim_{n\to∞}\frac{n}{n^2} = 0$
 
@@ -155,8 +151,6 @@ $\lim_{x\to0^+}x^x = 1$
 
 $\lim_{x\to0^+}0^x = 0$
 
-$\lim_{x\to0^+}x^0 = 1$
-
 ---
 
 The indeterminate form $1^∞$ can be expressed as:
@@ -165,13 +159,9 @@ $1^∞ = [0, ∞]in$
 
 Because different limit approaches yield different results:
 
-$\lim_{n\to∞}1^n = 1$
-
-$\lim_{n\to∞}(1 + \frac{1}{n})^n = e$
+$\lim_{n\to∞}(1 - \frac{1}{\sqrt{n}})^{n^2} = 0$
 
 $\lim_{n\to∞}(1 + \frac{1}{n})^{n^2} = ∞$
-
-$\lim_{n\to∞}(1 - \frac{1}{n})^n = \frac{1}{e}$
 
 ---
 
@@ -181,11 +171,9 @@ $∞^0 = [1, ∞]in$
 
 Because different limit approaches yield different results:
 
-$\lim_{n\to∞}n^0 = 1$
-
 $\lim_{n\to∞}n^{\frac{1}{n}} = 1$
 
-$\lim_{n\to∞}n^{\frac{1}{\sqrt{n}}} = ∞$
+$\lim_{n\to∞}n^{\frac{1}{\ln(\ln(n))}} = ∞$
 
 ## Some equations from indeterminate forms resulting back in a non-indeterminate form
 
