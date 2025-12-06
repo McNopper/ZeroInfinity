@@ -2,6 +2,7 @@
 #define INTERVALNUMBER_HPP_
 
 #include <algorithm>
+#include <array>
 #include <cmath>
 #include <limits>
 #include <set>
@@ -17,60 +18,59 @@ class IntervalNumber {
 
 private:
 
-    double m_x0{0.0};
-    double m_x1{0.0};
+    // x0 and x1 are stored in array.
+    std::array<double, 2u> m_interval{0.0, 0.0};
 
     void check() noexcept
     {
         // Always guarantee, that m_x0 <= m_x1.
-        if (m_x0 > m_x1)
+        if (m_interval[0u] > m_interval[1u])
         {
-            auto x0 = m_x0;
-            m_x0 = m_x1;
-            m_x1 = x0;
+            auto x = m_interval[0u];
+            m_interval[0u] = m_interval[1u];
+            m_interval[1u] = x;
         }
 
         // If one of the bounds is not a number, the whole interval is not a number.
-        if (std::isnan(m_x0) || std::isnan(m_x1))
+        if (std::isnan(m_interval[0u]) || std::isnan(m_interval[1u]))
         {
-            m_x0 = std::numeric_limits<double>::quiet_NaN();
-            m_x1 = std::numeric_limits<double>::quiet_NaN();
+            m_interval[0u] = std::numeric_limits<double>::quiet_NaN();
+            m_interval[1u] = std::numeric_limits<double>::quiet_NaN();
         }
     }
 
 public:
 
-    IntervalNumber() noexcept :
-        m_x0{0.0}, m_x1{0.0}
+    IntervalNumber() noexcept
     {
         check();
     }
 
     IntervalNumber(double x0) noexcept :
-        m_x0{x0}, m_x1{x0}
+        m_interval{x0, x0}
     {
         check();
     }
 
     IntervalNumber(double x0, double x1) noexcept :
-        m_x0{x0}, m_x1{x1}
+        m_interval{x0, x1}
     {
         check();
     }
 
     double getX0() const noexcept
     {
-        return m_x0;
+        return m_interval[0u];
     }
 
     double getX1() const noexcept
     {
-        return m_x1;
+        return m_interval[1u];
     }
 
     std::string toString() const noexcept
     {
-        return "[" + std::to_string(m_x0) + ", " + std::to_string(m_x1) + "]in";
+        return "[" + std::to_string(m_interval[0u]) + ", " + std::to_string(m_interval[1u]) + "]in";
     }
 
     bool operator==(const IntervalNumber& other) const noexcept
@@ -87,69 +87,31 @@ public:
     {
         std::set<double> results{};
 
-        // Compute all four cross products for proper interval multiplication.
-        double x = getX0() * other.getX0();
-        if (!std::isnan(x))
+        // Compute all four cross products as defined for interval multiplication.
+        for (std::size_t l = 0u; l < 2u; l++)
         {
-            results.insert(x);
-        }
-        x = getX0() * other.getX1();
-        if (!std::isnan(x))
-        {
-            results.insert(x);
-        }
-        x = getX1() * other.getX0();
-        if (!std::isnan(x))
-        {
-            results.insert(x);
-        }
-        x = getX1() * other.getX1();
-        if (!std::isnan(x))
-        {
-            results.insert(x);
-        }
-
-        // Check for indeterminate forms.
-        if ((getX0() == -INF && other.getX0() == 0.0) || (getX0() == 0.0 && other.getX0() == -INF))
-        {
-            results.insert(-INF);
-            results.insert(0.0);
-        }
-        if ((getX0() == -INF && other.getX1() == 0.0) || (getX0() == 0.0 && other.getX1() == -INF))
-        {
-            results.insert(-INF);
-            results.insert(0.0);
-        }
-        if ((getX1() == -INF && other.getX0() == 0.0) || (getX1() == 0.0 && other.getX0() == -INF))
-        {
-            results.insert(-INF);
-            results.insert(0.0);
-        }
-        if ((getX1() == -INF && other.getX1() == 0.0) || (getX1() == 0.0 && other.getX1() == -INF))
-        {
-            results.insert(-INF);
-            results.insert(0.0);
-        }
-
-        if ((getX0() == INF && other.getX0() == 0.0) || (getX0() == 0.0 && other.getX0() == INF))
-        {
-            results.insert(0.0);
-            results.insert(INF);
-        }
-        if ((getX0() == INF && other.getX1() == 0.0) || (getX0() == 0.0 && other.getX1() == INF))
-        {
-            results.insert(0.0);
-            results.insert(INF);
-        }
-        if ((getX1() == INF && other.getX0() == 0.0) || (getX1() == 0.0 && other.getX0() == INF))
-        {
-            results.insert(0.0);
-            results.insert(INF);
-        }
-        if ((getX1() == INF && other.getX1() == 0.0) || (getX1() == 0.0 && other.getX1() == INF))
-        {
-            results.insert(0.0);
-            results.insert(INF);
+            for (std::size_t r = 0u; r < 2u; r++)
+            {
+                auto result = m_interval[l] * other.m_interval[r];
+                if (!std::isnan(result))
+                {
+                    results.insert(result);
+                }
+                else
+                {
+                    // Check for indeterminate forms.
+                    if ((m_interval[l] == -INF && other.m_interval[r] == 0.0) || (m_interval[l] == 0.0 && other.m_interval[r] == -INF))
+                    {
+                        results.insert(-INF);
+                        results.insert(0.0);
+                    }
+                    if ((m_interval[l] == 0.0 && other.m_interval[r] == INF) || (m_interval[l] == INF && other.m_interval[r] == 0.0))
+                    {
+                        results.insert(0.0);
+                        results.insert(INF);
+                    }
+                }
+            }
         }
 
         // No results means not a number.
