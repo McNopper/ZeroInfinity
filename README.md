@@ -10,7 +10,7 @@ Thanks a lot, to my family and their patience having me as a 🤓.
 
 ## Note
 
-The math formulas are encoded using [MathJax](https://www.mathjax.org/). However, the decoding and rendering is not properly done in GitHub.  
+The math formulas are encoded using [MathJax](https://www.mathjax.org/). However, the decoding and rendering are not properly done in GitHub.  
 For properly displaying the formulas, please use another editor like [Visual Studio Code](https://code.visualstudio.com/).
 
 ## Motivation
@@ -51,7 +51,7 @@ Using the extended real number system $\overline {\mathbb R}$ [[2](#2-extended-r
 
 #### Enclosing the result in an interval
 
-Following is given:
+The following is given:
 
 $a, b \in \overline {\mathbb R} \land a \le b$
 
@@ -77,7 +77,7 @@ $0 \cdot -∞ = [-∞, 0]in$
 
 ### Interval number operations
 
-This is the given mathematical operation.
+These are the given mathematical operations.
 
 #### Multiplication
 
@@ -109,7 +109,7 @@ However, with interval numbers, the expression can be defined:
 
 $\frac{0}{0} = [-∞, ∞]in$
 
-Because the limits of the given example formula result in +∞ and -∞:
+Because the limits of the given example formulas result in +∞ and -∞:
 
 $\lim_{n\to0^+}\frac{n}{n^2} = +∞$
 
@@ -226,5 +226,5 @@ https://en.wikipedia.org/wiki/Magma_(algebra)
 ##### 5 Affinely Extended Real Numbers
 https://mathworld.wolfram.com/AffinelyExtendedRealNumbers.html
 
-##### 6 extended real numbers
+##### 6 Extended real numbers
 https://planetmath.org/extendedrealnumbers
