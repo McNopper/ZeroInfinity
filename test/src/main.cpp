@@ -210,6 +210,8 @@ TEST(IntervalNumber, MultiplicationWithInfinityEndpoints)
     EXPECT_EQ(result.getX1(), -2.0);
 }
 
+// ToDo: Add tests for addition, subtraction, division and absolute value of IntervalNumber.
+
 int main(int argc, char** argv)
 {
     testing::InitGoogleTest(&argc, argv);

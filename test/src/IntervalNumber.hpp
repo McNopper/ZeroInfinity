@@ -230,4 +230,6 @@ IntervalNumber operator-(double x, const IntervalNumber& other) noexcept
     return IntervalNumber(x) - other;
 }
 
+// ToDo: Implement division and absolute value operations for IntervalNumber, consistent with README definitions.
+
 #endif /* INTERVALNUMBER_HPP_ */

@@ -28,7 +28,7 @@ A naive approach like $-1 \cdot (0 \cdot -∞) = (-1 \cdot 0) \cdot -∞$ with m
 
 #### Investigation
 
-Existing required math limits for above assumption:
+Existing required mathematical limits for the above assumption:
 
 $\lim_{n\to\infty}\sqrt[n]{n}=1$  
 $\lim_{n\to\infty}\frac{1}{n}=0$  
