@@ -177,10 +177,12 @@ public:
     {
         std::set<double> results{};
 
-        // Compute for interval addition.
+        // Compute for interval subtraction.
         for (std::size_t i = 0u; i < 2u; i++)
         {
-            auto result = m_interval[i] - other.m_interval[i];
+            auto k = (i + 1u) % 2u;
+
+            auto result = m_interval[i] - other.m_interval[k];
             if (!std::isnan(result))
             {
                 results.insert(result);
@@ -188,7 +190,7 @@ public:
             else
             {
                 // Check for indeterminate forms.
-                if ((m_interval[i] == INF && other.m_interval[i] == INF) || (m_interval[i] == -INF && other.m_interval[i] == -INF))
+                if ((m_interval[i] == INF && other.m_interval[k] == INF) || (m_interval[i] == -INF && other.m_interval[k] == -INF))
                 {
                     results.insert(-INF);
                     results.insert(INF);
