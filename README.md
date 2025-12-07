@@ -8,6 +8,8 @@ Thanks to Eric Lengyel for asking the initial right questions.
 
 Thanks a lot, to my family and their patience having me as a 🤓.
 
+Thanks to 🤖, for cross checking the math, wording and implementation.
+
 ## Note
 
 The math formulas are encoded using [MathJax](https://www.mathjax.org/). However, the decoding and rendering are not properly done in GitHub.  
@@ -45,7 +47,7 @@ In the case of the given two indeterminate forms, the result could be **any** nu
 
 #### Using extended real numbers  
 
-Using the extended real number system $\overline {\mathbb R}$ [[2](#2-extended-real-number-line)], the intervals $[0, ∞]$ and $[-∞, 0]$ are allowed.
+Using the extended real number system $\overline {\mathbb R}$ [[2](#2-extended-real-number-line), [3](#3-affinely-extended-real-numbers)], the intervals $[0, ∞]$ and $[-∞, 0]$ are allowed.
 
 ![](illustrations/visual_interval_extended.png)
 
@@ -81,7 +83,7 @@ The algebraic structure of the interval numbers is at least a Magma [[5](#5-magm
 
 ### Interval number operations
 
-These are the given mathematical operations, following standard interval arithmetic [[3](#3-interval-arithmetic)].
+These are the given mathematical operations, following standard interval arithmetic [[6](#6-interval-arithmetic)].
 
 #### Multiplication
 
@@ -95,12 +97,6 @@ $[x_0, x_1]in + [y_0, y_1]in := [x_0 + y_0, x_1 + y_1]in$
 
 For the indeterminate form $\infty + (-\infty)$ or $(-\infty) + \infty$, the result is $[-\infty, \infty]in$.
 
-Because different limit approaches yield different results:
-
-$\lim_{n\to\infty}(n - n^2) = -∞$
-
-$\lim_{n\to\infty}(n^2 - n) = ∞$
-
 #### Subtraction
 
 $[x_0, x_1]in - [y_0, y_1]in := [x_0 - y_1, x_1 - y_0]in$
@@ -112,23 +108,6 @@ For the indeterminate form $\infty - \infty$ or $(-\infty) - (-\infty)$, the res
 $[x_0, x_1]in \div [y_0, y_1]in := [x_0, x_1]in \cdot [\frac{1}{y_1}, \frac{1}{y_0}]in$
 
 For the indeterminate form $\frac{0}{0}$, the result is $[-\infty, \infty]in$.
-
-Because the limits of the given example formulas result in $+∞$ and $-∞$:
-
-$\lim_{n\to0^+}\frac{n}{n^2} = +∞$
-
-$\lim_{n\to0^-}\frac{n}{n^2} = -∞$
-
-The indeterminate form $\frac{∞}{∞}$ can be expressed as:
-
-$\frac{∞}{∞} = [0, ∞]in$
-
-Because different limit approaches yield different results:
-
-$\lim_{n\to\infty}\frac{n}{n^2} = 0$
-
-$\lim_{n\to\infty}\frac{n^2}{n} = ∞$
-
 
 #### Absolute Value
 
@@ -142,13 +121,51 @@ The absolute value depends on whether the interval contains zero (when $x_0 \cdo
 
 In the [test](test/) folder is a C++ implementation of the interval number and the unit tests.
 
-## Additional indeterminate forms as interval numbers
+## Indeterminate forms as interval numbers
+
+This section demonstrates how various indeterminate forms can be expressed as interval numbers, with limit examples justifying the interval bounds.
+
+### Forms involving zero and infinity
+
+The indeterminate form $\frac{0}{0}$ is undefined in $\overline {\mathbb R}$, but with interval numbers it can be expressed as:
+
+$\frac{0}{0} = [-∞, ∞]in$
+
+Because the limits of the given example formulas result in $+∞$ and $-∞$:
+
+$\lim_{n\to0^+}\frac{n}{n^2} = +∞$
+
+$\lim_{n\to0^-}\frac{n}{n^2} = -∞$
+
+---
+
+The indeterminate form $∞ - ∞$ can be expressed as:
+
+$∞ - ∞ = [-∞, ∞]in$
+
+Because different limit approaches yield different results:
+
+$\lim_{n\to\infty}(n - n^2) = -∞$
+
+$\lim_{n\to\infty}(n^2 - n) = ∞$
+
+---
+
+The indeterminate form $\frac{∞}{∞}$ can be expressed as:
+
+$\frac{∞}{∞} = [0, ∞]in$
+
+Because different limit approaches yield different results:
+
+$\lim_{n\to\infty}\frac{n}{n^2} = 0$
+
+$\lim_{n\to\infty}\frac{n^2}{n} = ∞$
+
+### Forms involving exponentiation
 
 The indeterminate form $0^0$ can be expressed as:
 
 $0^0 = [0, 1]in$
-
-Because different limit approaches yield different results:
 
 $\lim_{n\to0^+}0^n = 0$
 
@@ -160,8 +177,6 @@ The indeterminate form $1^∞$ can be expressed as:
 
 $1^∞ = [0, ∞]in$
 
-Because different limit approaches yield different results:
-
 $\lim_{n\to\infty}(1 - \frac{1}{\sqrt{n}})^{n^2} = 0$
 
 $\lim_{n\to\infty}(1 + \frac{1}{n})^{n^2} = ∞$
@@ -171,8 +186,6 @@ $\lim_{n\to\infty}(1 + \frac{1}{n})^{n^2} = ∞$
 The indeterminate form $∞^0$ can be expressed as:
 
 $∞^0 = [1, ∞]in$
-
-Because different limit approaches yield different results:
 
 $\lim_{n\to\infty}n^{\frac{1}{n}} = 1$
 
@@ -226,8 +239,8 @@ https://en.wikipedia.org/wiki/Indeterminate_form
 ##### 2 Extended real number line
 https://en.wikipedia.org/wiki/Extended_real_number_line
 
-##### 3 Interval arithmetic
-https://en.wikipedia.org/wiki/Interval_arithmetic
+##### 3 Affinely Extended Real Numbers
+https://mathworld.wolfram.com/AffinelyExtendedRealNumbers.html
 
 ##### 4 Algebraic structure
 https://en.wikipedia.org/wiki/Algebraic_structure
@@ -235,8 +248,8 @@ https://en.wikipedia.org/wiki/Algebraic_structure
 ##### 5 Magma (algebra)
 https://en.wikipedia.org/wiki/Magma_(algebra)
 
-##### 6 Affinely Extended Real Numbers
-https://mathworld.wolfram.com/AffinelyExtendedRealNumbers.html
+##### 6 Interval arithmetic
+https://en.wikipedia.org/wiki/Interval_arithmetic
 
 ##### 7 Extended real numbers
 https://planetmath.org/extendedrealnumbers
