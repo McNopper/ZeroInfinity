@@ -15,14 +15,14 @@ For properly displaying the formulas, please use another editor like [Visual Stu
 
 ## Motivation
 
-The expressions $0 \cdot ∞$ and implicitly $0 \cdot -∞$ are indeterminate forms [[1](#1-indeterminate-form)]. It is not possible to do any calculus on these expressions like $-1 \cdot (0 \cdot -∞)$.  
+The expressions $0 \cdot ∞$ and implicitly $0 \cdot -∞$ are indeterminate forms [[1](#1-indeterminate-form)]. It is not possible to perform algebraic operations on these expressions like $-1 \cdot (0 \cdot -∞)$.  
 However, compared to $x = -1 \cdot -x$, intuitively the following equation should be true: 
 
 $$0 \cdot ∞ = -1 \cdot (0 \cdot -∞)$$
 
 ### Problem
 
-A naive approach like $-1 \cdot (0 \cdot -∞) = (-1 \cdot 0) \cdot -∞$ with math limits results again in $0 \cdot -∞$ even when the associative law is allowed.
+A naive approach like $-1 \cdot (0 \cdot -∞) = (-1 \cdot 0) \cdot -∞$ with mathematical limits results again in $0 \cdot -∞$ even when the associative law is allowed.
 
 #### Investigation
 
@@ -51,7 +51,7 @@ Using the extended real number system $\overline {\mathbb R}$ [[2](#2-extended-r
 
 ### Definition
 
-As the result is probably not **all** numbers in the interval, **any** or at least **one** number in the interval must be expressed as a new interval number *in*:
+Since an indeterminate form can evaluate to any value within a specific range, we introduce the interval number *in* to represent all possible values in that range:
 
 $[x_0, x_1]in := \{ x \in \overline {\mathbb R} \mid x_0 \le x \le x_1 \}$
 
@@ -95,6 +95,12 @@ $[x_0, x_1]in + [y_0, y_1]in := [x_0 + y_0, x_1 + y_1]in$
 
 For the indeterminate form $\infty + (-\infty)$ or $(-\infty) + \infty$, the result is $[-\infty, \infty]in$.
 
+Because different limit approaches yield different results:
+
+$\lim_{n\to\infty}(n - n^2) = -∞$
+
+$\lim_{n\to\infty}(n^2 - n) = ∞$
+
 #### Subtraction
 
 $[x_0, x_1]in - [y_0, y_1]in := [x_0 - y_1, x_1 - y_0]in$
@@ -107,40 +113,11 @@ $[x_0, x_1]in \div [y_0, y_1]in := [x_0, x_1]in \cdot [\frac{1}{y_1}, \frac{1}{y
 
 For the indeterminate form $\frac{0}{0}$, the result is $[-\infty, \infty]in$.
 
-#### Absolute Value
-
-$|[x_0, x_1]|in := [\min(|x_0|, |x_1|), \max(|x_0|, |x_1|)]in$
-
-## Implementation
-
-In the [test](test/) folder is a C++ implementation of the interval number and the unit tests.
-
-## Some indeterminate forms as interval numbers
-
-At the time of writing, the expression $\frac{0}{0}$ is undefined, also in $\overline {\mathbb R}$ [[6](#6-affinely-extended-real-numbers)].  
-However, with interval numbers, the expression can be defined:
-
-$\frac{0}{0} = [-∞, ∞]in$
-
 Because the limits of the given example formulas result in $+∞$ and $-∞$:
 
 $\lim_{n\to0^+}\frac{n}{n^2} = +∞$
 
 $\lim_{n\to0^-}\frac{n}{n^2} = -∞$
-
----
-
-Similarly, the indeterminate form $∞ - ∞$ can be expressed as:
-
-$∞ - ∞ = [-∞, ∞]in$
-
-Because different limit approaches yield different results:
-
-$\lim_{n\to\infty}(n - n^2) = -∞$
-
-$\lim_{n\to\infty}(n^2 - n) = ∞$
-
----
 
 The indeterminate form $\frac{∞}{∞}$ can be expressed as:
 
@@ -152,7 +129,20 @@ $\lim_{n\to\infty}\frac{n}{n^2} = 0$
 
 $\lim_{n\to\infty}\frac{n^2}{n} = ∞$
 
----
+
+#### Absolute Value
+
+$|[x_0, x_1]|in := [\min(|x_0|, |x_1|), \max(|x_0|, |x_1|)]in$ if $x_0 \cdot x_1 \ge 0$
+
+$|[x_0, x_1]|in := [0, \max(|x_0|, |x_1|)]in$ if $x_0 \cdot x_1 < 0$
+
+The absolute value depends on whether the interval contains zero (when $x_0 \cdot x_1 < 0$).
+
+## Implementation
+
+In the [test](test/) folder is a C++ implementation of the interval number and the unit tests.
+
+## Additional indeterminate forms as interval numbers
 
 The indeterminate form $0^0$ can be expressed as:
 
