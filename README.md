@@ -49,21 +49,11 @@ Using the extended real number system $\overline {\mathbb R}$ [[2](#2-extended-r
 
 ![](illustrations/visual_interval_extended.png)
 
-#### Enclosing the result in an interval
-
-The following is given:
-
-$a, b \in \overline {\mathbb R} \land a \le b$
-
-Interval, where the result for $a \cdot b$ is enclosed in the interval: 
-
-$[x_0, x_1] = \{ x_0 = a \cdot \beta | \beta \in [a, b[ \land x_1 = \alpha \cdot b | \alpha \in ]a, b] \}$
-
 ### Definition
 
 As the result is probably not **all** numbers in the interval, **any** or at least **one** number in the interval must be expressed as a new interval number *in*:
 
-$[x_0, x_1]in := \{ x \in \overline {\mathbb R} | \exists x \in [x_0, x_1] \}$
+$[x_0, x_1]in := \{ x \in \overline {\mathbb R} \mid x_0 \le x \le x_1 \}$
 
 The indeterminate form of $0 \cdot ∞$ can be expressed as the first rule:
 
@@ -75,36 +65,59 @@ Similarly, the expression for the indeterminate form of $0 \cdot -∞$ is the se
 ***Rule II***  
 $0 \cdot -∞ = [-∞, 0]in$
 
-### Interval number operations
-
-These are the given mathematical operations.
-
-#### Multiplication
-
-$[x_0, x_1]in \cdot [y_0, y_1]in := [\min(x_0 \cdot y_0, x_0 \cdot y_1, x_1 \cdot y_0, x_1 \cdot y_1), \max(x_0 \cdot y_0, x_0 \cdot y_1, x_1 \cdot y_0, x_1 \cdot y_1)]in$
-
-Regarding the algebraic structure [[3](#3-algebraic-structure)], only the required multiplication for the given rules is investigated.
-
-The algebraic structure of the interval numbers is at least a Magma [[4](#4-magma-algebra)], as all multiplications in $\overline {\mathbb R}$ including ***Rule I*** and ***Rule II*** are defined.
-
 ### Deduction
 
-|                                    | Operation or rule                    |
-|------------------------------------|--------------------------------------|
+|                               | Operation or rule                    |
+|-------------------------------|--------------------------------------|
 | $-1 \cdot (0 \cdot -∞)$       | ***Rule II***                        |
 | $-1 \cdot [-∞, 0]in$          | Multiplication for interval number   |
 | $[-1 \cdot -∞, -1 \cdot 0]in$ | Operation in $\overline {\mathbb R}$ |
 | $[0, ∞]in$                    | ***Rule I***                         |
 | $0 \cdot ∞$                   |                                      |
 
+Regarding the algebraic structure [[4](#4-algebraic-structure)], only the required multiplication for the given rules is investigated.
+
+The algebraic structure of the interval numbers is at least a Magma [[5](#5-magma-algebra)], as all multiplications in $\overline {\mathbb R}$ including ***Rule I*** and ***Rule II*** are defined.
+
+### Interval number operations
+
+These are the given mathematical operations, following standard interval arithmetic [[3](#3-interval-arithmetic)].
+
+#### Multiplication
+
+$[x_0, x_1]in \cdot [y_0, y_1]in := [\min(x_0 \cdot y_0, x_0 \cdot y_1, x_1 \cdot y_0, x_1 \cdot y_1), \max(x_0 \cdot y_0, x_0 \cdot y_1, x_1 \cdot y_0, x_1 \cdot y_1)]in$
+
+For the indeterminate forms $0 \cdot \infty = [0, \infty]in$ (***Rule I***) and $0 \cdot (-\infty) = [-\infty, 0]in$ (***Rule II***).
+
+#### Addition
+
+$[x_0, x_1]in + [y_0, y_1]in := [x_0 + y_0, x_1 + y_1]in$
+
+For the indeterminate form $\infty + (-\infty)$ or $(-\infty) + \infty$, the result is $[-\infty, \infty]in$.
+
+#### Subtraction
+
+$[x_0, x_1]in - [y_0, y_1]in := [x_0 - y_1, x_1 - y_0]in$
+
+For the indeterminate form $\infty - \infty$ or $(-\infty) - (-\infty)$, the result is $[-\infty, \infty]in$.
+
+#### Division
+
+$[x_0, x_1]in \div [y_0, y_1]in := [x_0, x_1]in \cdot [\frac{1}{y_1}, \frac{1}{y_0}]in$
+
+For the indeterminate form $\frac{0}{0}$, the result is $[-\infty, \infty]in$.
+
+#### Absolute Value
+
+$|[x_0, x_1]|in := [\min(|x_0|, |x_1|), \max(|x_0|, |x_1|)]in$
+
 ## Implementation
 
 In the [test](test/) folder is a C++ implementation of the interval number and the unit tests.
 
-
 ## Some indeterminate forms as interval numbers
 
-At the time of writing, the expression $\frac{0}{0}$ is undefined, also in $\overline {\mathbb R}$ [[5](#5-affinely-extended-real-numbers)].  
+At the time of writing, the expression $\frac{0}{0}$ is undefined, also in $\overline {\mathbb R}$ [[6](#6-affinely-extended-real-numbers)].  
 However, with interval numbers, the expression can be defined:
 
 $\frac{0}{0} = [-∞, ∞]in$
@@ -209,7 +222,7 @@ $[0, ∞]in + ∞ = [0 + ∞, ∞ + ∞] = [∞, ∞]in = ∞$
 
 ## Conclusion
 
-Using this approach, other indeterminate forms could be expressed as intervals and solved in equations as well. Especially the usage and current definition in measure theory should be further evaluated [[6](#6-extended-real-numbers)].
+Using this approach, other indeterminate forms could be expressed as intervals and solved in equations as well. Especially the usage and current definition in measure theory should be further evaluated [[7](#7-extended-real-numbers)].
 
 For now, it is shown that the algebraic structure of the interval number is a Magma. However, including the other mathematical operations, the algebraic structure could be further investigated.
 
@@ -223,14 +236,17 @@ https://en.wikipedia.org/wiki/Indeterminate_form
 ##### 2 Extended real number line
 https://en.wikipedia.org/wiki/Extended_real_number_line
 
-##### 3 Algebraic structure
+##### 3 Interval arithmetic
+https://en.wikipedia.org/wiki/Interval_arithmetic
+
+##### 4 Algebraic structure
 https://en.wikipedia.org/wiki/Algebraic_structure
 
-##### 4 Magma (algebra)
+##### 5 Magma (algebra)
 https://en.wikipedia.org/wiki/Magma_(algebra)
 
-##### 5 Affinely Extended Real Numbers
+##### 6 Affinely Extended Real Numbers
 https://mathworld.wolfram.com/AffinelyExtendedRealNumbers.html
 
-##### 6 Extended real numbers
+##### 7 Extended real numbers
 https://planetmath.org/extendedrealnumbers
