@@ -129,6 +129,30 @@ TEST(IntervalNumber, Multiplication05)
     EXPECT_EQ(result.getX1(), INF);
 }
 
+TEST(IntervalNumber, RuleI_ZeroTimesInfinity)
+{
+    // Rule I: 0 * ∞ = [0, ∞]in
+    IntervalNumber a{0.0};
+    IntervalNumber b{INF};
+
+    auto result = a * b;
+
+    EXPECT_EQ(result.getX0(), 0.0);
+    EXPECT_EQ(result.getX1(), INF);
+}
+
+TEST(IntervalNumber, RuleII_ZeroTimesNegativeInfinity)
+{
+    // Rule II: 0 * -∞ = [-∞, 0]in
+    IntervalNumber a{0.0};
+    IntervalNumber b{-INF};
+
+    auto result = a * b;
+
+    EXPECT_EQ(result.getX0(), -INF);
+    EXPECT_EQ(result.getX1(), 0.0);
+}
+
 TEST(IntervalNumber, Thesis01)
 {
     IntervalNumber a{-1.0};
@@ -210,7 +234,395 @@ TEST(IntervalNumber, MultiplicationWithInfinityEndpoints)
     EXPECT_EQ(result.getX1(), -2.0);
 }
 
-// ToDo: Add tests for addition, subtraction, division and absolute value of IntervalNumber.
+// Addition tests
+
+TEST(IntervalNumber, Addition01)
+{
+    IntervalNumber a{1.0, 2.0};
+    IntervalNumber b{3.0, 4.0};
+
+    auto result = a + b;
+
+    EXPECT_EQ(result.getX0(), 4.0);
+    EXPECT_EQ(result.getX1(), 6.0);
+}
+
+TEST(IntervalNumber, Addition02)
+{
+    IntervalNumber a{-2.0, 3.0};
+    IntervalNumber b{-1.0, 5.0};
+
+    auto result = a + b;
+
+    EXPECT_EQ(result.getX0(), -3.0);
+    EXPECT_EQ(result.getX1(), 8.0);
+}
+
+TEST(IntervalNumber, AdditionInfinity)
+{
+    IntervalNumber a{0.0, INF};
+    IntervalNumber b{INF};
+
+    auto result = a + b;
+
+    EXPECT_EQ(result.getX0(), INF);
+    EXPECT_EQ(result.getX1(), INF);
+}
+
+TEST(IntervalNumber, AdditionIndeterminateForm)
+{
+    // ∞ + -∞ = [-∞, ∞]in
+    IntervalNumber a{INF};
+    IntervalNumber b{-INF};
+
+    auto result = a + b;
+
+    EXPECT_EQ(result.getX0(), -INF);
+    EXPECT_EQ(result.getX1(), INF);
+}
+
+TEST(IntervalNumber, AdditionIndeterminateFormReverse)
+{
+    // -∞ + ∞ = [-∞, ∞]in
+    IntervalNumber a{-INF};
+    IntervalNumber b{INF};
+
+    auto result = a + b;
+
+    EXPECT_EQ(result.getX0(), -INF);
+    EXPECT_EQ(result.getX1(), INF);
+}
+
+// Subtraction tests
+
+TEST(IntervalNumber, Subtraction01)
+{
+    IntervalNumber a{5.0, 8.0};
+    IntervalNumber b{2.0, 3.0};
+
+    auto result = a - b;
+
+    EXPECT_EQ(result.getX0(), 2.0);
+    EXPECT_EQ(result.getX1(), 6.0);
+}
+
+TEST(IntervalNumber, Subtraction02)
+{
+    IntervalNumber a{-2.0, 3.0};
+    IntervalNumber b{-5.0, 1.0};
+
+    auto result = a - b;
+
+    EXPECT_EQ(result.getX0(), -3.0);
+    EXPECT_EQ(result.getX1(), 8.0);
+}
+
+TEST(IntervalNumber, SubtractionIndeterminateForm)
+{
+    // ∞ - ∞ = [-∞, ∞]in
+    IntervalNumber a{INF};
+    IntervalNumber b{INF};
+
+    auto result = a - b;
+
+    EXPECT_EQ(result.getX0(), -INF);
+    EXPECT_EQ(result.getX1(), INF);
+}
+
+TEST(IntervalNumber, SubtractionMinusInfinity)
+{
+    // -∞ - (-∞) = [-∞, ∞]in
+    IntervalNumber a{-INF};
+    IntervalNumber b{-INF};
+
+    auto result = a - b;
+
+    EXPECT_EQ(result.getX0(), -INF);
+    EXPECT_EQ(result.getX1(), INF);
+}
+
+// Division tests
+
+TEST(IntervalNumber, Division01)
+{
+    IntervalNumber a{6.0, 12.0};
+    IntervalNumber b{2.0, 3.0};
+
+    auto result = a / b;
+
+    EXPECT_EQ(result.getX0(), 2.0);
+    EXPECT_EQ(result.getX1(), 6.0);
+}
+
+TEST(IntervalNumber, Division02)
+{
+    IntervalNumber a{-8.0, 4.0};
+    IntervalNumber b{2.0};
+
+    auto result = a / b;
+
+    EXPECT_EQ(result.getX0(), -4.0);
+    EXPECT_EQ(result.getX1(), 2.0);
+}
+
+TEST(IntervalNumber, DivisionByZeroIndeterminateForm)
+{
+    // 0/0 = [-∞, ∞]in
+    IntervalNumber a{0.0};
+    IntervalNumber b{0.0};
+
+    auto result = a / b;
+
+    EXPECT_EQ(result.getX0(), -INF);
+    EXPECT_EQ(result.getX1(), INF);
+}
+
+TEST(IntervalNumber, DivisionInfinityByInfinity)
+{
+    // ∞/∞ = [0, ∞]in
+    IntervalNumber a{INF};
+    IntervalNumber b{INF};
+
+    auto result = a / b;
+
+    EXPECT_EQ(result.getX0(), 0.0);
+    EXPECT_EQ(result.getX1(), INF);
+}
+
+TEST(IntervalNumber, DivisionByInfinity)
+{
+    IntervalNumber a{5.0, 10.0};
+    IntervalNumber b{INF};
+
+    auto result = a / b;
+
+    EXPECT_EQ(result.getX0(), 0.0);
+    EXPECT_EQ(result.getX1(), 0.0);
+}
+
+TEST(IntervalNumber, DivisionNegativeIntervals)
+{
+    IntervalNumber a{-12.0, -6.0};
+    IntervalNumber b{2.0, 3.0};
+
+    auto result = a / b;
+
+    EXPECT_EQ(result.getX0(), -6.0);
+    EXPECT_EQ(result.getX1(), -2.0);
+}
+
+// Absolute value tests
+
+TEST(IntervalNumber, AbsoluteValue01)
+{
+    IntervalNumber a{3.0, 5.0};
+
+    auto result = abs(a);
+
+    EXPECT_EQ(result.getX0(), 3.0);
+    EXPECT_EQ(result.getX1(), 5.0);
+}
+
+TEST(IntervalNumber, AbsoluteValue02)
+{
+    IntervalNumber a{-5.0, -3.0};
+
+    auto result = abs(a);
+
+    EXPECT_EQ(result.getX0(), 3.0);
+    EXPECT_EQ(result.getX1(), 5.0);
+}
+
+TEST(IntervalNumber, AbsoluteValue03)
+{
+    // Interval contains zero
+    IntervalNumber a{-5.0, 3.0};
+
+    auto result = abs(a);
+
+    EXPECT_EQ(result.getX0(), 0.0);
+    EXPECT_EQ(result.getX1(), 5.0);
+}
+
+TEST(IntervalNumber, AbsoluteValue04)
+{
+    IntervalNumber a{-10.0, 15.0};
+
+    auto result = abs(a);
+
+    EXPECT_EQ(result.getX0(), 0.0);
+    EXPECT_EQ(result.getX1(), 15.0);
+}
+
+TEST(IntervalNumber, AbsoluteValueZero)
+{
+    IntervalNumber a{0.0};
+
+    auto result = abs(a);
+
+    EXPECT_EQ(result.getX0(), 0.0);
+    EXPECT_EQ(result.getX1(), 0.0);
+}
+
+TEST(IntervalNumber, AbsoluteValueInfinity)
+{
+    IntervalNumber a{-INF, INF};
+
+    auto result = abs(a);
+
+    EXPECT_EQ(result.getX0(), 0.0);
+    EXPECT_EQ(result.getX1(), INF);
+}
+
+TEST(IntervalNumber, AbsoluteValueNegativeInfinity)
+{
+    IntervalNumber a{-INF, 0.0};
+
+    auto result = abs(a);
+
+    EXPECT_EQ(result.getX0(), 0.0);
+    EXPECT_EQ(result.getX1(), INF);
+}
+
+// Test examples from README
+
+TEST(IntervalNumber, ReadmeExample01)
+{
+    // (0^0) * 0 = 0
+    IntervalNumber zero_to_zero{0.0, 1.0};
+
+    auto result = zero_to_zero * 0.0;
+
+    EXPECT_EQ(result.getX0(), 0.0);
+    EXPECT_EQ(result.getX1(), 0.0);
+}
+
+TEST(IntervalNumber, ReadmeExample02)
+{
+    // |0/0| + ∞ = ∞
+    IntervalNumber zero_div_zero{-INF, INF};
+    auto abs_result = abs(zero_div_zero);
+    auto final_result = abs_result + INF;
+
+    EXPECT_EQ(abs_result.getX0(), 0.0);
+    EXPECT_EQ(abs_result.getX1(), INF);
+    EXPECT_EQ(final_result.getX0(), INF);
+    EXPECT_EQ(final_result.getX1(), INF);
+}
+
+TEST(IntervalNumber, ReadmeExample03)
+{
+    // (∞/∞) + ∞ = ∞
+    IntervalNumber inf_div_inf{0.0, INF};
+    auto result = inf_div_inf + INF;
+
+    EXPECT_EQ(result.getX0(), INF);
+    EXPECT_EQ(result.getX1(), INF);
+}
+
+// Additional edge case tests
+
+TEST(IntervalNumber, DivisionIntervalContainingZero)
+{
+    // Division by interval containing zero should handle carefully
+    IntervalNumber a{10.0, 20.0};
+    IntervalNumber b{0.0, 2.0};
+    
+    auto result = a / b;
+    
+    // [10,20] / [0,2] = [10,20] * [1/2, 1/0] = [10,20] * [0.5, INF]
+    EXPECT_EQ(result.getX0(), 5.0);
+    EXPECT_EQ(result.getX1(), INF);
+}
+
+TEST(IntervalNumber, MultiplicationZeroInterval)
+{
+    // [0,0] * anything = [0,0]
+    IntervalNumber a{0.0};
+    IntervalNumber b{-10.0, 10.0};
+    
+    auto result = a * b;
+    
+    EXPECT_EQ(result.getX0(), 0.0);
+    EXPECT_EQ(result.getX1(), 0.0);
+}
+
+TEST(IntervalNumber, DivisionNegativeInfinity)
+{
+    // [-INF,-INF] / [2,3]
+    IntervalNumber a{-INF};
+    IntervalNumber b{2.0, 3.0};
+    
+    auto result = a / b;
+    
+    EXPECT_EQ(result.getX0(), -INF);
+    EXPECT_EQ(result.getX1(), -INF);
+}
+
+TEST(IntervalNumber, AdditionNegativeInfinity)
+{
+    // [-INF, -INF] + [1, 2]
+    IntervalNumber a{-INF};
+    IntervalNumber b{1.0, 2.0};
+    
+    auto result = a + b;
+    
+    EXPECT_EQ(result.getX0(), -INF);
+    EXPECT_EQ(result.getX1(), -INF);
+}
+
+TEST(IntervalNumber, SubtractionWithNegativeInfinity)
+{
+    // [1, 2] - [-INF, -INF]
+    IntervalNumber a{1.0, 2.0};
+    IntervalNumber b{-INF};
+    
+    auto result = a - b;
+    
+    EXPECT_EQ(result.getX0(), INF);
+    EXPECT_EQ(result.getX1(), INF);
+}
+
+TEST(IntervalNumber, MultiplicationBothNegativeInfinity)
+{
+    // [-INF, -1] * [-INF, -2]
+    IntervalNumber a{-INF, -1.0};
+    IntervalNumber b{-INF, -2.0};
+    
+    auto result = a * b;
+    
+    EXPECT_EQ(result.getX0(), 2.0);
+    EXPECT_EQ(result.getX1(), INF);
+}
+
+TEST(IntervalNumber, DivisionByNegativeInfinity)
+{
+    // [10, 20] / [-INF, -INF]
+    IntervalNumber a{10.0, 20.0};
+    IntervalNumber b{-INF};
+    
+    auto result = a / b;
+    
+    EXPECT_EQ(result.getX0(), 0.0);
+    EXPECT_EQ(result.getX1(), 0.0);
+}
+
+TEST(IntervalNumber, NaNPropagation)
+{
+    // NaN should propagate through operations
+    IntervalNumber a{QUIET_NAN};
+    IntervalNumber b{5.0};
+    
+    auto result1 = a * b;
+    auto result2 = a + b;
+    auto result3 = a - b;
+    auto result4 = a / b;
+    
+    EXPECT_TRUE(std::isnan(result1.getX0()));
+    EXPECT_TRUE(std::isnan(result2.getX0()));
+    EXPECT_TRUE(std::isnan(result3.getX0()));
+    EXPECT_TRUE(std::isnan(result4.getX0()));
+}
 
 int main(int argc, char** argv)
 {
