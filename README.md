@@ -12,8 +12,8 @@ Thanks to 🤖, for cross checking the math, wording and implementation.
 
 ## Note
 
-The math formulas are encoded using [MathJax](https://www.mathjax.org/). However, the decoding and rendering are not properly done in GitHub.  
-For properly displaying the formulas, please use another editor like [Visual Studio Code](https://code.visualstudio.com/).
+The math formulas are encoded using [MathJax](https://www.mathjax.org/).  
+If the rendering of the math formuls are not properly done, please use another editor/viewer like [Visual Studio Code](https://code.visualstudio.com/).
 
 ## Motivation
 
