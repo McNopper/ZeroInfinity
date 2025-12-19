@@ -117,6 +117,22 @@ $|[x_0, x_1]|in := [0, \max(|x_0|, |x_1|)]in$ if $x_0 \cdot x_1 < 0$
 
 The absolute value depends on whether the interval contains zero (when $x_0 \cdot x_1 < 0$).
 
+#### Power
+
+$[x_0, x_1]in^{[y_0, y_1]in} := [\min(x_0^{y_0}, x_0^{y_1}, x_1^{y_0}, x_1^{y_1}), \max(x_0^{y_0}, x_0^{y_1}, x_1^{y_0}, x_1^{y_1})]in$
+
+This general form handles both interval and scalar exponents (scalar $n$ is treated as $[n, n]in$).
+
+For the indeterminate forms involving exponentiation:
+- $0^0 = [0, 1]in$
+- $1^∞ = [0, ∞]in$
+- $∞^0 = [1, ∞]in$
+
+Special considerations:
+- For even integer exponents with intervals containing zero: result includes $0$
+- For negative exponents with zero in base: result approaches infinity
+- Interval-to-interval power computes all combinations of base and exponent endpoints to find the result range
+
 ## Implementation
 
 In the [test](test/) folder is a C++ implementation of the interval number and the unit tests.

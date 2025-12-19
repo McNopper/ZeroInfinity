@@ -624,6 +624,266 @@ TEST(IntervalNumber, NaNPropagation)
     EXPECT_TRUE(std::isnan(result4.getX0()));
 }
 
+// Power operation tests
+
+TEST(IntervalNumber, Power_IndeterminateForm_0_pow_0)
+{
+    // 0^0 = [0, 1]in
+    IntervalNumber a{0.0};
+    IntervalNumber exp{0.0};
+    
+    auto result = a.pow(exp);
+    
+    EXPECT_EQ(result.getX0(), 0.0);
+    EXPECT_EQ(result.getX1(), 1.0);
+}
+
+TEST(IntervalNumber, Power_IndeterminateForm_1_pow_Infinity)
+{
+    // 1^∞ = [0, ∞]in
+    IntervalNumber a{1.0};
+    IntervalNumber exp{INF};
+    
+    auto result = a.pow(exp);
+    
+    EXPECT_EQ(result.getX0(), 0.0);
+    EXPECT_EQ(result.getX1(), INF);
+}
+
+TEST(IntervalNumber, Power_IndeterminateForm_Infinity_pow_0)
+{
+    // ∞^0 = [1, ∞]in
+    IntervalNumber a{INF};
+    IntervalNumber exp{0.0};
+    
+    auto result = a.pow(exp);
+    
+    EXPECT_EQ(result.getX0(), 1.0);
+    EXPECT_EQ(result.getX1(), INF);
+}
+
+TEST(IntervalNumber, Power_PositiveInteger)
+{
+    // [2, 3]^2 = [4, 9]
+    IntervalNumber a{2.0, 3.0};
+    
+    auto result = a.pow(IntervalNumber(2.0));
+    
+    EXPECT_EQ(result.getX0(), 4.0);
+    EXPECT_EQ(result.getX1(), 9.0);
+}
+
+TEST(IntervalNumber, Power_PositiveInteger_Negative)
+{
+    // [-3, -2]^2 = [4, 9]
+    IntervalNumber a{-3.0, -2.0};
+    
+    auto result = a.pow(IntervalNumber(2.0));
+    
+    EXPECT_EQ(result.getX0(), 4.0);
+    EXPECT_EQ(result.getX1(), 9.0);
+}
+
+TEST(IntervalNumber, Power_EvenExponent_SpanningZero)
+{
+    // [-2, 3]^2 = [0, 9] (even exponent)
+    IntervalNumber a{-2.0, 3.0};
+    
+    auto result = a.pow(IntervalNumber(2.0));
+    
+    EXPECT_EQ(result.getX0(), 0.0);
+    EXPECT_EQ(result.getX1(), 9.0);
+}
+
+TEST(IntervalNumber, Power_OddExponent)
+{
+    // [2, 3]^3 = [8, 27]
+    IntervalNumber a{2.0, 3.0};
+    
+    auto result = a.pow(IntervalNumber(3.0));
+    
+    EXPECT_EQ(result.getX0(), 8.0);
+    EXPECT_EQ(result.getX1(), 27.0);
+}
+
+TEST(IntervalNumber, Power_FractionalExponent)
+{
+    // [4, 9]^0.5 = [2, 3] (square root)
+    IntervalNumber a{4.0, 9.0};
+    
+    auto result = a.pow(IntervalNumber(0.5));
+    
+    EXPECT_DOUBLE_EQ(result.getX0(), 2.0);
+    EXPECT_DOUBLE_EQ(result.getX1(), 3.0);
+}
+
+TEST(IntervalNumber, Power_NegativeExponent)
+{
+    // [2, 4]^-1 = [0.25, 0.5]
+    IntervalNumber a{2.0, 4.0};
+    
+    auto result = a.pow(IntervalNumber(-1.0));
+    
+    EXPECT_DOUBLE_EQ(result.getX0(), 0.25);
+    EXPECT_DOUBLE_EQ(result.getX1(), 0.5);
+}
+
+TEST(IntervalNumber, Power_ZeroExponent)
+{
+    // [5, 10]^0 = [1, 1]
+    IntervalNumber a{5.0, 10.0};
+    
+    auto result = a.pow(IntervalNumber(0.0));
+    
+    EXPECT_EQ(result.getX0(), 1.0);
+    EXPECT_EQ(result.getX1(), 1.0);
+}
+
+TEST(IntervalNumber, Power_LargeExponent)
+{
+    // [2, 2]^10 = [1024, 1024]
+    IntervalNumber a{2.0};
+    
+    auto result = a.pow(IntervalNumber(10.0));
+    
+    EXPECT_DOUBLE_EQ(result.getX0(), 1024.0);
+    EXPECT_DOUBLE_EQ(result.getX1(), 1024.0);
+}
+
+TEST(IntervalNumber, Power_GlobalFunction)
+{
+    // Test global pow function with scalar (converted to interval)
+    IntervalNumber a{2.0, 3.0};
+    
+    auto result = pow(a, 2.0);
+    
+    EXPECT_EQ(result.getX0(), 4.0);
+    EXPECT_EQ(result.getX1(), 9.0);
+}
+
+// Interval to interval power tests
+
+TEST(IntervalNumber, Power_IntervalToInterval_Simple)
+{
+    // [2, 3]^[2, 2] = [4, 9]
+    IntervalNumber base{2.0, 3.0};
+    IntervalNumber exp{2.0};
+    
+    auto result = base.pow(exp);
+    
+    EXPECT_EQ(result.getX0(), 4.0);
+    EXPECT_EQ(result.getX1(), 9.0);
+}
+
+TEST(IntervalNumber, Power_IntervalToInterval_Range)
+{
+    // [2, 2]^[1, 3] = [2, 8]
+    IntervalNumber base{2.0};
+    IntervalNumber exp{1.0, 3.0};
+    
+    auto result = base.pow(exp);
+    
+    EXPECT_EQ(result.getX0(), 2.0);
+    EXPECT_EQ(result.getX1(), 8.0);
+}
+
+TEST(IntervalNumber, Power_IntervalToInterval_BothRanges)
+{
+    // [2, 3]^[1, 2] should compute 2^1, 2^2, 3^1, 3^2 = 2, 4, 3, 9 -> [2, 9]
+    IntervalNumber base{2.0, 3.0};
+    IntervalNumber exp{1.0, 2.0};
+    
+    auto result = base.pow(exp);
+    
+    EXPECT_EQ(result.getX0(), 2.0);
+    EXPECT_EQ(result.getX1(), 9.0);
+}
+
+TEST(IntervalNumber, Power_IntervalToInterval_Indeterminate_0_0)
+{
+    // [0,0]^[0,0] = [0, 1]in
+    IntervalNumber base{0.0};
+    IntervalNumber exp{0.0};
+    
+    auto result = base.pow(exp);
+    
+    EXPECT_EQ(result.getX0(), 0.0);
+    EXPECT_EQ(result.getX1(), 1.0);
+}
+
+TEST(IntervalNumber, Power_IntervalToInterval_Indeterminate_1_Inf)
+{
+    // [1,1]^[∞,∞] = [0, ∞]in
+    IntervalNumber base{1.0};
+    IntervalNumber exp{INF};
+    
+    auto result = base.pow(exp);
+    
+    EXPECT_EQ(result.getX0(), 0.0);
+    EXPECT_EQ(result.getX1(), INF);
+}
+
+TEST(IntervalNumber, Power_IntervalToInterval_Indeterminate_Inf_0)
+{
+    // [∞,∞]^[0,0] = [1, ∞]in
+    IntervalNumber base{INF};
+    IntervalNumber exp{0.0};
+    
+    auto result = base.pow(exp);
+    
+    EXPECT_EQ(result.getX0(), 1.0);
+    EXPECT_EQ(result.getX1(), INF);
+}
+
+TEST(IntervalNumber, Power_IntervalToInterval_ContainsOne)
+{
+    // [0.5, 2]^[0.5, 1.5] should include 1^anything = 1
+    IntervalNumber base{0.5, 2.0};
+    IntervalNumber exp{0.5, 1.5};
+    
+    auto result = base.pow(exp);
+    
+    // Result should contain 1 and range from min to max of all combinations
+    EXPECT_LE(result.getX0(), 1.0);
+    EXPECT_GE(result.getX1(), 1.0);
+}
+
+TEST(IntervalNumber, Power_IntervalToInterval_GlobalFunction)
+{
+    // Test global pow function with interval exponent
+    IntervalNumber base{2.0, 3.0};
+    IntervalNumber exp{2.0};
+    
+    auto result = pow(base, exp);
+    
+    EXPECT_EQ(result.getX0(), 4.0);
+    EXPECT_EQ(result.getX1(), 9.0);
+}
+
+TEST(IntervalNumber, Power_IntervalToInterval_NegativeExponent)
+{
+    // [2, 4]^[-1, -1] = [0.25, 0.5]
+    IntervalNumber base{2.0, 4.0};
+    IntervalNumber exp{-1.0};
+    
+    auto result = base.pow(exp);
+    
+    EXPECT_DOUBLE_EQ(result.getX0(), 0.25);
+    EXPECT_DOUBLE_EQ(result.getX1(), 0.5);
+}
+
+TEST(IntervalNumber, Power_IntervalToInterval_FractionalExponents)
+{
+    // [4, 9]^[0.5, 0.5] = [2, 3]
+    IntervalNumber base{4.0, 9.0};
+    IntervalNumber exp{0.5};
+    
+    auto result = base.pow(exp);
+    
+    EXPECT_DOUBLE_EQ(result.getX0(), 2.0);
+    EXPECT_DOUBLE_EQ(result.getX1(), 3.0);
+}
+
 int main(int argc, char** argv)
 {
     testing::InitGoogleTest(&argc, argv);

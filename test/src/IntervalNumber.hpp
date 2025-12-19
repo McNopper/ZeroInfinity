@@ -308,6 +308,139 @@ public:
         }
     }
 
+    /**
+     * Power operation: [x0,x1]in ^ [y0,y1]in
+     * 
+     * Computes interval raised to an interval power.
+     * The result is the union of all possible powers: base^exp for all base in [x0,x1], exp in [y0,y1]
+     * 
+     * Handles indeterminate forms:
+     *   - [0,0]^[0,0] = [0, 1]in
+     *   - [1,1]^[∞,∞] = [0, ∞]in
+     *   - [∞,∞]^[0,0] = [1, ∞]in
+     * 
+     * General approach: compute base^exp for all combinations of interval endpoints.
+     * Scalar exponents are automatically converted to single-point intervals.
+     */
+    IntervalNumber pow(const IntervalNumber& exponent) const noexcept
+    {
+        std::set<double> results{};
+
+        // Handle indeterminate form: [0,0]^[0,0] = [0, 1]in
+        if (m_interval[0u] == 0.0 && m_interval[1u] == 0.0 &&
+            exponent.m_interval[0u] == 0.0 && exponent.m_interval[1u] == 0.0)
+        {
+            return IntervalNumber(0.0, 1.0);
+        }
+
+        // Handle indeterminate form: [1,1]^[∞,∞] = [0, ∞]in
+        if (m_interval[0u] == 1.0 && m_interval[1u] == 1.0 &&
+            exponent.m_interval[0u] == INF && exponent.m_interval[1u] == INF)
+        {
+            return IntervalNumber(0.0, INF);
+        }
+
+        // Handle indeterminate form: [∞,∞]^[0,0] = [1, ∞]in
+        if (m_interval[0u] == INF && m_interval[1u] == INF &&
+            exponent.m_interval[0u] == 0.0 && exponent.m_interval[1u] == 0.0)
+        {
+            return IntervalNumber(1.0, INF);
+        }
+
+        // Compute all four combinations: base^exp for each endpoint pair
+        for (std::size_t i = 0u; i < 2u; i++)
+        {
+            for (std::size_t j = 0u; j < 2u; j++)
+            {
+                double base = m_interval[i];
+                double exp = exponent.m_interval[j];
+                double result = std::pow(base, exp);
+                
+                if (!std::isnan(result) && !std::isinf(result))
+                {
+                    results.insert(result);
+                }
+                else if (std::isinf(result))
+                {
+                    results.insert(result);
+                }
+                else
+                {
+                    // Handle special NaN cases
+                    if (base == 0.0 && exp == 0.0)
+                    {
+                        // 0^0 contributes to [0,1] range
+                        results.insert(0.0);
+                        results.insert(1.0);
+                    }
+                    else if (base == 1.0 && std::isinf(exp))
+                    {
+                        // 1^∞ contributes to [0,∞] range
+                        results.insert(0.0);
+                        results.insert(INF);
+                    }
+                    else if (std::isinf(base) && exp == 0.0)
+                    {
+                        // ∞^0 contributes to [1,∞] range
+                        results.insert(1.0);
+                        results.insert(INF);
+                    }
+                    else if (base == 0.0 && exp < 0.0)
+                    {
+                        // 0^negative = infinity
+                        results.insert(INF);
+                    }
+                    else if (base < 0.0 && std::floor(exp) != exp)
+                    {
+                        // Negative base with non-integer exponent is undefined
+                        continue;
+                    }
+                }
+            }
+        }
+
+        // For intervals containing special cases, check intermediate values
+        if (m_interval[0u] <= 1.0 && m_interval[1u] >= 1.0 && 
+            exponent.m_interval[0u] <= 0.0 && exponent.m_interval[1u] >= 0.0)
+        {
+            // Interval contains 1^0 = 1
+            results.insert(1.0);
+        }
+
+        // Handle even exponent intervals and negative bases
+        if (m_interval[0u] < 0.0 && m_interval[1u] > 0.0)
+        {
+            // Base interval spans zero
+            double minExp = exponent.m_interval[0u];
+            double maxExp = exponent.m_interval[1u];
+            
+            if (minExp < 0.0 && maxExp < 0.0)
+            {
+                // All negative exponents with zero in base -> infinite result
+                results.insert(-INF);
+                results.insert(INF);
+            }
+            else if (minExp <= 0.0 && maxExp >= 0.0)
+            {
+                // Exponent spans zero, base spans zero -> can get any value
+                results.insert(0.0);
+                results.insert(INF);
+            }
+            else if (minExp == maxExp && std::floor(minExp) == minExp && static_cast<int>(minExp) % 2 == 0)
+            {
+                // Even integer exponent with base spanning zero: result includes 0
+                results.insert(0.0);
+            }
+        }
+
+        if (results.empty())
+        {
+            return IntervalNumber(QUIET_NAN);
+        }
+
+        return IntervalNumber(*results.begin(), *results.rbegin());
+    }
+
 };
 
 IntervalNumber operator*(double x, const IntervalNumber& other) noexcept
@@ -333,6 +466,16 @@ IntervalNumber operator/(double x, const IntervalNumber& other) noexcept
 IntervalNumber abs(const IntervalNumber& other) noexcept
 {
     return other.abs();
+}
+
+IntervalNumber pow(const IntervalNumber& base, double exponent) noexcept
+{
+    return base.pow(IntervalNumber(exponent));
+}
+
+IntervalNumber pow(const IntervalNumber& base, const IntervalNumber& exponent) noexcept
+{
+    return base.pow(exponent);
 }
 
 #endif /* INTERVALNUMBER_HPP_ */
