@@ -49,43 +49,88 @@ private:
 
 public:
 
+    /**
+     * Default constructor.
+     * Initializes interval to [0, 0]in.
+     */
     IntervalNumber() noexcept
     {
         check();
     }
 
+    /**
+     * Single value constructor.
+     * Creates a point interval [x0, x0]in.
+     * 
+     * @param x0 The single value for both endpoints
+     */
     IntervalNumber(double x0) noexcept :
         m_interval{x0, x0}
     {
         check();
     }
 
+    /**
+     * Interval constructor.
+     * Creates an interval [x0, x1]in. Automatically ensures x0 <= x1.
+     * 
+     * @param x0 Lower bound
+     * @param x1 Upper bound
+     */
     IntervalNumber(double x0, double x1) noexcept :
         m_interval{x0, x1}
     {
         check();
     }
 
+    /**
+     * Gets the lower bound of the interval.
+     * 
+     * @return The value x0
+     */
     double getX0() const noexcept
     {
         return m_interval[0u];
     }
 
+    /**
+     * Gets the upper bound of the interval.
+     * 
+     * @return The value x1
+     */
     double getX1() const noexcept
     {
         return m_interval[1u];
     }
 
+    /**
+     * Converts the interval to a string representation.
+     * 
+     * @return String in format "[x0, x1]in"
+     */
     std::string toString() const noexcept
     {
         return "[" + std::to_string(m_interval[0u]) + ", " + std::to_string(m_interval[1u]) + "]in";
     }
 
+    /**
+     * Equality operator.
+     * Two intervals are equal if both endpoints match exactly.
+     * 
+     * @param other The interval to compare with
+     * @return true if intervals are equal, false otherwise
+     */
     bool operator==(const IntervalNumber& other) const noexcept
     {
         return (getX0() == other.getX0()) && (getX1() == other.getX1());
     }
 
+    /**
+     * Inequality operator.
+     * 
+     * @param other The interval to compare with
+     * @return true if intervals are not equal, false otherwise
+     */
     bool operator!=(const IntervalNumber& other) const noexcept
     {
         return (getX0() != other.getX0()) || (getX1() != other.getX1());
@@ -136,6 +181,13 @@ public:
         return IntervalNumber(*results.begin(), *results.rbegin());
     }
 
+    /**
+     * Scalar multiplication operator.
+     * Multiplies interval by a scalar value.
+     * 
+     * @param x Scalar value
+     * @return Resulting interval
+     */
     IntervalNumber operator*(double x) const noexcept
     {
         return *this * IntervalNumber(x);
@@ -146,6 +198,9 @@ public:
      * 
      * Handles indeterminate form:
      *   - ∞ + (-∞) = [-∞, ∞]in
+     * 
+     * @param other The interval to add
+     * @return Resulting interval
      */
     IntervalNumber operator+(const IntervalNumber& other) const noexcept
     {
@@ -176,6 +231,13 @@ public:
         return IntervalNumber(*results.begin(), *results.rbegin());
     }
 
+    /**
+     * Scalar addition operator.
+     * Adds a scalar value to the interval.
+     * 
+     * @param x Scalar value
+     * @return Resulting interval
+     */
     IntervalNumber operator+(double x) const noexcept
     {
         return *this + IntervalNumber(x);
@@ -187,6 +249,9 @@ public:
      * Handles indeterminate forms:
      *   - ∞ - ∞ = [-∞, ∞]in
      *   - (-∞) - (-∞) = [-∞, ∞]in
+     * 
+     * @param other The interval to subtract
+     * @return Resulting interval
      */
     IntervalNumber operator-(const IntervalNumber& other) const noexcept
     {
@@ -219,6 +284,13 @@ public:
         return IntervalNumber(*results.begin(), *results.rbegin());
     }
 
+    /**
+     * Scalar subtraction operator.
+     * Subtracts a scalar value from the interval.
+     * 
+     * @param x Scalar value
+     * @return Resulting interval
+     */
     IntervalNumber operator-(double x) const noexcept
     {
         return *this - IntervalNumber(x);
@@ -230,6 +302,9 @@ public:
      * Handles indeterminate forms:
      *   - 0/0 = [-∞, ∞]in
      *   - ∞/∞ = [0, ∞]in
+     * 
+     * @param other The interval to divide by
+     * @return Resulting interval
      */
     IntervalNumber operator/(const IntervalNumber& other) const noexcept
     {
@@ -282,6 +357,13 @@ public:
         return IntervalNumber(*results.begin(), *results.rbegin());
     }
 
+    /**
+     * Scalar division operator.
+     * Divides the interval by a scalar value.
+     * 
+     * @param x Scalar value
+     * @return Resulting interval
+     */
     IntervalNumber operator/(double x) const noexcept
     {
         return *this / IntervalNumber(x);
@@ -291,6 +373,8 @@ public:
      * Absolute value of interval:
      *   |[x0,x1]|in = [min(|x0|,|x1|), max(|x0|,|x1|)]in if x0*x1 >= 0
      *   |[x0,x1]|in = [0, max(|x0|,|x1|)]in if x0*x1 < 0
+     * 
+     * @return Absolute value as interval
      */
     IntervalNumber abs() const noexcept
     {
@@ -443,36 +527,85 @@ public:
 
 };
 
+/**
+ * Global multiplication operator (scalar * interval).
+ * 
+ * @param x Scalar value
+ * @param other Interval
+ * @return Resulting interval
+ */
 IntervalNumber operator*(double x, const IntervalNumber& other) noexcept
 {
     return IntervalNumber(x) * other;
 }
 
+/**
+ * Global addition operator (scalar + interval).
+ * 
+ * @param x Scalar value
+ * @param other Interval
+ * @return Resulting interval
+ */
 IntervalNumber operator+(double x, const IntervalNumber& other) noexcept
 {
     return IntervalNumber(x) + other;
 }
 
+/**
+ * Global subtraction operator (scalar - interval).
+ * 
+ * @param x Scalar value
+ * @param other Interval
+ * @return Resulting interval
+ */
 IntervalNumber operator-(double x, const IntervalNumber& other) noexcept
 {
     return IntervalNumber(x) - other;
 }
 
+/**
+ * Global division operator (scalar / interval).
+ * 
+ * @param x Scalar value
+ * @param other Interval
+ * @return Resulting interval
+ */
 IntervalNumber operator/(double x, const IntervalNumber& other) noexcept
 {
     return IntervalNumber(x) / other;
 }
 
+/**
+ * Global absolute value function.
+ * 
+ * @param other Interval
+ * @return Absolute value as interval
+ */
 IntervalNumber abs(const IntervalNumber& other) noexcept
 {
     return other.abs();
 }
 
+/**
+ * Global power function (interval ^ scalar).
+ * Scalar exponent is converted to interval [exponent, exponent]in.
+ * 
+ * @param base Base interval
+ * @param exponent Scalar exponent
+ * @return Resulting interval
+ */
 IntervalNumber pow(const IntervalNumber& base, double exponent) noexcept
 {
     return base.pow(IntervalNumber(exponent));
 }
 
+/**
+ * Global power function (interval ^ interval).
+ * 
+ * @param base Base interval
+ * @param exponent Exponent interval
+ * @return Resulting interval
+ */
 IntervalNumber pow(const IntervalNumber& base, const IntervalNumber& exponent) noexcept
 {
     return base.pow(exponent);
