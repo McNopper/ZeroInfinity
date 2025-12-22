@@ -35,7 +35,7 @@ $\lim_{n\to\infty}\frac{1}{n}=0$
 
 Assume the usage of the associative law is allowed:
 
-$\lim_{n\to\infty}-\sqrt[n]{n} \cdot \lim_{n\to\infty}\frac{1}{n} = \lim_{n\to\infty}-\sqrt[n]{n} \cdot \frac{1}{n} = \lim_{n\to\infty}\frac{-1}{n}$
+$\lim_{n\to\infty}-\sqrt[n]{n} \cdot \lim_{n\to\infty}\frac{1}{n} = \lim_{n\to\infty}\left(-\sqrt[n]{n} \cdot \frac{1}{n}\right) = \lim_{n\to\infty}\left(-\frac{\sqrt[n]{n}}{n}\right)$
 
 The result is again 0 and does not provide the expected result.
 
@@ -57,25 +57,28 @@ Since an indeterminate form can evaluate to any value within a specific range, w
 
 $[x_0, x_1]in := \{ x \in \overline {\mathbb R} \mid x_0 \le x \le x_1 \}$
 
-The indeterminate form of $0 \cdot ∞$ can be expressed as the first rule:
+**Sign convention (for limits)**  
+In the following, $\infty$ means positive infinity. Negative infinity is written as $-\infty$.
+
+The indeterminate form of $0 \cdot \infty$ can be expressed as the first rule:
 
 ***Rule I***  
-$0 \cdot ∞ = [0, ∞]in$
+$0 \cdot \infty = [0, \infty]in$
 
-Similarly, the expression for the indeterminate form of $0 \cdot -∞$ is the second rule:
+Similarly, the expression for the indeterminate form of $0 \cdot (-\infty)$ is the second rule:
 
 ***Rule II***  
-$0 \cdot -∞ = [-∞, 0]in$
+$0 \cdot (-\infty) = [-\infty, 0]in$
 
 ### Deduction
 
 |                               | Operation or rule                    |
 |-------------------------------|--------------------------------------|
-| $-1 \cdot (0 \cdot -∞)$       | ***Rule II***                        |
-| $-1 \cdot [-∞, 0]in$          | Multiplication for interval number   |
-| $[-1 \cdot -∞, -1 \cdot 0]in$ | Operation in $\overline {\mathbb R}$ |
-| $[0, ∞]in$                    | ***Rule I***                         |
-| $0 \cdot ∞$                   |                                      |
+| $-1 \cdot (0 \cdot (-\infty))$       | ***Rule II***                        |
+| $-1 \cdot [-\infty, 0]in$            | Multiplication for interval number   |
+| $[-1 \cdot (-\infty), -1 \cdot 0]in$ | Operation in $\overline {\mathbb R}$ |
+| $[0, \infty]in$                      | ***Rule I***                         |
+| $0 \cdot \infty$                     |                                      |
 
 Regarding the algebraic structure [[4](#4-algebraic-structure)], only the required multiplication for the given rules is investigated.
 
@@ -147,9 +150,9 @@ The indeterminate form $\frac{0}{0}$ is undefined in $\overline {\mathbb R}$, bu
 
 $\frac{0}{0} = [-∞, ∞]in$
 
-Because the limits of the given example formulas result in $+∞$ and $-∞$:
+Because the limits of the given example formulas result in $∞$ and $-∞$:
 
-$\lim_{n\to0^+}\frac{n}{n^2} = +∞$
+$\lim_{n\to0^+}\frac{n}{n^2} = ∞$
 
 $\lim_{n\to0^-}\frac{n}{n^2} = -∞$
 
@@ -183,9 +186,11 @@ The indeterminate form $0^0$ can be expressed as:
 
 $0^0 = [0, ∞]in$
 
-$\lim_{n\to0^+}0^n = 0$
+$\lim_{n\to\infty}\left(\frac{1}{n}\right)^{\frac{1}{\sqrt{\ln(n)}}} = 0$
 
-$\lim_{n\to0^+}n^{-n} = ∞$
+$\lim_{n\to\infty}\left(\frac{1}{n}\right)^{\frac{1}{\ln(n)}} = e^{-1}$
+
+$\lim_{n\to\infty}\left(\frac{1}{n}\right)^{-\frac{1}{\sqrt{\ln(n)}}} = ∞$
 
 ---
 
