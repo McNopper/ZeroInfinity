@@ -124,9 +124,9 @@ $[x_0, x_1]in^{[y_0, y_1]in} := [\min(x_0^{y_0}, x_0^{y_1}, x_1^{y_0}, x_1^{y_1}
 This general form handles both interval and scalar exponents (scalar $n$ is treated as $[n, n]in$).
 
 For the indeterminate forms involving exponentiation:
-- $0^0 = [0, 1]in$
+- $0^0 = [0, ∞]in$
 - $1^∞ = [0, ∞]in$
-- $∞^0 = [1, ∞]in$
+- $∞^0 = [0, ∞]in$
 
 Special considerations:
 - For even integer exponents with intervals containing zero: result includes $0$
@@ -181,11 +181,11 @@ $\lim_{n\to\infty}\frac{n^2}{n} = ∞$
 
 The indeterminate form $0^0$ can be expressed as:
 
-$0^0 = [0, 1]in$
+$0^0 = [0, ∞]in$
 
 $\lim_{n\to0^+}0^n = 0$
 
-$\lim_{n\to0^+}n^n = 1$
+$\lim_{n\to0^+}n^{-n} = ∞$
 
 ---
 
@@ -201,25 +201,15 @@ $\lim_{n\to\infty}(1 + \frac{1}{n})^{n^2} = ∞$
 
 The indeterminate form $∞^0$ can be expressed as:
 
-$∞^0 = [1, ∞]in$
+$∞^0 = [0, ∞]in$
 
-$\lim_{n\to\infty}n^{\frac{1}{n}} = 1$
+$\lim_{n\to\infty}n^{-\frac{1}{\ln(\ln(n))}} = 0$
 
 $\lim_{n\to\infty}n^{\frac{1}{\ln(\ln(n))}} = ∞$
 
 ## Some equations from indeterminate forms resulting back in a non-indeterminate form
 
-$(0^0) \cdot 0 = 0$
-
-Because:
-
-$0^0 = [0, 1]in$
-
-$[0, 1]in \cdot 0 = [\min(0 \cdot 0, 1 \cdot 0), \max(0 \cdot 0, 1 \cdot 0)] = [0, 0]in = 0$
-
----
-
-$|\frac{0}{0}| + ∞ = ∞$
+$|\frac{0}{0}|+ ∞ = ∞$
 
 Because:
 

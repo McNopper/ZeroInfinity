@@ -488,17 +488,6 @@ TEST(IntervalNumber, AbsoluteValueNegativeInfinity)
 
 TEST(IntervalNumber, ReadmeExample01)
 {
-    // (0^0) * 0 = 0
-    IntervalNumber zero_to_zero{0.0, 1.0};
-
-    auto result = zero_to_zero * 0.0;
-
-    EXPECT_EQ(result.getX0(), 0.0);
-    EXPECT_EQ(result.getX1(), 0.0);
-}
-
-TEST(IntervalNumber, ReadmeExample02)
-{
     // |0/0| + ∞ = ∞
     IntervalNumber zero_div_zero{-INF, INF};
     auto abs_result = abs(zero_div_zero);
@@ -510,7 +499,7 @@ TEST(IntervalNumber, ReadmeExample02)
     EXPECT_EQ(final_result.getX1(), INF);
 }
 
-TEST(IntervalNumber, ReadmeExample03)
+TEST(IntervalNumber, ReadmeExample02)
 {
     // (∞/∞) + ∞ = ∞
     IntervalNumber inf_div_inf{0.0, INF};
@@ -628,14 +617,14 @@ TEST(IntervalNumber, NaNPropagation)
 
 TEST(IntervalNumber, Power_IndeterminateForm_0_pow_0)
 {
-    // 0^0 = [0, 1]in
+    // 0^0 = [0, ∞]in
     IntervalNumber a{0.0};
     IntervalNumber exp{0.0};
     
     auto result = a.pow(exp);
     
     EXPECT_EQ(result.getX0(), 0.0);
-    EXPECT_EQ(result.getX1(), 1.0);
+    EXPECT_EQ(result.getX1(), INF);
 }
 
 TEST(IntervalNumber, Power_IndeterminateForm_1_pow_Infinity)
@@ -652,13 +641,13 @@ TEST(IntervalNumber, Power_IndeterminateForm_1_pow_Infinity)
 
 TEST(IntervalNumber, Power_IndeterminateForm_Infinity_pow_0)
 {
-    // ∞^0 = [1, ∞]in
+    // ∞^0 = [0, ∞]in
     IntervalNumber a{INF};
     IntervalNumber exp{0.0};
     
     auto result = a.pow(exp);
     
-    EXPECT_EQ(result.getX0(), 1.0);
+    EXPECT_EQ(result.getX0(), 0.0);
     EXPECT_EQ(result.getX1(), INF);
 }
 
@@ -801,14 +790,14 @@ TEST(IntervalNumber, Power_IntervalToInterval_BothRanges)
 
 TEST(IntervalNumber, Power_IntervalToInterval_Indeterminate_0_0)
 {
-    // [0,0]^[0,0] = [0, 1]in
+    // [0,0]^[0,0] = [0, ∞]in
     IntervalNumber base{0.0};
     IntervalNumber exp{0.0};
     
     auto result = base.pow(exp);
     
     EXPECT_EQ(result.getX0(), 0.0);
-    EXPECT_EQ(result.getX1(), 1.0);
+    EXPECT_EQ(result.getX1(), INF);
 }
 
 TEST(IntervalNumber, Power_IntervalToInterval_Indeterminate_1_Inf)
@@ -825,13 +814,13 @@ TEST(IntervalNumber, Power_IntervalToInterval_Indeterminate_1_Inf)
 
 TEST(IntervalNumber, Power_IntervalToInterval_Indeterminate_Inf_0)
 {
-    // [∞,∞]^[0,0] = [1, ∞]in
+    // [∞,∞]^[0,0] = [0, ∞]in
     IntervalNumber base{INF};
     IntervalNumber exp{0.0};
     
     auto result = base.pow(exp);
     
-    EXPECT_EQ(result.getX0(), 1.0);
+    EXPECT_EQ(result.getX0(), 0.0);
     EXPECT_EQ(result.getX1(), INF);
 }
 
