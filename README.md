@@ -4,11 +4,13 @@
 
 ## Credits
 
-Thanks to Eric Lengyel for asking the initial right questions.
+Thanks go to Eric Lengyel for asking the right initial questions.
 
-Thanks a lot, to my family and their patience having me as a 🤓.
+Thanks to my family for their patience in having me as a 🤓.
 
-Thanks to 🤖, for cross checking the math, wording and implementation.
+Thanks to 🤖 for cross‑checking the math, wording, and implementation.
+
+Thanks go to Ingeborg Kettern, one of my mathematics professors, for the original motivation and for all the stories about Carl Friedrich Gauß.
 
 ## Note
 
