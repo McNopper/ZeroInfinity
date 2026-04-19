@@ -15,7 +15,7 @@ Thanks go to Ingeborg Kettern, one of my mathematics professors, for the origina
 ## Note
 
 The math formulas are encoded using [MathJax](https://www.mathjax.org/).  
-If the rendering of the math formuls are not properly done, please use another editor/viewer like [Visual Studio Code](https://code.visualstudio.com/).
+If the rendering of the math formulas is not properly done, please use another editor/viewer like [Visual Studio Code](https://code.visualstudio.com/).
 
 ## Motivation
 
