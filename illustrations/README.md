@@ -20,13 +20,15 @@ The figures are generated programmatically using Python and matplotlib, ensuring
 ### Requirements
 
 - Python 3.9 or later
-- `matplotlib`
-- `numpy`
+- `matplotlib` (tested with 3.10.8)
+- `numpy` (tested with 2.4.1)
+
+The committed PNGs in this directory were rendered with the versions listed above. Other recent versions are likely to work, but exact pixel-level reproduction is only guaranteed with the pinned versions.
 
 Install with:
 
 ```bash
-pip install matplotlib numpy
+pip install "matplotlib==3.10.8" "numpy==2.4.1"
 ```
 
 ### Run
