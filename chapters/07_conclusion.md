@@ -50,6 +50,8 @@ The interval-number framework opens several avenues for further investigation:
 
 7. **Estimation of additional indeterminate intervals.** Other indeterminate forms—possibly arising in specific application domains—could be assigned interval representations through the same limit-based justification methodology employed here.
 
+8. **Closure of exponentiation.** Exponentiation is defined here only on the admissible domain stated in [Section 4.7](04_operations.md#47-exponentiation); outside that domain it remains partial. Extending the operation to a total map on $\mathcal{I}$—either by enlarging the admissible domain through additional value-map cases or by adopting a closure convention analogous to the convex-hull convention used for the reciprocal of a zero-spanning interval—is left for future work.
+
 ## 7.4 Closing Remark
 
 While the immediate significance of the framework remains theoretical, it offers a mathematically principled approach to a long-standing problem in real analysis. The unification of interval arithmetic and extended-real semantics provides a foundation upon which further algebraic, computational, and applied investigations can be built.
