@@ -37,6 +37,10 @@ $$(a \cdot b) \cdot c \;=\; 0 \cdot (-\infty) \;=\; [-\infty, 0]_{in} \quad \tex
 
 Hence $a \cdot (b \cdot c) = [0, \infty]_{in} \ne [-\infty, 0]_{in} = (a \cdot b) \cdot c$. $\blacksquare$
 
+![Non-associativity counterexample](../illustrations/fig_non_associativity.png)
+
+*Figure 5.1: Bracketing trees for the non-associativity counterexample. With $a = -1$, $b = 0$, $c = -\infty$, the left bracketing $(a \cdot b) \cdot c$ resolves the inner product $a \cdot b = 0$ before applying Rule II at the outer node, yielding $[-\infty, 0]_{in}$; the right bracketing $a \cdot (b \cdot c)$ applies Rule II at the inner node and then negates, yielding $[0, \infty]_{in}$. The two results differ.*
+
 This counterexample is verified in the implementation by the test `MultiplicationNotAssociative` ([`test/src/main.cpp`](../test/src/main.cpp)).
 
 The non-associativity has a precise interpretation: the bracketing of an expression determines *when* an indeterminate form is resolved into an interval; once an interval has been formed, subsequent multiplication propagates uncertainty rather than collapsing it. The failure is therefore not inherited from real multiplication or from classical (Moore) interval multiplication, both of which are associative; it is specific to the rule by which indeterminate symbolic forms are mapped to intervals.
@@ -54,6 +58,10 @@ Beyond closure and identity, the following stronger algebraic axioms do *not* ho
 | Distributivity over $+$ | fails | sub-distributivity holds in classical interval arithmetic [[6](08_references.md)]; full distributivity does not transfer to $\mathcal{I}$ |
 
 The structure $(\mathcal{I}, \cdot, [1,1]_{in})$ is therefore a **unital magma**: closure and a two-sided identity hold, but associativity fails so it is neither a semigroup nor a monoid. Identifying maximal sub-structures on which stronger axioms recover (e.g., associativity on point-interval subsemigroups, monoidal behaviour on intervals bounded away from zero) is left to future work; see [Section 7](07_conclusion.md).
+
+![Algebraic-structure hierarchy](../illustrations/fig_algebraic_hierarchy.png)
+
+*Figure 5.2: Position of $(\mathcal{I}, \cdot, [1,1]_{in})$ in the standard hierarchy of algebraic structures with a single binary operation. Each upward edge denotes the addition of an axiom (associativity, identity, or inverses). The structure satisfies closure and identity but not associativity, locating it at **unital magma**; it does not lift to a monoid because of the counterexample of [Proposition 5.2](#52-failure-of-associativity).*
 
 ## 5.4 Significance
 

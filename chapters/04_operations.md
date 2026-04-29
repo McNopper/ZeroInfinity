@@ -108,6 +108,10 @@ The conventions $1/(0^{+}) = +\infty$ and $1/(0^{-}) = -\infty$ follow from one-
 
 When $y_0 < 0 < y_1$, the exact reciprocal is the union of two unbounded branches $[-\infty, 1/y_0]_{in} \cup [1/y_1, +\infty]_{in}$, which is not a single interval. The framework returns its convex hull $[-\infty, \infty]_{in}$, retaining closure within $\mathcal{I}$ at the cost of tightness.
 
+![Reciprocal of a zero-spanning interval](../illustrations/fig_reciprocal_zero_spanning.png)
+
+*Figure 4.2: Reciprocal of a zero-spanning interval $J = [y_0, y_1]_{in}$ with $y_0 < 0 < y_1$ (example $J = [-2, 4]_{in}$). The exact reciprocal consists of two unbounded branches $(-\infty, 1/y_0]$ and $[1/y_1, +\infty)$ separated by a gap; the framework replaces this non-convex set with its convex hull $[-\infty, +\infty]_{in}$ to preserve closure within $\mathcal{I}$.*
+
 ## 4.5 Division
 
 **Definition 4.5 (Interval Division).** Division is defined on all of $\mathcal{I} \times \mathcal{I}$ by

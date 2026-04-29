@@ -46,9 +46,11 @@ ZeroInfinity/
 │   ├── generate_figures.py
 │   ├── fig_extended_real_intervals.png
 │   ├── fig_indeterminate_limits.png
-│   └── fig_interval_multiplication.png
+│   ├── fig_interval_multiplication.png
+│   ├── fig_reciprocal_zero_spanning.png
+│   ├── fig_non_associativity.png
+│   └── fig_algebraic_hierarchy.png
 ├── test/                      C++ reference implementation and unit tests
-│   ├── README.md
 │   ├── CMakeLists.txt
 │   └── src/
 │       ├── IntervalNumber.hpp
