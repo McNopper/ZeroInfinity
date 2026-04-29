@@ -8,15 +8,15 @@ This section first fixes the arithmetic of the extended real line, then introduc
 
 ## 3.1 Preliminaries: Arithmetic in $\overline{\mathbb{R}}$
 
-Let $\overline{\mathbb{R}} := \mathbb{R} \cup \lbrace -\infty, +\infty\rbrace $ denote the extended real line, equipped with the order extension $-\infty \le r \le +\infty$ for all $r \in \mathbb{R}$.
+Let $\overline{\mathbb{R}} := \mathbb{R} \cup \lbrace -\infty, +\infty\rbrace$ denote the extended real line, equipped with the order extension $-\infty \le r \le +\infty$ for all $r \in \mathbb{R}$.
 
 The standard operations on $\overline{\mathbb{R}}$ adopted in this work are summarized below.
 
-**Defined operations.** For $r \in \mathbb{R}$ and $s \in \lbrace -\infty, +\infty\rbrace $:
+**Defined operations.** For $r \in \mathbb{R}$ and $s \in \lbrace -\infty, +\infty\rbrace$:
 
 | Operation | Result | Conditions |
 |-----------|--------|------------|
-| $r + s$ | $s$ | any $r \in \mathbb{R}$, $s \in \lbrace -\infty, +\infty\rbrace $ |
+| $r + s$ | $s$ | any $r \in \mathbb{R}$, $s \in \lbrace -\infty, +\infty\rbrace$ |
 | $\infty + \infty$ | $\infty$ | |
 | $(-\infty) + (-\infty)$ | $-\infty$ | |
 | $r \cdot \infty$ | $\infty$ | $r > 0$ |
@@ -36,9 +36,9 @@ In the standard treatment, computations encountering any of these forms are unde
 
 ## 3.2 Definition of an Interval Number
 
-**Definition 3.1 (Interval Number).** Let $\overline{\mathbb{R}} = \mathbb{R} \cup \lbrace -\infty, +\infty\rbrace $ denote the extended real line equipped with the standard ordering. An **interval number** is a closed interval in $\overline{\mathbb{R}}$:
+**Definition 3.1 (Interval Number).** Let $\overline{\mathbb{R}} = \mathbb{R} \cup \lbrace -\infty, +\infty\rbrace$ denote the extended real line equipped with the standard ordering. An **interval number** is a closed interval in $\overline{\mathbb{R}}$:
 
-$$[x_0, x_1]_{in} := \lbrace x \in \overline{\mathbb{R}} \mid x_0 \le x \le x_1 \rbrace ,$$
+$$[x_0, x_1]_{in} := \lbrace x \in \overline{\mathbb{R}} \mid x_0 \le x \le x_1 \rbrace,$$
 
 where $`x_0, x_1 \in \overline{\mathbb{R}}`$ and $`x_0 \le x_1`$.
 
@@ -46,9 +46,9 @@ where $`x_0, x_1 \in \overline{\mathbb{R}}`$ and $`x_0 \le x_1`$.
 
 ## 3.3 Point Intervals
 
-**Definition 3.2 (Point Interval).** A point interval is an interval number of the form $[r, r]_{in} = \lbrace r\rbrace $, which is identified with the element $r \in \overline{\mathbb{R}}$.
+**Definition 3.2 (Point Interval).** A point interval is an interval number of the form $`[r, r]_{in} = \lbrace r\rbrace`$, which is identified with the element $r \in \overline{\mathbb{R}}$.
 
-This identification provides a natural embedding $\overline{\mathbb{R}} \hookrightarrow \mathcal{I}$, $r \mapsto [r, r]_{in}$.
+This identification provides a natural embedding $\overline{\mathbb{R}} \hookrightarrow \mathcal{I}$, $`r \mapsto [r, r]_{in}`$.
 
 ## 3.4 Foundation Rules for Indeterminate Forms
 
@@ -64,7 +64,7 @@ $$0 \cdot (-\infty) = [-\infty, 0]_{in}.$$
 
 **Directional convention.** Within Rules I and II, the symbol $0$ is interpreted as a one-sided (non-negative) approach to zero, written $0^{+}$ where emphasis is required. Concretely, Rule I represents the set of limits
 
-$$\lbrace \, \lim_{n} a_n b_n : a_n \ge 0,\; a_n \to 0,\; b_n \to +\infty \,\rbrace ,$$
+$$\lbrace \, \lim_{n} a_n b_n : a_n \ge 0,\; a_n \to 0,\; b_n \to +\infty \,\rbrace,$$
 
 and Rule II is obtained from Rule I by negation, since $`0 \cdot (-\infty) = -1 \cdot (0 \cdot \infty)`$ in the algebra of $`\mathcal{I}`$ (Section 4). Without this directional restriction, the products $`a_n b_n`$ with two-sided $`a_n \to 0`$ would attain every value in $`[-\infty, \infty]`$, and the algebraic identity that motivates the framework would collapse.
 
@@ -80,7 +80,7 @@ The two foundation intervals together cover the extended real line, intersecting
 
 ## 3.6 Justification for Rules I and II
 
-The interval representations of Rules I and II are justified by exhibiting explicit *directional* sequences (with $a_n \ge 0$) whose products realize a representative spread of limit values within the intervals. The arguments below show that the assigned intervals are *attained*; a separate question—whether they are tight, i.e. whether every interior point is attainable as a limit—is addressed by the parametric witness below.
+The interval representations of Rules I and II are justified by exhibiting explicit *directional* sequences (with $`a_n \ge 0`$) whose products realize a representative spread of limit values within the intervals. The arguments below show that the assigned intervals are *attained*; a separate question—whether they are tight, i.e. whether every interior point is attainable as a limit—is addressed by the parametric witness below.
 
 **For $0^{+} \cdot \infty$:**
 - Sequence A: $`a_n = \tfrac{1}{n^2}`$, $`b_n = n`$. Then $`a_n b_n = \tfrac{1}{n} \to 0`$.

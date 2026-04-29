@@ -16,7 +16,7 @@ Several extensions of classical interval arithmetic relax this restriction. *Kau
 
 ## 2.2 Extended Real Numbers
 
-The extended real line $\overline{\mathbb{R}} = \mathbb{R} \cup \lbrace -\infty, +\infty\rbrace $, originating in the work of Riemann and formalized by Hausdorff and others [[2, 3](08_references.md)], adjoins $\pm\infty$ to $\mathbb{R}$. While $\overline{\mathbb{R}}$ provides a topological completion, algebraic operations remain partially undefined: $0 \cdot \infty$, $\infty - \infty$, and similar expressions lack standard interpretations.
+The extended real line $\overline{\mathbb{R}} = \mathbb{R} \cup \lbrace -\infty, +\infty\rbrace$, originating in the work of Riemann and formalized by Hausdorff and others [[2, 3](08_references.md)], adjoins $\pm\infty$ to $\mathbb{R}$. While $\overline{\mathbb{R}}$ provides a topological completion, algebraic operations remain partially undefined: $0 \cdot \infty$, $\infty - \infty$, and similar expressions lack standard interpretations.
 
 Measure-theoretic conventions [[2](08_references.md)] sometimes assign values to such forms in specific contexts (e.g., $0 \cdot \infty = 0$ in certain measure-theoretic constructions), but these are context-dependent and do not constitute a unified algebraic theory.
 

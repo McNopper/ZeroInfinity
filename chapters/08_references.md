@@ -22,7 +22,7 @@
 
 [9] IEEE Standard for Interval Arithmetic, IEEE Std 1788-2015 (2015). IEEE, New York. <https://doi.org/10.1109/IEEESTD.2015.7140721>
 
-[10] Kaucher, E. (1980). *Interval analysis in the extended interval space $\mathbb{IR}$.* Computing Supplementum 2, 33–49. Springer-Verlag, Vienna. <https://doi.org/10.1007/978-3-7091-8577-3_3> (Modal/Kaucher interval arithmetic; admits improper intervals and yields a group structure under addition.)
+[10] Kaucher, E. (1980). *Interval analysis in the extended interval space $`\mathbb{IR}`$.* Computing Supplementum 2, 33–49. Springer-Verlag, Vienna. <https://doi.org/10.1007/978-3-7091-8577-3_3> (Modal/Kaucher interval arithmetic; admits improper intervals and yields a group structure under addition.)
 
 [11] Hansen, E., and Walster, G. W. (2004). *Global Optimization Using Interval Analysis,* 2nd ed., revised and expanded. Marcel Dekker / CRC Press, New York. (Extended interval arithmetic, including division by intervals containing zero.)
 

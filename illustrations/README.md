@@ -11,7 +11,7 @@ This directory contains the figures used throughout the document, together with 
 | `fig_interval_multiplication.png` | [Section 4.1](../chapters/04_operations.md#41-multiplication) | Geometric view of interval multiplication via the four endpoint products |
 | `fig_reciprocal_zero_spanning.png` | [Section 4.4](../chapters/04_operations.md#44-reciprocal) | Reciprocal of a zero-spanning interval: exact two-branch result vs. closure-preserving convex hull |
 | `fig_non_associativity.png` | [Section 5.2](../chapters/05_algebraic_structure.md#52-failure-of-associativity) | Bracketing trees for the counterexample $a = -1$, $b = 0$, $c = -\infty$ showing $(a \cdot b) \cdot c \ne a \cdot (b \cdot c)$ |
-| `fig_algebraic_hierarchy.png` | [Section 5.3](../chapters/05_algebraic_structure.md#53-limitations-of-the-structure) | Hasse-style hierarchy of single-operation algebraic structures, marking $(\mathcal{I}, \cdot, [1,1]_{in})$ as a unital magma |
+| `fig_algebraic_hierarchy.png` | [Section 5.3](../chapters/05_algebraic_structure.md#53-limitations-of-the-structure) | Hasse-style hierarchy of single-operation algebraic structures, marking $`(\mathcal{I}, \cdot, [1,1]_{in})`$ as a unital magma |
 
 ## Regenerating the Figures
 
