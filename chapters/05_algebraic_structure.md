@@ -10,14 +10,14 @@ This section examines the algebraic structure induced by interval-number operati
 
 **Theorem 5.1 (Closure).** *The set of interval numbers $\mathcal{I}$, equipped with the multiplication operation of [Definition 4.1](04_operations.md#41-multiplication), forms a* **unital magma** *[[5](08_references.md)]: it is closed under multiplication, with two-sided identity $[1, 1]_{in}$.*
 
-**Proof of closure.** A magma is a set with a single binary operation that is closed [[4, 5](08_references.md)]. Let $I = [x_0, x_1]_{in}$ and $J = [y_0, y_1]_{in}$ be interval numbers, with $x_0, x_1, y_0, y_1 \in \overline{\mathbb{R}}$. Each of the four products $P_{ij} := x_i \cdot y_j$ for $i, j \in \{0, 1\}$ is either:
+**Proof of closure.** A magma is a set with a single binary operation that is closed [[4, 5](08_references.md)]. Let $`I = [x_0, x_1]_{in}`$ and $`J = [y_0, y_1]_{in}`$ be interval numbers, with $`x_0, x_1, y_0, y_1 \in \overline{\mathbb{R}}`$. Each of the four products $`P_{ij} := x_i \cdot y_j`$ for $`i, j \in \lbrace 0, 1\rbrace `$ is either:
 
 (a) a defined element of $\overline{\mathbb{R}}$, or
-(b) one of the four indeterminate forms $0 \cdot (\pm\infty)$ or $(\pm\infty) \cdot 0$, treated symmetrically by the value map $\mathcal{V}$ of [Definition 4.1](04_operations.md#41-multiplication) (Rules I and II for $0 \cdot \infty$ and $0 \cdot (-\infty)$, with the reversed forms $\infty \cdot 0$ and $(-\infty) \cdot 0$ assigned the same finite endpoint sets $\{0, \infty\}$ and $\{-\infty, 0\}$, respectively).
+(b) one of the four indeterminate forms $0 \cdot (\pm\infty)$ or $(\pm\infty) \cdot 0$, treated symmetrically by the value map $\mathcal{V}$ of [Definition 4.1](04_operations.md#41-multiplication) (Rules I and II for $0 \cdot \infty$ and $0 \cdot (-\infty)$, with the reversed forms $\infty \cdot 0$ and $(-\infty) \cdot 0$ assigned the same finite endpoint sets $\lbrace 0, \infty\rbrace $ and $\lbrace -\infty, 0\rbrace $, respectively).
 
-In both cases the value map $\mathcal{V}(P_{ij})$ is a non-empty finite subset of $\overline{\mathbb{R}}$. Hence the candidate set $\mathcal{C}(I, J) = \bigcup_{i,j} \mathcal{V}(P_{ij})$ is a non-empty finite subset of $\overline{\mathbb{R}}$, and its minimum and maximum are well-defined. Therefore $I \cdot J = [\min \mathcal{C},\ \max \mathcal{C}]_{in} \in \mathcal{I}$, establishing closure.
+In both cases the value map $`\mathcal{V}(P_{ij})`$ is a non-empty finite subset of $`\overline{\mathbb{R}}`$. Hence the candidate set $`\mathcal{C}(I, J) = \bigcup_{i,j} \mathcal{V}(P_{ij})`$ is a non-empty finite subset of $`\overline{\mathbb{R}}`$, and its minimum and maximum are well-defined. Therefore $`I \cdot J = [\min \mathcal{C},\ \max \mathcal{C}]_{in} \in \mathcal{I}`$, establishing closure.
 
-**Proof of identity.** For $I = [x_0, x_1]_{in}$ with $x_0, x_1 \in \overline{\mathbb{R}}$, the four endpoint products in $[1, 1]_{in} \cdot I$ are $1 \cdot x_0$ and $1 \cdot x_1$. Since one factor is the finite nonzero scalar $1$, no indeterminate product of the form $0 \cdot (\pm\infty)$ or $(\pm\infty) \cdot 0$ arises, and each endpoint product is defined in $\overline{\mathbb{R}}$ with $1 \cdot x_i = x_i$. Hence $\mathcal{C}([1,1]_{in}, I) = \{x_0, x_1\}$ and $[1, 1]_{in} \cdot I = [x_0, x_1]_{in} = I$. The argument is symmetric in the operands. $\blacksquare$
+**Proof of identity.** For $`I = [x_0, x_1]_{in}`$ with $`x_0, x_1 \in \overline{\mathbb{R}}`$, the four endpoint products in $`[1, 1]_{in} \cdot I`$ are $`1 \cdot x_0`$ and $`1 \cdot x_1`$. Since one factor is the finite nonzero scalar $`1`$, no indeterminate product of the form $`0 \cdot (\pm\infty)`$ or $`(\pm\infty) \cdot 0`$ arises, and each endpoint product is defined in $`\overline{\mathbb{R}}`$ with $`1 \cdot x_i = x_i`$. Hence $`\mathcal{C}([1,1]_{in}, I) = \lbrace x_0, x_1\rbrace `$ and $`[1, 1]_{in} \cdot I = [x_0, x_1]_{in} = I`$. The argument is symmetric in the operands. $`\blacksquare`$
 
 ## 5.2 Failure of Associativity
 
@@ -39,7 +39,7 @@ Hence $a \cdot (b \cdot c) = [0, \infty]_{in} \ne [-\infty, 0]_{in} = (a \cdot b
 
 ![Non-associativity counterexample](../illustrations/fig_non_associativity.png)
 
-*Figure 5.1: Bracketing trees for the non-associativity counterexample. With $a = -1$, $b = 0$, $c = -\infty$, the left bracketing $(a \cdot b) \cdot c$ resolves the inner product $a \cdot b = 0$ before applying Rule II at the outer node, yielding $[-\infty, 0]_{in}$; the right bracketing $a \cdot (b \cdot c)$ applies Rule II at the inner node and then negates, yielding $[0, \infty]_{in}$. The two results differ.*
+*Figure 5.1: Bracketing trees for the non-associativity counterexample. With $`a = -1`$, $`b = 0`$, $`c = -\infty`$, the left bracketing $`(a \cdot b) \cdot c`$ resolves the inner product $`a \cdot b = 0`$ before applying Rule II at the outer node, yielding $`[-\infty, 0]_{in}`$; the right bracketing $`a \cdot (b \cdot c)`$ applies Rule II at the inner node and then negates, yielding $`[0, \infty]_{in}`$. The two results differ.*
 
 This counterexample is verified in the implementation by the test `MultiplicationNotAssociative` ([`test/src/main.cpp`](../test/src/main.cpp)).
 

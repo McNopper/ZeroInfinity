@@ -16,7 +16,7 @@ To support an honest appraisal, the principal limitations of the framework are s
 
 2. **Loss of tightness for division by zero-spanning intervals.** When the divisor strictly contains zero, the natural reciprocal is a union of two intervals; to retain closure within $\mathcal{I}$, the framework returns $[-\infty, \infty]_{in}$, which is sound but not tight ([Section 4.4](04_operations.md#44-reciprocal)).
 
-3. **Convention behind $\tfrac{0}{0}$.** The reciprocal of the point interval $[0,0]_{in}$ is assigned $[-\infty, \infty]_{in}$ by the convex-hull convention of [Definition 4.4](04_operations.md#44-reciprocal); the value of $\tfrac{0}{0}$ then follows internally from [Definition 4.5](04_operations.md#45-division). The choice of $[-\infty, \infty]_{in}$ for the reciprocal of $[0,0]_{in}$ is a convention motivated by directional limits, not an internal derivation.
+3. **Convention behind $`\tfrac{0}{0}`$.** The reciprocal of the point interval $`[0,0]_{in}`$ is assigned $`[-\infty, \infty]_{in}`$ by the convex-hull convention of [Definition 4.4](04_operations.md#44-reciprocal); the value of $`\tfrac{0}{0}`$ then follows internally from [Definition 4.5](04_operations.md#45-division). The choice of $`[-\infty, \infty]_{in}`$ for the reciprocal of $`[0,0]_{in}`$ is a convention motivated by directional limits, not an internal derivation.
 
 4. **No proven distributivity.** Sub-distributivity of multiplication over addition holds in classical interval arithmetic [[6](08_references.md)]; full distributivity does not transfer, and a precise statement for $\mathcal{I}$ is not given here.
 
