@@ -13,7 +13,7 @@ This section examines the algebraic structure induced by interval-number operati
 **Proof of closure.** A magma is a set with a single binary operation that is closed [[4, 5](08_references.md)]. Let $I = [x_0, x_1]_{in}$ and $J = [y_0, y_1]_{in}$ be interval numbers, with $x_0, x_1, y_0, y_1 \in \overline{\mathbb{R}}$. Each of the four products $P_{ij} := x_i \cdot y_j$ for $i, j \in \{0, 1\}$ is either:
 
 (a) a defined element of $\overline{\mathbb{R}}$, or
-(b) the indeterminate form $0 \cdot (\pm\infty)$, treated by [Rule I](03_interval_numbers.md#34-foundation-rules-for-indeterminate-forms) or [Rule II](03_interval_numbers.md#34-foundation-rules-for-indeterminate-forms) as a finite endpoint set $\{0, \pm\infty\}$.
+(b) one of the four indeterminate forms $0 \cdot (\pm\infty)$ or $(\pm\infty) \cdot 0$, treated symmetrically by the value map $\mathcal{V}$ of [Definition 4.1](04_operations.md#41-multiplication) (Rules I and II for $0 \cdot \infty$ and $0 \cdot (-\infty)$, with the reversed forms $\infty \cdot 0$ and $(-\infty) \cdot 0$ assigned the same finite endpoint sets $\{0, \infty\}$ and $\{-\infty, 0\}$, respectively).
 
 In both cases the value map $\mathcal{V}(P_{ij})$ is a non-empty finite subset of $\overline{\mathbb{R}}$. Hence the candidate set $\mathcal{C}(I, J) = \bigcup_{i,j} \mathcal{V}(P_{ij})$ is a non-empty finite subset of $\overline{\mathbb{R}}$, and its minimum and maximum are well-defined. Therefore $I \cdot J = [\min \mathcal{C},\ \max \mathcal{C}]_{in} \in \mathcal{I}$, establishing closure.
 

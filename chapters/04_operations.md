@@ -32,7 +32,7 @@ In particular, if no $P_{ij}$ is an indeterminate form, the definition reduces t
 
 $$I \cdot J = [\min(x_0 y_0, x_0 y_1, x_1 y_0, x_1 y_1),\ \max(x_0 y_0, x_0 y_1, x_1 y_0, x_1 y_1)]_{in}.$$
 
-**Scalar multiplication.** For $r \in \overline{\mathbb{R}}$ identified with the point interval $[r, r]_{in}$, Definition 4.1 specializes to:
+**Scalar multiplication.** For finite $r \in \mathbb{R}$ identified with the point interval $[r, r]_{in}$, Definition 4.1 specializes to:
 
 $$
 r \cdot [x_0, x_1]_{in} =
@@ -46,7 +46,9 @@ r \cdot [x_0, x_1]_{in} =
 \end{cases}
 $$
 
-The four $r = 0$ subcases follow from $\mathcal{V}$ applied to the candidate products $0 \cdot x_0$ and $0 \cdot x_1$.
+The four $r = 0$ subcases follow from $\mathcal{V}$ applied to the candidate products $0 \cdot x_0$ and $0 \cdot x_1$. For *infinite* scalars $r \in \{-\infty, +\infty\}$ (which may produce indeterminate corner products $r \cdot 0$ when $0 \in [x_0, x_1]$), no closed-form simplification is asserted; the result is obtained directly from the candidate-set rule of Definition 4.1, e.g.
+
+$$+\infty \cdot [0, 1]_{in} \;=\; [\min\{0, +\infty\},\ \max\{0, +\infty\}]_{in} \;=\; [0, +\infty]_{in}.$$
 
 **Geometric interpretation.** The four endpoint products correspond to the corners of the rectangle $[x_0, x_1] \times [y_0, y_1]$ in the $xy$-plane:
 
@@ -157,7 +159,9 @@ Negation of $\pm\infty$ is interpreted in $\overline{\mathbb{R}}$ in the standar
 
 **Definition 4.7 (Power).** Let $I = [x_0, x_1]_{in}$ and $E = [y_0, y_1]_{in}$. The **admissible domain** of exponentiation is
 
-$$\mathrm{dom}(\,\cdot^{\,\cdot}) := \{(I, E) \in \mathcal{I} \times \mathcal{I} \;:\; x_0 \ge 0,\ \text{or}\ E = \{n\}\ \text{with}\ n \in \mathbb{Z}\}.$$
+$$\mathrm{dom}(\,\cdot^{\,\cdot}) := \{(I, E) \in \mathcal{I} \times \mathcal{I} \;:\; (x_0 > 0)\ \text{or}\ (x_0 \ge 0\ \text{and}\ y_0 \ge 0)\ \text{or}\ (E = \{n\},\ n \in \mathbb{Z}_{\ge 0})\ \text{or}\ (E = \{n\},\ n \in \mathbb{Z}_{<0}\ \text{and}\ 0 \notin I)\}.$$
+
+That is, exponentiation is admitted when (i) the base interval is strictly positive, or (ii) the base interval is non-negative and the exponent interval is non-negative (so no $0^{y}$ with $y < 0$ arises), or (iii) the exponent is a single non-negative integer (so negative bases are handled by integer powers and zero bases give $0^{n} = 0$ for $n \ge 1$ and $0^{0}$ via $\mathcal{V}^{\wedge}$), or (iv) the exponent is a single negative integer and $0 \notin I$ (so $0^{n}$ with $n < 0$ does not arise).
 
 On the admissible domain, exponentiation is defined as the closed interval hull of the image set:
 
@@ -176,7 +180,7 @@ $$
 \end{cases}
 $$
 
-If $(I, E) \notin \mathrm{dom}(\,\cdot^{\,\cdot})$ the operation is undefined; in the reference implementation this is signaled by NaN propagation.
+The admissible domain is chosen precisely so that every pair $(x, y) \in I \times E$ falls into one of the two cases above; in particular, points $0^{y}$ with $y < 0$ are excluded by the domain restriction (i)–(iv). If $(I, E) \notin \mathrm{dom}(\,\cdot^{\,\cdot})$ the operation is undefined; in the reference implementation this is signaled by NaN propagation.
 
 **Reduction to corner formulas.** On regions where $x \mapsto x^y$ and $y \mapsto x^y$ are jointly monotonic, the supremum and infimum of $\mathcal{S}(I, E)$ are attained at corners $(x_i, y_j)$ and Definition 4.7 reduces to a four-corner endpoint formula. This is *not* the case in general; in particular, for a point even-integer exponent $E = \{n\}$ ($n \ge 2$ even) and a base interval crossing zero, $x \mapsto x^n$ attains its minimum $0$ in the interior:
 

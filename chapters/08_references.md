@@ -22,6 +22,12 @@
 
 [9] IEEE Standard for Interval Arithmetic, IEEE Std 1788-2015 (2015). IEEE, New York. <https://doi.org/10.1109/IEEESTD.2015.7140721>
 
+[10] Kaucher, E. (1980). *Interval analysis in the extended interval space $\mathbb{IR}$.* Computing Supplementum 2, 33–49. Springer-Verlag, Vienna. <https://doi.org/10.1007/978-3-7091-8577-3_3> (Modal/Kaucher interval arithmetic; admits improper intervals and yields a group structure under addition.)
+
+[11] Hansen, E., and Walster, G. W. (2004). *Global Optimization Using Interval Analysis,* 2nd ed., revised and expanded. Marcel Dekker / CRC Press, New York. (Extended interval arithmetic, including division by intervals containing zero.)
+
+[12] Carlström, J. (2004). *Wheels — On Division by Zero.* Mathematical Structures in Computer Science 14(1), 143–184. <https://doi.org/10.1017/S0960129503004110> (Algebraic totalization of division via wheel structures.)
+
 **Supplementary online references.**
 
 [S1] *Extended real number line.* Wikipedia. <https://en.wikipedia.org/wiki/Extended_real_number_line>
