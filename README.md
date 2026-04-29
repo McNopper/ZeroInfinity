@@ -26,19 +26,6 @@ The expressions $0 \cdot \infty$ and $0 \cdot (-\infty)$ are classical indetermi
 
 ---
 
-## Note on Rendering
-
-The mathematical formulas use LaTeX notation compatible with [MathJax](https://www.mathjax.org/).
-For optimal rendering, view this document in:
-
-- GitHub's web interface (built-in MathJax support),
-- [Visual Studio Code](https://code.visualstudio.com/) with a Markdown + Math preview extension,
-- or any Markdown renderer with MathJax support.
-
-Figures are regenerated from a Python script in [`illustrations/`](illustrations/README.md).
-
----
-
 ## Repository Structure
 
 ```

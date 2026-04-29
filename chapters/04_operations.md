@@ -14,11 +14,13 @@ $$\mathcal{C}(I, J) := \bigcup_{i,j \in \{0,1\}} \mathcal{V}(x_i \cdot y_j) \;\s
 
 where the *value map* $\mathcal{V}: \overline{\mathbb{R}} \cup \{0 \cdot \infty,\ 0 \cdot (-\infty)\} \to \mathcal{P}(\overline{\mathbb{R}})$ is defined by
 
-$$\mathcal{V}(p) := \begin{cases}
+$$
+\mathcal{V}(p) := \begin{cases}
 \{p\}, & p \in \overline{\mathbb{R}} \text{ (a defined product)}, \\
 \{0, \infty\}, & p = 0 \cdot \infty \text{ (Rule I endpoints)}, \\
 \{-\infty, 0\}, & p = 0 \cdot (-\infty) \text{ (Rule II endpoints)}.
-\end{cases}$$
+\end{cases}
+$$
 
 The product is then
 
@@ -30,13 +32,15 @@ $$I \cdot J = \big[\min(x_0 y_0, x_0 y_1, x_1 y_0, x_1 y_1),\ \max(x_0 y_0, x_0 
 
 **Scalar multiplication.** For $r \in \overline{\mathbb{R}}$ identified with the point interval $[r, r]_{in}$, Definition 4.1 specializes to:
 
-$$r \cdot [x_0, x_1]_{in} =
+$$
+r \cdot [x_0, x_1]_{in} =
 \begin{cases}
 [r x_0, r x_1]_{in}, & r > 0, \\
 [r x_1, r x_0]_{in}, & r < 0, \\
 [0, 0]_{in}, & r = 0 \text{ and } 0 \notin\{-\infty, \infty\} \cap\{x_0, x_1\}, \\
 [-\infty, 0]_{in} \text{ or } [0, \infty]_{in}, & r = 0 \text{ and } x_0 = -\infty \text{ or } x_1 = \infty \text{ (via Rules I/II)}.
-\end{cases}$$
+\end{cases}
+$$
 
 **Geometric interpretation.** The four endpoint products correspond to the corners of the rectangle $[x_0, x_1] \times [y_0, y_1]$ in the $xy$-plane:
 
