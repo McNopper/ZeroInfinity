@@ -24,11 +24,11 @@ $$
 
 The product is then
 
-$$I \cdot J := \big[\min \mathcal{C}(I, J),\ \max \mathcal{C}(I, J)\big]_{in}.$$
+$$I \cdot J := [\min \mathcal{C}(I, J),\ \max \mathcal{C}(I, J)]_{in}.$$
 
 In particular, if no $P_{ij}$ is an indeterminate form, the definition reduces to the classical interval-arithmetic formula
 
-$$I \cdot J = \big[\min(x_0 y_0, x_0 y_1, x_1 y_0, x_1 y_1),\ \max(x_0 y_0, x_0 y_1, x_1 y_0, x_1 y_1)\big]_{in}.$$
+$$I \cdot J = [\min(x_0 y_0, x_0 y_1, x_1 y_0, x_1 y_1),\ \max(x_0 y_0, x_0 y_1, x_1 y_0, x_1 y_1)]_{in}.$$
 
 **Scalar multiplication.** For $r \in \overline{\mathbb{R}}$ identified with the point interval $[r, r]_{in}$, Definition 4.1 specializes to:
 
@@ -69,7 +69,7 @@ $$
 
 Then
 
-$$I + J := \big[\min \mathcal{C}_{+}(I, J),\ \max \mathcal{C}_{+}(I, J)\big]_{in}.$$
+$$I + J := [\min \mathcal{C}_{+}(I, J),\ \max \mathcal{C}_{+}(I, J)]_{in}.$$
 
 When neither endpoint sum is indeterminate this reduces to $[x_0 + y_0,\ x_1 + y_1]_{in}$.
 
@@ -83,7 +83,7 @@ $$\mathcal{C}_{-}(I, J) := \mathcal{V}_{-}(x_0 - y_1) \cup \mathcal{V}_{-}(x_1 -
 
 and
 
-$$I - J := \big[\min \mathcal{C}_{-}(I, J),\ \max \mathcal{C}_{-}(I, J)\big]_{in}.$$
+$$I - J := [\min \mathcal{C}_{-}(I, J),\ \max \mathcal{C}_{-}(I, J)]_{in}.$$
 
 When no indeterminate form arises this reduces to $[x_0 - y_1,\ x_1 - y_0]_{in}$.
 
@@ -97,9 +97,9 @@ $$
 \frac{1}{J} :=
 \begin{cases}
 [-\infty, \infty]_{in}, & y_0 = y_1 = 0, \\
-\big[\tfrac{1}{y_1},\ \tfrac{1}{y_0}\big]_{in}, & y_0 > 0 \text{ or } y_1 < 0, \\
-\big[\tfrac{1}{y_1},\ +\infty\big]_{in}, & y_0 = 0,\; y_1 > 0, \\
-\big[-\infty,\ \tfrac{1}{y_0}\big]_{in}, & y_0 < 0,\; y_1 = 0, \\
+[\tfrac{1}{y_1},\ \tfrac{1}{y_0}]_{in}, & y_0 > 0 \text{ or } y_1 < 0, \\
+[\tfrac{1}{y_1},\ +\infty]_{in}, & y_0 = 0,\; y_1 > 0, \\
+[-\infty,\ \tfrac{1}{y_0}]_{in}, & y_0 < 0,\; y_1 = 0, \\
 [-\infty, \infty]_{in}, & y_0 < 0 < y_1.
 \end{cases}
 $$
@@ -135,27 +135,27 @@ and the parametric witness $a_n = c/n$, $b_n = 1/n$ giving $a_n / b_n = c$ for a
 **Definition 4.6 (Absolute Value).** Absolute value is defined by order rather than by endpoint multiplication, so that no indeterminate product is required:
 
 $$
-\big|[x_0, x_1]\big|_{in} :=
+\lvert [x_0, x_1] \rvert_{in} :=
 \begin{cases}
 [x_0,\ x_1]_{in}, & 0 \le x_0, \\
 [-x_1,\ -x_0]_{in}, & x_1 \le 0, \\
-\big[0,\ \max(-x_0,\ x_1)\big]_{in}, & x_0 < 0 < x_1.
+[0,\ \max(-x_0,\ x_1)]_{in}, & x_0 < 0 < x_1.
 \end{cases}
 $$
 
 Negation of $\pm\infty$ is interpreted in $\overline{\mathbb{R}}$ in the standard way.
 
-**Examples.** $\big|[-5, 3]\big|_{in} = [0, 5]_{in}$. $\big|[-\infty, 0]\big|_{in} = [0, \infty]_{in}$. $\big|[0, \infty]\big|_{in} = [0, \infty]_{in}$.
+**Examples.** $\lvert [-5, 3] \rvert_{in} = [0, 5]_{in}$. $\lvert [-\infty, 0] \rvert_{in} = [0, \infty]_{in}$. $\lvert [0, \infty] \rvert_{in} = [0, \infty]_{in}$.
 
 ## 4.7 Exponentiation
 
 **Definition 4.7 (Power).** Let $I = [x_0, x_1]_{in}$ and $E = [y_0, y_1]_{in}$. Exponentiation is defined as a *partial* operation on $\mathcal{I} \times \mathcal{I}$, with admissible domain
 
-$$\mathrm{dom}(\,\cdot^{\,\cdot}) := \big\{(I, E) \in \mathcal{I} \times \mathcal{I} \;:\; x \ge 0 \text{ for all } x \in I,\ \text{or}\ y \in \mathbb{Z} \text{ for all } y \in E\big\}$$
+$$\mathrm{dom}(\,\cdot^{\,\cdot}) := \{(I, E) \in \mathcal{I} \times \mathcal{I} \;:\; x \ge 0 \text{ for all } x \in I,\ \text{or}\ y \in \mathbb{Z} \text{ for all } y \in E\}$$
 
 together with the three indeterminate-form points listed below. On the admissible domain,
 
-$$I^{E} := \big[\min_{i,j} V(x_i^{y_j}),\ \max_{i,j} V(x_i^{y_j})\big]_{in},$$
+$$I^{E} := [\min_{i,j} V(x_i^{y_j}),\ \max_{i,j} V(x_i^{y_j})]_{in},$$
 
 where $V$ extends each endpoint power $x_i^{y_j}$ to a finite set of values via the indeterminate-form table:
 

@@ -24,12 +24,12 @@ The interval-number framework therefore validates the intuitive algebraic identi
 
 ## 6.2 Combined Operations
 
-**Example 6.1.** $\;\big|\tfrac{0}{0}\big| + \infty = \infty.$
+**Example 6.1.** $\;\lvert \tfrac{0}{0} \rvert + \infty = \infty.$
 
 *Derivation.*
 
 - $\frac{0}{0} = [-\infty, \infty]_{in}$ ([Definition 4.5](04_operations.md#45-division));
-- $\big|[-\infty, \infty]\big|_{in} = [0, \infty]_{in}$ ([Definition 4.6](04_operations.md#46-absolute-value));
+- $\lvert [-\infty, \infty] \rvert_{in} = [0, \infty]_{in}$ ([Definition 4.6](04_operations.md#46-absolute-value));
 - $[0, \infty]_{in} + \infty = [0 + \infty,\ \infty + \infty]_{in} = [\infty, \infty]_{in} = \infty$. $\quad\square$
 
 **Example 6.2.** $\;\tfrac{\infty}{\infty} + \infty = \infty.$
