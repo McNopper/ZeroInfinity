@@ -297,64 +297,78 @@ public:
     }
 
     /**
-     * Interval division: [x0,x1]in / [y0,y1]in := [x0,x1]in * [1/y1, 1/y0]in
-     * 
-     * Handles indeterminate forms:
-     *   - 0/0 = [-∞, ∞]in
-     *   - ∞/∞ = [0, ∞]in
-     * 
+     * Interval division: [x0,x1]in / [y0,y1]in := [x0,x1]in * (1/[y0,y1]in)
+     *
+     * Reciprocal of [y0, y1] is computed by case analysis (see paper §4.4):
+     *   - [0, 0]                   -> [-∞, ∞]   (paper convention; division total)
+     *   - y0 > 0, y1 > 0           -> [1/y1, 1/y0]
+     *   - y1 < 0, y0 < 0           -> [1/y1, 1/y0]
+     *   - y0 == 0, y1 > 0          -> [1/y1, +∞]   (1/0+ = +∞)
+     *   - y0 < 0, y1 == 0          -> [-∞, 1/y0]   (1/0- = -∞)
+     *   - y0 < 0 < y1 (zero-spanning) -> [-∞, +∞] (loss of tightness; hull of two unbounded branches)
+     *
+     * Indeterminate forms emerging from this scheme:
+     *   - 0/0 = [0,0] * [-∞, ∞] = [-∞, ∞]
+     *   - ∞/∞ = [∞,∞] * [0,0] = [0, ∞]   (via 0·∞ rule in operator*)
+     *
      * @param other The interval to divide by
      * @return Resulting interval
      */
     IntervalNumber operator/(const IntervalNumber& other) const noexcept
     {
-        std::set<double> results{};
-
-        std::array<double, 2u> reciprocal{0.0, 0.0};
-        
-        if (other.m_interval[0u] == 0.0 && other.m_interval[1u] == 0.0)
-        {
-            if (m_interval[0u] == 0.0 && m_interval[1u] == 0.0)
-            {
-                return IntervalNumber(-INF, INF);
-            }
-            return IntervalNumber(QUIET_NAN);
-        }
-
-        reciprocal[0u] = 1.0 / other.m_interval[1u];
-        reciprocal[1u] = 1.0 / other.m_interval[0u];
-
-        for (std::size_t l = 0u; l < 2u; l++)
-        {
-            for (std::size_t r = 0u; r < 2u; r++)
-            {
-                auto result = m_interval[l] * reciprocal[r];
-                if (!std::isnan(result))
-                {
-                    results.insert(result);
-                }
-                else
-                {
-                    if ((m_interval[l] == -INF && reciprocal[r] == 0.0) || (m_interval[l] == 0.0 && reciprocal[r] == -INF))
-                    {
-                        results.insert(-INF);
-                        results.insert(0.0);
-                    }
-                    if ((m_interval[l] == 0.0 && reciprocal[r] == INF) || (m_interval[l] == INF && reciprocal[r] == 0.0))
-                    {
-                        results.insert(0.0);
-                        results.insert(INF);
-                    }
-                }
-            }
-        }
-
-        if (results.empty())
+        // NaN propagation
+        if (std::isnan(m_interval[0u]) || std::isnan(other.m_interval[0u]))
         {
             return IntervalNumber(QUIET_NAN);
         }
 
-        return IntervalNumber(*results.begin(), *results.rbegin());
+        const double y0 = other.m_interval[0u];
+        const double y1 = other.m_interval[1u];
+
+        // Divisor is the point [0, 0]: by convention, division returns the full hull.
+        if (y0 == 0.0 && y1 == 0.0)
+        {
+            return IntervalNumber(-INF, INF);
+        }
+
+        double r_lo;
+        double r_hi;
+
+        if (y0 > 0.0)
+        {
+            // Strictly positive divisor.
+            r_lo = 1.0 / y1;
+            r_hi = 1.0 / y0;
+        }
+        else if (y1 < 0.0)
+        {
+            // Strictly negative divisor.
+            r_lo = 1.0 / y1;
+            r_hi = 1.0 / y0;
+        }
+        else if (y0 == 0.0)
+        {
+            // [0, y1] with y1 > 0; lower bound of reciprocal is 1/y1, upper is +∞.
+            r_lo = 1.0 / y1;
+            r_hi = INF;
+        }
+        else if (y1 == 0.0)
+        {
+            // [y0, 0] with y0 < 0; lower bound is -∞, upper is 1/y0 (negative).
+            r_lo = -INF;
+            r_hi = 1.0 / y0;
+        }
+        else
+        {
+            // y0 < 0 < y1: divisor strictly contains zero. The exact reciprocal
+            // is (-∞, 1/y0] ∪ [1/y1, +∞); to preserve closure within \mathcal{I}
+            // we take the convex hull, which is [-∞, +∞]. This is sound but
+            // not tight (paper §4.4, Limitation 2).
+            r_lo = -INF;
+            r_hi = INF;
+        }
+
+        return *this * IntervalNumber(r_lo, r_hi);
     }
 
     /**
@@ -370,26 +384,36 @@ public:
     }
 
     /**
-     * Absolute value of interval:
-     *   |[x0,x1]|in = [min(|x0|,|x1|), max(|x0|,|x1|)]in if x0*x1 >= 0
-     *   |[x0,x1]|in = [0, max(|x0|,|x1|)]in if x0*x1 < 0
-     * 
+     * Absolute value of interval (defined by order, not by endpoint product):
+     *   |[x0, x1]|in = [x0, x1]                       if 0 <= x0
+     *   |[x0, x1]|in = [-x1, -x0]                     if x1 <= 0
+     *   |[x0, x1]|in = [0, max(-x0, x1)]              if x0 < 0 < x1
+     *
+     * Using order rather than the product x0·x1 avoids the indeterminate form
+     * 0·∞ that would arise for intervals such as [0, ∞] or [-∞, 0]
+     * (paper §4.6).
+     *
      * @return Absolute value as interval
      */
     IntervalNumber abs() const noexcept
     {
-        if (m_interval[0u] * m_interval[1u] >= 0.0)
+        const double a0 = m_interval[0u];
+        const double a1 = m_interval[1u];
+
+        if (std::isnan(a0) || std::isnan(a1))
         {
-            double abs0 = std::fabs(m_interval[0u]);
-            double abs1 = std::fabs(m_interval[1u]);
-            return IntervalNumber(std::min(abs0, abs1), std::max(abs0, abs1));
+            return IntervalNumber(QUIET_NAN);
         }
-        else
+
+        if (a0 >= 0.0)
         {
-            double abs0 = std::fabs(m_interval[0u]);
-            double abs1 = std::fabs(m_interval[1u]);
-            return IntervalNumber(0.0, std::max(abs0, abs1));
+            return IntervalNumber(a0, a1);
         }
+        if (a1 <= 0.0)
+        {
+            return IntervalNumber(-a1, -a0);
+        }
+        return IntervalNumber(0.0, std::max(-a0, a1));
     }
 
     /**
@@ -476,8 +500,10 @@ public:
                     }
                     else if (base < 0.0 && std::floor(exp) != exp)
                     {
-                        // Negative base with non-integer exponent is undefined
-                        continue;
+                        // Negative base with non-integer real exponent is not
+                        // real-valued. The operation is therefore not defined
+                        // on this corner; signal partiality by returning NaN.
+                        return IntervalNumber(QUIET_NAN);
                     }
                 }
             }

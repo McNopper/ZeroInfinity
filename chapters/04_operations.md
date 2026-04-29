@@ -4,7 +4,7 @@
 
 ---
 
-All operations follow standard interval arithmetic [[6](09_references.md)], with explicit treatment of indeterminate forms.
+All operations follow standard interval arithmetic [[6](08_references.md)], with explicit treatment of indeterminate forms.
 
 ## 4.1 Multiplication
 
@@ -54,82 +54,129 @@ $$
 
 ## 4.2 Addition
 
-**Definition 4.2 (Interval Addition).**
+**Definition 4.2 (Interval Addition).** For interval numbers $I = [x_0, x_1]_{in}$ and $J = [y_0, y_1]_{in}$, define the candidate set
 
-$$[x_0, x_1]_{in} + [y_0, y_1]_{in} := [x_0 + y_0,\ x_1 + y_1]_{in}.$$
+$$\mathcal{C}_{+}(I, J) := \mathcal{V}_{+}(x_0 + y_0) \cup \mathcal{V}_{+}(x_1 + y_1) \;\subseteq\; \overline{\mathbb{R}},$$
 
-**Indeterminate form.** $\infty + (-\infty)$ and $(-\infty) + \infty$ both yield $[-\infty, \infty]_{in}$.
+where the additive value map $\mathcal{V}_{+}: \overline{\mathbb{R}} \cup \{\infty + (-\infty),\ (-\infty) + \infty\} \to \mathcal{P}(\overline{\mathbb{R}})$ is
 
-**Example.** $[0, \infty]_{in} + 5 = [5, \infty]_{in}$.
+$$
+\mathcal{V}_{+}(s) := \begin{cases}
+\{s\}, & s \in \overline{\mathbb{R}} \text{ (a defined sum)}, \\
+\{-\infty, \infty\}, & s \in \{\infty + (-\infty),\ (-\infty) + \infty\}.
+\end{cases}
+$$
+
+Then
+
+$$I + J := \big[\min \mathcal{C}_{+}(I, J),\ \max \mathcal{C}_{+}(I, J)\big]_{in}.$$
+
+When neither endpoint sum is indeterminate this reduces to $[x_0 + y_0,\ x_1 + y_1]_{in}$.
+
+**Example.** $[0, \infty]_{in} + 5 = [5, \infty]_{in}$. $[0, \infty]_{in} + [-\infty, 0]_{in} = [-\infty, \infty]_{in}$.
 
 ## 4.3 Subtraction
 
-**Definition 4.3 (Interval Subtraction).**
+**Definition 4.3 (Interval Subtraction).** With the analogous value map $\mathcal{V}_{-}$ that sends $\infty - \infty$ and $(-\infty) - (-\infty)$ to $\{-\infty, \infty\}$ and every defined difference to a singleton,
 
-$$[x_0, x_1]_{in} - [y_0, y_1]_{in} := [x_0 - y_1,\ x_1 - y_0]_{in}.$$
+$$\mathcal{C}_{-}(I, J) := \mathcal{V}_{-}(x_0 - y_1) \cup \mathcal{V}_{-}(x_1 - y_0),$$
 
-**Indeterminate form.** $\infty - \infty$ and $(-\infty) - (-\infty)$ both yield $[-\infty, \infty]_{in}$.
+and
 
-**Example.** $[1, 5]_{in} - [2, 3]_{in} = [1 - 3,\ 5 - 2]_{in} = [-2, 3]_{in}$.
+$$I - J := \big[\min \mathcal{C}_{-}(I, J),\ \max \mathcal{C}_{-}(I, J)\big]_{in}.$$
+
+When no indeterminate form arises this reduces to $[x_0 - y_1,\ x_1 - y_0]_{in}$.
+
+**Example.** $[1, 5]_{in} - [2, 3]_{in} = [-2, 3]_{in}$.
 
 ## 4.4 Reciprocal
 
-**Definition 4.4 (Reciprocal).** For an interval number $J = [y_0, y_1]_{in}$ that does not strictly contain zero (i.e., $y_0 \ge 0$ or $y_1 \le 0$), define
+**Definition 4.4 (Reciprocal).** Reciprocation is defined on all of $\mathcal{I}$ by the following case analysis on the divisor $J = [y_0, y_1]_{in}$:
 
-$$\frac{1}{J} := \left[\frac{1}{y_1},\ \frac{1}{y_0}\right]_{in},$$
+$$
+\frac{1}{J} :=
+\begin{cases}
+[-\infty, \infty]_{in}, & y_0 = y_1 = 0, \\
+\big[\tfrac{1}{y_1},\ \tfrac{1}{y_0}\big]_{in}, & y_0 > 0 \text{ or } y_1 < 0, \\
+\big[\tfrac{1}{y_1},\ +\infty\big]_{in}, & y_0 = 0,\; y_1 > 0, \\
+\big[-\infty,\ \tfrac{1}{y_0}\big]_{in}, & y_0 < 0,\; y_1 = 0, \\
+[-\infty, \infty]_{in}, & y_0 < 0 < y_1.
+\end{cases}
+$$
 
-with the conventions $\tfrac{1}{0^+} = +\infty$ when $y_0 = 0 \le y_1$ and $\tfrac{1}{0^-} = -\infty$ when $y_0 \le y_1 = 0$.
+The conventions $1/(0^{+}) = +\infty$ and $1/(0^{-}) = -\infty$ follow from one-sided real limits; the assignment for $J = [0, 0]_{in}$ is by convention, since neither sign of approach is privileged for a point interval at zero.
 
-**Zero strictly interior to $J$.** If $y_0 < 0 < y_1$, the reciprocal is the union $[-\infty, 1/y_0]_{in} \cup [1/y_1, \infty]_{in}$, which is not a single interval. The framework returns $[-\infty, \infty]_{in}$ in this case, retaining closure within $\mathcal{I}$ at the cost of tightness.
+When $y_0 < 0 < y_1$, the exact reciprocal is the union of two unbounded branches $[-\infty, 1/y_0]_{in} \cup [1/y_1, +\infty]_{in}$, which is not a single interval. The framework returns its convex hull $[-\infty, \infty]_{in}$, retaining closure within $\mathcal{I}$ at the cost of tightness.
 
 ## 4.5 Division
 
-**Definition 4.5 (Interval Division).** For $I, J \in \mathcal{I}$:
+**Definition 4.5 (Interval Division).** Division is defined on all of $\mathcal{I} \times \mathcal{I}$ by
 
 $$I \div J := I \cdot \frac{1}{J},$$
 
-evaluated using [Definition 4.1](#41-multiplication).
+evaluated using [Definition 4.1](#41-multiplication) and [Definition 4.4](#44-reciprocal). The case analysis of the reciprocal makes division a total operation on $\mathcal{I}$.
 
-**Special case $\tfrac{0}{0}$.** $[0, 0]_{in} \div [0, 0]_{in}$ is assigned $[-\infty, \infty]_{in}$ by convention, justified by $\lim_{n \to 0^+} \tfrac{n}{n^2} = +\infty$ and $\lim_{n \to 0^-} \tfrac{n}{n^2} = -\infty$.
+**Indeterminate form $\tfrac{0}{0}$.** With $I = J = [0, 0]_{in}$, Definition 4.4 gives $1/J = [-\infty, \infty]_{in}$, and then $[0, 0]_{in} \cdot [-\infty, \infty]_{in} = [-\infty, \infty]_{in}$ via Rules I and II in Definition 4.1.
 
-**Indeterminate form $\tfrac{\infty}{\infty}$.** Through [Definition 4.1](#41-multiplication) applied to a reciprocal containing $\infty$ or $-\infty$ as an endpoint, the form $\tfrac{\infty}{\infty}$ evaluates to $[0, \infty]_{in}$.
+This is consistent with the one-sided limit witnesses
+
+$$\lim_{x \to 0^{+}} \frac{x}{x^{2}} = +\infty, \qquad \lim_{x \to 0^{-}} \frac{x}{x^{2}} = -\infty,$$
+
+and the parametric witness $a_n = c/n$, $b_n = 1/n$ giving $a_n / b_n = c$ for any $c \in \mathbb{R}$.
+
+**Indeterminate form $\tfrac{\infty}{\infty}$.** With $I = J = [\infty, \infty]_{in}$, Definition 4.4 gives $1/J = [0, 0]_{in}$, and then $[\infty, \infty]_{in} \cdot [0, 0]_{in} = [0, \infty]_{in}$ via Rule I in Definition 4.1.
 
 ## 4.6 Absolute Value
 
-**Definition 4.6 (Absolute Value).** For $[x_0, x_1]_{in}$ with $x_0 \le x_1$:
+**Definition 4.6 (Absolute Value).** Absolute value is defined by order rather than by endpoint multiplication, so that no indeterminate product is required:
 
-- If $x_0 \cdot x_1 \ge 0$ (the interval does not properly contain zero):
+$$
+\big|[x_0, x_1]\big|_{in} :=
+\begin{cases}
+[x_0,\ x_1]_{in}, & 0 \le x_0, \\
+[-x_1,\ -x_0]_{in}, & x_1 \le 0, \\
+\big[0,\ \max(-x_0,\ x_1)\big]_{in}, & x_0 < 0 < x_1.
+\end{cases}
+$$
 
-$$\big|[x_0, x_1]\big|_{in} := \big[\min(|x_0|, |x_1|),\ \max(|x_0|, |x_1|)\big]_{in}.$$
+Negation of $\pm\infty$ is interpreted in $\overline{\mathbb{R}}$ in the standard way.
 
-- If $x_0 \cdot x_1 < 0$ (the interval contains zero):
-
-$$\big|[x_0, x_1]\big|_{in} := \big[0,\ \max(|x_0|, |x_1|)\big]_{in}.$$
-
-**Example.** $\big|[-5, 3]\big|_{in} = [0, 5]_{in}$.
+**Examples.** $\big|[-5, 3]\big|_{in} = [0, 5]_{in}$. $\big|[-\infty, 0]\big|_{in} = [0, \infty]_{in}$. $\big|[0, \infty]\big|_{in} = [0, \infty]_{in}$.
 
 ## 4.7 Exponentiation
 
-**Definition 4.7 (Power).** For interval base $I = [x_0, x_1]_{in}$ and interval exponent $E = [y_0, y_1]_{in}$:
+**Definition 4.7 (Power).** Let $I = [x_0, x_1]_{in}$ and $E = [y_0, y_1]_{in}$. Exponentiation is defined as a *partial* operation on $\mathcal{I} \times \mathcal{I}$, with admissible domain
 
-$$I^E := \big[\min(x_0^{y_0}, x_0^{y_1}, x_1^{y_0}, x_1^{y_1}),\ \max(x_0^{y_0}, x_0^{y_1}, x_1^{y_0}, x_1^{y_1})\big]_{in}.$$
+$$\mathrm{dom}(\,\cdot^{\,\cdot}) := \big\{(I, E) \in \mathcal{I} \times \mathcal{I} \;:\; x \ge 0 \text{ for all } x \in I,\ \text{or}\ y \in \mathbb{Z} \text{ for all } y \in E\big\}$$
 
-For a scalar exponent $n$, treat $n$ as the point interval $[n, n]_{in}$.
+together with the three indeterminate-form points listed below. On the admissible domain,
 
-**Indeterminate forms involving exponents:**
-- $0^0 = [0, \infty]_{in}$
-- $1^\infty = [0, \infty]_{in}$
-- $\infty^0 = [0, \infty]_{in}$
+$$I^{E} := \big[\min_{i,j} V(x_i^{y_j}),\ \max_{i,j} V(x_i^{y_j})\big]_{in},$$
 
-**Justification of $0^0 = [0, \infty]_{in}$:**
-- Sequence A: $a_n = \tfrac{1}{n}$, $b_n = \tfrac{1}{\sqrt{\ln n}}$, then $a_n^{b_n} \to 0$.
-- Sequence B: $a_n = \tfrac{1}{n}$, $b_n = \tfrac{1}{\ln n}$, then $a_n^{b_n} \to e^{-1}$.
-- Sequence C: $a_n = \tfrac{1}{n}$, $b_n = -\tfrac{1}{\sqrt{\ln n}}$, then $a_n^{b_n} \to \infty$.
+where $V$ extends each endpoint power $x_i^{y_j}$ to a finite set of values via the indeterminate-form table:
 
-**Special considerations:**
-- For even integer exponents on intervals containing zero, the result includes $0$.
-- For negative exponents on bases containing zero, the result extends to $\pm\infty$.
-- Interval-to-interval power requires evaluation at all combinations of base and exponent endpoints to determine the resulting range.
+$$
+V(b^{e}) := \begin{cases}
+\{0, \infty\}, & b^{e} \in \{0^{0},\ 1^{\infty},\ \infty^{0}\}, \\
+\{b^{e}\}, & b^{e} \in \overline{\mathbb{R}}.
+\end{cases}
+$$
+
+If $(I, E) \notin \mathrm{dom}(\,\cdot^{\,\cdot})$ the operation is undefined; in the reference implementation this is signaled by NaN propagation.
+
+**Indeterminate forms.**
+
+$$0^{0} = 1^{\infty} = \infty^{0} = [0, \infty]_{in}.$$
+
+**Special considerations.**
+- If $I$ contains zero strictly and $E$ contains a negative value, $0^{y}$ for $y < 0$ contributes $\infty$ and the resulting interval extends to $\infty$.
+- If $I$ contains a negative value strictly and $E$ contains an even integer (and only integer values), the corner products are real and the result includes $0$ when the base interval contains zero.
+- If $I$ contains a negative value strictly and any value of $E$ is non-integer, the operation is partial; the implementation returns NaN.
+
+**Justification of $0^{0} = [0, \infty]_{in}$:**
+- Sequence A: $a_n = 1/n$, $b_n = 1/\sqrt{\ln n}$, then $a_n^{b_n} \to 0$.
+- Sequence B: $a_n = 1/n$, $b_n = 1/\ln n$, then $a_n^{b_n} \to e^{-1}$.
+- Sequence C: $a_n = 1/n$, $b_n = -1/\sqrt{\ln n}$, then $a_n^{b_n} \to \infty$.
 
 ---
 

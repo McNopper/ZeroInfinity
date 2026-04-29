@@ -52,7 +52,7 @@ This identification provides a natural embedding $\overline{\mathbb{R}} \hookrig
 
 ## 3.4 Foundation Rules for Indeterminate Forms
 
-The central concept is that indeterminate forms correspond to intervals of possible limiting values. The two fundamental rules are:
+The interval-number framework assigns to each indeterminate form a closed interval in $\overline{\mathbb{R}}$. These assignments are formal algebraic conventions, motivated and supported by directional limit witnesses: in each case, the assigned interval is the convex hull of products of sequences in which the factor tending to zero is restricted to a specified sign. The two fundamental rules are:
 
 **Rule I.** The indeterminate form $0 \cdot \infty$ is represented as
 
@@ -62,36 +62,42 @@ $$0 \cdot \infty = [0, \infty]_{in}.$$
 
 $$0 \cdot (-\infty) = [-\infty, 0]_{in}.$$
 
-These rules encode the principle that expressions of the form $a_n \cdot b_n$ with $\lim_n a_n = 0$ and $\lim_n b_n \in \{-\infty, \infty\}$ may converge to any value within the specified interval, depending on the relative rates at which $a_n$ approaches zero and $b_n$ approaches infinity.
+**Directional convention.** Within Rules I and II, the symbol $0$ is interpreted as a one-sided (non-negative) approach to zero, written $0^{+}$ where emphasis is required. Concretely, Rule I represents the set of limits
+
+$$\{\, \lim_{n} a_n b_n : a_n \ge 0,\; a_n \to 0,\; b_n \to +\infty \,\},$$
+
+and Rule II is obtained from Rule I by negation, since $0 \cdot (-\infty) = -1 \cdot (0 \cdot \infty)$ in the algebra of $\mathcal{I}$ (Section 4). Without this directional restriction, the products $a_n b_n$ with two-sided $a_n \to 0$ would attain every value in $[-\infty, \infty]$, and the algebraic identity that motivates the framework would collapse.
+
+This convention is a formal choice, not a derivation; the framework should be read as an algebraic structure on $\mathcal{I}$ whose rules are *consistent with* the stated class of directional limits, rather than as a complete classification of all possible limits of all sequences fitting the symbolic form.
 
 ## 3.5 Geometric Visualization
 
-The two foundation intervals partition the extended real line through the origin:
+The two foundation intervals together cover the extended real line, intersecting at the origin:
 
 ![Foundation intervals on the extended real line](../illustrations/fig_extended_real_intervals.png)
 
-*Figure 3.1: The extended real line $\overline{\mathbb{R}}$ with the two foundation intervals $[-\infty, 0]_{in}$ (blue) and $[0, \infty]_{in}$ (green), corresponding to Rules II and I, respectively.*
+*Figure 3.1: The extended real line $\overline{\mathbb{R}}$ with the two foundation intervals $[-\infty, 0]_{in}$ (blue) and $[0, \infty]_{in}$ (green), corresponding to Rules II and I, respectively. The intervals are not disjoint: they share the point $0$.*
 
 ## 3.6 Justification for Rules I and II
 
-The interval representations of Rules I and II are justified by exhibiting explicit sequences whose products realize different limit values within the intervals.
+The interval representations of Rules I and II are justified by exhibiting explicit *directional* sequences (with $a_n \ge 0$) whose products realize a representative spread of limit values within the intervals. The arguments below show that the assigned intervals are *attained*; a separate question—whether they are tight, i.e. whether every interior point is attainable as a limit—is addressed by the parametric witness below.
 
-**For $0 \cdot \infty$:**
-- Sequence A: $a_n = \frac{1}{n^2}$, $b_n = n$. Then $a_n \cdot b_n = \frac{1}{n} \to 0$.
-- Sequence B: $a_n = \frac{1}{n}$, $b_n = n$. Then $a_n \cdot b_n = 1$ for all $n$.
-- Sequence C: $a_n = \frac{1}{n}$, $b_n = n^2$. Then $a_n \cdot b_n = n \to \infty$.
+**For $0^{+} \cdot \infty$:**
+- Sequence A: $a_n = \tfrac{1}{n^2}$, $b_n = n$. Then $a_n b_n = \tfrac{1}{n} \to 0$.
+- Sequence B: $a_n = \tfrac{1}{n}$, $b_n = n$. Then $a_n b_n = 1$ for all $n$.
+- Sequence C: $a_n = \tfrac{1}{n}$, $b_n = n^2$. Then $a_n b_n = n \to \infty$.
 
-All resulting limits lie in $[0, \infty]_{in}$.
+A parametric witness for any $c \in [0, \infty)$ is $a_n = c/n$, $b_n = n$, giving $a_n b_n = c$ for all $n$; together with Sequence C, this shows every value of $[0, \infty]_{in}$ is attainable as a limit.
 
 ![Sequence convergence](../illustrations/fig_indeterminate_limits.png)
 
-*Figure 3.2: Three sequences $a_n \cdot b_n$ with $a_n \to 0$ and $b_n \to \infty$, converging to $0$, $1$, and $\infty$, respectively (log-scaled vertical axis). All limit values lie within $[0, \infty]_{in}$, consistent with Rule I.*
+*Figure 3.2: Three sequences $a_n b_n$ with $a_n \to 0^{+}$ and $b_n \to \infty$, converging to $0$, $1$, and $\infty$, respectively (log-scaled vertical axis). All limit values lie within $[0, \infty]_{in}$, consistent with Rule I.*
 
-**For $0 \cdot (-\infty)$:**
-- Sequence A: $a_n = \frac{1}{n}$, $b_n = -n$. Then $a_n \cdot b_n = -1$ for all $n$.
-- Sequence B: $a_n = \frac{1}{n}$, $b_n = -n^2$. Then $a_n \cdot b_n = -n \to -\infty$.
+**For $0^{+} \cdot (-\infty)$:**
+- Sequence A: $a_n = \tfrac{1}{n}$, $b_n = -n$. Then $a_n b_n = -1$ for all $n$.
+- Sequence B: $a_n = \tfrac{1}{n}$, $b_n = -n^2$. Then $a_n b_n = -n \to -\infty$.
 
-All resulting limits lie in $[-\infty, 0]_{in}$.
+For any $c \in (-\infty, 0]$, the parametric sequences $a_n = -c/n$, $b_n = -n$ (with $a_n \ge 0$ since $c \le 0$) give $a_n b_n = c$ for all $n$, completing the witness for $[-\infty, 0]_{in}$.
 
 ---
 

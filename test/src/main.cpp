@@ -873,6 +873,163 @@ TEST(IntervalNumber, Power_IntervalToInterval_FractionalExponents)
     EXPECT_DOUBLE_EQ(result.getX1(), 3.0);
 }
 
+// =====================================================================
+// Regression tests for fixes to reciprocal / division / abs / power.
+// These cover correctness gaps identified during the scientific review
+// of the paper.
+// =====================================================================
+
+TEST(IntervalNumber, ReciprocalOfZeroSpanningInterval)
+{
+    // 1 / [-1, 1]: divisor strictly contains zero, true reciprocal is
+    // (-inf, -1] U [1, inf); the convex hull is [-inf, inf].
+    IntervalNumber a{1.0};
+    IntervalNumber b{-1.0, 1.0};
+
+    auto result = a / b;
+
+    EXPECT_EQ(result.getX0(), -INF);
+    EXPECT_EQ(result.getX1(), INF);
+}
+
+TEST(IntervalNumber, DivisionByZeroSpanningInterval_NumeratorPositive)
+{
+    // [2, 2] / [-1, 1] should be [-inf, inf], not [-2, 2].
+    IntervalNumber a{2.0};
+    IntervalNumber b{-1.0, 1.0};
+
+    auto result = a / b;
+
+    EXPECT_EQ(result.getX0(), -INF);
+    EXPECT_EQ(result.getX1(), INF);
+}
+
+TEST(IntervalNumber, DivisionByZeroSpanningInterval_AsymmetricSpan)
+{
+    // [1, 1] / [-2, 3]: divisor strictly contains zero -> hull [-inf, inf].
+    IntervalNumber a{1.0};
+    IntervalNumber b{-2.0, 3.0};
+
+    auto result = a / b;
+
+    EXPECT_EQ(result.getX0(), -INF);
+    EXPECT_EQ(result.getX1(), INF);
+}
+
+TEST(IntervalNumber, DivisionByLeftZeroBoundary)
+{
+    // [1, 1] / [-2, 0]: divisor approaches zero from the negative side.
+    // Reciprocal is [-inf, -0.5], so result is [-inf, -0.5].
+    IntervalNumber a{1.0};
+    IntervalNumber b{-2.0, 0.0};
+
+    auto result = a / b;
+
+    EXPECT_EQ(result.getX0(), -INF);
+    EXPECT_EQ(result.getX1(), -0.5);
+}
+
+TEST(IntervalNumber, DivisionByPointZero_NonZeroNumerator)
+{
+    // x / [0, 0] for x != 0: division is total on \mathcal{I}; result is the
+    // full hull [-inf, inf] (paper §4.5).
+    IntervalNumber a{5.0};
+    IntervalNumber b{0.0};
+
+    auto result = a / b;
+
+    EXPECT_EQ(result.getX0(), -INF);
+    EXPECT_EQ(result.getX1(), INF);
+}
+
+TEST(IntervalNumber, DivisionByPointZero_NegativeNumerator)
+{
+    IntervalNumber a{-3.0};
+    IntervalNumber b{0.0};
+
+    auto result = a / b;
+
+    EXPECT_EQ(result.getX0(), -INF);
+    EXPECT_EQ(result.getX1(), INF);
+}
+
+TEST(IntervalNumber, AbsoluteValueOfPositiveInfinityInterval)
+{
+    // |[0, +inf]| = [0, +inf]. Order-based definition must avoid 0*inf = NaN.
+    IntervalNumber a{0.0, INF};
+
+    auto result = a.abs();
+
+    EXPECT_EQ(result.getX0(), 0.0);
+    EXPECT_EQ(result.getX1(), INF);
+}
+
+TEST(IntervalNumber, AbsoluteValueOfNegativeInfinityInterval)
+{
+    // |[-inf, 0]| = [0, +inf].
+    IntervalNumber a{-INF, 0.0};
+
+    auto result = a.abs();
+
+    EXPECT_EQ(result.getX0(), 0.0);
+    EXPECT_EQ(result.getX1(), INF);
+}
+
+TEST(IntervalNumber, AbsoluteValueOfFullExtendedInterval)
+{
+    // |[-inf, +inf]| = [0, +inf].
+    IntervalNumber a{-INF, INF};
+
+    auto result = a.abs();
+
+    EXPECT_EQ(result.getX0(), 0.0);
+    EXPECT_EQ(result.getX1(), INF);
+}
+
+TEST(IntervalNumber, AbsoluteValuePreservesOrderForAsymmetricSpan)
+{
+    // |[-1, 5]| = [0, 5] (largest of |x0|, |x1| is 5).
+    IntervalNumber a{-1.0, 5.0};
+
+    auto result = a.abs();
+
+    EXPECT_EQ(result.getX0(), 0.0);
+    EXPECT_EQ(result.getX1(), 5.0);
+
+    // |[-7, 3]| = [0, 7].
+    IntervalNumber b{-7.0, 3.0};
+
+    auto result_b = b.abs();
+
+    EXPECT_EQ(result_b.getX0(), 0.0);
+    EXPECT_EQ(result_b.getX1(), 7.0);
+}
+
+TEST(IntervalNumber, PowerNegativeBaseNonIntegerExponent_ReturnsNaN)
+{
+    // (-2)^0.5 is not real-valued; power must signal partiality with NaN
+    // rather than silently producing a misleading interval.
+    IntervalNumber base{-2.0};
+    IntervalNumber exp{0.5};
+
+    auto result = base.pow(exp);
+
+    EXPECT_TRUE(std::isnan(result.getX0()));
+    EXPECT_TRUE(std::isnan(result.getX1()));
+}
+
+TEST(IntervalNumber, PowerSpanningZeroBaseNonIntegerExponent_ReturnsNaN)
+{
+    // [-1, 4]^0.5: lower corner (-1)^0.5 is not real -> NaN.
+    IntervalNumber base{-1.0, 4.0};
+    IntervalNumber exp{0.5};
+
+    auto result = base.pow(exp);
+
+    EXPECT_TRUE(std::isnan(result.getX0()));
+    EXPECT_TRUE(std::isnan(result.getX1()));
+}
+
 int main(int argc, char** argv)
 {
     testing::InitGoogleTest(&argc, argv);

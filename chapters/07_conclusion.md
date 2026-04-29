@@ -1,38 +1,38 @@
-# 8. Conclusion and Future Work
+# 7. Conclusion and Future Work
 
-[← Previous: Implementation](07_implementation.md) | [Back to Contents](../README.md) | [Next: References →](09_references.md)
+[← Previous: Applications](06_applications.md) | [Back to Contents](../README.md) | [Next: References →](08_references.md)
 
 ---
 
-## 8.1 Summary
+## 7.1 Summary
 
-This work has introduced **interval numbers** as a formal algebraic framework for representing and manipulating indeterminate forms. By embedding indeterminate expressions into closed intervals of the extended real line $\overline{\mathbb{R}}$, algebraic closure is achieved: operations that are previously undefined now yield well-defined results. The induced structure—at minimum a Magma under multiplication—supports consistent algebraic manipulation while preserving the intuitive interpretation of indeterminate forms as ranges of admissible limit values. A C++ reference implementation accompanied by a unit test suite validates the framework computationally.
+This work has introduced **interval numbers** as a formal algebraic framework for representing and manipulating indeterminate forms. By embedding indeterminate expressions into closed intervals of the extended real line $\overline{\mathbb{R}}$, algebraic closure is achieved: operations that were previously undefined now yield well-defined results. The induced structure is a **unital magma** under multiplication—closed, with two-sided identity $[1,1]_{in}$, but neither associative nor monoidal—and supports consistent algebraic manipulation while preserving the intuitive interpretation of indeterminate forms as ranges of admissible limit values. A C++ reference implementation accompanied by a unit test suite validates the framework computationally; build and verification details are documented in the repository's [README](../README.md#reference-implementation).
 
-## 8.2 Limitations and Open Questions
+## 7.2 Limitations and Open Questions
 
 To support an honest appraisal, the principal limitations of the framework are stated explicitly:
 
-1. **Multiplication is not associative.** [Proposition 5.2](05_algebraic_structure.md#52-failure-of-associativity) exhibits a concrete counterexample. Consequently, the result of an interval-number expression depends on its bracketing, and the framework only enjoys the Magma property—not semigroup, monoid, or group structure—on $\mathcal{I}$ as a whole.
+1. **Multiplication is not associative.** [Proposition 5.2](05_algebraic_structure.md#52-failure-of-associativity) exhibits a concrete counterexample. Consequently, the result of an interval-number expression depends on its bracketing, and the framework only enjoys unital-magma structure—not semigroup, monoid, or group structure—on $\mathcal{I}$ as a whole.
 
 2. **Loss of tightness for division by zero-spanning intervals.** When the divisor strictly contains zero, the natural reciprocal is a union of two intervals; to retain closure within $\mathcal{I}$, the framework returns $[-\infty, \infty]_{in}$, which is sound but not tight ([Section 4.4](04_operations.md#44-reciprocal)).
 
 3. **Special-cased $\tfrac{0}{0}$.** The point-to-point case $\tfrac{0}{0}$ is assigned $[-\infty, \infty]_{in}$ by convention rather than emerging from the formula via reciprocal; the limit-based justification ([Section 4.5](04_operations.md#45-division)) is a meta-argument, not an internal derivation.
 
-4. **No proven distributivity.** Sub-distributivity of multiplication over addition holds in classical interval arithmetic [[6](09_references.md)]; full distributivity does not transfer, and a precise statement for $\mathcal{I}$ is not given here.
+4. **No proven distributivity.** Sub-distributivity of multiplication over addition holds in classical interval arithmetic [[6](08_references.md)]; full distributivity does not transfer, and a precise statement for $\mathcal{I}$ is not given here.
 
 5. **Choice of limit witnesses.** The interval assigned to each indeterminate form is justified by exhibiting limit sequences whose values reach (or approach) the endpoints. A proof that the chosen interval is *optimal*—i.e., that no admissible value lies strictly outside it—is informal and rests on standard real-analytic intuition rather than a fully formal argument.
 
-6. **Floating-point implementation.** The reference implementation uses IEEE-754 `double` and inherits its rounding behaviour. The mathematical claims are stated in $\overline{\mathbb{R}}$; their floating-point realization is approximate.
+6. **Floating-point realization.** Any numerical realization (such as the reference implementation) inherits the rounding behaviour of its arithmetic substrate. The mathematical claims are stated in $\overline{\mathbb{R}}$; floating-point realizations are approximate.
 
-These limitations delineate the scope of the present contribution and motivate the directions outlined in [Section 8.3](#83-future-directions).
+These limitations delineate the scope of the present contribution and motivate the directions outlined in [Section 7.3](#73-future-directions).
 
-## 8.3 Future Directions
+## 7.3 Future Directions
 
 The interval-number framework opens several avenues for further investigation:
 
 1. **Richer algebraic structure.** Investigate whether interval numbers exhibit additional structure (associativity, distributivity, identities, inverses) under suitable restrictions—for example, on intervals not containing zero, or on the set of point intervals.
 
-2. **Measure-theoretic integration.** Reconcile interval-number operations with the measure-theoretic conventions for handling indeterminate forms [[7](09_references.md)], where context-specific conventions such as $0 \cdot \infty = 0$ are common.
+2. **Measure-theoretic integration.** Reconcile interval-number operations with measure-theoretic conventions for handling indeterminate forms [[2](08_references.md)], where context-specific conventions such as $0 \cdot \infty = 0$ are common.
 
 3. **Applications.** Explore applications in:
    - numerical analysis (controlled treatment of overflow and underflow),
@@ -50,10 +50,10 @@ The interval-number framework opens several avenues for further investigation:
 
 7. **Estimation of additional indeterminate intervals.** Other indeterminate forms—possibly arising in specific application domains—could be assigned interval representations through the same limit-based justification methodology employed here.
 
-## 8.4 Closing Remark
+## 7.4 Closing Remark
 
 While the immediate significance of the framework remains theoretical, it offers a mathematically principled approach to a long-standing problem in real analysis. The unification of interval arithmetic and extended-real semantics provides a foundation upon which further algebraic, computational, and applied investigations can be built.
 
 ---
 
-[← Previous: Implementation](07_implementation.md) | [Back to Contents](../README.md) | [Next: References →](09_references.md)
+[← Previous: Applications](06_applications.md) | [Back to Contents](../README.md) | [Next: References →](08_references.md)

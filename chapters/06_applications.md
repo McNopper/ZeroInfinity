@@ -1,6 +1,6 @@
 # 6. Applications and Examples
 
-[← Previous: Algebraic Structure](05_algebraic_structure.md) | [Back to Contents](../README.md) | [Next: Implementation →](07_implementation.md)
+[← Previous: Algebraic Structure](05_algebraic_structure.md) | [Back to Contents](../README.md) | [Next: Conclusion →](07_conclusion.md)
 
 ---
 
@@ -47,9 +47,9 @@ The following table summarizes the principal indeterminate forms together with t
 |------|----------|---------------|
 | $0 \cdot \infty$ | $[0, \infty]_{in}$ | [Rule I](03_interval_numbers.md#34-foundation-rules-for-indeterminate-forms) |
 | $0 \cdot (-\infty)$ | $[-\infty, 0]_{in}$ | [Rule II](03_interval_numbers.md#34-foundation-rules-for-indeterminate-forms) |
-| $\dfrac{0}{0}$ | $[-\infty, \infty]_{in}$ | $\lim\frac{n}{n^2} = 0^+$ vs.\ $\lim\frac{-n}{n^2} = 0^-$ |
+| $\dfrac{0}{0}$ | $[-\infty, \infty]_{in}$ | $\lim_{x \to 0^{+}}\tfrac{x}{x^2} = +\infty$ vs.\ $\lim_{x \to 0^{-}}\tfrac{x}{x^2} = -\infty$; parametric $a_n = c/n,\ b_n = 1/n$ gives $a_n/b_n = c$ for any $c \in \mathbb{R}$ |
 | $\infty - \infty$ | $[-\infty, \infty]_{in}$ | $\lim(n - n^2) = -\infty$ vs.\ $\lim(n^2 - n) = \infty$ |
-| $\dfrac{\infty}{\infty}$ | $[0, \infty]_{in}$ | $\lim\frac{n}{n^2} = 0$ vs.\ $\lim\frac{n^2}{n} = \infty$ |
+| $\dfrac{\infty}{\infty}$ | $[0, \infty]_{in}$ | $\lim\tfrac{n}{n^2} = 0$ vs.\ $\lim\tfrac{n^2}{n} = \infty$ |
 | $0^0$ | $[0, \infty]_{in}$ | three-sequence argument ([Section 4.7](04_operations.md#47-exponentiation)) |
 | $1^\infty$ | $[0, \infty]_{in}$ | $(1 - \tfrac{1}{\sqrt{n}})^{n^2} \to 0$, $(1 + \tfrac{1}{n})^{n^2} \to \infty$ |
 | $\infty^0$ | $[0, \infty]_{in}$ | $n^{-1/\ln\ln n} \to 0$, $n^{\,1/\ln\ln n} \to \infty$ |
@@ -58,15 +58,20 @@ These representations are internally consistent under all operations defined in 
 
 ## 6.4 Worked Limits Justifying Selected Intervals
 
-For $\frac{0}{0} = [-\infty, \infty]_{in}$:
-$$\lim_{n \to 0^+}\frac{n}{n^2} = \infty, \qquad \lim_{n \to 0^-}\frac{n}{n^2} = -\infty.$$
+For $\dfrac{0}{0} = [-\infty, \infty]_{in}$:
+
+$$\lim_{x \to 0^{+}}\frac{x}{x^{2}} = +\infty, \qquad \lim_{x \to 0^{-}}\frac{x}{x^{2}} = -\infty.$$
+
+For any finite $c \in \mathbb{R}$, the parametric sequences $a_n = c/n$, $b_n = 1/n$ satisfy $a_n/b_n = c$ for all $n$, demonstrating that every value of $\mathbb{R}$ is attainable.
 
 For $1^\infty = [0, \infty]_{in}$:
+
 $$\lim_{n \to \infty}\Big(1 - \tfrac{1}{\sqrt{n}}\Big)^{n^2} = 0, \qquad \lim_{n \to \infty}\Big(1 + \tfrac{1}{n}\Big)^{n^2} = \infty.$$
 
 For $\infty^0 = [0, \infty]_{in}$:
+
 $$\lim_{n \to \infty} n^{-\,1/\ln\ln n} = 0, \qquad \lim_{n \to \infty} n^{\,1/\ln\ln n} = \infty.$$
 
 ---
 
-[← Previous: Algebraic Structure](05_algebraic_structure.md) | [Back to Contents](../README.md) | [Next: Implementation →](07_implementation.md)
+[← Previous: Algebraic Structure](05_algebraic_structure.md) | [Back to Contents](../README.md) | [Next: Conclusion →](07_conclusion.md)

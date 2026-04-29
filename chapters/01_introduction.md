@@ -32,7 +32,7 @@ which still does not produce the expected behavior of $0 \cdot \infty$.
 
 ## 1.3 Proposed Resolution
 
-This work proposes a resolution by introducing **interval numbers** as formal mathematical objects. Rather than treating $0 \cdot \infty$ as undefined, it is represented as $[0, \infty]_{in}$—an interval containing all possible values that limiting sequences of the form $a_n \cdot b_n$ (with $a_n \to 0$ and $b_n \to \infty$) can approach. This approach achieves algebraic closure: operations on indeterminate forms yield well-defined results within the extended interval framework.
+This work proposes a resolution by introducing **interval numbers** as formal mathematical objects. Rather than treating $0 \cdot \infty$ as undefined, it is represented as $[0, \infty]_{in}$—an interval whose endpoints span the limits realizable by directional sequences $a_n \cdot b_n$ with $a_n \to 0^{+}$ and $b_n \to +\infty$ (see [Section 3.4](03_interval_numbers.md#34-foundation-rules-for-indeterminate-forms) for the precise convention). This approach achieves algebraic closure: operations on indeterminate forms yield well-defined results within the extended interval framework.
 
 ## 1.4 Contributions
 
@@ -40,13 +40,13 @@ The main contributions of this work are:
 
 1. A formal definition of **interval numbers** as a mathematical structure for representing indeterminate forms.
 2. A complete specification of arithmetic operations on interval numbers, following standard interval arithmetic conventions.
-3. A proof sketch that interval numbers form a Magma under multiplication, establishing a non-trivial algebraic structure.
+3. A proof that interval numbers form a unital magma under multiplication, with a concrete counterexample demonstrating non-associativity.
 4. Demonstration of internal consistency through limit-based justifications of interval bounds.
 5. A functional C++ reference implementation accompanied by a unit test suite.
 
 ## 1.5 Organization
 
-The remainder of the document is organized as follows. [Section 2](02_related_work.md) reviews related work in interval arithmetic, extended reals, and indeterminate forms. [Section 3](03_interval_numbers.md) establishes the formal definition and foundation rules. [Section 4](04_operations.md) defines the algebraic operations. [Section 5](05_algebraic_structure.md) discusses the algebraic structure. [Section 6](06_applications.md) presents worked examples. [Section 7](07_implementation.md) describes the implementation. [Section 8](08_conclusion.md) concludes with future research directions.
+The remainder of the document is organized as follows. [Section 2](02_related_work.md) reviews related work in interval arithmetic, extended reals, and indeterminate forms. [Section 3](03_interval_numbers.md) establishes the formal definition and foundation rules. [Section 4](04_operations.md) defines the algebraic operations. [Section 5](05_algebraic_structure.md) discusses the algebraic structure. [Section 6](06_applications.md) presents worked examples. [Section 7](07_conclusion.md) concludes with future research directions. A reference C++ implementation accompanies the paper and is documented in the repository [README](../README.md#reference-implementation).
 
 ---
 
