@@ -198,7 +198,7 @@ The case $n = 0$ is *not* covered by the formula above: if $I$ contains an indet
 
 $$[x_0, x_1]_{in}^{\{n\}} \;=\; [\min(x_0^n, x_1^n),\ \max(x_0^n, x_1^n)]_{in}, \qquad (n \in \mathbb{Z}_{<0},\ 0 \notin I).$$
 
-For positive base intervals $I \subseteq [0, +\infty]$, $x^y$ is monotonic in each variable on each sign-component of $E$, and the convex hull is determined by the four corner values $x_i^{y_j}$ together with $\mathcal{V}^{\wedge}$ at the indeterminate-form points.
+For strictly positive finite base intervals $I \subseteq (0, +\infty)$, write $x^{y} = \exp(y \log x)$. The image $y \log x$ over $\log I \times E$ is determined by the standard interval-product hull on these finite quantities, and applying the increasing map $\exp$ yields the corresponding hull for $x^{y}$. The only indeterminate closure point that can arise in this case is $1^{\pm\infty}$ (when $1 \in I$ and $\pm\infty \in E$), which is supplemented via $\mathcal{V}^{\wedge}$; the extended-base indeterminate point $(\pm\infty)^{0}$ does not arise here and is handled by the general image-set definition above.
 
 **Indeterminate forms.**
 

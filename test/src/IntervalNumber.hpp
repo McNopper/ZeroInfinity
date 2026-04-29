@@ -422,10 +422,9 @@ public:
      * Computes interval raised to an interval power.
      * The result is the union of all possible powers: base^exp for all base in [x0,x1], exp in [y0,y1]
      * 
-     * Handles indeterminate forms:
-     *   - [0,0]^[0,0] = [0, ∞]in
-     *   - [1,1]^[∞,∞] = [0, ∞]in
-     *   - [∞,∞]^[0,0] = [0, ∞]in
+     * Handles indeterminate forms via the value map V^ at every reachable
+     * indeterminate-form corner (0,0), (1, +/- inf), (+/- inf, 0): whenever
+     * such a corner lies in [x0,x1] x [y0,y1] the hull contains 0 and +inf.
      * 
      * General approach: compute base^exp for all combinations of interval endpoints.
      * Scalar exponents are automatically converted to single-point intervals.
@@ -434,25 +433,30 @@ public:
     {
         std::set<double> results{};
 
-        // Handle indeterminate form: [0,0]^[0,0] = [0, ∞]in
-        if (m_interval[0u] == 0.0 && m_interval[1u] == 0.0 &&
-            exponent.m_interval[0u] == 0.0 && exponent.m_interval[1u] == 0.0)
-        {
-            return IntervalNumber(0.0, INF);
-        }
+        // Apply the value map V^ at every indeterminate-form point reached by
+        // the image set I^E. Per Definition 4.7 the indeterminate corner
+        // points are (0,0), (1, +/- inf) and (+/- inf, 0); whenever any such
+        // point lies in I x E the hull contains both 0 and +inf.
+        const double bLo = m_interval[0u];
+        const double bHi = m_interval[1u];
+        const double eLo = exponent.m_interval[0u];
+        const double eHi = exponent.m_interval[1u];
+        const bool baseContainsZero = (bLo <= 0.0 && bHi >= 0.0);
+        const bool baseContainsOne  = (bLo <= 1.0 && bHi >= 1.0);
+        const bool baseContainsPosInf = (bHi == INF);
+        const bool baseContainsNegInf = (bLo == -INF);
+        const bool expContainsZero  = (eLo <= 0.0 && eHi >= 0.0);
+        const bool expContainsPosInf = (eHi == INF);
+        const bool expContainsNegInf = (eLo == -INF);
 
-        // Handle indeterminate form: [1,1]^[∞,∞] = [0, ∞]in
-        if (m_interval[0u] == 1.0 && m_interval[1u] == 1.0 &&
-            exponent.m_interval[0u] == INF && exponent.m_interval[1u] == INF)
-        {
-            return IntervalNumber(0.0, INF);
-        }
+        const bool indeterminate00 = baseContainsZero && expContainsZero;
+        const bool indeterminate1Inf = baseContainsOne && (expContainsPosInf || expContainsNegInf);
+        const bool indeterminateInf0 = (baseContainsPosInf || baseContainsNegInf) && expContainsZero;
 
-        // Handle indeterminate form: [∞,∞]^[0,0] = [0, ∞]in
-        if (m_interval[0u] == INF && m_interval[1u] == INF &&
-            exponent.m_interval[0u] == 0.0 && exponent.m_interval[1u] == 0.0)
+        if (indeterminate00 || indeterminate1Inf || indeterminateInf0)
         {
-            return IntervalNumber(0.0, INF);
+            results.insert(0.0);
+            results.insert(INF);
         }
 
         // Compute all four combinations: base^exp for each endpoint pair

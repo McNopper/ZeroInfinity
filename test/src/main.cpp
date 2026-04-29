@@ -651,6 +651,42 @@ TEST(IntervalNumber, Power_IndeterminateForm_Infinity_pow_0)
     EXPECT_EQ(result.getX1(), INF);
 }
 
+TEST(IntervalNumber, Power_IndeterminateForm_BaseContainsZero_pow_0)
+{
+    // [0,1]^0 = [0, ∞]in (V^ at the (0,0) corner)
+    IntervalNumber a{0.0, 1.0};
+    auto result = a.pow(IntervalNumber{0.0});
+    EXPECT_EQ(result.getX0(), 0.0);
+    EXPECT_EQ(result.getX1(), INF);
+}
+
+TEST(IntervalNumber, Power_IndeterminateForm_BaseContainsPosInf_pow_0)
+{
+    // [1,∞]^0 = [0, ∞]in (V^ at the (+inf,0) corner)
+    IntervalNumber a{1.0, INF};
+    auto result = a.pow(IntervalNumber{0.0});
+    EXPECT_EQ(result.getX0(), 0.0);
+    EXPECT_EQ(result.getX1(), INF);
+}
+
+TEST(IntervalNumber, Power_IndeterminateForm_NegInfinity_pow_0)
+{
+    // [-∞,-∞]^0 = [0, ∞]in (formal V^ assignment for (-inf,0))
+    IntervalNumber a{-INF};
+    auto result = a.pow(IntervalNumber{0.0});
+    EXPECT_EQ(result.getX0(), 0.0);
+    EXPECT_EQ(result.getX1(), INF);
+}
+
+TEST(IntervalNumber, Power_IndeterminateForm_1_pow_NegInfinity)
+{
+    // 1^(-∞) = [0, ∞]in (signed variant per V^)
+    IntervalNumber a{1.0};
+    auto result = a.pow(IntervalNumber{-INF});
+    EXPECT_EQ(result.getX0(), 0.0);
+    EXPECT_EQ(result.getX1(), INF);
+}
+
 TEST(IntervalNumber, Power_PositiveInteger)
 {
     // [2, 3]^2 = [4, 9]
