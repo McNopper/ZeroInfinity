@@ -54,7 +54,7 @@ The following table summarizes the principal indeterminate forms together with t
 | $1^\infty$ | $[0, \infty]_{in}$ | $(1 - \tfrac{1}{\sqrt{n}})^{n^2} \to 0$, $(1 + \tfrac{1}{n})^{n^2} \to \infty$ |
 | $\infty^0$ | $[0, \infty]_{in}$ | $n^{-1/\ln\ln n} \to 0$, $n^{\,1/\ln\ln n} \to \infty$ |
 
-These representations are internally consistent under all operations defined in [Section 4](04_operations.md).
+These representations are consistent with the definitions in [Section 4](04_operations.md): for each form, evaluating it via the relevant Section-4 rule reproduces the listed interval. A global soundness theorem covering all composite expressions is not claimed; non-associativity of multiplication ([Section 5.2](05_algebraic_structure.md#52-failure-of-associativity)) and convex-hull approximation in the reciprocal ([Section 4.4](04_operations.md#44-reciprocal)) preclude such a claim in full generality.
 
 ## 6.4 Worked Limits Justifying Selected Intervals
 

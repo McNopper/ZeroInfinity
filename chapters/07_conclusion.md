@@ -6,7 +6,7 @@
 
 ## 7.1 Summary
 
-This work has introduced **interval numbers** as a formal algebraic framework for representing and manipulating indeterminate forms. By embedding indeterminate expressions into closed intervals of the extended real line $\overline{\mathbb{R}}$, algebraic closure is achieved: operations that were previously undefined now yield well-defined results. The induced structure is a **unital magma** under multiplication—closed, with two-sided identity $[1,1]_{in}$, but neither associative nor monoidal—and supports consistent algebraic manipulation while preserving the intuitive interpretation of indeterminate forms as ranges of admissible limit values. A C++ reference implementation accompanied by a unit test suite validates the framework computationally; build and verification details are documented in the repository's [README](../README.md#reference-implementation).
+This work has introduced **interval numbers** as a formal algebraic framework for representing and manipulating indeterminate forms. By embedding indeterminate expressions into closed intervals of the extended real line $\overline{\mathbb{R}}$, algebraic closure is achieved: operations that were previously undefined now yield well-defined results. The induced structure is a **unital magma** under multiplication—closed, with two-sided identity $[1,1]_{in}$, but neither associative nor monoidal—and supports consistent algebraic manipulation while preserving the intuitive interpretation of indeterminate forms as ranges of admissible limit values. A C++ reference implementation accompanied by a unit test suite validates the framework computationally; build and verification details are documented in [`test/README.md`](../test/README.md).
 
 ## 7.2 Limitations and Open Questions
 

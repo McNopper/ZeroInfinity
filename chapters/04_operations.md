@@ -12,15 +12,17 @@ All operations follow standard interval arithmetic [[6](08_references.md)], with
 
 $$\mathcal{C}(I, J) := \bigcup_{i,j \in \{0,1\}} \mathcal{V}(x_i \cdot y_j) \;\subseteq\; \overline{\mathbb{R}},$$
 
-where the *value map* $\mathcal{V}: \overline{\mathbb{R}} \cup \{0 \cdot \infty,\ 0 \cdot (-\infty)\} \to \mathcal{P}(\overline{\mathbb{R}})$ is defined by
+where the *value map* $\mathcal{V}$ is defined symmetrically on each ordered pair of factors:
 
 $$
 \mathcal{V}(p) := \begin{cases}
 \{p\}, & p \in \overline{\mathbb{R}} \text{ (a defined product)}, \\
-\{0, \infty\}, & p = 0 \cdot \infty \text{ (Rule I endpoints)}, \\
-\{-\infty, 0\}, & p = 0 \cdot (-\infty) \text{ (Rule II endpoints)}.
+\{0, \infty\}, & p \in \{\,0 \cdot \infty,\ \infty \cdot 0\,\} \text{ (Rule I endpoints)}, \\
+\{-\infty, 0\}, & p \in \{\,0 \cdot (-\infty),\ (-\infty) \cdot 0\,\} \text{ (Rule II endpoints)}.
 \end{cases}
 $$
+
+Multiplication of finite reals with $\pm\infty$ commutes in $\overline{\mathbb{R}}$, so the only ordered pairs requiring symmetric extension are those involving the indeterminate factor $0$.
 
 The product is then
 
@@ -35,12 +37,16 @@ $$I \cdot J = [\min(x_0 y_0, x_0 y_1, x_1 y_0, x_1 y_1),\ \max(x_0 y_0, x_0 y_1,
 $$
 r \cdot [x_0, x_1]_{in} =
 \begin{cases}
-[r x_0, r x_1]_{in}, & r > 0, \\
-[r x_1, r x_0]_{in}, & r < 0, \\
-[0, 0]_{in}, & r = 0 \text{ and } 0 \notin\{-\infty, \infty\} \cap\{x_0, x_1\}, \\
-[-\infty, 0]_{in} \text{ or } [0, \infty]_{in}, & r = 0 \text{ and } x_0 = -\infty \text{ or } x_1 = \infty \text{ (via Rules I/II)}.
+[r x_0,\ r x_1]_{in}, & r > 0, \\
+[r x_1,\ r x_0]_{in}, & r < 0, \\
+[0, 0]_{in}, & r = 0,\ x_0 > -\infty,\ x_1 < +\infty, \\
+[-\infty, 0]_{in}, & r = 0,\ x_0 = -\infty,\ x_1 < +\infty, \\
+[0, \infty]_{in}, & r = 0,\ x_0 > -\infty,\ x_1 = +\infty, \\
+[-\infty, \infty]_{in}, & r = 0,\ x_0 = -\infty,\ x_1 = +\infty.
 \end{cases}
 $$
+
+The four $r = 0$ subcases follow from $\mathcal{V}$ applied to the candidate products $0 \cdot x_0$ and $0 \cdot x_1$.
 
 **Geometric interpretation.** The four endpoint products correspond to the corners of the rectangle $[x_0, x_1] \times [y_0, y_1]$ in the $xy$-plane:
 
@@ -149,38 +155,53 @@ Negation of $\pm\infty$ is interpreted in $\overline{\mathbb{R}}$ in the standar
 
 ## 4.7 Exponentiation
 
-**Definition 4.7 (Power).** Let $I = [x_0, x_1]_{in}$ and $E = [y_0, y_1]_{in}$. Exponentiation is defined as a *partial* operation on $\mathcal{I} \times \mathcal{I}$, with admissible domain
+**Definition 4.7 (Power).** Let $I = [x_0, x_1]_{in}$ and $E = [y_0, y_1]_{in}$. The **admissible domain** of exponentiation is
 
-$$\mathrm{dom}(\,\cdot^{\,\cdot}) := \{(I, E) \in \mathcal{I} \times \mathcal{I} \;:\; x \ge 0 \text{ for all } x \in I,\ \text{or}\ y \in \mathbb{Z} \text{ for all } y \in E\}$$
+$$\mathrm{dom}(\,\cdot^{\,\cdot}) := \{(I, E) \in \mathcal{I} \times \mathcal{I} \;:\; x_0 \ge 0,\ \text{or}\ E = \{n\}\ \text{with}\ n \in \mathbb{Z}\}.$$
 
-together with the three indeterminate-form points listed below. On the admissible domain,
+On the admissible domain, exponentiation is defined as the closed interval hull of the image set:
 
-$$I^{E} := [\min_{i,j} V(x_i^{y_j}),\ \max_{i,j} V(x_i^{y_j})]_{in},$$
+$$I^{E} := [\inf \mathcal{S}(I, E),\ \sup \mathcal{S}(I, E)]_{in},$$
 
-where $V$ extends each endpoint power $x_i^{y_j}$ to a finite set of values via the indeterminate-form table:
+where
+
+$$\mathcal{S}(I, E) := \bigcup_{x \in I,\ y \in E} \mathcal{V}^{\wedge}(x^{y}) \;\subseteq\; \overline{\mathbb{R}},$$
+
+and $\mathcal{V}^{\wedge}$ extends the real-valued map by handling the three indeterminate-form points:
 
 $$
-V(b^{e}) := \begin{cases}
-\{0, \infty\}, & b^{e} \in \{0^{0},\ 1^{\infty},\ \infty^{0}\}, \\
-\{b^{e}\}, & b^{e} \in \overline{\mathbb{R}}.
+\mathcal{V}^{\wedge}(b^{e}) := \begin{cases}
+\{0, \infty\}, & (b, e) \in \{(0,0),\ (1, \pm\infty),\ (\pm\infty, 0)\}, \\
+\{b^{e}\}, & b^{e} \text{ is defined in } \overline{\mathbb{R}}.
 \end{cases}
 $$
 
 If $(I, E) \notin \mathrm{dom}(\,\cdot^{\,\cdot})$ the operation is undefined; in the reference implementation this is signaled by NaN propagation.
 
+**Reduction to corner formulas.** On regions where $x \mapsto x^y$ and $y \mapsto x^y$ are jointly monotonic, the supremum and infimum of $\mathcal{S}(I, E)$ are attained at corners $(x_i, y_j)$ and Definition 4.7 reduces to a four-corner endpoint formula. This is *not* the case in general; in particular, for a point even-integer exponent $E = \{n\}$ ($n \ge 2$ even) and a base interval crossing zero, $x \mapsto x^n$ attains its minimum $0$ in the interior:
+
+$$
+[x_0, x_1]_{in}^{\{n\}} =
+\begin{cases}
+[x_0^{n},\ x_1^{n}]_{in}, & 0 \le x_0 \text{ or } n \text{ odd}, \\
+[x_1^{n},\ x_0^{n}]_{in}, & x_1 \le 0 \text{ and } n \text{ even}, \\
+[0,\ \max(x_0^{n},\ x_1^{n})]_{in}, & x_0 < 0 < x_1 \text{ and } n \text{ even}.
+\end{cases}
+$$
+
+For positive base intervals $I \subseteq [0, +\infty]$, $x^y$ is monotonic in each variable on each sign-component of $E$, and the convex hull is determined by the four corner values $x_i^{y_j}$ together with $\mathcal{V}^{\wedge}$ at the indeterminate-form points.
+
 **Indeterminate forms.**
 
 $$0^{0} = 1^{\infty} = \infty^{0} = [0, \infty]_{in}.$$
 
-**Special considerations.**
-- If $I$ contains zero strictly and $E$ contains a negative value, $0^{y}$ for $y < 0$ contributes $\infty$ and the resulting interval extends to $\infty$.
-- If $I$ contains a negative value strictly and $E$ contains an even integer (and only integer values), the corner products are real and the result includes $0$ when the base interval contains zero.
-- If $I$ contains a negative value strictly and any value of $E$ is non-integer, the operation is partial; the implementation returns NaN.
+Each of these arises as $\mathcal{V}^{\wedge}$ applied to the corresponding indeterminate-form point.
 
 **Justification of $0^{0} = [0, \infty]_{in}$:**
 - Sequence A: $a_n = 1/n$, $b_n = 1/\sqrt{\ln n}$, then $a_n^{b_n} \to 0$.
 - Sequence B: $a_n = 1/n$, $b_n = 1/\ln n$, then $a_n^{b_n} \to e^{-1}$.
 - Sequence C: $a_n = 1/n$, $b_n = -1/\sqrt{\ln n}$, then $a_n^{b_n} \to \infty$.
+- For any $c > 0$, the parametric witness $a_n = 1/n$, $b_n = -\ln c / \ln n$ gives $a_n^{b_n} = c$ for all $n \ge 2$, so every value of $(0, \infty)$ is attained.
 
 ---
 

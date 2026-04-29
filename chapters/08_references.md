@@ -4,7 +4,7 @@
 
 ---
 
-[1] *Indeterminate form.* Wikipedia. <https://en.wikipedia.org/wiki/Indeterminate_form>
+[1] Apostol, T. M. (1974). *Mathematical Analysis,* 2nd ed. Addison-Wesley, Reading, MA. (Standard treatment of indeterminate forms in §7.13–7.14.)
 
 [2] Folland, G. B. (1999). *Real Analysis: Modern Techniques and Their Applications,* 2nd ed. Wiley-Interscience, New York. (Extended real line and conventions for arithmetic with $\pm\infty$.)
 
@@ -33,6 +33,8 @@
 [S4] *Magma (algebra).* Wikipedia. <https://en.wikipedia.org/wiki/Magma_(algebra)>
 
 [S5] *Extended real numbers.* PlanetMath. <https://planetmath.org/extendedrealnumbers>
+
+[S6] *Indeterminate form.* Wikipedia. <https://en.wikipedia.org/wiki/Indeterminate_form>
 
 ---
 

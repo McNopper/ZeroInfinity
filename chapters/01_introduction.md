@@ -20,15 +20,13 @@ which provides no new information. The fundamental obstacle is that indeterminat
 
 ## 1.2 Limit-Based Investigation
 
-Standard limit analysis confirms the difficulty. Consider the limits:
+Standard limit analysis confirms the difficulty. Two sequences both fitting the symbolic form $0 \cdot \infty$ produce different limits:
 
-$$\lim_{n\to\infty}\sqrt[n]{n} = 1, \qquad \lim_{n\to\infty}\frac{1}{n} = 0.$$
+$$a_n = \tfrac{1}{n},\ b_n = n^2 \quad \Rightarrow \quad a_n b_n = n \to \infty,$$
 
-Assuming associativity is permitted:
+$$a_n = \tfrac{1}{n^2},\ b_n = n \quad \Rightarrow \quad a_n b_n = \tfrac{1}{n} \to 0.$$
 
-$$\lim_{n\to\infty}\left(-\sqrt[n]{n}\right) \cdot \lim_{n\to\infty}\frac{1}{n} = \lim_{n\to\infty}\left(-\frac{\sqrt[n]{n}}{n}\right) = 0,$$
-
-which still does not produce the expected behavior of $0 \cdot \infty$.
+A single real-valued limit cannot capture both behaviours, yet both arise from the same symbolic form. This motivates a representation in which $0 \cdot \infty$ stands for the *range* of attainable limit values rather than a single number.
 
 ## 1.3 Proposed Resolution
 
@@ -46,7 +44,7 @@ The main contributions of this work are:
 
 ## 1.5 Organization
 
-The remainder of the document is organized as follows. [Section 2](02_related_work.md) reviews related work in interval arithmetic, extended reals, and indeterminate forms. [Section 3](03_interval_numbers.md) establishes the formal definition and foundation rules. [Section 4](04_operations.md) defines the algebraic operations. [Section 5](05_algebraic_structure.md) discusses the algebraic structure. [Section 6](06_applications.md) presents worked examples. [Section 7](07_conclusion.md) concludes with future research directions. A reference C++ implementation accompanies the paper and is documented in the repository [README](../README.md#reference-implementation).
+The remainder of the document is organized as follows. [Section 2](02_related_work.md) reviews related work in interval arithmetic, extended reals, and indeterminate forms. [Section 3](03_interval_numbers.md) establishes the formal definition and foundation rules. [Section 4](04_operations.md) defines the algebraic operations. [Section 5](05_algebraic_structure.md) discusses the algebraic structure. [Section 6](06_applications.md) presents worked examples. [Section 7](07_conclusion.md) concludes with future research directions. A reference C++ implementation accompanies the paper and is documented in [`test/README.md`](../test/README.md).
 
 ---
 
