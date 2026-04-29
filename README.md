@@ -73,7 +73,19 @@ ZeroInfinity/
 
 ## Acknowledgments
 
-The author gratefully acknowledges Eric Lengyel for insightful initial questions, family and colleagues for careful review and patience, and Ingeborg Kettern for foundational motivation rooted in classical analysis and inspiration through the legacy of Carl Friedrich Gauß.
+The author gratefully acknowledges:
+
+- Ingeborg Kettern, for analysis at the Fachhochschule Furtwangen
+- Prof. Dr. Peter Fleischer, for algebra at the Fachhochschule Furtwangen
+- and Eric Lengyel, for insightful questions during the more recent development of this work
+
+### Personal Acknowledgments
+
+The author gratefully acknowledges:
+
+- his parents, Monika Friedel Nopper and Ernst Christian Nopper
+- his wife, Iris Karoline Nopper
+- and the wider family
 
 ---
 
