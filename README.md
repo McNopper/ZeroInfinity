@@ -76,4 +76,4 @@ The author gratefully acknowledges:
 
 - his parents, Monika Friedel Nopper and Ernst Christian Nopper
 - his wife, Iris Karoline Nopper
-- and the wider family
+- and the wider family and friends
