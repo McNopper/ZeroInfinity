@@ -16,25 +16,30 @@ The project uses CMake (version 3.14 or higher).
 
 ```bash
 cd test
-mkdir build && cd build
-cmake ..
-cmake --build .
+cmake -S . -B build
+cmake --build build --config Release
 ```
 
 Google Test is fetched automatically via CMake's `FetchContent` module; no manual installation is required.
 
 ## Running the Tests
 
-```bash
-# Debug build (default)
-./Debug/interval_test.exe
+The location of the test executable depends on the CMake generator:
 
-# Release build
-cmake --build . --config Release
-./Release/interval_test.exe
+```bash
+# Single-config generators (Ninja, Unix Makefiles)
+./build/interval_test          # add .exe on Windows
+
+# Multi-config generators (Visual Studio, Xcode)
+./build/Release/interval_test.exe
+./build/Debug/interval_test.exe
 ```
 
-On non-Windows platforms, the executable is produced without the `.exe` suffix.
+Alternatively, run the suite via CTest from the build directory:
+
+```bash
+ctest --test-dir build --output-on-failure -C Release
+```
 
 ## Verification: Mapping Mathematical Claims to Tests
 
