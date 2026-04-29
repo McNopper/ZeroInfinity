@@ -37,10 +37,18 @@ This work proposes a resolution by introducing **interval numbers** as formal ma
 The main contributions of this work are:
 
 1. A formal definition of **interval numbers** as a mathematical structure for representing indeterminate forms.
-2. A complete specification of the basic arithmetic operations (total on $\mathcal{I}$) and an exponentiation operation on a stated admissible domain, all following the interval-arithmetic principle of taking hulls of attainable values.
+2. A complete specification of the basic arithmetic operations (total on $\mathcal{I}$) and an exponentiation operation on a stated admissible domain, all following the interval-arithmetic principle of taking hulls of attainable values, extended by an explicit value map for indeterminate endpoint products.
 3. A proof that interval numbers form a unital magma under multiplication, with a concrete counterexample demonstrating non-associativity.
 4. Demonstration of internal consistency through limit-based justifications of interval bounds.
 5. A functional C++ reference implementation accompanied by a unit test suite.
+
+**Scope and main results.** To distinguish what is *proven* from what is *assigned by convention* or *illustrated by example*, this paper takes the following positions:
+
+- **Definitions and conventions** ([Sections 3](03_interval_numbers.md) and [4](04_operations.md)): the foundation rules I and II ([Section 3.4](03_interval_numbers.md#34-foundation-rules-for-indeterminate-forms)), the value maps $\mathcal{V}$ and $\mathcal{V}^{\wedge}$ ([Sections 4.1](04_operations.md#41-multiplication) and [4.7](04_operations.md#47-exponentiation)), and the convex-hull convention for the reciprocal of a zero-spanning interval ([Section 4.4](04_operations.md#44-reciprocal)) are formal choices, not derivations.
+- **Proven results**: closure of $(\mathcal{I}, \cdot)$ and existence of the two-sided identity $[1,1]_{in}$ ([Theorem 5.1](05_algebraic_structure.md#51-closure-under-multiplication)); failure of associativity ([Proposition 5.2](05_algebraic_structure.md#52-failure-of-associativity)).
+- **Example-based limit witnesses** ([Sections 3.6](03_interval_numbers.md#36-justification-for-rules-i-and-ii) and [6.3–6.4](06_applications.md#63-classical-indeterminate-forms-and-their-interval-representations)): explicit and parametric directional sequences exhibiting representative endpoint and interior values for each foundation rule and classical indeterminate form.
+- **Implementation conformance**: the C++ reference implementation matches the stated definitions on the cases exercised by the unit tests ([`test/README.md`](../test/README.md)); it is a conformance artefact, not independent evidence for the mathematical claims.
+- **Not claimed**: a global soundness or optimality (tightness) theorem covering all composite expressions; full distributivity; closure of exponentiation outside its admissible domain.
 
 ## 1.5 Organization
 

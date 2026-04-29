@@ -143,7 +143,7 @@ and the parametric witness $a_n = c/n$, $b_n = 1/n$ giving $a_n / b_n = c$ for a
 **Definition 4.6 (Absolute Value).** Absolute value is defined by order rather than by endpoint multiplication, so that no indeterminate product is required:
 
 $$
-\lvert [x_0, x_1] \rvert_{in} :=
+\lvert [x_0, x_1]_{in} \rvert :=
 \begin{cases}
 [x_0,\ x_1]_{in}, & 0 \le x_0, \\
 [-x_1,\ -x_0]_{in}, & x_1 \le 0, \\
@@ -153,7 +153,7 @@ $$
 
 Negation of $\pm\infty$ is interpreted in $\overline{\mathbb{R}}$ in the standard way.
 
-**Examples.** $\lvert [-5, 3] \rvert_{in} = [0, 5]_{in}$. $\lvert [-\infty, 0] \rvert_{in} = [0, \infty]_{in}$. $\lvert [0, \infty] \rvert_{in} = [0, \infty]_{in}$.
+**Examples.** $\lvert [-5, 3]_{in} \rvert = [0, 5]_{in}$. $\lvert [-\infty, 0]_{in} \rvert = [0, \infty]_{in}$. $\lvert [0, \infty]_{in} \rvert = [0, \infty]_{in}$.
 
 ## 4.7 Exponentiation
 
@@ -180,18 +180,23 @@ $$
 \end{cases}
 $$
 
-The admissible domain is chosen precisely so that every pair $(x, y) \in I \times E$ falls into one of the two cases above; in particular, points $0^{y}$ with $y < 0$ are excluded by the domain restriction (i)–(iv). If $(I, E) \notin \mathrm{dom}(\,\cdot^{\,\cdot})$ the operation is undefined; in the reference implementation this is signaled by NaN propagation.
+The admissible domain is chosen precisely so that every pair $(x, y) \in I \times E$ falls into one of the two cases above; in particular, points $0^{y}$ with $y < 0$ are excluded by the domain restriction (i)–(iv). If $(I, E) \notin \mathrm{dom}(\,\cdot^{\,\cdot})$ the operation is mathematically undefined; the reference implementation handles many — but not necessarily all — non-admissible inputs by NaN propagation and should not be relied upon to reject every non-admissible input outside the cases exercised by the unit tests.
 
-**Reduction to corner formulas.** On regions where $x \mapsto x^y$ and $y \mapsto x^y$ are jointly monotonic, the supremum and infimum of $\mathcal{S}(I, E)$ are attained at corners $(x_i, y_j)$ and Definition 4.7 reduces to a four-corner endpoint formula. This is *not* the case in general; in particular, for a point even-integer exponent $E = \{n\}$ ($n \ge 2$ even) and a base interval crossing zero, $x \mapsto x^n$ attains its minimum $0$ in the interior:
+**Reduction to corner formulas.** On regions where $x \mapsto x^y$ and $y \mapsto x^y$ are jointly monotonic, the supremum and infimum of $\mathcal{S}(I, E)$ are attained at corners $(x_i, y_j)$ and Definition 4.7 reduces to a four-corner endpoint formula. This is *not* the case in general; in particular, for a point positive-integer exponent $E = \{n\}$ with $n \in \mathbb{Z}_{>0}$ and a base interval crossing zero, $x \mapsto x^n$ attains its minimum $0$ in the interior:
 
 $$
 [x_0, x_1]_{in}^{\{n\}} =
 \begin{cases}
-[x_0^{n},\ x_1^{n}]_{in}, & 0 \le x_0 \text{ or } n \text{ odd}, \\
-[x_1^{n},\ x_0^{n}]_{in}, & x_1 \le 0 \text{ and } n \text{ even}, \\
-[0,\ \max(x_0^{n},\ x_1^{n})]_{in}, & x_0 < 0 < x_1 \text{ and } n \text{ even}.
+[x_0^{n},\ x_1^{n}]_{in}, & 0 \le x_0\ \text{or}\ n\ \text{odd}, \\
+[x_1^{n},\ x_0^{n}]_{in}, & x_1 \le 0\ \text{and}\ n\ \text{even}, \\
+[0,\ \max(x_0^{n},\ x_1^{n})]_{in}, & x_0 < 0 < x_1\ \text{and}\ n\ \text{even},
 \end{cases}
+\qquad (n \in \mathbb{Z}_{>0}).
 $$
+
+The case $n = 0$ is *not* covered by the formula above: if $I$ contains an indeterminate base for the exponent $0$ — that is, if $0 \in I$ (giving the corner $0^0$) or if $\pm\infty \in I$ (giving the corners $(\pm\infty)^{0}$) — then $\mathcal{V}^{\wedge}$ contributes $\{0, \infty\}$ at that point and $I^{\{0\}} = [0, \infty]_{in}$; otherwise every point of $I$ is finite and nonzero, $b^{0} = 1$ pointwise, and $I^{\{0\}} = [1, 1]_{in}$. The case $n \in \mathbb{Z}_{<0}$ is admissible only when $0 \notin I$ (case (iv) above); on that region $x \mapsto x^n$ is monotone and the result is
+
+$$[x_0, x_1]_{in}^{\{n\}} \;=\; [\min(x_0^n, x_1^n),\ \max(x_0^n, x_1^n)]_{in}, \qquad (n \in \mathbb{Z}_{<0},\ 0 \notin I).$$
 
 For positive base intervals $I \subseteq [0, +\infty]$, $x^y$ is monotonic in each variable on each sign-component of $E$, and the convex hull is determined by the four corner values $x_i^{y_j}$ together with $\mathcal{V}^{\wedge}$ at the indeterminate-form points.
 
@@ -199,7 +204,7 @@ For positive base intervals $I \subseteq [0, +\infty]$, $x^y$ is monotonic in ea
 
 $$0^{0} = 1^{\infty} = \infty^{0} = [0, \infty]_{in}.$$
 
-Each of these arises as $\mathcal{V}^{\wedge}$ applied to the corresponding indeterminate-form point.
+Each of these arises as $\mathcal{V}^{\wedge}$ applied to the corresponding indeterminate-form point. The signed variants admitted by Definition 4.7 — namely $1^{-\infty}$ and $(-\infty)^{0}$ — are also indeterminate and receive the same hull $[0, \infty]_{in}$ by formal assignment via $\mathcal{V}^{\wedge}$. For $1^{-\infty}$, the parametric sequence $a_n = 1 + (\ln c)/n,\ b_n = -n$ gives $a_n^{b_n} \to c^{-1}$, attaining every $c^{-1} \in (0, \infty)$ as $c$ varies, so $[0, \infty]_{in}$ is a genuine limit hull. For $(-\infty)^{0}$, no analogous real-valued limit-witness argument is claimed: non-integer real exponents of negative bases are not real-valued, so $(-\infty)^{0} = [0, \infty]_{in}$ is a *formal convention* of the value map $\mathcal{V}^{\wedge}$ adopted for symmetry with $(+\infty)^{0}$ and to keep the admissible domain closed under sign reflection of the base.
 
 **Justification of $0^{0} = [0, \infty]_{in}$:**
 - Sequence A: $a_n = 1/n$, $b_n = 1/\sqrt{\ln n}$, then $a_n^{b_n} \to 0$.

@@ -1,10 +1,10 @@
-# 6. Applications and Examples
+# 6. Worked Examples and Classical Forms
 
 [← Previous: Algebraic Structure](05_algebraic_structure.md) | [Back to Contents](../README.md) | [Next: Conclusion →](07_conclusion.md)
 
 ---
 
-This section demonstrates the consistency and utility of the framework through worked examples.
+This section illustrates the framework through worked algebraic examples and tabulates the interval-number representations of the classical indeterminate forms together with their limit-based justifications. No application case study from numerical analysis or engineering is claimed here; the examples document the internal consistency of Definitions 4.1–4.7 with the foundation rules of Section 3.
 
 ## 6.1 Algebraic Consistency
 
@@ -29,7 +29,7 @@ The interval-number framework therefore validates the intuitive algebraic identi
 *Derivation.*
 
 - $\frac{0}{0} = [-\infty, \infty]_{in}$ ([Definition 4.5](04_operations.md#45-division));
-- $\lvert [-\infty, \infty] \rvert_{in} = [0, \infty]_{in}$ ([Definition 4.6](04_operations.md#46-absolute-value));
+- $\lvert [-\infty, \infty]_{in} \rvert = [0, \infty]_{in}$ ([Definition 4.6](04_operations.md#46-absolute-value));
 - $[0, \infty]_{in} + \infty = [0 + \infty,\ \infty + \infty]_{in} = [\infty, \infty]_{in} = \infty$. $\quad\square$
 
 **Example 6.2.** $\;\tfrac{\infty}{\infty} + \infty = \infty.$

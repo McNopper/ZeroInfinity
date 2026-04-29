@@ -17,7 +17,7 @@ This section examines the algebraic structure induced by interval-number operati
 
 In both cases the value map $\mathcal{V}(P_{ij})$ is a non-empty finite subset of $\overline{\mathbb{R}}$. Hence the candidate set $\mathcal{C}(I, J) = \bigcup_{i,j} \mathcal{V}(P_{ij})$ is a non-empty finite subset of $\overline{\mathbb{R}}$, and its minimum and maximum are well-defined. Therefore $I \cdot J = [\min \mathcal{C},\ \max \mathcal{C}]_{in} \in \mathcal{I}$, establishing closure.
 
-**Proof of identity.** For $I = [x_0, x_1]_{in}$ with $x_0, x_1 \in \overline{\mathbb{R}}$, the four endpoint products in $[1, 1]_{in} \cdot I$ are $1 \cdot x_0$ and $1 \cdot x_1$, each of which is defined in $\overline{\mathbb{R}}$ (no factor is zero, so no indeterminate form arises). Hence $\mathcal{C}([1,1]_{in}, I) = \{x_0, x_1\}$ and $[1, 1]_{in} \cdot I = [x_0, x_1]_{in} = I$. The argument is symmetric in the operands. $\blacksquare$
+**Proof of identity.** For $I = [x_0, x_1]_{in}$ with $x_0, x_1 \in \overline{\mathbb{R}}$, the four endpoint products in $[1, 1]_{in} \cdot I$ are $1 \cdot x_0$ and $1 \cdot x_1$. Since one factor is the finite nonzero scalar $1$, no indeterminate product of the form $0 \cdot (\pm\infty)$ or $(\pm\infty) \cdot 0$ arises, and each endpoint product is defined in $\overline{\mathbb{R}}$ with $1 \cdot x_i = x_i$. Hence $\mathcal{C}([1,1]_{in}, I) = \{x_0, x_1\}$ and $[1, 1]_{in} \cdot I = [x_0, x_1]_{in} = I$. The argument is symmetric in the operands. $\blacksquare$
 
 ## 5.2 Failure of Associativity
 

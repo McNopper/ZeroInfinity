@@ -28,6 +28,8 @@
 
 [12] Carlström, J. (2004). *Wheels — On Division by Zero.* Mathematical Structures in Computer Science 14(1), 143–184. <https://doi.org/10.1017/S0960129503004110> (Algebraic totalization of division via wheel structures.)
 
+[13] Bergstra, J. A., and Tucker, J. V. (2007). *The rational numbers as an abstract data type.* Journal of the ACM 54(2), Article 7. <https://doi.org/10.1145/1219092.1219095> (Introduces meadows; cf. also Bergstra, Hirshfeld and Tucker 2009 on meadows of fields.)
+
 **Supplementary online references.**
 
 [S1] *Extended real number line.* Wikipedia. <https://en.wikipedia.org/wiki/Extended_real_number_line>
