@@ -38,7 +38,7 @@ On non-Windows platforms, the executable is produced without the `.exe` suffix.
 
 ## Verification: Mapping Mathematical Claims to Tests
 
-The 89 unit tests in [`src/main.cpp`](src/main.cpp) verify that the reference implementation conforms to the formal definitions of [Chapter 4](../chapters/04_operations.md) and to the stated examples and edge cases. Selected correspondences:
+The 93 unit tests in [`src/main.cpp`](src/main.cpp) verify that the reference implementation conforms to the formal definitions of [Chapter 4](../chapters/04_operations.md) and to the stated examples and edge cases. Selected correspondences:
 
 | Claim | Reference | Test name(s) |
 |-------|-----------|--------------|
@@ -51,7 +51,7 @@ The 89 unit tests in [`src/main.cpp`](src/main.cpp) verify that the reference im
 | $`\tfrac{\infty}{\infty} = [0, \infty]_{in}`$ | [§4.5](../chapters/04_operations.md#45-division) | `DivisionInfinityByInfinity` |
 | $`0^0 = 1^\infty = \infty^0 = [0, \infty]_{in}`$ | [§4.7](../chapters/04_operations.md#47-exponentiation) | `Power_IndeterminateForm_0_pow_0`, `Power_IndeterminateForm_1_pow_Infinity`, `Power_IndeterminateForm_Infinity_pow_0` |
 
-All 89 tests pass under the build instructions above. Test names not appearing in this table cover normalization invariants, arithmetic identities on point intervals, IEEE-754 baseline comparisons, and regression tests for reciprocal/division/abs/pow on edge cases.
+All 93 tests pass under the build instructions above. Test names not appearing in this table cover normalization invariants, arithmetic identities on point intervals, IEEE-754 baseline comparisons, and regression tests for reciprocal/division/abs/pow on edge cases.
 
 ## Scope and Future Refinements
 
