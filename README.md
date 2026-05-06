@@ -4,6 +4,14 @@
 
 ---
 
+**Foundation Rule (Rule I):**
+
+$$0 \cdot \infty \;=\; \Omega \;:=\; [0, \infty]_{in}$$
+
+Within the **interval-number framework** introduced in this work, the indeterminate form $`0 \cdot \infty`$ is identified with the **foundation interval** $`\Omega := [0, \infty]_{in}`$, with companion $`-\Omega := [-\infty, 0]_{in}`$ for $`0 \cdot (-\infty)`$ (Rule II). See [§3.4](chapters/03_interval_numbers.md#34-foundation-rules-for-indeterminate-forms) for the formal statement, definition, and derivation.
+
+---
+
 ## Abstract
 
 The expressions $`0 \cdot \infty`$ and $`0 \cdot (-\infty)`$ are classical indeterminate forms that resist standard algebraic manipulation, even under extended real arithmetic. This work introduces **interval numbers**, a formal algebraic framework that represents indeterminate forms as closed intervals in the extended real line $`\overline{\mathbb{R}}`$. The interval $`[x_0, x_1]_{in}`$ is treated as a first-class algebraic object whose endpoints are *assigned by formal rules motivated by directional limit witnesses* rather than derived as a complete classification of all admissible limits. The two foundation rules identify $`0 \cdot \infty = \Omega := [0, \infty]_{in}`$ and $`0 \cdot (-\infty) = -\Omega := [-\infty, 0]_{in}`$, naming the resulting interval numbers as a notational shorthand. Operations are defined by interval-arithmetic-style hulls, extended by an explicit value map $`\mathcal{V}`$ that handles indeterminate endpoint products, and (for exponentiation) by an image-set hull on a stated admissible domain. The main proven result is that $`(\mathcal{I}, \cdot)`$ is a **unital magma** with identity $`[1,1]_{in}`$ — closed under multiplication, but neither associative (an explicit counterexample is given) nor monoidal. Addition, subtraction, multiplication, reciprocal, division, and absolute value are total on $`\mathcal{I}`$; exponentiation is partial on a precisely stated admissible domain. Worked examples and parametric limit witnesses for each classical indeterminate form (including $`0\cdot\infty`$, $`\infty-\infty`$, $`0/0`$, $`\infty/\infty`$, $`0^0`$, $`1^\infty`$, $`\infty^0`$) illustrate consistency with the chosen rules; no global optimality or tightness theorem is claimed. A C++ reference implementation with an accompanying unit-test suite is provided as a conformance artefact.
