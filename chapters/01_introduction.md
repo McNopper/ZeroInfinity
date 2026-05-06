@@ -30,7 +30,7 @@ A single real-valued limit cannot capture both behaviours, yet both arise from t
 
 ## 1.3 Proposed Resolution
 
-This work proposes a resolution by introducing **interval numbers** as formal mathematical objects. Rather than treating $`0 \cdot \infty`$ as undefined, it is represented as $`[0, \infty]_{in}`$—an interval whose endpoints span the limits realizable by directional sequences $`a_n \cdot b_n`$ with $`a_n \to 0^{+}`$ and $`b_n \to +\infty`$ (see [Section 3.4](03_interval_numbers.md#34-foundation-rules-for-indeterminate-forms) for the precise convention). This approach makes the basic arithmetic operations (addition, subtraction, multiplication, reciprocal, division, absolute value) total on $`\mathcal{I}`$, and provides an exponentiation operation defined on a precisely stated admissible domain ([Section 4.7](04_operations.md#47-exponentiation)).
+This work proposes a resolution by introducing **interval numbers** as formal mathematical objects. Rather than treating $`0 \cdot \infty`$ as undefined, it is represented as $`[0, \infty]_{in}`$—an interval whose endpoints span the limits realizable by directional sequences $`a_n \cdot b_n`$ with $`a_n \to 0^{+}`$ and $`b_n \to +\infty`$ (see [Section 3.4](03_interval_numbers.md#34-foundation-rules-for-indeterminate-forms) for the precise convention). This foundation interval is denoted $`\Omega := [0, \infty]_{in}`$, with companion shorthand $`-\Omega := [-\infty, 0]_{in}`$. This approach makes the basic arithmetic operations (addition, subtraction, multiplication, reciprocal, division, absolute value) total on $`\mathcal{I}`$, and provides an exponentiation operation defined on a precisely stated admissible domain ([Section 4.7](04_operations.md#47-exponentiation)).
 
 ## 1.4 Contributions
 

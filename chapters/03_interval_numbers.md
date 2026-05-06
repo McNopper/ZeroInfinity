@@ -52,21 +52,40 @@ This identification provides a natural embedding $\overline{\mathbb{R}} \hookrig
 
 ## 3.4 Foundation Rules for Indeterminate Forms
 
-The interval-number framework assigns to each indeterminate form a closed interval in $\overline{\mathbb{R}}$. These assignments are formal algebraic conventions, motivated and supported by directional limit witnesses: in each case, the assigned interval is the convex hull of products of sequences in which the factor tending to zero is restricted to a specified sign. The two fundamental rules are:
+The interval-number framework assigns to each indeterminate form a closed interval in $\overline{\mathbb{R}}$. These assignments are formal algebraic conventions, motivated and supported by directional limit witnesses: in each case, the assigned interval is the convex hull of products of sequences in which the factor tending to zero is restricted to a specified sign. The two fundamental rules are stated as symbolic identities and then made precise by definitions of the named foundation intervals.
 
-**Rule I.** The indeterminate form $0 \cdot \infty$ is represented as
+**Rule I (statement).** The indeterminate form $0 \cdot \infty$ is identified with a single named object $\Omega$:
 
-$$0 \cdot \infty = [0, \infty]_{in}.$$
+$$0 \cdot \infty \;=\; \Omega.$$
 
-**Rule II.** The indeterminate form $0 \cdot (-\infty)$ is represented as
+**Rule II (statement).** The indeterminate form $0 \cdot (-\infty)$ is identified with $-\Omega$:
 
-$$0 \cdot (-\infty) = [-\infty, 0]_{in}.$$
+$$0 \cdot (-\infty) \;=\; -\Omega.$$
+
+**Definition 3.3 (Foundation intervals).** The symbols of Rules I and II are defined as the following interval numbers:
+
+$$
+\Omega \;:=\; [0, \infty]_{in},\qquad
+-\Omega \;:=\; [-\infty, 0]_{in}.
+$$
+
+For the joint full-range indeterminate (arising e.g. from $\tfrac{0}{0}$ and $\infty - \infty$, see [Section 6.3](06_applications.md#63-classical-indeterminate-forms-and-their-interval-representations)), define additionally
+
+$$\widetilde{\Omega} \;:=\; [-\infty, \infty]_{in}.$$
+
+These symbols are *names for interval numbers*, not new atomic elements of $\overline{\mathbb{R}}$. They inherit all arithmetic from the operations defined in [Section 4](04_operations.md) and add no new mathematical content; the bracketed forms $`[0, \infty]_{in}`$, $`[-\infty, 0]_{in}`$, and $`[-\infty, \infty]_{in}`$ remain primary throughout this work, with the shorthand used where it improves readability. The symbol $\Omega$ is local to this work and is not to be confused with the first uncountable ordinal of set theory or with asymptotic lower-bound notation in computer science.
+
+**Derivation.** The identification $`\Omega = [0, \infty]_{in}`$ of Rule I is justified by exhibiting directional sequences whose products attain every value of $`[0, \infty]_{in}`$, with no sequence (under $`a_n \ge 0,\ a_n \to 0,\ b_n \to +\infty`$) leaving that interval; the parametric witness $`a_n = c/n,\ b_n = n`$ yields any $`c \in [0, \infty)`$, while $`a_n = 1/n,\ b_n = n^2`$ realizes the right endpoint $`+\infty`$ ([Section 3.6](#36-justification-for-rules-i-and-ii)). Rule II then follows from Rule I by scalar multiplication in the algebra of $`\mathcal{I}`$ ([Definition 4.1](04_operations.md#41-multiplication)): multiplying $`\Omega`$ by $`-1`$ gives
+
+$$-1 \cdot \Omega \;=\; -1 \cdot [0, \infty]_{in} \;=\; [-1 \cdot \infty,\ -1 \cdot 0]_{in} \;=\; [-\infty, 0]_{in} \;=\; -\Omega,$$
+
+so $`0 \cdot (-\infty) = -1 \cdot (0 \cdot \infty) = -1 \cdot \Omega = -\Omega`$. The dual direction $`0 \cdot \infty = -1 \cdot (0 \cdot (-\infty))`$ is verified step-by-step in [Section 6.1](06_applications.md#61-algebraic-consistency).
 
 **Directional convention.** Within Rules I and II, the symbol $0$ is interpreted as a one-sided (non-negative) approach to zero, written $0^{+}$ where emphasis is required. Concretely, Rule I represents the set of limits
 
 $$\lbrace \, \lim_{n} a_n b_n : a_n \ge 0,\; a_n \to 0,\; b_n \to +\infty \,\rbrace,$$
 
-and Rule II is obtained from Rule I by negation, since $`0 \cdot (-\infty) = -1 \cdot (0 \cdot \infty)`$ in the algebra of $`\mathcal{I}`$ (Section 4). Without this directional restriction, the products $`a_n b_n`$ with two-sided $`a_n \to 0`$ would attain every value in $`[-\infty, \infty]`$, and the algebraic identity that motivates the framework would collapse.
+and Rule II inherits the analogous one-sided restriction via the derivation above. Without this directional restriction, the products $`a_n b_n`$ with two-sided $`a_n \to 0`$ would attain every value in $`[-\infty, \infty]`$, and the algebraic identity that motivates the framework would collapse.
 
 This convention is a formal choice, not a derivation; the framework should be read as an algebraic structure on $\mathcal{I}$ whose rules are *consistent with* the stated class of directional limits, rather than as a complete classification of all possible limits of all sequences fitting the symbolic form.
 

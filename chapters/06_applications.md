@@ -8,16 +8,16 @@ This section illustrates the framework through worked algebraic examples and tab
 
 ## 6.1 Algebraic Consistency
 
-**Claim.** $\;0 \cdot \infty = -1 \cdot (0 \cdot (-\infty)).$
+**Claim.** $\;0 \cdot \infty = -1 \cdot (0 \cdot (-\infty)).$ Equivalently, $\;\Omega = -1 \cdot (-\Omega).$
 
 *Derivation.*
 
 | Step | Operation or Rule |
 |------|-------------------|
-| $-1 \cdot (0 \cdot (-\infty))$ | apply [Rule II](03_interval_numbers.md#34-foundation-rules-for-indeterminate-forms) |
+| $-1 \cdot (0 \cdot (-\infty))$ | apply [Rule II](03_interval_numbers.md#34-foundation-rules-for-indeterminate-forms): $0 \cdot (-\infty) = -\Omega$ |
 | $`-1 \cdot [-\infty, 0]_{in}`$ | scalar multiplication ([Definition 4.1](04_operations.md#41-multiplication)) |
 | $`[-1 \cdot 0,\ -1 \cdot (-\infty)]_{in}`$ | operations in $\overline{\mathbb{R}}$ |
-| $`[0, \infty]_{in}`$ | apply [Rule I](03_interval_numbers.md#34-foundation-rules-for-indeterminate-forms) |
+| $`[0, \infty]_{in} = \Omega`$ | apply [Rule I](03_interval_numbers.md#34-foundation-rules-for-indeterminate-forms) |
 | $0 \cdot \infty$ | $\square$ |
 
 The interval-number framework therefore validates the intuitive algebraic identity, a result not attainable with naive limit analysis.
@@ -55,6 +55,8 @@ The following table summarizes the principal indeterminate forms together with t
 | $`\infty^0`$ | $`[0, \infty]_{in}`$ | parametric: $`a_n = n,\ b_n = \tfrac{\ln c}{\ln n}`$ gives $`a_n^{b_n} = c`$ for any $`c > 0`$; endpoints $`0,\infty`$ via $`b_n = \mp 1/\ln\ln n`$ |
 
 These representations are consistent with the definitions in [Section 4](04_operations.md): for each form, evaluating it via the relevant Section-4 rule reproduces the listed interval. A global soundness theorem covering all composite expressions is not claimed; non-associativity of multiplication ([Section 5.2](05_algebraic_structure.md#52-failure-of-associativity)) and convex-hull approximation in the reciprocal ([Section 4.4](04_operations.md#44-reciprocal)) preclude such a claim in full generality.
+
+Using the shorthand of [Section 3.4](03_interval_numbers.md#34-foundation-rules-for-indeterminate-forms), the rows of the table can be summarized as $`0 \cdot \infty = \Omega`$, $`0 \cdot (-\infty) = -\Omega`$, $`0/0 = \widetilde{\Omega}`$, $`\infty - \infty = \widetilde{\Omega}`$, and $`\infty/\infty = 0^0 = 1^\infty = \infty^0 = \Omega`$.
 
 ## 6.4 Worked Limits Justifying Selected Intervals
 

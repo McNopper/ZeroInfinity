@@ -22,7 +22,7 @@ $$
 \end{cases}
 $$
 
-Multiplication of finite reals with $\pm\infty$ commutes in $\overline{\mathbb{R}}$, so the only ordered pairs requiring symmetric extension are those involving the indeterminate factor $0$.
+Multiplication of finite reals with $\pm\infty$ commutes in $\overline{\mathbb{R}}$, so the only ordered pairs requiring symmetric extension are those involving the indeterminate factor $0$. The endpoint sets $`\lbrace 0, \infty\rbrace`$ and $`\lbrace -\infty, 0\rbrace`$ returned by $\mathcal{V}$ on indeterminate corner products are exactly the endpoints of the foundation intervals $`\Omega = [0, \infty]_{in}`$ and $`-\Omega = [-\infty, 0]_{in}`$ of [Section 3.4](03_interval_numbers.md#34-foundation-rules-for-indeterminate-forms); taking $\min$ and $\max$ over $\mathcal{C}$ recovers those intervals.
 
 The product is then
 
