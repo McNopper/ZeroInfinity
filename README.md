@@ -6,7 +6,7 @@
 
 **Foundation Rule (Rule I):**
 
-$$0 \cdot \infty \;=\; \Omega \;:=\; [0, \infty]_{in}$$
+$$0 \cdot \infty = \Omega := [0, \infty]_{in}$$
 
 Within the **interval-number framework** introduced in this work, the indeterminate form $`0 \cdot \infty`$ is identified with the **foundation interval** $`\Omega := [0, \infty]_{in}`$, with companion $`-\Omega := [-\infty, 0]_{in}`$ for $`0 \cdot (-\infty)`$ (Rule II). See [§3.4](chapters/03_interval_numbers.md#34-foundation-rules-for-indeterminate-forms) for the formal statement, definition, and derivation.
 
