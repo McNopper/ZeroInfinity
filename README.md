@@ -6,8 +6,8 @@
 
 The full scientific paper is provided as a single LaTeX-typeset PDF:
 
-- **[paper/paper.pdf](paper/paper.pdf)** — the complete manuscript.
-- **[paper/paper.tex](paper/paper.tex)** — LaTeX source.
+- **[paper.pdf](paper.pdf)** — the complete manuscript.
+- **[paper.tex](paper.tex)** — LaTeX source.
 
 ### Foundation Rule (Rule I)
 
@@ -28,10 +28,9 @@ closed under multiplication, but neither associative nor monoidal.
 ZeroInfinity/
 ├── README.md                  Entry point (this file)
 ├── LICENSE
-├── paper/
-│   ├── paper.tex              LaTeX source of the paper
-│   └── paper.pdf              Typeset PDF of the paper
-├── illustrations/             Figures and figure-generation script
+├── paper.tex                  LaTeX source of the paper
+├── paper.pdf                  Typeset PDF of the paper
+├── illustrations/Figures and figure-generation script
 │   ├── generate_figures.py
 │   ├── fig_extended_real_intervals.png
 │   ├── fig_indeterminate_limits.png
@@ -48,19 +47,17 @@ ZeroInfinity/
 
 ## Building the Paper
 
-The PDF in `paper/paper.pdf` is committed for convenience and can be
-rebuilt from `paper/paper.tex` with any modern LaTeX engine. Tectonic
-is recommended because it auto-fetches all required packages:
+The PDF in `paper.pdf` is committed for convenience and can be rebuilt
+from `paper.tex` with any modern LaTeX engine. Tectonic is recommended
+because it auto-fetches all required packages:
 
 ```bash
-cd paper
 tectonic paper.tex
 ```
 
 Alternatively, with a full TeX Live or MiKTeX installation:
 
 ```bash
-cd paper
 pdflatex paper.tex
 pdflatex paper.tex   # rerun to resolve cross-references
 ```
