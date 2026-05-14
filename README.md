@@ -64,7 +64,7 @@ pdflatex paper.tex   # rerun to resolve cross-references
 
 ## Regenerating the Figures
 
-The figures in `illustrations/` are generated programmatically with
+The figures in `figures/` are generated programmatically with
 Python and matplotlib (publication-quality serif font, LaTeX math
 rendering, 300 DPI).
 
@@ -78,10 +78,10 @@ Install and run:
 
 ```bash
 pip install "matplotlib==3.10.8" "numpy==2.4.1"
-python illustrations/generate_figures.py
+python figures/generate_figures.py
 ```
 
-All `.png` files in `illustrations/` are overwritten on each run.
+All `.png` files in `figures/` are overwritten on each run.
 
 ## C++ Reference Implementation
 

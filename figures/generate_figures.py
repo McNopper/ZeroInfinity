@@ -1,7 +1,7 @@
 """
 Generates scientific publication-quality figures for the ZeroInfinity paper.
 
-Run from the repository root or from the illustrations/ directory:
+Run from the repository root or from the figures/ directory:
     python generate_figures.py
 
 Produces:
