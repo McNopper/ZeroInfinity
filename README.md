@@ -30,7 +30,7 @@ ZeroInfinity/
 ├── LICENSE
 ├── paper.tex                  LaTeX source of the paper
 ├── paper.pdf                  Typeset PDF of the paper
-├── illustrations/Figures and figure-generation script
+├── figures/                   Figures and figure-generation script
 │   ├── generate_figures.py
 │   ├── fig_extended_real_intervals.png
 │   ├── fig_indeterminate_limits.png
