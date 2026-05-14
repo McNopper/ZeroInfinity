@@ -349,6 +349,36 @@ In the standard treatment, computations encountering any of these
 forms are undefined. The interval-number framework provides a uniform
 algebraic interpretation.
 
+\paragraph{Interval hull.}
+For any nonempty finite subset $S \subseteq \Rext$, define the
+\emph{interval hull}
+\[
+\mathrm{Hull}(S) \;:=\; [\,\min S,\ \max S\,].
+\]
+Throughout the paper, $\min$ and $\max$ are taken in the extended
+order on $\Rext$, so $\min S$ and $\max S$ exist and lie in $\Rext$
+for any nonempty finite $S$.
+
+\begin{proposition}[Well-definedness of the hull]\label{prop:hull}
+For every nonempty finite $S \subseteq \Rext$, $\mathrm{Hull}(S)$ is
+an interval number in the sense of
+Definition~\ref{def:interval-number}; equivalently,
+$\min S, \max S \in \Rext$ and $\min S \le \max S$.
+\end{proposition}
+
+\begin{proof}
+$\Rext$ is totally ordered, so any nonempty finite $S \subseteq \Rext$
+has a least and a greatest element in $\Rext$, with
+$\min S \le \max S$ by definition. Hence
+$\mathrm{Hull}(S) = [\min S, \max S]$ satisfies
+Definition~\ref{def:interval-number}.
+\end{proof}
+
+The hull operator is the common building block of every operation
+defined in Section~\ref{sec:operations}: each operation is expressed
+as the hull of a finite candidate set obtained by applying a
+value map to the endpoint combinations of its operands.
+
 \subsection{Definition of an Interval Number}
 
 \begin{definition}[Interval Number]\label{def:interval-number}
@@ -524,6 +554,46 @@ For any $c \in (-\infty, 0]$, the parametric sequences $a_n = -c/n$,
 $b_n = -n$ (with $a_n \ge 0$ since $c \le 0$) give $a_n b_n = c$ for
 all $n$, completing the witness for $\inI{-\infty, 0}$.
 
+\begin{proposition}[Tightness of the foundation intervals]\label{prop:foundation-tight}
+Let
+\[
+L^{+} \;:=\; \{\, \lim_{n} a_n b_n \;:\; a_n \ge 0,\ a_n \to 0,\
+  b_n \to +\infty,\ \text{and the limit exists in $\Rext$} \,\},
+\]
+and let $L^{-}$ be defined analogously with $b_n \to -\infty$ in place
+of $b_n \to +\infty$. Then
+\[
+\mathrm{Hull}(L^{+}) \;=\; \inI{0, \infty}, \qquad
+\mathrm{Hull}(L^{-}) \;=\; \inI{-\infty, 0}.
+\]
+\end{proposition}
+
+\begin{proof}
+\emph{Containment $L^{+} \subseteq [0, \infty]$.} For each $n$ with
+$n$ large enough that $b_n > 0$, the product $a_n b_n \ge 0$ since
+$a_n \ge 0$. Hence every existing limit $\lim_n a_n b_n$ lies in
+$[0, +\infty]$.
+
+\emph{Attainment of $[0, +\infty]$.} The witnesses in
+Section~\ref{sec:rule-justification} show $0, +\infty \in L^{+}$, and
+the parametric witness $a_n = c/n,\ b_n = n$ shows $c \in L^{+}$ for
+every $c \in [0, +\infty)$. Hence $L^{+} \supseteq [0, +\infty]$, and
+combined with the containment, $L^{+} = [0, +\infty]$. Therefore
+$\mathrm{Hull}(L^{+}) = [\min L^{+}, \max L^{+}] = [0, +\infty]$.
+
+The argument for $L^{-}$ is symmetric: $a_n b_n \le 0$ for large $n$
+since $a_n \ge 0$ and $b_n < 0$; the witnesses of
+Section~\ref{sec:rule-justification} attain every value of
+$[-\infty, 0]$. Hence $\mathrm{Hull}(L^{-}) = [-\infty, 0]$.
+\end{proof}
+
+Proposition~\ref{prop:foundation-tight} shows that under the
+directional convention of Section~\ref{sec:foundation-rules}, the
+foundation intervals are not arbitrary symbolic choices: they are the
+unique closed-interval hulls of the directional limit sets, and no
+strictly smaller closed interval would contain all admissible limit
+values.
+
 %====================================================================
 \section{Operations on Interval Numbers}\label{sec:operations}
 
@@ -534,35 +604,35 @@ with explicit treatment of indeterminate forms.
 
 \begin{definition}[Interval Multiplication]\label{def:multiplication}
 For interval numbers $I = \inI{x_0, x_1}$ and $J = \inI{y_0, y_1}$,
-let $P_{ij} := x_i \cdot y_j$ for $i, j \in \{0, 1\}$. Define the
-\emph{candidate set}
+define the \emph{candidate set}
 \[
-\Cand(I, J) := \bigcup_{i,j \in \{0,1\}} \V(x_i \cdot y_j)
+\Cand(I, J) \;:=\; \bigcup_{i,j \in \{0,1\}} \V(x_i,\, y_j)
 \;\subseteq\; \Rext,
 \]
-where the \emph{value map} $\V$ is defined symmetrically on each
-ordered pair of factors:
+where the \emph{value map} $\V : \Rext \times \Rext \to
+\mathcal{P}_{\mathrm{fin}}(\Rext) \setminus \{\emptyset\}$ is defined
+on each ordered pair of factors by
 \[
-\V(p) := \begin{cases}
-\{p\}, & p \in \Rext \text{ (a defined product)}, \\
-\{0, \infty\}, & p \in \{\,0 \cdot \infty,\ \infty \cdot 0\,\} \text{ (Rule I endpoints)}, \\
-\{-\infty, 0\}, & p \in \{\,0 \cdot (-\infty),\ (-\infty) \cdot 0\,\} \text{ (Rule II endpoints)}.
+\V(a, b) \;:=\;
+\begin{cases}
+\{a \cdot b\}, & a \cdot b \text{ is defined in $\Rext$}, \\
+\{0, \infty\},  & \{a, b\} = \{0, +\infty\}\ \text{(Rule~I)}, \\
+\{-\infty, 0\}, & \{a, b\} = \{0, -\infty\}\ \text{(Rule~II)}.
 \end{cases}
 \]
 The product is then
 \[
-I \cdot J := \inI{\min \Cand(I, J),\ \max \Cand(I, J)}.
+I \cdot J \;:=\; \mathrm{Hull}\bigl(\Cand(I, J)\bigr).
 \]
 \end{definition}
 
 Multiplication of finite reals with $\pm\infty$ commutes in $\Rext$,
-so the only ordered pairs requiring symmetric extension are those
-involving the indeterminate factor $0$. The endpoint sets
-$\{0, \infty\}$ and $\{-\infty, 0\}$ returned by $\V$ on
-indeterminate corner products are exactly the endpoints of the
-foundation intervals $\Omega = \inI{0, \infty}$ and
-$-\Omega = \inI{-\infty, 0}$ of Section~\ref{sec:foundation-rules};
-taking $\min$ and $\max$ over $\Cand$ recovers those intervals.
+so the value map $\V$ is symmetric in its two arguments. The endpoint
+sets $\{0, \infty\}$ and $\{-\infty, 0\}$ returned by $\V$ on
+indeterminate factor pairs are exactly the endpoints of the foundation
+intervals $\Omega = \inI{0, \infty}$ and $-\Omega = \inI{-\infty, 0}$
+of Section~\ref{sec:foundation-rules}; the hull recovers those
+intervals.
 
 In particular, if no $P_{ij}$ is an indeterminate form, the
 definition reduces to the classical interval-arithmetic formula
@@ -585,15 +655,16 @@ r \cdot \inI{x_0, x_1} =
 \inI{-\infty, \infty}, & r = 0,\ x_0 = -\infty,\ x_1 = +\infty.
 \end{cases}
 \]
-The four $r = 0$ subcases follow from $\V$ applied to the candidate
-products $0 \cdot x_0$ and $0 \cdot x_1$. For \emph{infinite} scalars
-$r \in \{-\infty, +\infty\}$ (which may produce indeterminate corner
-products $r \cdot 0$ when $0 \in [x_0, x_1]$), no closed-form
+The four $r = 0$ subcases follow from $\V$ applied to the factor pairs
+$(0, x_0)$ and $(0, x_1)$. For \emph{infinite} scalars
+$r \in \{-\infty, +\infty\}$ (which may produce indeterminate factor
+pairs $(r, 0)$ when $0 \in [x_0, x_1]$), no closed-form
 simplification is asserted; the result is obtained directly from the
 candidate-set rule of Definition~\ref{def:multiplication}, e.g.
 \[
 +\infty \cdot \inI{0, 1}
-\;=\; \inI{\min\{0, +\infty\},\ \max\{0, +\infty\}}
+\;=\; \mathrm{Hull}\bigl(\V(+\infty, 0) \cup \V(+\infty, 1)\bigr)
+\;=\; \mathrm{Hull}(\{0, +\infty\})
 \;=\; \inI{0, +\infty}.
 \]
 
@@ -624,21 +695,21 @@ in the $xy$-plane:
 For interval numbers $I = \inI{x_0, x_1}$ and $J = \inI{y_0, y_1}$,
 define the candidate set
 \[
-\Cand_{+}(I, J) := \V_{+}(x_0 + y_0) \cup \V_{+}(x_1 + y_1)
+\Cand_{+}(I, J) \;:=\; \V_{+}(x_0,\, y_0) \cup \V_{+}(x_1,\, y_1)
 \;\subseteq\; \Rext,
 \]
-where the additive value map
-$\V_{+}: \Rext \cup \{\infty + (-\infty),\ (-\infty) + \infty\}
-\to \mathcal{P}(\Rext)$ is
+where the additive value map $\V_{+} : \Rext \times \Rext \to
+\mathcal{P}_{\mathrm{fin}}(\Rext) \setminus \{\emptyset\}$ is
 \[
-\V_{+}(s) := \begin{cases}
-\{s\}, & s \in \Rext \text{ (a defined sum)}, \\
-\{-\infty, \infty\}, & s \in \{\infty + (-\infty),\ (-\infty) + \infty\}.
+\V_{+}(a, b) \;:=\;
+\begin{cases}
+\{a + b\}, & a + b \text{ is defined in $\Rext$}, \\
+\{-\infty, \infty\}, & \{a, b\} = \{+\infty, -\infty\}.
 \end{cases}
 \]
 Then
 \[
-I + J := \inI{\min \Cand_{+}(I, J),\ \max \Cand_{+}(I, J)}.
+I + J \;:=\; \mathrm{Hull}\bigl(\Cand_{+}(I, J)\bigr).
 \]
 \end{definition}
 
@@ -651,15 +722,20 @@ $\inI{0, \infty} + \inI{-\infty, 0} = \inI{-\infty, \infty}$.
 \subsection{Subtraction}\label{sec:subtraction}
 
 \begin{definition}[Interval Subtraction]\label{def:subtraction}
-With the analogous value map $\V_{-}$ that sends $\infty - \infty$
-and $(-\infty) - (-\infty)$ to $\{-\infty, \infty\}$ and every defined
-difference to a singleton,
+Let the subtractive value map $\V_{-} : \Rext \times \Rext \to
+\mathcal{P}_{\mathrm{fin}}(\Rext) \setminus \{\emptyset\}$ be
 \[
-\Cand_{-}(I, J) := \V_{-}(x_0 - y_1) \cup \V_{-}(x_1 - y_0),
+\V_{-}(a, b) \;:=\;
+\begin{cases}
+\{a - b\}, & a - b \text{ is defined in $\Rext$}, \\
+\{-\infty, \infty\}, & a = b \in \{+\infty, -\infty\}.
+\end{cases}
 \]
-and
+Define
 \[
-I - J := \inI{\min \Cand_{-}(I, J),\ \max \Cand_{-}(I, J)}.
+\Cand_{-}(I, J) \;:=\; \V_{-}(x_0,\, y_1) \cup \V_{-}(x_1,\, y_0),
+\qquad
+I - J \;:=\; \mathrm{Hull}\bigl(\Cand_{-}(I, J)\bigr).
 \]
 \end{definition}
 
@@ -777,21 +853,33 @@ Let $I = \inI{x_0, x_1}$ and $E = \inI{y_0, y_1}$. The
 On the admissible domain, exponentiation is defined as the closed
 interval hull of the image set:
 \[
-I^{E} := \inI{\inf \mathcal{S}(I, E),\ \sup \mathcal{S}(I, E)},
+I^{E} \;:=\; \mathrm{Hull}\bigl(\mathcal{S}(I, E)\bigr),
 \]
 where
 \[
-\mathcal{S}(I, E) := \bigcup_{x \in I,\ y \in E} \Vhat(x^{y})
+\mathcal{S}(I, E) \;:=\; \bigcup_{x \in I,\ y \in E} \Vhat(x,\, y)
 \;\subseteq\; \Rext,
 \]
-and $\Vhat$ extends the real-valued map by handling the three
-indeterminate-form points:
+and the exponentiation value map $\Vhat : \Rext \times \Rext \to
+\mathcal{P}_{\mathrm{fin}}(\Rext) \setminus \{\emptyset\}$ extends
+real-valued exponentiation by handling the indeterminate-form points:
 \[
-\Vhat(b^{e}) := \begin{cases}
-\{0, \infty\}, & (b, e) \in \{(0,0),\ (1, \pm\infty),\ (\pm\infty, 0)\}, \\
+\Vhat(b, e) \;:=\;
+\begin{cases}
+\{0, \infty\}, & (b, e) \in \{(0,0),\ (1, +\infty),\ (1, -\infty),
+\ (+\infty, 0),\ (-\infty, 0)\}, \\
 \{b^{e}\}, & b^{e} \text{ is defined in } \Rext.
 \end{cases}
 \]
+Well-definedness of $\mathcal{S}(I, E)$ as a nonempty subset of
+$\Rext$, and of $I^{E}$ as an interval number, requires that
+$\mathcal{S}(I, E)$ have a finite-element minimum and maximum in
+$\Rext$ on the admissible domain; this follows because the
+real-valued continuous map $(x, y) \mapsto x^{y}$ is monotone in each
+argument on each of the rectangles obtained by splitting $I \times E$
+along $x = 1$ and $y = 0$, so its image is a closed interval, and the
+finitely many indeterminate-form contributions of $\Vhat$ only add
+isolated endpoint values.
 \end{definition}
 
 That is, exponentiation is admitted when (i) the base interval is
@@ -833,8 +921,8 @@ $x \mapsto x^n$ attains its minimum $0$ in the interior:
 
 The case $n = 0$ is \emph{not} covered by the formula above: if $I$
 contains an indeterminate base for the exponent $0$---that is, if
-$0 \in I$ (giving the corner $0^0$) or if $\pm\infty \in I$ (giving
-the corners $(\pm\infty)^{0}$)---then $\Vhat$ contributes
+$0 \in I$ (giving the pair $(0, 0)$) or if $\pm\infty \in I$ (giving
+the pair $(\pm\infty, 0)$)---then $\Vhat$ contributes
 $\{0, \infty\}$ at that point and $I^{\{0\}} = \inI{0, \infty}$;
 otherwise every point of $I$ is finite and nonzero, $b^{0} = 1$
 pointwise, and $I^{\{0\}} = \inI{1, 1}$. The case
@@ -854,7 +942,7 @@ on these finite quantities, and applying the increasing map $\exp$
 yields the corresponding hull for $x^{y}$. The only indeterminate
 closure point that can arise in this case is $1^{\pm\infty}$ (when
 $1 \in I$ and $\pm\infty \in E$), which is supplemented via $\Vhat$;
-the extended-base indeterminate point $(\pm\infty)^{0}$ does not
+the extended-base indeterminate pair $(\pm\infty, 0)$ does not
 arise here and is handled by the general image-set definition above.
 
 \paragraph{Indeterminate forms.}
@@ -910,35 +998,102 @@ multiplication, with two-sided identity $\inI{1, 1}$.
 A magma is a set with a single binary operation that is
 closed~\cite{Bourbaki1989,MacLaneBirkhoff1999}. Let
 $I = \inI{x_0, x_1}$ and $J = \inI{y_0, y_1}$ be interval numbers,
-with $x_0, x_1, y_0, y_1 \in \Rext$. Each of the four products
-$P_{ij} := x_i \cdot y_j$ for $i, j \in \{0, 1\}$ is either:
+with $x_0, x_1, y_0, y_1 \in \Rext$. For each of the four ordered
+pairs $(x_i, y_j)$ with $i, j \in \{0, 1\}$, the product
+$x_i \cdot y_j$ is either:
 \begin{enumerate}[label=(\alph*),leftmargin=2em]
-  \item a defined element of $\Rext$, or
-  \item one of the four indeterminate forms $0 \cdot (\pm\infty)$ or
-    $(\pm\infty) \cdot 0$, treated symmetrically by the value map
-    $\V$ of Definition~\ref{def:multiplication} (Rules I and II for
-    $0 \cdot \infty$ and $0 \cdot (-\infty)$, with the reversed forms
-    $\infty \cdot 0$ and $(-\infty) \cdot 0$ assigned the same finite
-    endpoint sets $\{0, \infty\}$ and $\{-\infty, 0\}$, respectively).
+  \item a defined element of $\Rext$, in which case
+    $\V(x_i, y_j) = \{x_i \cdot y_j\}$ is a singleton; or
+  \item an indeterminate pair $\{x_i, y_j\} = \{0, \pm\infty\}$, in
+    which case Rules~I and~II assign
+    $\V(x_i, y_j) \in \{\{0, \infty\},\ \{-\infty, 0\}\}$, a finite
+    two-element subset of $\Rext$.
 \end{enumerate}
-In both cases the value map $\V(P_{ij})$ is a non-empty finite subset
-of $\Rext$. Hence the candidate set
-$\Cand(I, J) = \bigcup_{i,j} \V(P_{ij})$ is a non-empty finite subset
-of $\Rext$, and its minimum and maximum are well-defined. Therefore
-$I \cdot J = \inI{\min \Cand,\ \max \Cand} \in \Iset$, establishing
+In either case $\V(x_i, y_j)$ is a nonempty finite subset of $\Rext$.
+Hence
+$\Cand(I, J) = \bigcup_{i,j} \V(x_i, y_j)$ is a nonempty finite
+subset of $\Rext$, and by Proposition~\ref{prop:hull},
+$I \cdot J = \mathrm{Hull}(\Cand(I, J)) \in \Iset$. This establishes
 closure.
 \end{proof}
 
 \begin{proof}[Proof of identity]
-For $I = \inI{x_0, x_1}$ with $x_0, x_1 \in \Rext$, the four endpoint
-products in $\inI{1, 1} \cdot I$ are $1 \cdot x_0$ and $1 \cdot x_1$.
-Since one factor is the finite nonzero scalar $1$, no indeterminate
-product of the form $0 \cdot (\pm\infty)$ or $(\pm\infty) \cdot 0$
-arises, and each endpoint product is defined in $\Rext$ with
-$1 \cdot x_i = x_i$. Hence
+For $I = \inI{x_0, x_1}$ with $x_0, x_1 \in \Rext$, the factor pairs
+in $\inI{1, 1} \cdot I$ are $(1, x_0)$ and $(1, x_1)$ (each appearing
+twice). Since one factor is the finite nonzero scalar $1$, no
+indeterminate pair $\{0, \pm\infty\}$ arises, and each product is
+defined in $\Rext$ with $1 \cdot x_i = x_i$. Hence
 $\Cand(\inI{1,1}, I) = \{x_0, x_1\}$ and
-$\inI{1, 1} \cdot I = \inI{x_0, x_1} = I$. The argument is symmetric
-in the operands.
+\[
+\inI{1, 1} \cdot I \;=\; \mathrm{Hull}(\{x_0, x_1\})
+\;=\; \inI{x_0, x_1} \;=\; I.
+\]
+The argument for $I \cdot \inI{1, 1}$ is symmetric, since $\V$ is
+symmetric in its arguments. Uniqueness: if $\inI{e_0, e_1}$ is also a
+two-sided identity, then
+$\inI{e_0, e_1} = \inI{e_0, e_1} \cdot \inI{1, 1} = \inI{1, 1}$, where
+the first equality uses that $\inI{1, 1}$ is a right identity and the
+second that $\inI{e_0, e_1}$ is a left identity. Hence $\inI{1, 1}$
+is the unique two-sided identity.
+\end{proof}
+
+\begin{proposition}[Embedding $\Rext \hookrightarrow \Iset$]\label{prop:embedding}
+The map $\iota : \Rext \to \Iset,\ r \mapsto \inI{r, r}$ is injective
+and satisfies the following compatibility with $\Rext$ arithmetic on
+its image. Let $\circ$ denote any of $+,\,-,\,\cdot$ in $\Rext$ and
+its lift to $\Iset$ from Section~\ref{sec:operations}. If
+$r \circ s$ is defined in $\Rext$, then
+$\iota(r) \circ \iota(s) = \iota(r \circ s)$. If $r \circ s$ is
+indeterminate, then $\iota(r) \circ \iota(s)$ is the corresponding
+foundation interval ($\Omega$, $-\Omega$, or
+$\widetilde{\Omega}$).
+\end{proposition}
+
+\begin{proof}
+Injectivity is immediate from
+Definition~\ref{def:point-interval}. For multiplication: if
+$r \cdot s$ is defined in $\Rext$, the four factor pairs of
+$\iota(r) \cdot \iota(s)$ collapse to a single pair $(r, s)$ with
+$\V(r, s) = \{r \cdot s\}$, so $\iota(r) \cdot \iota(s) =
+\mathrm{Hull}(\{r \cdot s\}) = \inI{r \cdot s, r \cdot s}
+= \iota(r \cdot s)$. If $\{r, s\} = \{0, +\infty\}$ (resp.\
+$\{0, -\infty\}$), then $\V(r, s) = \{0, \infty\}$ (resp.\
+$\{-\infty, 0\}$), and the hull yields $\Omega$ (resp.\ $-\Omega$).
+The arguments for $\pm$ are analogous, with $\V_{+}$ (resp.\
+$\V_{-}$) on $\{+\infty, -\infty\}$ producing the full-range
+foundation interval $\widetilde{\Omega}$.
+\end{proof}
+
+\begin{proposition}[Inclusion monotonicity]\label{prop:monotone}
+For each of the binary operations $\circ \in \{+,\, -,\, \cdot\}$
+defined in Section~\ref{sec:operations}, and for all
+$I, I', J, J' \in \Iset$,
+\[
+I \subseteq I' \ \text{and}\ J \subseteq J'
+\quad\Longrightarrow\quad I \circ J \subseteq I' \circ J'.
+\]
+The same holds for the unary operations $|\cdot|$ and $1/\,\cdot\,$
+(Definitions~\ref{def:abs} and~\ref{def:reciprocal}), and for
+exponentiation $I^E$ on pairs $(I, E), (I', E')$ that both lie in the
+admissible domain of Definition~\ref{def:power}.
+\end{proposition}
+
+\begin{proof}
+Each operation is defined as the hull of a candidate (image) set
+constructed from the endpoints (or points) of its operands. If
+$I \subseteq I'$, the endpoints of $I$ lie in $I'$ and hence among
+the points considered by the corresponding image set for $I'$;
+similarly for $J \subseteq J'$. Therefore the candidate set for
+$I \circ J$ is a subset of that for $I' \circ J'$, and
+$\mathrm{Hull}(S) \subseteq \mathrm{Hull}(S')$ whenever
+$S \subseteq S'$, so
+$I \circ J \subseteq I' \circ J'$. The same argument applies to
+$|\cdot|$ (whose definition is by cases on the order of endpoints,
+each case being inclusion-monotone) and to $1/\,\cdot\,$ (by
+inspection of the five-case definition: each case is monotone in the
+endpoints, and inclusion across case boundaries broadens the result).
+For exponentiation, the image set $\mathcal{S}(I, E)$ is by
+construction monotone in $(I, E)$ under set inclusion.
 \end{proof}
 
 \subsection{Failure of Associativity}\label{sec:non-associativity}
