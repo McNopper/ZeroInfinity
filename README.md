@@ -22,7 +22,7 @@ meaning to the seven classical indeterminate forms $0 \cdot \infty$,
 $\infty - \infty$, $\tfrac{0}{0}$, $\tfrac{\infty}{\infty}$, $0^0$,
 $1^\infty$, and $\infty^0$.
 
-A C++ reference implementation with a Google Test suite (93 tests) is
+A C++ reference implementation with a Google Test suite (99 tests) is
 provided as a conformance artefact.
 
 ## The paper
@@ -39,7 +39,7 @@ latexmk -pdf paper.tex
 ## Reference implementation
 
 The C++ reference implementation lives in [`test/`](test/) and provides an
-`IntervalNumber` class plus 93 Google Test unit tests verifying the
+`IntervalNumber` class plus 99 Google Test unit tests verifying the
 operations and identities stated in the paper.
 
 ```bash
@@ -57,8 +57,6 @@ it.
 
 The author gratefully acknowledges:
 
-- Ingeborg Kettern, for analysis at the Fachhochschule Furtwangen
-- Prof. Dr. Peter Fleischer, for algebra at the Fachhochschule Furtwangen
 - Eric Lengyel, for insightful questions during the more recent development
   of this work
 - AI assistants, for review, critique, and editorial support during the

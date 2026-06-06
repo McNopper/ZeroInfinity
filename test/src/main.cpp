@@ -1066,6 +1066,101 @@ TEST(IntervalNumber, PowerSpanningZeroBaseNonIntegerExponent_ReturnsNaN)
     EXPECT_TRUE(std::isnan(result.getX1()));
 }
 
+// ---------------------------------------------------------------------
+// Inclusion monotonicity (paper Prop. 5.4 + Remark 5.5).
+// Monotonicity holds for +, -, *, |.| and exponentiation, but FAILS for
+// the reciprocal / division at the degenerate divisor [0,0]: a narrower
+// divisor ([0,0]) yields a wider reciprocal than a wider one-sided
+// divisor ([0,2] / [-2,0]). These tests pin that documented exception.
+// ---------------------------------------------------------------------
+
+TEST(IntervalNumber, MonotonicityHoldsForMultiplication)
+{
+    // [1,1] subset [0,2] and [INF,INF] subset [1,INF]; products stay nested.
+    auto small = IntervalNumber(1.0) * IntervalNumber(INF);          // [INF,INF]
+    auto big   = IntervalNumber(0.0, 2.0) * IntervalNumber(1.0, INF); // [0,INF]
+    EXPECT_TRUE(big.getX0() <= small.getX0() && small.getX1() <= big.getX1());
+}
+
+TEST(IntervalNumber, MonotonicityFailsForReciprocalAtPointZero)
+{
+    // [0,0] subset [0,2], yet 1/[0,0] = [-INF,INF] is NOT a subset of
+    // 1/[0,2] = [0.5, INF].  (paper Remark 5.5)
+    auto recipPointZero = IntervalNumber(1.0) / IntervalNumber(0.0);       // [-INF, INF]
+    auto recipOneSided  = IntervalNumber(1.0) / IntervalNumber(0.0, 2.0);  // [0.5, INF]
+
+    EXPECT_EQ(recipPointZero.getX0(), -INF);
+    EXPECT_EQ(recipPointZero.getX1(), INF);
+    EXPECT_EQ(recipOneSided.getX0(), 0.5);
+    EXPECT_EQ(recipOneSided.getX1(), INF);
+
+    // The wider divisor produces the narrower reciprocal: monotonicity fails.
+    const bool isSubset =
+        (recipOneSided.getX0() <= recipPointZero.getX0()) &&
+        (recipPointZero.getX1() <= recipOneSided.getX1());
+    EXPECT_FALSE(isSubset);
+}
+
+TEST(IntervalNumber, MonotonicityFailsForReciprocalAtPointZeroNegativeSide)
+{
+    // [0,0] subset [-2,0], yet 1/[0,0] = [-INF,INF] is NOT a subset of
+    // 1/[-2,0] = [-INF, -0.5].  (paper Remark 5.5)
+    auto recipPointZero = IntervalNumber(1.0) / IntervalNumber(0.0);        // [-INF, INF]
+    auto recipOneSided  = IntervalNumber(1.0) / IntervalNumber(-2.0, 0.0);  // [-INF, -0.5]
+
+    EXPECT_EQ(recipOneSided.getX0(), -INF);
+    EXPECT_EQ(recipOneSided.getX1(), -0.5);
+
+    const bool isSubset =
+        (recipOneSided.getX0() <= recipPointZero.getX0()) &&
+        (recipPointZero.getX1() <= recipOneSided.getX1());
+    EXPECT_FALSE(isSubset);
+}
+
+// ---------------------------------------------------------------------
+// Admissible-domain gating for exponentiation (paper Def. 4.7).
+// Inputs outside the admissible domain are mathematically undefined and
+// must return NaN rather than a fabricated interval.
+// ---------------------------------------------------------------------
+
+TEST(IntervalNumber, PowerNonAdmissible_NegativeIntegerExponent_ZeroSpanningBase_ReturnsNaN)
+{
+    // [-1, 4]^(-2): exponent is a negative integer but 0 in base, so case (iv)
+    // does not apply and the pair is non-admissible -> NaN.
+    IntervalNumber base{-1.0, 4.0};
+    IntervalNumber exp{-2.0};
+
+    auto result = base.pow(exp);
+
+    EXPECT_TRUE(std::isnan(result.getX0()));
+    EXPECT_TRUE(std::isnan(result.getX1()));
+}
+
+TEST(IntervalNumber, PowerNonAdmissible_NegativeExponentInterval_ZeroBase_ReturnsNaN)
+{
+    // [0, 2]^[-1, 1]: reaches 0^y with y < 0; non-admissible -> NaN.
+    IntervalNumber base{0.0, 2.0};
+    IntervalNumber exp{-1.0, 1.0};
+
+    auto result = base.pow(exp);
+
+    EXPECT_TRUE(std::isnan(result.getX0()));
+    EXPECT_TRUE(std::isnan(result.getX1()));
+}
+
+TEST(IntervalNumber, PowerAdmissible_NonNegativeBase_NonNegativeExponentInterval)
+{
+    // [0, 2]^[1, 3] is admissible (case ii); no indeterminate corner is
+    // reached, so the result is the plain image hull [0, 8].
+    IntervalNumber base{0.0, 2.0};
+    IntervalNumber exp{1.0, 3.0};
+
+    auto result = base.pow(exp);
+
+    EXPECT_EQ(result.getX0(), 0.0);
+    EXPECT_EQ(result.getX1(), 8.0);
+}
+
 int main(int argc, char** argv)
 {
     testing::InitGoogleTest(&argc, argv);

@@ -431,120 +431,95 @@ public:
      */
     IntervalNumber pow(const IntervalNumber& exponent) const noexcept
     {
-        std::set<double> results{};
-
-        // Apply the value map V^ at every indeterminate-form point reached by
-        // the image set I^E. Per Definition 4.7 the indeterminate corner
-        // points are (0,0), (1, +/- inf) and (+/- inf, 0); whenever any such
-        // point lies in I x E the hull contains both 0 and +inf.
         const double bLo = m_interval[0u];
         const double bHi = m_interval[1u];
         const double eLo = exponent.m_interval[0u];
         const double eHi = exponent.m_interval[1u];
+
+        // NaN propagation.
+        if (std::isnan(bLo) || std::isnan(bHi) || std::isnan(eLo) || std::isnan(eHi))
+        {
+            return IntervalNumber(QUIET_NAN);
+        }
+
+        // Admissible domain (paper Def. 4.7). Exponentiation is partial; for
+        // any pair (I, E) outside the admissible domain the operation is
+        // mathematically undefined and is reported as NaN. The admissible
+        // cases are:
+        //   (i)   base strictly positive            (bLo > 0)
+        //   (ii)  base and exponent non-negative     (bLo >= 0 and eLo >= 0)
+        //   (iii) exponent a single non-neg integer  (E = {n}, n >= 0)
+        //   (iv)  exponent a single neg integer and  (E = {n}, n < 0, 0 not in I)
         const bool baseContainsZero = (bLo <= 0.0 && bHi >= 0.0);
-        const bool baseContainsOne  = (bLo <= 1.0 && bHi >= 1.0);
-        const bool baseContainsPosInf = (bHi == INF);
-        const bool baseContainsNegInf = (bLo == -INF);
-        const bool expContainsZero  = (eLo <= 0.0 && eHi >= 0.0);
-        const bool expContainsPosInf = (eHi == INF);
-        const bool expContainsNegInf = (eLo == -INF);
+        const bool exponentIsPointInteger =
+            (eLo == eHi) && std::isfinite(eLo) && (std::floor(eLo) == eLo);
 
-        const bool indeterminate00 = baseContainsZero && expContainsZero;
-        const bool indeterminate1Inf = baseContainsOne && (expContainsPosInf || expContainsNegInf);
-        const bool indeterminateInf0 = (baseContainsPosInf || baseContainsNegInf) && expContainsZero;
+        bool admissible = false;
+        if (bLo > 0.0)
+        {
+            admissible = true;                                          // (i)
+        }
+        else if (bLo >= 0.0 && eLo >= 0.0)
+        {
+            admissible = true;                                          // (ii)
+        }
+        else if (exponentIsPointInteger && eLo >= 0.0)
+        {
+            admissible = true;                                          // (iii)
+        }
+        else if (exponentIsPointInteger && eLo < 0.0 && !baseContainsZero)
+        {
+            admissible = true;                                          // (iv)
+        }
 
-        if (indeterminate00 || indeterminate1Inf || indeterminateInf0)
+        if (!admissible)
+        {
+            return IntervalNumber(QUIET_NAN);
+        }
+
+        std::set<double> results{};
+
+        // Value map V^ at the indeterminate-form corners reachable within
+        // I x E: (0,0), (1, +/-inf) and (+/-inf, 0). Whenever such a corner
+        // lies in I x E the hull contains both 0 and +inf.
+        const bool baseContainsOne = (bLo <= 1.0 && bHi >= 1.0);
+        const bool baseContainsInf = (bHi == INF) || (bLo == -INF);
+        const bool expContainsZero = (eLo <= 0.0 && eHi >= 0.0);
+        const bool expContainsInf  = (eHi == INF) || (eLo == -INF);
+
+        if ((baseContainsZero && expContainsZero) ||   // (0, 0)
+            (baseContainsOne  && expContainsInf)  ||   // (1, +/-inf)
+            (baseContainsInf  && expContainsZero))     // (+/-inf, 0)
         {
             results.insert(0.0);
             results.insert(INF);
         }
 
-        // Compute all four combinations: base^exp for each endpoint pair
+        // Endpoint (corner) values. On the admissible domain (x, y) -> x^y is
+        // monotone on each sign-constant subrectangle, so its extrema are
+        // attained at corners -- with the sole exception of the interior
+        // minimum of an even positive-integer power over a zero-spanning base,
+        // handled separately below. No corner can be NaN on the admissible
+        // domain (negative bases occur only with integer exponents).
         for (std::size_t i = 0u; i < 2u; i++)
         {
             for (std::size_t j = 0u; j < 2u; j++)
             {
-                double base = m_interval[i];
-                double exp = exponent.m_interval[j];
-                double result = std::pow(base, exp);
-                
-                if (!std::isnan(result) && !std::isinf(result))
+                const double r = std::pow(m_interval[i], exponent.m_interval[j]);
+                if (!std::isnan(r))
                 {
-                    results.insert(result);
-                }
-                else if (std::isinf(result))
-                {
-                    results.insert(result);
-                }
-                else
-                {
-                    // Handle special NaN cases
-                    if (base == 0.0 && exp == 0.0)
-                    {
-                        // 0^0 contributes to [0,∞] range
-                        results.insert(0.0);
-                        results.insert(INF);
-                    }
-                    else if (base == 1.0 && std::isinf(exp))
-                    {
-                        // 1^∞ contributes to [0,∞] range
-                        results.insert(0.0);
-                        results.insert(INF);
-                    }
-                    else if (std::isinf(base) && exp == 0.0)
-                    {
-                        // ∞^0 contributes to [0,∞] range
-                        results.insert(0.0);
-                        results.insert(INF);
-                    }
-                    else if (base == 0.0 && exp < 0.0)
-                    {
-                        // 0^negative = infinity
-                        results.insert(INF);
-                    }
-                    else if (base < 0.0 && std::floor(exp) != exp)
-                    {
-                        // Negative base with non-integer real exponent is not
-                        // real-valued. The operation is therefore not defined
-                        // on this corner; signal partiality by returning NaN.
-                        return IntervalNumber(QUIET_NAN);
-                    }
+                    results.insert(r);
                 }
             }
         }
 
-        // For intervals containing special cases, check intermediate values
-        if (m_interval[0u] <= 1.0 && m_interval[1u] >= 1.0 && 
-            exponent.m_interval[0u] <= 0.0 && exponent.m_interval[1u] >= 0.0)
+        // Interior minimum: x^n for an even integer n > 0 attains 0 inside a
+        // base interval that strictly spans zero (paper Def. 4.7, reduction
+        // to corner formulas, even-exponent case).
+        if (exponentIsPointInteger && eLo > 0.0 && bLo < 0.0 && bHi > 0.0 &&
+            std::fmod(eLo, 2.0) == 0.0)
         {
-            // Interval contains 1^0 = 1
-            results.insert(1.0);
-        }
-
-        // Handle even exponent intervals and negative bases
-        if (m_interval[0u] < 0.0 && m_interval[1u] > 0.0)
-        {
-            // Base interval spans zero
-            double minExp = exponent.m_interval[0u];
-            double maxExp = exponent.m_interval[1u];
-            
-            if (minExp < 0.0 && maxExp < 0.0)
-            {
-                // All negative exponents with zero in base -> infinite result
-                results.insert(-INF);
-                results.insert(INF);
-            }
-            else if (minExp <= 0.0 && maxExp >= 0.0)
-            {
-                // Exponent spans zero, base spans zero -> can get any value
-                results.insert(0.0);
-                results.insert(INF);
-            }
-            else if (minExp == maxExp && std::floor(minExp) == minExp && static_cast<int>(minExp) % 2 == 0)
-            {
-                // Even integer exponent with base spanning zero: result includes 0
-                results.insert(0.0);
-            }
+            results.insert(0.0);
         }
 
         if (results.empty())

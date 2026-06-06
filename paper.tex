@@ -28,6 +28,7 @@
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
 
 \newcommand{\Rext}{\overline{\mathbb{R}}}
 \newcommand{\Iset}{\mathcal{I}}
@@ -896,10 +897,8 @@ $(x, y) \in I \times E$ falls into one of the two cases above; in
 particular, points $0^{y}$ with $y < 0$ are excluded by the domain
 restriction (i)--(iv). If $(I, E) \notin \mathrm{dom}(\,\cdot^{\,\cdot})$
 the operation is mathematically undefined; the reference
-implementation handles many---but not necessarily all---non-admissible
-inputs by NaN propagation and should not be relied upon to reject
-every non-admissible input outside the cases exercised by the unit
-tests.
+implementation tests membership in the admissible domain explicitly
+and returns NaN for any pair lying outside it.
 
 \paragraph{Reduction to corner formulas.} On regions where
 $x \mapsto x^y$ and $y \mapsto x^y$ are jointly monotonic, the
@@ -1072,29 +1071,61 @@ $I, I', J, J' \in \Iset$,
 I \subseteq I' \ \text{and}\ J \subseteq J'
 \quad\Longrightarrow\quad I \circ J \subseteq I' \circ J'.
 \]
-The same holds for the unary operations $|\cdot|$ and $1/\,\cdot\,$
-(Definitions~\ref{def:abs} and~\ref{def:reciprocal}), and for
-exponentiation $I^E$ on pairs $(I, E), (I', E')$ that both lie in the
-admissible domain of Definition~\ref{def:power}.
+The same holds for the unary operation $|\cdot|$
+(Definition~\ref{def:abs}) and for exponentiation $I^E$ on pairs
+$(I, E), (I', E')$ that both lie in the admissible domain of
+Definition~\ref{def:power}. The reciprocal $1/\,\cdot\,$ and division
+$\div$ are \emph{not} inclusion-monotone in general; the single
+obstruction is the degenerate divisor $\inI{0,0}$, and is described in
+Remark~\ref{rem:recip-nonmono} below.
 \end{proposition}
 
 \begin{proof}
-Each operation is defined as the hull of a candidate (image) set
-constructed from the endpoints (or points) of its operands. If
-$I \subseteq I'$, the endpoints of $I$ lie in $I'$ and hence among
-the points considered by the corresponding image set for $I'$;
-similarly for $J \subseteq J'$. Therefore the candidate set for
-$I \circ J$ is a subset of that for $I' \circ J'$, and
+For each operation $\circ \in \{+, -, \cdot\}$, the result equals the
+hull of the \emph{full} image set
+$\mathcal{S}_{\circ}(I, J) := \bigcup_{x \in I,\, y \in J}
+\V_{\circ}(x, y)$, where $\V_{\circ}$ is the corresponding value map
+(Definitions~\ref{def:multiplication}--\ref{def:subtraction}); the
+endpoint-only candidate set has the same hull because each value map is
+monotone in each argument on the sign-constant subrectangles of
+$I \times J$, so its extreme values are attained at endpoints, while
+the indeterminate corners contribute exactly the endpoints of the
+foundation intervals. If $I \subseteq I'$ and $J \subseteq J'$ then
+$\mathcal{S}_{\circ}(I, J) \subseteq \mathcal{S}_{\circ}(I', J')$, and
 $\mathrm{Hull}(S) \subseteq \mathrm{Hull}(S')$ whenever
-$S \subseteq S'$, so
-$I \circ J \subseteq I' \circ J'$. The same argument applies to
-$|\cdot|$ (whose definition is by cases on the order of endpoints,
-each case being inclusion-monotone) and to $1/\,\cdot\,$ (by
-inspection of the five-case definition: each case is monotone in the
-endpoints, and inclusion across case boundaries broadens the result).
-For exponentiation, the image set $\mathcal{S}(I, E)$ is by
-construction monotone in $(I, E)$ under set inclusion.
+$S \subseteq S'$, so $I \circ J \subseteq I' \circ J'$. The same image-set
+argument applies to $|\cdot|$ (whose value at each point is
+$\lvert x \rvert$, monotone under inclusion of the operand) and to
+exponentiation, whose image set $\mathcal{S}(I, E)$ is by construction
+monotone in $(I, E)$ under set inclusion on the admissible domain.
 \end{proof}
+
+\begin{remark}[Failure of monotonicity for the reciprocal]\label{rem:recip-nonmono}
+Unlike the operations above, the reciprocal of
+Definition~\ref{def:reciprocal} is not defined as the hull of a
+pointwise image set: the case $J = \inI{0,0}$ is the
+\emph{convention} $1/\inI{0,0} := \inI{-\infty, \infty}$
+(Section~\ref{sec:limitations}, Limitation~3), which assigns the
+\emph{widest} interval to the \emph{narrowest} divisor. This breaks
+inclusion monotonicity at exactly that point. For example,
+\[
+\inI{0,0} \subseteq \inI{0,2},
+\quad\text{yet}\quad
+\tfrac{1}{\inI{0,0}} = \inI{-\infty, \infty}
+\;\not\subseteq\;
+\inI{\tfrac12, +\infty} = \tfrac{1}{\inI{0,2}},
+\]
+and likewise $\inI{0,0} \subseteq \inI{-2,0}$ with
+$1/\inI{-2,0} = \inI{-\infty, -\tfrac12}$. Since division is defined
+through the reciprocal (Definition~\ref{def:division}), $\div$
+inherits the same failure. On all other case boundaries of
+Definition~\ref{def:reciprocal} the operation \emph{is} monotone: every
+case other than $\inI{0,0}$ returns the hull of the pointwise reciprocal
+image, and an exhaustive check over divisor pairs on the endpoint set
+$\{-\infty, -2, -1, 0, 1, 2, +\infty\}$ exhibits failures only for the
+smaller divisor $\inI{0,0}$. The obstruction is therefore confined to
+the single degenerate divisor $\inI{0,0}$.
+\end{remark}
 
 \subsection{Failure of Associativity}\label{sec:non-associativity}
 
