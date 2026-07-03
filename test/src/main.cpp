@@ -1067,7 +1067,7 @@ TEST(IntervalNumber, PowerSpanningZeroBaseNonIntegerExponent_ReturnsNaN)
 }
 
 // ---------------------------------------------------------------------
-// Inclusion monotonicity (paper Prop. 5.4 + Remark 5.5).
+// Inclusion monotonicity (paper Prop. 5.3 + Remark 5.4).
 // Monotonicity holds for +, -, *, |.| and exponentiation, but FAILS for
 // the reciprocal / division at the degenerate divisor [0,0]: a narrower
 // divisor ([0,0]) yields a wider reciprocal than a wider one-sided
@@ -1085,7 +1085,7 @@ TEST(IntervalNumber, MonotonicityHoldsForMultiplication)
 TEST(IntervalNumber, MonotonicityFailsForReciprocalAtPointZero)
 {
     // [0,0] subset [0,2], yet 1/[0,0] = [-INF,INF] is NOT a subset of
-    // 1/[0,2] = [0.5, INF].  (paper Remark 5.5)
+    // 1/[0,2] = [0.5, INF].  (paper Remark 5.4)
     auto recipPointZero = IntervalNumber(1.0) / IntervalNumber(0.0);       // [-INF, INF]
     auto recipOneSided  = IntervalNumber(1.0) / IntervalNumber(0.0, 2.0);  // [0.5, INF]
 
@@ -1104,7 +1104,7 @@ TEST(IntervalNumber, MonotonicityFailsForReciprocalAtPointZero)
 TEST(IntervalNumber, MonotonicityFailsForReciprocalAtPointZeroNegativeSide)
 {
     // [0,0] subset [-2,0], yet 1/[0,0] = [-INF,INF] is NOT a subset of
-    // 1/[-2,0] = [-INF, -0.5].  (paper Remark 5.5)
+    // 1/[-2,0] = [-INF, -0.5].  (paper Remark 5.4)
     auto recipPointZero = IntervalNumber(1.0) / IntervalNumber(0.0);        // [-INF, INF]
     auto recipOneSided  = IntervalNumber(1.0) / IntervalNumber(-2.0, 0.0);  // [-INF, -0.5]
 

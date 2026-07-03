@@ -351,28 +351,36 @@ forms are undefined. The interval-number framework provides a uniform
 algebraic interpretation.
 
 \paragraph{Interval hull.}
-For any nonempty finite subset $S \subseteq \Rext$, define the
+For any nonempty subset $S \subseteq \Rext$, define the
 \emph{interval hull}
 \[
-\mathrm{Hull}(S) \;:=\; [\,\min S,\ \max S\,].
+\mathrm{Hull}(S) \;:=\; [\,\inf S,\ \sup S\,].
 \]
-Throughout the paper, $\min$ and $\max$ are taken in the extended
-order on $\Rext$, so $\min S$ and $\max S$ exist and lie in $\Rext$
-for any nonempty finite $S$.
+Throughout the paper, infima and suprema are taken in the extended
+order on $\Rext$, which is a complete lattice, so $\inf S$ and
+$\sup S$ exist and lie in $\Rext$ for any nonempty $S$. For finite
+$S$---the case arising in all basic arithmetic operations---the
+infimum and supremum are attained, i.e.\
+$\mathrm{Hull}(S) = [\min S, \max S]$; the general (infinite) case is
+needed for the directional limit sets of
+Proposition~\ref{prop:foundation-tight} and for the image-set
+definition of exponentiation (Section~\ref{sec:exponentiation}).
 
 \begin{proposition}[Well-definedness of the hull]\label{prop:hull}
-For every nonempty finite $S \subseteq \Rext$, $\mathrm{Hull}(S)$ is
+For every nonempty $S \subseteq \Rext$, $\mathrm{Hull}(S)$ is
 an interval number in the sense of
 Definition~\ref{def:interval-number}; equivalently,
-$\min S, \max S \in \Rext$ and $\min S \le \max S$.
+$\inf S, \sup S \in \Rext$ and $\inf S \le \sup S$.
 \end{proposition}
 
 \begin{proof}
-$\Rext$ is totally ordered, so any nonempty finite $S \subseteq \Rext$
-has a least and a greatest element in $\Rext$, with
-$\min S \le \max S$ by definition. Hence
-$\mathrm{Hull}(S) = [\min S, \max S]$ satisfies
-Definition~\ref{def:interval-number}.
+$\Rext$ is a complete lattice: every subset of $\Rext$ has an infimum
+and a supremum in $\Rext$. For nonempty $S$, pick any $s \in S$; then
+$\inf S \le s \le \sup S$. Hence
+$\mathrm{Hull}(S) = [\inf S, \sup S]$ satisfies
+Definition~\ref{def:interval-number}. If $S$ is in addition finite,
+the infimum and supremum are attained, so
+$\mathrm{Hull}(S) = [\min S, \max S]$.
 \end{proof}
 
 The hull operator is the common building block of every operation
@@ -580,7 +588,7 @@ Section~\ref{sec:rule-justification} show $0, +\infty \in L^{+}$, and
 the parametric witness $a_n = c/n,\ b_n = n$ shows $c \in L^{+}$ for
 every $c \in [0, +\infty)$. Hence $L^{+} \supseteq [0, +\infty]$, and
 combined with the containment, $L^{+} = [0, +\infty]$. Therefore
-$\mathrm{Hull}(L^{+}) = [\min L^{+}, \max L^{+}] = [0, +\infty]$.
+$\mathrm{Hull}(L^{+}) = [\inf L^{+}, \sup L^{+}] = [0, +\infty]$.
 
 The argument for $L^{-}$ is symmetric: $a_n b_n \le 0$ for large $n$
 since $a_n \ge 0$ and $b_n < 0$; the witnesses of
@@ -635,8 +643,9 @@ intervals $\Omega = \inI{0, \infty}$ and $-\Omega = \inI{-\infty, 0}$
 of Section~\ref{sec:foundation-rules}; the hull recovers those
 intervals.
 
-In particular, if no $P_{ij}$ is an indeterminate form, the
-definition reduces to the classical interval-arithmetic formula
+In particular, if no endpoint product $x_i \cdot y_j$ is an
+indeterminate form, the definition reduces to the classical
+interval-arithmetic formula
 \[
 I \cdot J = \inI{\min(x_0 y_0, x_0 y_1, x_1 y_0, x_1 y_1),\
 \max(x_0 y_0, x_0 y_1, x_1 y_0, x_1 y_1)}.
@@ -861,9 +870,12 @@ where
 \mathcal{S}(I, E) \;:=\; \bigcup_{x \in I,\ y \in E} \Vhat(x,\, y)
 \;\subseteq\; \Rext,
 \]
-and the exponentiation value map $\Vhat : \Rext \times \Rext \to
-\mathcal{P}_{\mathrm{fin}}(\Rext) \setminus \{\emptyset\}$ extends
-real-valued exponentiation by handling the indeterminate-form points:
+and the exponentiation value map $\Vhat$ is the \emph{partial} map
+$\Rext \times \Rext \rightharpoonup
+\mathcal{P}_{\mathrm{fin}}(\Rext) \setminus \{\emptyset\}$, defined
+exactly on the pairs falling into one of the two cases below, that
+extends real-valued exponentiation by handling the
+indeterminate-form points:
 \[
 \Vhat(b, e) \;:=\;
 \begin{cases}
@@ -872,13 +884,14 @@ real-valued exponentiation by handling the indeterminate-form points:
 \{b^{e}\}, & b^{e} \text{ is defined in } \Rext.
 \end{cases}
 \]
-Well-definedness of $\mathcal{S}(I, E)$ as a nonempty subset of
-$\Rext$, and of $I^{E}$ as an interval number, requires that
-$\mathcal{S}(I, E)$ have a finite-element minimum and maximum in
-$\Rext$ on the admissible domain; this follows because the
-real-valued continuous map $(x, y) \mapsto x^{y}$ is monotone in each
-argument on each of the rectangles obtained by splitting $I \times E$
-along $x = 1$ and $y = 0$, so its image is a closed interval, and the
+On the admissible domain, every pair $(x, y) \in I \times E$ lies in
+the domain of $\Vhat$, so $\mathcal{S}(I, E)$ is a nonempty subset of
+$\Rext$ and $I^{E} = \mathrm{Hull}(\mathcal{S}(I, E))$ is an interval
+number by Proposition~\ref{prop:hull}. Moreover, the hull endpoints
+are \emph{attained} in $\mathcal{S}(I, E)$: the real-valued
+continuous map $(x, y) \mapsto x^{y}$ is monotone in each argument on
+each of the rectangles obtained by splitting $I \times E$ along
+$x = 1$ and $y = 0$, so its image is a closed interval, and the
 finitely many indeterminate-form contributions of $\Vhat$ only add
 isolated endpoint values.
 \end{definition}
