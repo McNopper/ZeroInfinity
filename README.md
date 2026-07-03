@@ -20,7 +20,11 @@ counterexample is given) nor monoidal. The framework recovers classical real
 arithmetic on degenerate intervals while assigning consistent algebraic
 meaning to the seven classical indeterminate forms $0 \cdot \infty$,
 $\infty - \infty$, $\tfrac{0}{0}$, $\tfrac{\infty}{\infty}$, $0^0$,
-$1^\infty$, and $\infty^0$.
+$1^\infty$, and $\infty^0$. The foundation rule is a *directional
+refinement* of containment-set (cset) arithmetic (Walster 1998;
+Pryce & Corliss 2006), which assigns the two-sided hull
+$[-\infty, \infty]$ to $0 \cdot \infty$; the tighter one-sided
+intervals are what give the algebraic-structure analysis its content.
 
 A C++ reference implementation with a Google Test suite (99 tests) is
 provided as a conformance artefact.

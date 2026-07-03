@@ -70,7 +70,12 @@ directional limit witnesses} rather than derived as a complete
 classification of all admissible limits. The two foundation rules
 identify $0 \cdot \infty = \Omega := \inI{0, \infty}$ and
 $0 \cdot (-\infty) = -\Omega := \inI{-\infty, 0}$, naming the resulting
-interval numbers as a notational shorthand. Operations are defined by
+interval numbers as a notational shorthand. The rules adopt a
+\emph{directional} (one-sided) convention that refines the two-sided
+assignment $[-\infty, \infty]$ of containment-set (cset) arithmetic
+and is the precise choice under which the sign-reflection identity
+$\Omega = -1 \cdot (-\Omega)$ carries algebraic content.
+Operations are defined by
 interval-arithmetic-style hulls, extended by an explicit value map
 $\V$ that handles indeterminate endpoint products, and (for
 exponentiation) by an image-set hull on a stated admissible domain.
@@ -159,7 +164,12 @@ domain (Section~\ref{sec:exponentiation}).
 The main contributions of this work are:
 \begin{enumerate}[leftmargin=2em]
   \item A formal definition of \textbf{interval numbers} as a
-    mathematical structure for representing indeterminate forms.
+    mathematical structure for representing indeterminate forms,
+    founded on a \emph{directional} rule
+    $0 \cdot \infty = \inI{0, \infty}$ that strictly refines the
+    two-sided assignment $[-\infty, \infty]$ of containment-set
+    arithmetic~\cite{Walster1998,PryceCorliss2006}
+    (Section~\ref{sec:related-work}).
   \item A complete specification of the basic arithmetic operations
     (total on $\Iset$) and an exponentiation operation on a stated
     admissible domain, all following the interval-arithmetic principle
@@ -264,6 +274,42 @@ $\pm\infty$ are first-class endpoints; and (ii) its primary aim is the
 algebraic representation of classical indeterminate forms, not the
 totalization of division per se.
 
+Closest to the present work is \emph{containment-set (cset)
+arithmetic}, introduced by Walster~\cite{Walster1998} and developed
+by Pryce and Corliss~\cite{PryceCorliss2006}, which evaluates
+expressions over the extended reals by assigning to each operation at
+each point the set of \emph{all} attainable limits. Indeterminate
+forms thereby receive set values: the cset of $x \cdot y$ at
+$(0, +\infty)$ is the full extended line $[-\infty, +\infty]$,
+because two-sided sequences $x_n \to 0$ realize every extended-real
+limit. The present framework departs from cset arithmetic in three
+substantive respects.
+\begin{enumerate}[label=(\roman*),leftmargin=2.5em]
+  \item \emph{Directional foundation rule.} Rule~I assigns
+    $0 \cdot \infty$ the half-line $\inI{0, \infty}$, obtained by
+    restricting the vanishing factor to one-sided approach
+    (Section~\ref{sec:foundation-rules})---a strictly tighter
+    interval than the cset $[-\infty, +\infty]$, and the choice that
+    validates the motivating identity
+    $\Omega = -1 \cdot (-\Omega)$
+    (Section~\ref{sec:algebraic-consistency}), which collapses to a
+    tautology under the two-sided assignment.
+  \item \emph{Algebraic characterization.} Cset arithmetic was
+    designed for rigorous numerical enclosure; the algebraic
+    structure it induces on intervals was not analysed. Here the
+    multiplicative structure is characterized exactly: closure and a
+    two-sided identity hold (Theorem~\ref{thm:closure}) while
+    associativity fails by explicit counterexample
+    (Proposition~\ref{prop:non-assoc}), locating
+    $(\Iset, \cdot, \inI{1,1})$ precisely at unital magma.
+  \item \emph{Structural results.} Inclusion monotonicity is proved
+    for all basic operations together with its exact obstruction---the
+    single degenerate divisor $\inI{0,0}$
+    (Proposition~\ref{prop:monotone},
+    Remark~\ref{rem:recip-nonmono})---a statement that has no
+    counterpart in the cset literature.
+\end{enumerate}
+
 \subsection{Extended Real Numbers}
 
 The extended real line $\Rext = \mathbb{R} \cup \{-\infty, +\infty\}$,
@@ -292,12 +338,22 @@ expressed as interval numbers.
 The novelty of the contribution lies in combining the operational
 rigor of interval arithmetic with the topological scope of the
 extended real line, yielding a formalism in which indeterminate forms
-are first-class algebraic objects. To the author's knowledge, the
-specific combination---extended-real endpoints, an explicit value map
-for indeterminate products, and a worked algebraic-structure analysis
-tailored to indeterminate forms---has not previously been treated as
-a self-contained framework, although several of its individual
-ingredients are present in the works cited above.
+are first-class algebraic objects. The individual ingredients---
+extended-real endpoints, set-valued treatment of indeterminate
+points, hull-based closure---are each present in the works cited
+above, most completely in cset
+arithmetic~\cite{Walster1998,PryceCorliss2006}. What is new here is,
+first, the \emph{directional} foundation rule
+$0 \cdot \infty = \inI{0, \infty}$, which refines the two-sided cset
+assignment $[-\infty, +\infty]$ and is the precise choice under which
+the sign-reflection identity $\Omega = -1 \cdot (-\Omega)$ carries
+algebraic content; and second, the resulting \emph{algebraic-structure
+analysis}---the unital-magma theorem, the non-associativity
+counterexample, the embedding of $\Rext$, and the inclusion-monotonicity
+result with its exact obstruction---none of which is developed in the
+enclosure-oriented cset literature. To the author's knowledge, this
+directional convention and the algebraic characterization built on it
+have not previously been treated as a self-contained framework.
 
 %====================================================================
 \section{Interval Numbers: Formal Definition}\label{sec:interval-numbers}
@@ -493,8 +549,17 @@ represents the set of limits
 and Rule II inherits the analogous one-sided restriction via the
 derivation above. Without this directional restriction, the products
 $a_n b_n$ with two-sided $a_n \to 0$ would attain every value in
-$[-\infty, \infty]$, and the algebraic identity that motivates the
-framework would collapse.
+$[-\infty, \infty]$---precisely the containment set assigned to
+$0 \cdot \infty$ by cset
+arithmetic~\cite{Walster1998,PryceCorliss2006}---and the algebraic
+identity that motivates the framework would collapse: with
+$0 \cdot \infty = 0 \cdot (-\infty) = \inI{-\infty, \infty}$, the
+identity $\Omega = -1 \cdot (-\Omega)$ degenerates to the tautology
+$\inI{-\infty, \infty} = \inI{-\infty, \infty}$ and distinguishes
+nothing. The directional refinement is therefore the point of
+departure from cset arithmetic, and the tighter foundation intervals
+it yields are what give the algebraic analysis of
+Section~\ref{sec:algebraic-structure} its content.
 
 This convention is a formal choice, not a derivation; the framework
 should be read as an algebraic structure on $\Iset$ whose rules are
@@ -1606,6 +1671,17 @@ E.~Hansen and G.~W. Walster.
 \newblock \emph{Global Optimization Using Interval Analysis}, 2nd ed.,
 revised and expanded.
 \newblock Marcel Dekker / CRC Press, New York, 2004.
+
+\bibitem{Walster1998}
+G.~W. Walster.
+\newblock The extended real interval system.
+\newblock Technical report, Sun Microsystems Laboratories, 1998.
+
+\bibitem{PryceCorliss2006}
+J.~D. Pryce and G.~F. Corliss.
+\newblock Interval arithmetic with containment sets.
+\newblock \emph{Computing} 78(3), 251--276, 2006.
+\newblock \href{https://doi.org/10.1007/s00607-006-0180-4}{doi:10.1007/s00607-006-0180-4}.
 
 \bibitem{Carlstroem2004}
 J.~Carlstr\"om.
